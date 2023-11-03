@@ -22,7 +22,9 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cashfree_pg"
-VERSION = "3.0.1"
+VERSION = "3.0.3"
+with open("README.md", "r", encoding="utf-8") as fh:
+    readme = fh.read()
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
@@ -45,7 +47,7 @@ setup(
     include_package_data=True,
     license="Apache 2.0",
     long_description_content_type='text/markdown',
-    long_description="""\
+    long_description=readme,
     Cashfree&#39;s Payment Gateway APIs provide developers with a streamlined pathway to integrate advanced payment processing capabilities into their applications, platforms and websites.
     """,  # noqa: E501
     package_data={"cashfree_pg": ["py.typed"]},
