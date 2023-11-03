@@ -48,7 +48,5 @@ setup(
     license="Apache 2.0",
     long_description_content_type='text/markdown',
     long_description=readme,
-    Cashfree&#39;s Payment Gateway APIs provide developers with a streamlined pathway to integrate advanced payment processing capabilities into their applications, platforms and websites.
-    """,  # noqa: E501
     package_data={"cashfree_pg": ["py.typed"]},
 )
