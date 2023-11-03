@@ -6,9 +6,9 @@ on:
       - master
 
 jobs:
-  build:
+  build-n-publish:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
-    runs-on: ubuntu-latest
+    runs-on: ubuntu
     steps:
     - uses: actions/checkout@master
     - name: Set up Python 3.10
@@ -25,4 +25,4 @@ jobs:
     - name: Publish distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@master
       with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
+        password: $

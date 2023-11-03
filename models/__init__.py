@@ -1,7 +1,6 @@
 # coding: utf-8
 
 # flake8: noqa
-
 """
     Cashfree Payment Gateway APIs
 
@@ -15,21 +14,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.2"
-
-# import apis into sdk package
-# import ApiClient
-from cashfree_pg.api_response import ApiResponse
-from cashfree_pg.api_client import ApiClient
-from cashfree_pg.configuration import Configuration
-from cashfree_pg.exceptions import OpenApiException
-from cashfree_pg.exceptions import ApiTypeError
-from cashfree_pg.exceptions import ApiValueError
-from cashfree_pg.exceptions import ApiKeyError
-from cashfree_pg.exceptions import ApiAttributeError
-from cashfree_pg.exceptions import ApiException
-
-# import models into sdk package
+# import models into model package
 from cashfree_pg.models.api_error import ApiError
 from cashfree_pg.models.api_error404 import ApiError404
 from cashfree_pg.models.api_error409 import ApiError409
