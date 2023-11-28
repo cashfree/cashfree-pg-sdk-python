@@ -32,28 +32,28 @@ class TestEligibilityApi(unittest.TestCase):
     def test_p_g_eligibility_fetch_cardless_emi(self):
         """Test case for p_g_eligibility_fetch_cardless_emi
 
-        Get Eligible Cardless EMI Payment Methods for a customer on an order  # noqa: E501
+        Get Eligible Cardless EMI  # noqa: E501
         """
         pass
 
     def test_p_g_eligibility_fetch_offers(self):
         """Test case for p_g_eligibility_fetch_offers
 
-        Get Eligible Offers for an Order  # noqa: E501
+        Get Eligible Offers  # noqa: E501
         """
         pass
 
     def test_p_g_eligibility_fetch_paylater(self):
         """Test case for p_g_eligibility_fetch_paylater
 
-        Get Eligible Paylater for a customer on an order  # noqa: E501
+        Get Eligible Paylater  # noqa: E501
         """
         pass
 
     def test_p_g_eligibility_fetch_payment_methods(self):
         """Test case for p_g_eligibility_fetch_payment_methods
 
-        Get eligible Payment Methods  # noqa: E501
+        Get Eligible Payment Methods  # noqa: E501
         """
         pass
 

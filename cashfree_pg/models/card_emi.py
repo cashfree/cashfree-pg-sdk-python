@@ -26,23 +26,20 @@ class CardEMI(BaseModel):
     """
     Payment method for card emi
     """
-    channel: Optional[StrictStr] = Field(None, description="The channel for card payments will always be \"link\"")
-    card_number: Optional[StrictStr] = Field(None, description="Customer card number.")
+    channel: StrictStr = Field(..., description="The channel for card payments will always be \"link\"")
+    card_number: StrictStr = Field(..., description="Customer card number.")
     card_holder_name: Optional[StrictStr] = Field(None, description="Customer name mentioned on the card.")
-    card_expiry_mm: Optional[StrictStr] = Field(None, description="Card expiry month.")
-    card_expiry_yy: Optional[StrictStr] = Field(None, description="Card expiry year.")
-    card_cvv: Optional[StrictStr] = Field(None, description="CVV mentioned on the card.")
+    card_expiry_mm: StrictStr = Field(..., description="Card expiry month.")
+    card_expiry_yy: StrictStr = Field(..., description="Card expiry year.")
+    card_cvv: StrictStr = Field(..., description="CVV mentioned on the card.")
     card_alias: Optional[StrictStr] = Field(None, description="Card alias as returned by Cashfree Vault API")
-    card_bank_name: Optional[StrictStr] = Field(None, description="Card bank name, required for EMI payments. This is the bank user has selected for EMI. One of [\"hdfc, \"kotak\", \"icici\", \"rbl\", \"bob\", \"standard chartered\", \"axis\", \"au\", \"yes\", \"sbi\", \"fed\", \"hsbc\", \"citi\", \"amex\"]")
-    emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure selected by the user")
+    card_bank_name: StrictStr = Field(..., description="Card bank name, required for EMI payments. This is the bank user has selected for EMI. One of [\"hdfc, \"kotak\", \"icici\", \"rbl\", \"bob\", \"standard chartered\", \"axis\", \"au\", \"yes\", \"sbi\", \"fed\", \"hsbc\", \"citi\", \"amex\"]")
+    emi_tenure: StrictInt = Field(..., description="EMI tenure selected by the user")
     __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "card_alias", "card_bank_name", "emi_tenure"]
 
     @validator('card_bank_name')
     def card_bank_name_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex'):
             raise ValueError("must be one of enum values ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex')")
         return value

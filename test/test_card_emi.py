@@ -51,6 +51,13 @@ class TestCardEMI(unittest.TestCase):
             )
         else :
             return CardEMI(
+                channel = '',
+                card_number = '',
+                card_expiry_mm = '',
+                card_expiry_yy = '',
+                card_cvv = '',
+                card_bank_name = 'hdfc',
+                emi_tenure = 56,
         )
         """
 

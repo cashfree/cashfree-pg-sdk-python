@@ -56,6 +56,7 @@ class TestCard(unittest.TestCase):
             )
         else :
             return Card(
+                channel = 'link',
         )
         """
 

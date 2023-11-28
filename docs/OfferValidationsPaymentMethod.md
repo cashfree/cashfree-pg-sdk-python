@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **all** | **object** | All offers applicable | 
 **card** | [**CardOffer**](CardOffer.md) |  | 
 **netbanking** | [**OfferNBNetbanking**](OfferNBNetbanking.md) |  | 
-**app** | [**WalletOffer**](WalletOffer.md) |  | [optional] 
+**app** | [**WalletOffer**](WalletOffer.md) |  | 
 **upi** | **object** |  | 
 **paylater** | [**PaylaterOffer**](PaylaterOffer.md) |  | 
 **emi** | [**EMIOffer**](EMIOffer.md) |  | 

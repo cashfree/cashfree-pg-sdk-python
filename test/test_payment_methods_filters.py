@@ -40,7 +40,7 @@ class TestPaymentMethodsFilters(unittest.TestCase):
         if include_optional :
             return PaymentMethodsFilters(
                 payment_methods = [
-                    'net_banking'
+                    ''
                     ]
             )
         else :

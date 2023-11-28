@@ -75,6 +75,8 @@ class TestOfferValidationsPaymentMethod(unittest.TestCase):
                         ], ),
                 netbanking = cashfree_pg.models.offer_nb_netbanking.OfferNB_netbanking(
                     bank_name = 'all', ),
+                app = cashfree_pg.models.wallet_offer.Wallet Offer(
+                    provider = 'paytm', ),
                 upi = cashfree_pg.models.upi_offer.UPI Offer(),
                 paylater = cashfree_pg.models.paylater_offer.Paylater Offer(
                     provider = 'simpl', ),
