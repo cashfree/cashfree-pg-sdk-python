@@ -44,6 +44,8 @@ class TestOfferWallet(unittest.TestCase):
             )
         else :
             return OfferWallet(
+                app = cashfree_pg.models.wallet_offer.Wallet Offer(
+                    provider = 'paytm', ),
         )
         """
 

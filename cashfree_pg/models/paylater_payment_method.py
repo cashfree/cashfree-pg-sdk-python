@@ -19,15 +19,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel
+
+from pydantic import BaseModel, Field
 from cashfree_pg.models.paylater import Paylater
 
 class PaylaterPaymentMethod(BaseModel):
     """
     paylater payment method
     """
-    paylater: Optional[Paylater] = None
+    paylater: Paylater = Field(...)
     __properties = ["paylater"]
 
     class Config:

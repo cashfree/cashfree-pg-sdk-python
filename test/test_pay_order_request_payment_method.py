@@ -43,7 +43,7 @@ class TestPayOrderRequestPaymentMethod(unittest.TestCase):
                 upi = {"channel":"collect","upi_id":"john@okxdfcbak","upi_expiry_minutes":10}, 
                 netbanking = {"channel":"link","netbanking_bank_code":3022}, 
                 app = {"channel":"link","provider":"gpay","phone":"8474090552"}, 
-                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"}, 
+                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","card_bank_name":"hdfc","emi_tenure":3}, 
                 cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3}, 
                 paylater = {"channel":"link","provider":"kotak","phone":"7789112345"}
             )
@@ -53,7 +53,9 @@ class TestPayOrderRequestPaymentMethod(unittest.TestCase):
                 upi = {"channel":"collect","upi_id":"john@okxdfcbak","upi_expiry_minutes":10},
                 netbanking = {"channel":"link","netbanking_bank_code":3022},
                 app = {"channel":"link","provider":"gpay","phone":"8474090552"},
-                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"},
+                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","card_bank_name":"hdfc","emi_tenure":3},
+                cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3},
+                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"},
         )
         """
 

@@ -19,15 +19,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel
+
+from pydantic import BaseModel, Field
 from cashfree_pg.models.wallet_offer import WalletOffer
 
 class OfferWallet(BaseModel):
     """
     Offer object for wallet payment method
     """
-    app: Optional[WalletOffer] = None
+    app: WalletOffer = Field(...)
     __properties = ["app"]
 
     class Config:

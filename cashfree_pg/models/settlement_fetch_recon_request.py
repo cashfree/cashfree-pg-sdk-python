@@ -21,15 +21,15 @@ import json
 
 
 from pydantic import BaseModel, Field
+from cashfree_pg.models.fetch_settlements_request_filters import FetchSettlementsRequestFilters
 from cashfree_pg.models.fetch_settlements_request_pagination import FetchSettlementsRequestPagination
-from cashfree_pg.models.settlement_fetch_recon_request_filters import SettlementFetchReconRequestFilters
 
 class SettlementFetchReconRequest(BaseModel):
     """
     Recon Request Object
     """
     pagination: FetchSettlementsRequestPagination = Field(...)
-    filters: SettlementFetchReconRequestFilters = Field(...)
+    filters: FetchSettlementsRequestFilters = Field(...)
     __properties = ["pagination", "filters"]
 
     class Config:
@@ -75,7 +75,7 @@ class SettlementFetchReconRequest(BaseModel):
 
         _obj = SettlementFetchReconRequest.parse_obj({
             "pagination": FetchSettlementsRequestPagination.from_dict(obj.get("pagination")) if obj.get("pagination") is not None else None,
-            "filters": SettlementFetchReconRequestFilters.from_dict(obj.get("filters")) if obj.get("filters") is not None else None
+            "filters": FetchSettlementsRequestFilters.from_dict(obj.get("filters")) if obj.get("filters") is not None else None
         })
         return _obj
 

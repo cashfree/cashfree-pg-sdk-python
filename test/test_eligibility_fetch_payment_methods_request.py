@@ -40,7 +40,7 @@ class TestEligibilityFetchPaymentMethodsRequest(unittest.TestCase):
         if include_optional :
             return EligibilityFetchPaymentMethodsRequest(
                 queries = {"amount":100}, 
-                filters = {"payment_methods":["netbanking"]}
+                filters = {"payment_methods":null}
             )
         else :
             return EligibilityFetchPaymentMethodsRequest(

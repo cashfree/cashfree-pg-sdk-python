@@ -42,7 +42,7 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 
                     cursor = '', ), 
-                filters = cashfree_pg.models.settlement_fetch_recon_request_filters.SettlementFetchReconRequest_filters(
+                filters = cashfree_pg.models.fetch_settlements_request_filters.FetchSettlementsRequest_filters(
                     cf_settlement_ids = [
                         56
                         ], 
@@ -57,7 +57,7 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 
                     cursor = '', ),
-                filters = cashfree_pg.models.settlement_fetch_recon_request_filters.SettlementFetchReconRequest_filters(
+                filters = cashfree_pg.models.fetch_settlements_request_filters.FetchSettlementsRequest_filters(
                     cf_settlement_ids = [
                         56
                         ], 

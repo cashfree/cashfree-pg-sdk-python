@@ -134,7 +134,6 @@ cashfree_pg/models/refund_url_object.py
 cashfree_pg/models/saved_instrument_meta.py
 cashfree_pg/models/settlement_entity.py
 cashfree_pg/models/settlement_fetch_recon_request.py
-cashfree_pg/models/settlement_fetch_recon_request_filters.py
 cashfree_pg/models/settlement_recon_entity.py
 cashfree_pg/models/settlement_recon_entity_data_inner.py
 cashfree_pg/models/settlement_url_object.py
@@ -270,7 +269,6 @@ docs/RefundsApi.md
 docs/SavedInstrumentMeta.md
 docs/SettlementEntity.md
 docs/SettlementFetchReconRequest.md
-docs/SettlementFetchReconRequestFilters.md
 docs/SettlementReconEntity.md
 docs/SettlementReconEntityDataInner.md
 docs/SettlementReconciliationApi.md
@@ -415,7 +413,6 @@ test/test_refunds_api.py
 test/test_saved_instrument_meta.py
 test/test_settlement_entity.py
 test/test_settlement_fetch_recon_request.py
-test/test_settlement_fetch_recon_request_filters.py
 test/test_settlement_recon_entity.py
 test/test_settlement_recon_entity_data_inner.py
 test/test_settlement_reconciliation_api.py

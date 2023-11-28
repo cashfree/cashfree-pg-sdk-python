@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.2"
+__version__ = "3.0.5"
 
 # import apis into sdk package
 # import ApiClient
@@ -142,7 +142,6 @@ from cashfree_pg.models.refund_url_object import RefundURLObject
 from cashfree_pg.models.saved_instrument_meta import SavedInstrumentMeta
 from cashfree_pg.models.settlement_entity import SettlementEntity
 from cashfree_pg.models.settlement_fetch_recon_request import SettlementFetchReconRequest
-from cashfree_pg.models.settlement_fetch_recon_request_filters import SettlementFetchReconRequestFilters
 from cashfree_pg.models.settlement_recon_entity import SettlementReconEntity
 from cashfree_pg.models.settlement_recon_entity_data_inner import SettlementReconEntityDataInner
 from cashfree_pg.models.settlement_url_object import SettlementURLObject

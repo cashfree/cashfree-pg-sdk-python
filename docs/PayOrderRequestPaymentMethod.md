@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **netbanking** | [**Netbanking**](Netbanking.md) |  | 
 **app** | [**App**](App.md) |  | 
 **emi** | [**CardEMI**](CardEMI.md) |  | 
-**cardless_emi** | [**CardlessEMI**](CardlessEMI.md) |  | [optional] 
-**paylater** | [**Paylater**](Paylater.md) |  | [optional] 
+**cardless_emi** | [**CardlessEMI**](CardlessEMI.md) |  | 
+**paylater** | [**Paylater**](Paylater.md) |  | 
 
 ## Example
 

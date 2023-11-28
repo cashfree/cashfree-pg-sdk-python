@@ -20,14 +20,15 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, confloat, conint
+from pydantic import BaseModel, Field, confloat, conint, constr
 
 class PaymentMethodsQueries(BaseModel):
     """
     Payment Method Query Object
     """
     amount: Optional[Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)]] = Field(None, description="Amount of the order.")
-    __properties = ["amount"]
+    order_id: Optional[constr(strict=True, max_length=50, min_length=3)] = Field(None, description="OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
+    __properties = ["amount", "order_id"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,7 +66,8 @@ class PaymentMethodsQueries(BaseModel):
             return PaymentMethodsQueries.parse_obj(obj)
 
         _obj = PaymentMethodsQueries.parse_obj({
-            "amount": obj.get("amount")
+            "amount": obj.get("amount"),
+            "order_id": obj.get("order_id")
         })
         return _obj
 
