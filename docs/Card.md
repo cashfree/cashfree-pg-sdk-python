@@ -5,7 +5,7 @@ Card Payment method
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** | The channel for card payments can be \&quot;link\&quot; or \&quot;post\&quot;. Post is used for seamless OTP payments where merchant captures OTP on their own page. | [optional] 
+**channel** | **str** | The channel for card payments can be \&quot;link\&quot; or \&quot;post\&quot;. Post is used for seamless OTP payments where merchant captures OTP on their own page. | 
 **card_number** | **str** | Customer card number for plain card transactions. Token pan number for tokenized card transactions. | [optional] 
 **card_holder_name** | **str** | Customer name mentioned on the card. | [optional] 
 **card_expiry_mm** | **str** | Card expiry month for plain card transactions. Token expiry month for tokenized card transactions. | [optional] 

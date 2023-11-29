@@ -43,6 +43,7 @@ class TestCardlessEMIPaymentMethod(unittest.TestCase):
             )
         else :
             return CardlessEMIPaymentMethod(
+                cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3},
         )
         """
 

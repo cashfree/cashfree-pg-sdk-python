@@ -43,6 +43,7 @@ class TestPaylaterPaymentMethod(unittest.TestCase):
             )
         else :
             return PaylaterPaymentMethod(
+                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"},
         )
         """
 

@@ -39,7 +39,8 @@ class TestPaymentMethodsQueries(unittest.TestCase):
         model = cashfree_pg.models.payment_methods_queries.PaymentMethodsQueries()  # noqa: E501
         if include_optional :
             return PaymentMethodsQueries(
-                amount = 100
+                amount = 100, 
+                order_id = 'order_413462PK1RI1IwYB1X69LgzUQWiSxYDF'
             )
         else :
             return PaymentMethodsQueries(

@@ -5,7 +5,7 @@ cardless EMI payment method object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cardless_emi** | [**CardlessEMI**](CardlessEMI.md) |  | [optional] 
+**cardless_emi** | [**CardlessEMI**](CardlessEMI.md) |  | 
 
 ## Example
 

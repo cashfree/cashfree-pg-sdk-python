@@ -6,6 +6,7 @@ Payment Method Query Object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **amount** | **float** | Amount of the order. | [optional] 
+**order_id** | **str** | OrderId of the order. Either of &#x60;order_id&#x60; or &#x60;order_amount&#x60; is mandatory. | [optional] 
 
 ## Example
 

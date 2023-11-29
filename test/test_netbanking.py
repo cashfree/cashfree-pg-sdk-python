@@ -41,7 +41,7 @@ class TestNetbanking(unittest.TestCase):
             return Netbanking(
                 channel = '', 
                 netbanking_bank_code = 56, 
-                netbanking_bank_name = 'AEIO'
+                netbanking_bank_name = 'AEIOT'
             )
         else :
             return Netbanking(

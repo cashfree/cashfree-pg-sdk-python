@@ -39,11 +39,11 @@ class TestCardEMIPaymentMethod(unittest.TestCase):
         model = cashfree_pg.models.card_emi_payment_method.CardEMIPaymentMethod()  # noqa: E501
         if include_optional :
             return CardEMIPaymentMethod(
-                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"}
+                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","card_bank_name":"hdfc","emi_tenure":3}
             )
         else :
             return CardEMIPaymentMethod(
-                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"},
+                emi = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","card_bank_name":"hdfc","emi_tenure":3},
         )
         """
 

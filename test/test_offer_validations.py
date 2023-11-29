@@ -40,12 +40,12 @@ class TestOfferValidations(unittest.TestCase):
         if include_optional :
             return OfferValidations(
                 min_amount = 1, 
-                payment_method = None, 
+                payment_method = {"wallet":{"issuer":"paytm"}}, 
                 max_allowed = 10
             )
         else :
             return OfferValidations(
-                payment_method = None,
+                payment_method = {"wallet":{"issuer":"paytm"}},
                 max_allowed = 10,
         )
         """
