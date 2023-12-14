@@ -37,8 +37,8 @@ class Netbanking(BaseModel):
         if value is None:
             return value
 
-        if not re.match(r"^[A-Z]{4}$", value):
-            raise ValueError(r"must validate the regular expression /^[A-Z]{4}$/")
+        if not re.match(r"^[A-Z]{5}$", value):
+            raise ValueError(r"must validate the regular expression /^[A-Z]{5}$/")
         return value
 
     class Config:
