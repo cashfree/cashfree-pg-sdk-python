@@ -19,15 +19,15 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel
+
+from pydantic import BaseModel, Field
 from cashfree_pg.models.cardless_emi import CardlessEMI
 
 class CardlessEMIPaymentMethod(BaseModel):
     """
     cardless EMI payment method object
     """
-    cardless_emi: Optional[CardlessEMI] = None
+    cardless_emi: CardlessEMI = Field(...)
     __properties = ["cardless_emi"]
 
     class Config:
