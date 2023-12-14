@@ -20,14 +20,14 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+from pydantic import BaseModel, Field, StrictStr
 
 class LinkMetaEntity(BaseModel):
     """
     Payment link meta information object
     """
     notify_url: Optional[StrictStr] = Field(None, description="Notification URL for server-server communication. It should be an https URL.")
-    upi_intent: Optional[StrictBool] = Field(None, description="If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere")
+    upi_intent: Optional[StrictStr] = Field(None, description="If \"true\", link will directly open UPI Intent flow on mobile, and normal link flow elsewhere")
     return_url: Optional[StrictStr] = Field(None, description="The URL to which user will be redirected to after the payment is done on the link. Maximum length: 250.")
     payment_methods: Optional[StrictStr] = Field(None, description="Allowed payment modes for this link. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\", \"nb\", \"upi\", \"paypal\", \"app\". Leave it blank to show all available payment methods")
     __properties = ["notify_url", "upi_intent", "return_url", "payment_methods"]

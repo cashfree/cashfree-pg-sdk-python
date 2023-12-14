@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional
+
 from pydantic import BaseModel, Field
 from cashfree_pg.models.netbanking import Netbanking
 
@@ -27,7 +27,7 @@ class NetBankingPaymentMethod(BaseModel):
     """
     Payment method for netbanking object
     """
-    netbanking: Optional[Netbanking] = Field(...)
+    netbanking: Netbanking = Field(...)
     __properties = ["netbanking"]
 
     class Config:
@@ -57,11 +57,6 @@ class NetBankingPaymentMethod(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of netbanking
         if self.netbanking:
             _dict['netbanking'] = self.netbanking.to_dict()
-        # set to None if netbanking (nullable) is None
-        # and __fields_set__ contains the field
-        if self.netbanking is None and "netbanking" in self.__fields_set__:
-            _dict['netbanking'] = None
-
         return _dict
 
     @classmethod

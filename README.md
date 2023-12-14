@@ -11,6 +11,8 @@ Cashfree's PG API Documentation - https://docs.cashfree.com/reference/pg-new-api
 
 Learn and understand payment gateway workflows at Cashfree Payments [here](https://docs.cashfree.com/docs/payment-gateway)
 
+Try out our interactive guides at [Cashfree Dev Studio](https://www.cashfree.com/devstudio) !
+
 ## Getting Started
 
 ### Installation
@@ -35,8 +37,9 @@ Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant D
 ### Basic Usage
 Create Order
 ```python
-customerDetails = CustomerDetails(customer_id="123", customer_phone="9999999999")
-createOrderRequest = CreateOrderRequest(order_amount=1, order_currency="INR", customer_details=customerDetails)
+customerDetails = CustomerDetails(customer_id="walterwNrcMi", customer_phone="9999999999")
+orderMeta = CreateOrderRequestOrderMeta(notify_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
+createOrderRequest = CreateOrderRequest(order_amount=1, order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
 try:
     api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None)
     print(api_response.data)

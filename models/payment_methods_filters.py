@@ -24,9 +24,9 @@ from pydantic import BaseModel, Field, StrictStr, conlist
 
 class PaymentMethodsFilters(BaseModel):
     """
-    Filter for Payment Methods
+    Filter for specific Payment Methods
     """
-    payment_methods: Optional[conlist(StrictStr)] = Field(None, description="Array of payment methods to be filtered.")
+    payment_methods: Optional[conlist(StrictStr)] = Field(None, description="Array of payment methods to be filtered. This is optional, by default all payment methods will be returned. Possible values in [ 'debit_card', 'credit_card', 'prepaid_card', 'corporate_credit_card', 'upi', 'wallet', 'netbanking', 'banktransfer', 'paylater', 'paypal', 'debit_card_emi', 'credit_card_emi', 'upi_credit_card', 'upi_ppi', 'cardless_emi', 'account_based_payment' ] ")
     __properties = ["payment_methods"]
 
     class Config:

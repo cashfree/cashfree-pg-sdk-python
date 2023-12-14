@@ -26,7 +26,7 @@ class Card(BaseModel):
     """
     Card Payment method
     """
-    channel: Optional[StrictStr] = Field(None, description="The channel for card payments can be \"link\" or \"post\". Post is used for seamless OTP payments where merchant captures OTP on their own page.")
+    channel: StrictStr = Field(..., description="The channel for card payments can be \"link\" or \"post\". Post is used for seamless OTP payments where merchant captures OTP on their own page.")
     card_number: Optional[StrictStr] = Field(None, description="Customer card number for plain card transactions. Token pan number for tokenized card transactions.")
     card_holder_name: Optional[StrictStr] = Field(None, description="Customer name mentioned on the card.")
     card_expiry_mm: Optional[StrictStr] = Field(None, description="Card expiry month for plain card transactions. Token expiry month for tokenized card transactions.")
@@ -45,9 +45,6 @@ class Card(BaseModel):
     @validator('channel')
     def channel_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in ('link', 'post'):
             raise ValueError("must be one of enum values ('link', 'post')")
         return value
