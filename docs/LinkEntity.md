@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **link_purpose** | **str** |  | [optional] 
 **link_created_at** | **str** |  | [optional] 
 **customer_details** | [**LinkCustomerDetailsEntity**](LinkCustomerDetailsEntity.md) |  | [optional] 
-**link_meta** | [**LinkMetaEntity**](LinkMetaEntity.md) |  | [optional] 
+**link_meta** | **Dict[str, str]** | Payment link meta information object. | [optional] 
 **link_url** | **str** |  | [optional] 
 **link_expiry_time** | **str** |  | [optional] 
 **link_notes** | **Dict[str, str]** | Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs | [optional] 
