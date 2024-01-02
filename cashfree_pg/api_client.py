@@ -80,8 +80,6 @@ from cashfree_pg.models.cashback_details import *
 from cashfree_pg.models.create_link_request import *
 from cashfree_pg.models.create_offer_request import *
 from cashfree_pg.models.create_order_request import *
-from cashfree_pg.models.create_order_request_order_meta import *
-from cashfree_pg.models.create_order_request_terminal import *
 from cashfree_pg.models.create_terminal_request import *
 from cashfree_pg.models.create_terminal_request_terminal_meta import *
 from cashfree_pg.models.create_terminal_transaction_request import *
@@ -202,7 +200,7 @@ class Cashfree:
     XSandbox = CFEnvironment.SANDBOX
 
     @validate_arguments
-    def PGEligibilityFetchCardlessEmi(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_cardless_emi_request : Annotated[EligibilityFetchCardlessEMIRequest, Field(..., description="Request Body to get eligible cardless emi options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGEligibilityFetchCardlessEmi(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_cardless_emi_request : Annotated[EligibilityFetchCardlessEMIRequest, Field(..., description="Request Body to get eligible cardless emi options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Cardless EMI  # noqa: E501
 
         Use this API to get eligible Cardless EMI Payment Methods available for a customer on an order basis their phone number.  # noqa: E501
@@ -218,7 +216,7 @@ class Cashfree:
         :type eligibility_fetch_cardless_emi_request: EligibilityFetchCardlessEMIRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -305,7 +303,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -358,7 +356,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGEligibilityFetchOffers(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_offers_request : Annotated[EligibilityFetchOffersRequest, Field(..., description="Request Body to get eligible offers for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGEligibilityFetchOffers(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_offers_request : Annotated[EligibilityFetchOffersRequest, Field(..., description="Request Body to get eligible offers for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Offers  # noqa: E501
 
         Use this API to get eligible offers for an order_id or order amount.  # noqa: E501
@@ -374,7 +372,7 @@ class Cashfree:
         :type eligibility_fetch_offers_request: EligibilityFetchOffersRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -461,7 +459,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -513,7 +511,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGEligibilityFetchPaylater(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_paylater_request : Annotated[EligibilityFetchPaylaterRequest, Field(..., description="Request Body to get eligible paylater options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGEligibilityFetchPaylater(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_paylater_request : Annotated[EligibilityFetchPaylaterRequest, Field(..., description="Request Body to get eligible paylater options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Paylater  # noqa: E501
 
         Use this API to get eligible Paylater Payment Methods for a customer on an order.  # noqa: E501
@@ -529,7 +527,7 @@ class Cashfree:
         :type eligibility_fetch_paylater_request: EligibilityFetchPaylaterRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -616,7 +614,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -669,7 +667,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGEligibilityFetchPaymentMethods(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_payment_methods_request : Annotated[EligibilityFetchPaymentMethodsRequest, Field(..., description="Request Body to get eligible payment methods for an account and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGEligibilityFetchPaymentMethods(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_payment_methods_request : Annotated[EligibilityFetchPaymentMethodsRequest, Field(..., description="Request Body to get eligible payment methods for an account and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Payment Methods  # noqa: E501
 
         Use this API to get eligible Payment Methods  # noqa: E501
@@ -685,7 +683,7 @@ class Cashfree:
         :type eligibility_fetch_payment_methods_request: EligibilityFetchPaymentMethodsRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -772,7 +770,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -826,7 +824,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGCreateOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_offer_request : Annotated[CreateOfferRequest, Field(..., description="Request body to create an offer at Cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCreateOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_offer_request : Annotated[CreateOfferRequest, Field(..., description="Request body to create an offer at Cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Offer  # noqa: E501
 
         Use this API to create offers with Cashfree from your backend  # noqa: E501
@@ -842,7 +840,7 @@ class Cashfree:
         :type create_offer_request: CreateOfferRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -929,7 +927,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -981,7 +979,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGFetchOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, offer_id : Annotated[StrictStr, Field(..., description="The offer ID for which you want to view the offer details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGFetchOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, offer_id : Annotated[StrictStr, Field(..., description="The offer ID for which you want to view the offer details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Offer by ID  # noqa: E501
 
         Use this API to get offer by offer_id  # noqa: E501
@@ -997,7 +995,7 @@ class Cashfree:
         :type offer_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1087,7 +1085,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1130,7 +1128,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGCreateOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_order_request : Annotated[CreateOrderRequest, Field(..., description="Request body to create an order at cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCreateOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_order_request : Annotated[CreateOrderRequest, Field(..., description="Request body to create an order at cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Order  # noqa: E501
 
         ### Order An order is an entity which has a amount and currency associated with it. It is something for which you want to collect payment for. Use this API to create orders with Cashfree from your backend to get a `payment_sessions_id`.  You can use the `payment_sessions_id` to create a transaction for the order.   # noqa: E501
@@ -1146,7 +1144,7 @@ class Cashfree:
         :type create_order_request: CreateOrderRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1233,7 +1231,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1285,7 +1283,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGFetchOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGFetchOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Order  # noqa: E501
 
         Use this API to fetch the order that was created at Cashfree's using the `order_id`.  ## When to use this API - To check the status of your order - Once the order is PAID - Once your customer returns to `return_url`   # noqa: E501
@@ -1301,7 +1299,7 @@ class Cashfree:
         :type order_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1391,7 +1389,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1434,7 +1432,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_recon_request : Annotated[FetchReconRequest, Field(..., description="Request Body for the reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_recon_request : Annotated[FetchReconRequest, Field(..., description="Request Body for the reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """PG Reconciliation  # noqa: E501
 
         - Use this API to get the payment gateway reconciliation details with date range. - It will have events for your payment account   # noqa: E501
@@ -1452,7 +1450,7 @@ class Cashfree:
         :type content_type: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param accept: application/json
         :type accept: str
@@ -1543,7 +1541,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1596,7 +1594,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGCancelLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCancelLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Cancel Payment Link  # noqa: E501
 
         Use this API to cancel a payment link. No further payments can be done against a cancelled link. Only a link in ACTIVE status can be cancelled.  # noqa: E501
@@ -1612,7 +1610,7 @@ class Cashfree:
         :type link_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1702,7 +1700,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1744,7 +1742,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGCreateLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_link_request : Annotated[CreateLinkRequest, Field(..., description="Request Body to Create Payment Links")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCreateLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_link_request : Annotated[CreateLinkRequest, Field(..., description="Request Body to Create Payment Links")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Payment Link  # noqa: E501
 
         Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.  # noqa: E501
@@ -1760,7 +1758,7 @@ class Cashfree:
         :type create_link_request: CreateLinkRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -1847,7 +1845,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -1899,7 +1897,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGFetchLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGFetchLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Payment Link Details  # noqa: E501
 
         Use this API to view all details and status of a payment link.  # noqa: E501
@@ -1915,7 +1913,7 @@ class Cashfree:
         :type link_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2005,7 +2003,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2048,7 +2046,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGLinkFetchOrders(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGLinkFetchOrders(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Orders for a Payment Link  # noqa: E501
 
         Use this API to view all order details for a payment link.  # noqa: E501
@@ -2064,7 +2062,7 @@ class Cashfree:
         :type link_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2154,7 +2152,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2197,7 +2195,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGAuthorizeOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, authorize_order_request : Annotated[AuthorizeOrderRequest, Field(..., description="Request to Capture or Void Transactions")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGAuthorizeOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, authorize_order_request : Annotated[AuthorizeOrderRequest, Field(..., description="Request to Capture or Void Transactions")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Preauthorization  # noqa: E501
 
         Use this API to capture or void a preauthorized payment  # noqa: E501
@@ -2215,7 +2213,7 @@ class Cashfree:
         :type authorize_order_request: AuthorizeOrderRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2306,7 +2304,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2359,7 +2357,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGOrderAuthenticatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, order_authenticate_payment_request : Annotated[OrderAuthenticatePaymentRequest, Field(..., description="Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderAuthenticatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, order_authenticate_payment_request : Annotated[OrderAuthenticatePaymentRequest, Field(..., description="Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Submit or Resend OTP  # noqa: E501
 
         If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.  # noqa: E501
@@ -2377,7 +2375,7 @@ class Cashfree:
         :type order_authenticate_payment_request: OrderAuthenticatePaymentRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2468,7 +2466,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2521,7 +2519,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGOrderFetchPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderFetchPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Payment by ID  # noqa: E501
 
         Use this API to view payment details of an order for a payment ID.  # noqa: E501
@@ -2539,7 +2537,7 @@ class Cashfree:
         :type cf_payment_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2633,7 +2631,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2676,7 +2674,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGOrderFetchPayments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderFetchPayments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Payments for an Order  # noqa: E501
 
         Use this API to view all payment details for an order.  # noqa: E501
@@ -2692,7 +2690,7 @@ class Cashfree:
         :type order_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2782,7 +2780,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2825,7 +2823,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGPayOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, pay_order_request : Annotated[PayOrderRequest, Field(..., description="Request body to create a transaction at cashfree using `payment_session_id`")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGPayOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, pay_order_request : Annotated[PayOrderRequest, Field(..., description="Request body to create a transaction at cashfree using `payment_session_id`")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Order Pay  # noqa: E501
 
         Use this API when you have already created the orders and want Cashfree to process the payment. To use this API S2S flag needs to be enabled from the backend. In case you want to use the cards payment option the PCI DSS flag is required, for more information send an email to \"care@cashfree.com\".   # noqa: E501
@@ -2841,7 +2839,7 @@ class Cashfree:
         :type pay_order_request: PayOrderRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -2928,7 +2926,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -2982,7 +2980,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGOrderCreateRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, order_create_refund_request : Annotated[OrderCreateRefundRequest, Field(..., description="Request Body to Create Refunds")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderCreateRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, order_create_refund_request : Annotated[OrderCreateRefundRequest, Field(..., description="Request Body to Create Refunds")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Refund  # noqa: E501
 
         Use this API to initiate refunds.  # noqa: E501
@@ -3000,7 +2998,7 @@ class Cashfree:
         :type order_create_refund_request: OrderCreateRefundRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -3091,7 +3089,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3144,7 +3142,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGOrderFetchRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, refund_id : Annotated[StrictStr, Field(..., description="Refund Id of the refund you want to fetch.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderFetchRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, refund_id : Annotated[StrictStr, Field(..., description="Refund Id of the refund you want to fetch.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Refund  # noqa: E501
 
         Use this API to fetch a specific refund processed on your Cashfree Account.  # noqa: E501
@@ -3162,7 +3160,7 @@ class Cashfree:
         :type refund_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -3256,7 +3254,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3299,7 +3297,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGOrderFetchRefunds(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderFetchRefunds(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get All Refunds for an Order  # noqa: E501
 
         Use this API to fetch all refunds processed against an order.  # noqa: E501
@@ -3315,7 +3313,7 @@ class Cashfree:
         :type order_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -3405,7 +3403,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3448,7 +3446,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGFetchSettlements(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_settlements_request : Annotated[FetchSettlementsRequest, Field(..., description="Request Body to get the settlements")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGFetchSettlements(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_settlements_request : Annotated[FetchSettlementsRequest, Field(..., description="Request Body to get the settlements")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get All Settlements  # noqa: E501
 
         Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.  # noqa: E501
@@ -3466,7 +3464,7 @@ class Cashfree:
         :type content_type: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param accept: application/json
         :type accept: str
@@ -3557,7 +3555,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3609,7 +3607,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGSettlementFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, settlement_fetch_recon_request : Annotated[SettlementFetchReconRequest, Field(..., description="Request Body for the settlement reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGSettlementFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, settlement_fetch_recon_request : Annotated[SettlementFetchReconRequest, Field(..., description="Request Body for the settlement reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Settlement Reconciliation  # noqa: E501
 
         - Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range. - This API will return events for the settlement IDs you want   # noqa: E501
@@ -3627,7 +3625,7 @@ class Cashfree:
         :type content_type: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param accept: application/json
         :type accept: str
@@ -3718,7 +3716,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3771,7 +3769,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGOrderFetchSettlement(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGOrderFetchSettlement(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Settlements by Order ID  # noqa: E501
 
         Use this API to view all the settlements of a particular order.  # noqa: E501
@@ -3787,7 +3785,7 @@ class Cashfree:
         :type order_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -3877,7 +3875,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -3921,7 +3919,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def PGCustomerDeleteInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id which needs to be deleted")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCustomerDeleteInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id which needs to be deleted")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Delete Saved Card Instrument  # noqa: E501
 
         Use this API to delete a saved card instrument for a customer_id and instrument_id  # noqa: E501
@@ -3939,7 +3937,7 @@ class Cashfree:
         :type instrument_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4033,7 +4031,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4076,7 +4074,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGCustomerFetchInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCustomerFetchInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Specific Saved Card Instrument  # noqa: E501
 
         Use this API to fetch a single specific saved card for a customer_id by it's instrument_id  # noqa: E501
@@ -4094,7 +4092,7 @@ class Cashfree:
         :type instrument_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4188,7 +4186,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4231,7 +4229,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGCustomerFetchInstruments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_type : Annotated[StrictStr, Field(..., description="Payment mode or type of saved instrument ")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCustomerFetchInstruments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_type : Annotated[StrictStr, Field(..., description="Payment mode or type of saved instrument ")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch All Saved Card Instrument  # noqa: E501
 
         Use this API to fetch saved cards for a customer_id   # noqa: E501
@@ -4249,7 +4247,7 @@ class Cashfree:
         :type instrument_type: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4343,7 +4341,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4385,7 +4383,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def PGCustomerInstrumentsFetchCryptogram(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved card instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def PGCustomerInstrumentsFetchCryptogram(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved card instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch cryptogram for a saved card instrument  # noqa: E501
 
         Use this API To get the card network token, token expiry and cryptogram for a saved card instrument using instrument id  # noqa: E501
@@ -4403,7 +4401,7 @@ class Cashfree:
         :type instrument_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4497,7 +4495,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4541,7 +4539,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
 
     @validate_arguments
-    def SposCreateTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_request : Annotated[CreateTerminalRequest, Field(..., description="Request Body to Create Terminal for SPOS")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def SposCreateTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_request : Annotated[CreateTerminalRequest, Field(..., description="Request Body to Create Terminal for SPOS")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Terminal  # noqa: E501
 
         Use this API to create new terminals to use softPOS.  # noqa: E501
@@ -4557,7 +4555,7 @@ class Cashfree:
         :type create_terminal_request: CreateTerminalRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4644,7 +4642,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4696,7 +4694,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def SposCreateTerminalTransaction(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_transaction_request : Annotated[CreateTerminalTransactionRequest, Field(..., description="Request body to create a terminal transaction")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def SposCreateTerminalTransaction(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_transaction_request : Annotated[CreateTerminalTransactionRequest, Field(..., description="Request body to create a terminal transaction")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Terminal  # noqa: E501
 
         Use this API to create a new terminal transaction. To use this API you should first create an order using the Create Order API. Also, you need to enter the terminal details while creating the order and pass the same terminal information while creating a transaction using the below mentioned API.  # noqa: E501
@@ -4712,7 +4710,7 @@ class Cashfree:
         :type create_terminal_transaction_request: CreateTerminalTransactionRequest
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4799,7 +4797,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4851,7 +4849,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def SposFetchTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="The terminal for which you want to view the order details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def SposFetchTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="The terminal for which you want to view the order details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get terminal status using phone number  # noqa: E501
 
         Use this API to view all details of a terminal.  # noqa: E501
@@ -4867,7 +4865,7 @@ class Cashfree:
         :type terminal_phone_no: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -4957,7 +4955,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -4999,7 +4997,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
-    def SposFetchTerminalQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+    def SposFetchTerminalQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Terminal QR Codes  # noqa: E501
 
         You can fetch all the StaticQRs corresponding to given terminal id or phone number. Provide either the terminal_phone_no or terminal_id in the request.  # noqa: E501
@@ -5017,7 +5015,7 @@ class Cashfree:
         :type cf_terminal_id: str
         :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
         :type x_request_id: str
-        :param x_idempotency_key: Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.  Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders  
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.
         :type x_idempotency_key: str
         :param async_req: Whether to execute the request asynchronously.
         :type async_req: bool, optional
@@ -5111,7 +5109,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-3.0.8"
+        _header_params["x-sdk-platform"] = "pythonsdk-3.1.0"
 
         # process the form parameters
         _form_params = []
@@ -5200,7 +5198,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/3.0.8/python'
+        self.user_agent = 'OpenAPI-Generator/3.1.0/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

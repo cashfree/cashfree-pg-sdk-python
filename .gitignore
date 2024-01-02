@@ -5,7 +5,6 @@ __pycache__/
 
 # C extensions
 *.so
-.DS_Store
 
 # Distribution / packaging
 .Python
@@ -67,3 +66,8 @@ target/
 .ipynb_checkpoints
 
 cashfree_pg/api
+.DS_Store
+__init__.py
+api_client.py
+api_response.py
+models/

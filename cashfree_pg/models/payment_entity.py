@@ -91,11 +91,6 @@ class PaymentEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of payment_method
         if self.payment_method:
             _dict['payment_method'] = self.payment_method.to_dict()
-        # set to None if authorization (nullable) is None
-        # and __fields_set__ contains the field
-        if self.authorization is None and "authorization" in self.__fields_set__:
-            _dict['authorization'] = None
-
         return _dict
 
     @classmethod

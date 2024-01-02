@@ -55,16 +55,6 @@ class OrderMeta(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if return_url (nullable) is None
-        # and __fields_set__ contains the field
-        if self.return_url is None and "return_url" in self.__fields_set__:
-            _dict['return_url'] = None
-
-        # set to None if notify_url (nullable) is None
-        # and __fields_set__ contains the field
-        if self.notify_url is None and "notify_url" in self.__fields_set__:
-            _dict['notify_url'] = None
-
         # set to None if payment_methods (nullable) is None
         # and __fields_set__ contains the field
         if self.payment_methods is None and "payment_methods" in self.__fields_set__:

@@ -54,11 +54,6 @@ class FetchReconRequestPagination(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if cursor (nullable) is None
-        # and __fields_set__ contains the field
-        if self.cursor is None and "cursor" in self.__fields_set__:
-            _dict['cursor'] = None
-
         return _dict
 
     @classmethod
