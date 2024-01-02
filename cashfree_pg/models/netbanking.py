@@ -29,7 +29,7 @@ class Netbanking(BaseModel):
     channel: StrictStr = Field(..., description="The channel for netbanking will always be `link`")
     netbanking_bank_code: Optional[conint(strict=True)] = Field(None, description="Bank code")
     netbanking_bank_name: Optional[constr(strict=True)] = Field(None, description="String code for bank")
-    __properties = []
+    __properties = ["channel", "netbanking_bank_code", "netbanking_bank_name"]
 
     @validator('netbanking_bank_name')
     def netbanking_bank_name_validate_regular_expression(cls, value):
@@ -77,6 +77,9 @@ class Netbanking(BaseModel):
             return Netbanking.parse_obj(obj)
 
         _obj = Netbanking.parse_obj({
+            "channel": obj.get("channel"),
+            "netbanking_bank_code": obj.get("netbanking_bank_code"),
+            "netbanking_bank_name": obj.get("netbanking_bank_name")
         })
         return _obj
 

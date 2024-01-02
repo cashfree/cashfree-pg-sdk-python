@@ -59,31 +59,6 @@ class CustomerDetails(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if customer_email (nullable) is None
-        # and __fields_set__ contains the field
-        if self.customer_email is None and "customer_email" in self.__fields_set__:
-            _dict['customer_email'] = None
-
-        # set to None if customer_name (nullable) is None
-        # and __fields_set__ contains the field
-        if self.customer_name is None and "customer_name" in self.__fields_set__:
-            _dict['customer_name'] = None
-
-        # set to None if customer_bank_account_number (nullable) is None
-        # and __fields_set__ contains the field
-        if self.customer_bank_account_number is None and "customer_bank_account_number" in self.__fields_set__:
-            _dict['customer_bank_account_number'] = None
-
-        # set to None if customer_bank_ifsc (nullable) is None
-        # and __fields_set__ contains the field
-        if self.customer_bank_ifsc is None and "customer_bank_ifsc" in self.__fields_set__:
-            _dict['customer_bank_ifsc'] = None
-
-        # set to None if customer_bank_code (nullable) is None
-        # and __fields_set__ contains the field
-        if self.customer_bank_code is None and "customer_bank_code" in self.__fields_set__:
-            _dict['customer_bank_code'] = None
-
         return _dict
 
     @classmethod

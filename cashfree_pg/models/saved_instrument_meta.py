@@ -57,11 +57,6 @@ class SavedInstrumentMeta(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if card_token_details (nullable) is None
-        # and __fields_set__ contains the field
-        if self.card_token_details is None and "card_token_details" in self.__fields_set__:
-            _dict['card_token_details'] = None
-
         return _dict
 
     @classmethod

@@ -45,8 +45,6 @@ cashfree_pg/models/cashback_details.py
 cashfree_pg/models/create_link_request.py
 cashfree_pg/models/create_offer_request.py
 cashfree_pg/models/create_order_request.py
-cashfree_pg/models/create_order_request_order_meta.py
-cashfree_pg/models/create_order_request_terminal.py
 cashfree_pg/models/create_terminal_request.py
 cashfree_pg/models/create_terminal_request_terminal_meta.py
 cashfree_pg/models/create_terminal_transaction_request.py
@@ -174,8 +172,6 @@ docs/CashbackDetails.md
 docs/CreateLinkRequest.md
 docs/CreateOfferRequest.md
 docs/CreateOrderRequest.md
-docs/CreateOrderRequestOrderMeta.md
-docs/CreateOrderRequestTerminal.md
 docs/CreateTerminalRequest.md
 docs/CreateTerminalRequestTerminalMeta.md
 docs/CreateTerminalTransactionRequest.md
@@ -319,8 +315,6 @@ test/test_cashback_details.py
 test/test_create_link_request.py
 test/test_create_offer_request.py
 test/test_create_order_request.py
-test/test_create_order_request_order_meta.py
-test/test_create_order_request_terminal.py
 test/test_create_terminal_request.py
 test/test_create_terminal_request_terminal_meta.py
 test/test_create_terminal_transaction_request.py

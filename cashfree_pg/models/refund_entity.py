@@ -123,11 +123,6 @@ class RefundEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of refund_speed
         if self.refund_speed:
             _dict['refund_speed'] = self.refund_speed.to_dict()
-        # set to None if metadata (nullable) is None
-        # and __fields_set__ contains the field
-        if self.metadata is None and "metadata" in self.__fields_set__:
-            _dict['metadata'] = None
-
         return _dict
 
     @classmethod
