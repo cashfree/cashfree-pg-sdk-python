@@ -56,11 +56,6 @@ class WHorder(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if order_tags (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_tags is None and "order_tags" in self.__fields_set__:
-            _dict['order_tags'] = None
-
         return _dict
 
     @classmethod

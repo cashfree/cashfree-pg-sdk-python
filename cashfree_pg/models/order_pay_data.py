@@ -56,26 +56,6 @@ class OrderPayData(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # set to None if url (nullable) is None
-        # and __fields_set__ contains the field
-        if self.url is None and "url" in self.__fields_set__:
-            _dict['url'] = None
-
-        # set to None if payload (nullable) is None
-        # and __fields_set__ contains the field
-        if self.payload is None and "payload" in self.__fields_set__:
-            _dict['payload'] = None
-
-        # set to None if content_type (nullable) is None
-        # and __fields_set__ contains the field
-        if self.content_type is None and "content_type" in self.__fields_set__:
-            _dict['content_type'] = None
-
-        # set to None if method (nullable) is None
-        # and __fields_set__ contains the field
-        if self.method is None and "method" in self.__fields_set__:
-            _dict['method'] = None
-
         return _dict
 
     @classmethod

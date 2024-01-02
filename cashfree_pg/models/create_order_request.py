@@ -21,9 +21,9 @@ import json
 
 from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr
-from cashfree_pg.models.create_order_request_order_meta import CreateOrderRequestOrderMeta
-from cashfree_pg.models.create_order_request_terminal import CreateOrderRequestTerminal
 from cashfree_pg.models.customer_details import CustomerDetails
+from cashfree_pg.models.order_meta import OrderMeta
+from cashfree_pg.models.terminal_details import TerminalDetails
 from cashfree_pg.models.vendor_split import VendorSplit
 
 class CreateOrderRequest(BaseModel):
@@ -34,8 +34,8 @@ class CreateOrderRequest(BaseModel):
     order_amount: Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)] = Field(..., description="Bill amount for the order. Provide upto two decimals. 10.15 means Rs 10 and 15 paisa")
     order_currency: StrictStr = Field(..., description="Currency for the order. INR if left empty. Contact care@cashfree.com to enable new currencies.")
     customer_details: CustomerDetails = Field(...)
-    terminal: Optional[CreateOrderRequestTerminal] = None
-    order_meta: Optional[CreateOrderRequestOrderMeta] = None
+    terminal: Optional[TerminalDetails] = None
+    order_meta: Optional[OrderMeta] = None
     order_expiry_time: Optional[StrictStr] = Field(None, description="Time after which the order expires. Customers will not be able to make the payment beyond the time specified here. We store timestamps in IST, but you can provide them in a valid ISO 8601 time format. Example 2021-07-02T10:20:12+05:30 for IST, 2021-07-02T10:20:12Z for UTC")
     order_note: Optional[constr(strict=True, max_length=200, min_length=3)] = Field(None, description="Order note for reference.")
     order_tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
@@ -82,36 +82,6 @@ class CreateOrderRequest(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['order_splits'] = _items
-        # set to None if order_id (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_id is None and "order_id" in self.__fields_set__:
-            _dict['order_id'] = None
-
-        # set to None if terminal (nullable) is None
-        # and __fields_set__ contains the field
-        if self.terminal is None and "terminal" in self.__fields_set__:
-            _dict['terminal'] = None
-
-        # set to None if order_meta (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_meta is None and "order_meta" in self.__fields_set__:
-            _dict['order_meta'] = None
-
-        # set to None if order_note (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_note is None and "order_note" in self.__fields_set__:
-            _dict['order_note'] = None
-
-        # set to None if order_tags (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_tags is None and "order_tags" in self.__fields_set__:
-            _dict['order_tags'] = None
-
-        # set to None if order_splits (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_splits is None and "order_splits" in self.__fields_set__:
-            _dict['order_splits'] = None
-
         return _dict
 
     @classmethod
@@ -128,8 +98,8 @@ class CreateOrderRequest(BaseModel):
             "order_amount": obj.get("order_amount"),
             "order_currency": obj.get("order_currency"),
             "customer_details": CustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
-            "terminal": CreateOrderRequestTerminal.from_dict(obj.get("terminal")) if obj.get("terminal") is not None else None,
-            "order_meta": CreateOrderRequestOrderMeta.from_dict(obj.get("order_meta")) if obj.get("order_meta") is not None else None,
+            "terminal": TerminalDetails.from_dict(obj.get("terminal")) if obj.get("terminal") is not None else None,
+            "order_meta": OrderMeta.from_dict(obj.get("order_meta")) if obj.get("order_meta") is not None else None,
             "order_expiry_time": obj.get("order_expiry_time"),
             "order_note": obj.get("order_note"),
             "order_tags": obj.get("order_tags"),

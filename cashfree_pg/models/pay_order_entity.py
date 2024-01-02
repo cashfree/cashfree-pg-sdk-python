@@ -92,11 +92,6 @@ class PayOrderEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict['data'] = self.data.to_dict()
-        # set to None if action (nullable) is None
-        # and __fields_set__ contains the field
-        if self.action is None and "action" in self.__fields_set__:
-            _dict['action'] = None
-
         return _dict
 
     @classmethod

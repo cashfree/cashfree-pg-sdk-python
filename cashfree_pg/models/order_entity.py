@@ -97,16 +97,6 @@ class OrderEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of refunds
         if self.refunds:
             _dict['refunds'] = self.refunds.to_dict()
-        # set to None if order_note (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_note is None and "order_note" in self.__fields_set__:
-            _dict['order_note'] = None
-
-        # set to None if order_tags (nullable) is None
-        # and __fields_set__ contains the field
-        if self.order_tags is None and "order_tags" in self.__fields_set__:
-            _dict['order_tags'] = None
-
         return _dict
 
     @classmethod
