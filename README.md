@@ -38,7 +38,7 @@ Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant D
 Create Order
 ```python
 customerDetails = CustomerDetails(customer_id="walterwNrcMi", customer_phone="9999999999")
-orderMeta = CreateOrderRequestOrderMeta(notify_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
+orderMeta = CreateOrderRequestOrderMeta(return_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
 createOrderRequest = CreateOrderRequest(order_amount=1, order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
 try:
     api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None)
