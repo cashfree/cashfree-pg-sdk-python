@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.refund_webhook import RefundWebhook  # noqa: E501
+from cashfree_pg.models.refund_webhook_data_entity import RefundWebhookDataEntity  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestRefundWebhook(unittest.TestCase):
-    """RefundWebhook unit test stubs"""
+class TestRefundWebhookDataEntity(unittest.TestCase):
+    """RefundWebhookDataEntity unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,27 +30,24 @@ class TestRefundWebhook(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test RefundWebhook
+        """Test RefundWebhookDataEntity
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `RefundWebhook`
+        # uncomment below to create an instance of `RefundWebhookDataEntity`
         """
-        model = cashfree_pg.models.refund_webhook.RefundWebhook()  # noqa: E501
+        model = cashfree_pg.models.refund_webhook_data_entity.RefundWebhookDataEntity()  # noqa: E501
         if include_optional :
-            return RefundWebhook(
-                data = cashfree_pg.models.refund_webhook_data_entity.RefundWebhookDataEntity(
-                    refund = null, ), 
-                event_time = '2021-10-07T19:42:44+05:30', 
-                type = 'PAYMENT_SUCCESS_WEBHOOK'
+            return RefundWebhookDataEntity(
+                refund = {"cf_payment_id":918812,"cf_refund_id":"refund_1553338","refund_id":"REF-123","order_id":"c6G-QMcbm1848","entity":"refund","refund_amount":100.81,"refund_currency":"INR","refund_note":"Refund for order #123","refund_status":"SUCCESS","refund_type":"MERCHANT_INITIATED","refund_splits":[],"status_description":"In Progress","refund_arn":"RF12312","metadata":{"option":"myotpion"},"created_at":"2021-07-25T08:57:52+05:30","processed_at":"2021-07-25T12:57:52+05:30","refund_charge":0,"refund_mode":"STANDARD"}
             )
         else :
-            return RefundWebhook(
+            return RefundWebhookDataEntity(
         )
         """
 
-    def testRefundWebhook(self):
-        """Test RefundWebhook"""
+    def testRefundWebhookDataEntity(self):
+        """Test RefundWebhookDataEntity"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
