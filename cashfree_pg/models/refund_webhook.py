@@ -21,13 +21,13 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, StrictStr
-from cashfree_pg.models.payment_webhook_data_entity1 import PaymentWebhookDataEntity1
+from cashfree_pg.models.refund_webhook_data_entity import RefundWebhookDataEntity
 
 class RefundWebhook(BaseModel):
     """
     refund webhook object
     """
-    data: Optional[PaymentWebhookDataEntity1] = None
+    data: Optional[RefundWebhookDataEntity] = None
     event_time: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
     __properties = ["data", "event_time", "type"]
@@ -71,7 +71,7 @@ class RefundWebhook(BaseModel):
             return RefundWebhook.parse_obj(obj)
 
         _obj = RefundWebhook.parse_obj({
-            "data": PaymentWebhookDataEntity1.from_dict(obj.get("data")) if obj.get("data") is not None else None,
+            "data": RefundWebhookDataEntity.from_dict(obj.get("data")) if obj.get("data") is not None else None,
             "event_time": obj.get("event_time"),
             "type": obj.get("type")
         })

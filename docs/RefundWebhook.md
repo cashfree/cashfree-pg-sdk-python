@@ -5,7 +5,7 @@ refund webhook object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**PaymentWebhookDataEntity1**](PaymentWebhookDataEntity1.md) |  | [optional] 
+**data** | [**RefundWebhookDataEntity**](RefundWebhookDataEntity.md) |  | [optional] 
 **event_time** | **str** |  | [optional] 
 **type** | **str** |  | [optional] 
 
