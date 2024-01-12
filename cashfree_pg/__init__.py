@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.1.3"
+__version__ = "3.1.4"
 
 # import apis into sdk package
 # import ApiClient
