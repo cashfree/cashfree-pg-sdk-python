@@ -5,7 +5,7 @@ Create terminal response object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **int** |  | [optional] 
+**cf_payment_id** | **str** |  | [optional] 
 **payment_amount** | **int** |  | [optional] 
 **payment_method** | **str** |  | [optional] 
 **payment_url** | **str** |  | [optional] 

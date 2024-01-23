@@ -6,6 +6,7 @@
 README.md
 cashfree_pg/__init__.py
 cashfree_pg/api/__init__.py
+cashfree_pg/api/customers_api.py
 cashfree_pg/api/eligibility_api.py
 cashfree_pg/api/offers_api.py
 cashfree_pg/api/orders_api.py
@@ -42,6 +43,7 @@ cashfree_pg/models/cardless_emi_entity.py
 cashfree_pg/models/cardless_emi_payment_method.py
 cashfree_pg/models/cardless_emi_queries.py
 cashfree_pg/models/cashback_details.py
+cashfree_pg/models/create_customer_request.py
 cashfree_pg/models/create_link_request.py
 cashfree_pg/models/create_offer_request.py
 cashfree_pg/models/create_order_request.py
@@ -51,6 +53,7 @@ cashfree_pg/models/create_terminal_transaction_request.py
 cashfree_pg/models/cryptogram_entity.py
 cashfree_pg/models/customer_details.py
 cashfree_pg/models/customer_details_cardless_emi.py
+cashfree_pg/models/customer_entity.py
 cashfree_pg/models/discount_details.py
 cashfree_pg/models/eligibility_cardless_emi_entity.py
 cashfree_pg/models/eligibility_fetch_cardless_emi_request.py
@@ -78,7 +81,7 @@ cashfree_pg/models/instrument_webhook_data.py
 cashfree_pg/models/instrument_webhook_data_entity.py
 cashfree_pg/models/link_customer_details_entity.py
 cashfree_pg/models/link_entity.py
-cashfree_pg/models/link_meta_entity.py
+cashfree_pg/models/link_meta_response_entity.py
 cashfree_pg/models/link_notify_entity.py
 cashfree_pg/models/net_banking_payment_method.py
 cashfree_pg/models/netbanking.py
@@ -126,7 +129,6 @@ cashfree_pg/models/payment_method_upiin_payments_entity.py
 cashfree_pg/models/payment_methods_filters.py
 cashfree_pg/models/payment_methods_queries.py
 cashfree_pg/models/payment_mode_details.py
-cashfree_pg/models/payment_url_object.py
 cashfree_pg/models/payment_webhook.py
 cashfree_pg/models/payment_webhook_customer_entity.py
 cashfree_pg/models/payment_webhook_data_entity.py
@@ -138,21 +140,19 @@ cashfree_pg/models/recon_entity.py
 cashfree_pg/models/recon_entity_data_inner.py
 cashfree_pg/models/refund_entity.py
 cashfree_pg/models/refund_speed.py
-cashfree_pg/models/refund_url_object.py
 cashfree_pg/models/refund_webhook.py
 cashfree_pg/models/refund_webhook_data_entity.py
 cashfree_pg/models/saved_instrument_meta.py
 cashfree_pg/models/settlement_entity.py
 cashfree_pg/models/settlement_fetch_recon_request.py
-cashfree_pg/models/settlement_fetch_recon_request_filters.py
 cashfree_pg/models/settlement_recon_entity.py
 cashfree_pg/models/settlement_recon_entity_data_inner.py
-cashfree_pg/models/settlement_url_object.py
 cashfree_pg/models/settlement_webhook.py
 cashfree_pg/models/settlement_webhook_data_entity.py
 cashfree_pg/models/terminal_details.py
 cashfree_pg/models/terminal_entity.py
 cashfree_pg/models/terminal_transaction_entity.py
+cashfree_pg/models/terminate_order_request.py
 cashfree_pg/models/upi.py
 cashfree_pg/models/upi_authorize_details.py
 cashfree_pg/models/upi_payment_method.py
@@ -180,6 +180,7 @@ docs/CardlessEMIEntity.md
 docs/CardlessEMIPaymentMethod.md
 docs/CardlessEMIQueries.md
 docs/CashbackDetails.md
+docs/CreateCustomerRequest.md
 docs/CreateLinkRequest.md
 docs/CreateOfferRequest.md
 docs/CreateOrderRequest.md
@@ -189,6 +190,8 @@ docs/CreateTerminalTransactionRequest.md
 docs/CryptogramEntity.md
 docs/CustomerDetails.md
 docs/CustomerDetailsCardlessEMI.md
+docs/CustomerEntity.md
+docs/CustomersApi.md
 docs/DiscountDetails.md
 docs/EMIOffer.md
 docs/EMIPlansArray.md
@@ -217,7 +220,7 @@ docs/InstrumentWebhookData.md
 docs/InstrumentWebhookDataEntity.md
 docs/LinkCustomerDetailsEntity.md
 docs/LinkEntity.md
-docs/LinkMetaEntity.md
+docs/LinkMetaResponseEntity.md
 docs/LinkNotifyEntity.md
 docs/NetBankingPaymentMethod.md
 docs/Netbanking.md
@@ -269,7 +272,6 @@ docs/PaymentMethodUPIInPaymentsEntity.md
 docs/PaymentMethodsFilters.md
 docs/PaymentMethodsQueries.md
 docs/PaymentModeDetails.md
-docs/PaymentURLObject.md
 docs/PaymentWebhook.md
 docs/PaymentWebhookCustomerEntity.md
 docs/PaymentWebhookDataEntity.md
@@ -282,18 +284,15 @@ docs/ReconEntity.md
 docs/ReconEntityDataInner.md
 docs/RefundEntity.md
 docs/RefundSpeed.md
-docs/RefundURLObject.md
 docs/RefundWebhook.md
 docs/RefundWebhookDataEntity.md
 docs/RefundsApi.md
 docs/SavedInstrumentMeta.md
 docs/SettlementEntity.md
 docs/SettlementFetchReconRequest.md
-docs/SettlementFetchReconRequestFilters.md
 docs/SettlementReconEntity.md
 docs/SettlementReconEntityDataInner.md
 docs/SettlementReconciliationApi.md
-docs/SettlementURLObject.md
 docs/SettlementWebhook.md
 docs/SettlementWebhookDataEntity.md
 docs/SettlementsApi.md
@@ -301,6 +300,7 @@ docs/SoftPOSApi.md
 docs/TerminalDetails.md
 docs/TerminalEntity.md
 docs/TerminalTransactionEntity.md
+docs/TerminateOrderRequest.md
 docs/TokenVaultApi.md
 docs/UPIAuthorizeDetails.md
 docs/UPIPaymentMethod.md
@@ -334,6 +334,7 @@ test/test_cardless_emi_entity.py
 test/test_cardless_emi_payment_method.py
 test/test_cardless_emi_queries.py
 test/test_cashback_details.py
+test/test_create_customer_request.py
 test/test_create_link_request.py
 test/test_create_offer_request.py
 test/test_create_order_request.py
@@ -343,6 +344,8 @@ test/test_create_terminal_transaction_request.py
 test/test_cryptogram_entity.py
 test/test_customer_details.py
 test/test_customer_details_cardless_emi.py
+test/test_customer_entity.py
+test/test_customers_api.py
 test/test_discount_details.py
 test/test_eligibility_api.py
 test/test_eligibility_cardless_emi_entity.py
@@ -371,7 +374,7 @@ test/test_instrument_webhook_data.py
 test/test_instrument_webhook_data_entity.py
 test/test_link_customer_details_entity.py
 test/test_link_entity.py
-test/test_link_meta_entity.py
+test/test_link_meta_response_entity.py
 test/test_link_notify_entity.py
 test/test_net_banking_payment_method.py
 test/test_netbanking.py
@@ -422,7 +425,6 @@ test/test_payment_method_upiin_payments_entity.py
 test/test_payment_methods_filters.py
 test/test_payment_methods_queries.py
 test/test_payment_mode_details.py
-test/test_payment_url_object.py
 test/test_payment_webhook.py
 test/test_payment_webhook_customer_entity.py
 test/test_payment_webhook_data_entity.py
@@ -436,18 +438,15 @@ test/test_recon_entity.py
 test/test_recon_entity_data_inner.py
 test/test_refund_entity.py
 test/test_refund_speed.py
-test/test_refund_url_object.py
 test/test_refund_webhook.py
 test/test_refund_webhook_data_entity.py
 test/test_refunds_api.py
 test/test_saved_instrument_meta.py
 test/test_settlement_entity.py
 test/test_settlement_fetch_recon_request.py
-test/test_settlement_fetch_recon_request_filters.py
 test/test_settlement_recon_entity.py
 test/test_settlement_recon_entity_data_inner.py
 test/test_settlement_reconciliation_api.py
-test/test_settlement_url_object.py
 test/test_settlement_webhook.py
 test/test_settlement_webhook_data_entity.py
 test/test_settlements_api.py
@@ -455,6 +454,7 @@ test/test_soft_pos_api.py
 test/test_terminal_details.py
 test/test_terminal_entity.py
 test/test_terminal_transaction_entity.py
+test/test_terminate_order_request.py
 test/test_token_vault_api.py
 test/test_upi.py
 test/test_upi_authorize_details.py

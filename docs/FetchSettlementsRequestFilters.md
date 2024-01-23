@@ -5,7 +5,7 @@ Specify either the Settlement ID, Settlement UTR, or start date and end date to 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_settlement_ids** | **List[int]** | List of settlement IDs for which you want the settlement reconciliation details. | [optional] 
+**cf_settlement_ids** | **List[str]** | List of settlement IDs for which you want the settlement reconciliation details. | [optional] 
 **settlement_utrs** | **List[str]** | List of settlement UTRs for which you want the settlement reconciliation details. | [optional] 
 **start_date** | **str** | Specify the start date from when you want the settlement reconciliation details. | [optional] 
 **end_date** | **str** | Specify the end date till when you want the settlement reconciliation details. | [optional] 
