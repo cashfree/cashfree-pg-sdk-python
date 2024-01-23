@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **min_amount** | **float** | Minimum Amount for Offer to be Applicable | [optional] 
 **payment_method** | [**OfferValidationsPaymentMethod**](OfferValidationsPaymentMethod.md) |  | 
-**max_allowed** | **float** | Maximum amount of Offer that can be availed. | 
 
 ## Example
 
