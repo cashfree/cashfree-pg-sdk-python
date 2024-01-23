@@ -55,11 +55,11 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **order_id** | **str**| The id which uniquely identifies your order | 
  **authorize_order_request** | [**AuthorizeOrderRequest**](AuthorizeOrderRequest.md)| Request to Capture or Void Transactions | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -128,11 +128,11 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **cf_payment_id** | **str**| The Cashfree payment or transaction ID. | 
  **order_authenticate_payment_request** | [**OrderAuthenticatePaymentRequest**](OrderAuthenticatePaymentRequest.md)| Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -205,11 +205,11 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **order_id** | **str**| The id which uniquely identifies your order | 
  **cf_payment_id** | **str**| The Cashfree payment or transaction ID. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -282,10 +282,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **order_id** | **str**| The id which uniquely identifies your order | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -354,10 +354,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **pay_order_request** | [**PayOrderRequest**](PayOrderRequest.md)| Request body to create a transaction at cashfree using &#x60;payment_session_id&#x60; | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 

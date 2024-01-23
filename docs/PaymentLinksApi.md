@@ -53,10 +53,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **link_id** | **str**| The payment link ID for which you want to view the details. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -129,10 +129,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **create_link_request** | [**CreateLinkRequest**](CreateLinkRequest.md)| Request Body to Create Payment Links | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -204,10 +204,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **link_id** | **str**| The payment link ID for which you want to view the details. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -238,7 +238,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **PGLinkFetchOrders**
-> List[OrderEntity] PGLinkFetchOrders(x_api_version, link_id, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
+> List[PaymentLinkOrderEntity] PGLinkFetchOrders(x_api_version, link_id, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
 Get Orders for a Payment Link
 
@@ -255,7 +255,7 @@ Use this API to view all order details for a payment link.
 import time
 import os
 import cashfree_pg
-from cashfree_pg.models.order_entity import OrderEntity
+from cashfree_pg.models.payment_link_order_entity import PaymentLinkOrderEntity
 from cashfree_pg.rest import ApiException
 from pprint import pprint
 
@@ -280,14 +280,14 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **link_id** | **str**| The payment link ID for which you want to view the details. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
-[**List[OrderEntity]**](OrderEntity.md)
+[**List[PaymentLinkOrderEntity]**](PaymentLinkOrderEntity.md)
 
 ### Authorization
 

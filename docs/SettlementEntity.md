@@ -5,8 +5,8 @@ Settlement entity object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **str** |  | [optional] 
-**cf_settlement_id** | **str** |  | [optional] 
+**cf_payment_id** | **int** |  | [optional] 
+**cf_settlement_id** | **int** |  | [optional] 
 **settlement_currency** | **str** |  | [optional] 
 **order_id** | **str** |  | [optional] 
 **entity** | **str** |  | [optional] 

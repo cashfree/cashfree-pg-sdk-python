@@ -4,16 +4,16 @@ All URIs are relative to *https://sandbox.cashfree.com/pg*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PGEligibilityFetchCardlessEmi**](EligibilityApi.md#PGEligibilityFetchCardlessEmi) | **POST** /eligibility/cardlessemi | Get Eligible Cardless EMI Payment Methods for a customer on an order
-[**PGEligibilityFetchOffers**](EligibilityApi.md#PGEligibilityFetchOffers) | **POST** /eligibility/offers | Get Eligible Offers for an Order
-[**PGEligibilityFetchPaylater**](EligibilityApi.md#PGEligibilityFetchPaylater) | **POST** /eligibility/paylater | Get Eligible Paylater for a customer on an order
-[**PGEligibilityFetchPaymentMethods**](EligibilityApi.md#PGEligibilityFetchPaymentMethods) | **POST** /eligibility/payment_methods | Get eligible Payment Methods
+[**PGEligibilityFetchCardlessEmi**](EligibilityApi.md#PGEligibilityFetchCardlessEmi) | **POST** /eligibility/cardlessemi | Get Eligible Cardless EMI
+[**PGEligibilityFetchOffers**](EligibilityApi.md#PGEligibilityFetchOffers) | **POST** /eligibility/offers | Get Eligible Offers
+[**PGEligibilityFetchPaylater**](EligibilityApi.md#PGEligibilityFetchPaylater) | **POST** /eligibility/paylater | Get Eligible Paylater
+[**PGEligibilityFetchPaymentMethods**](EligibilityApi.md#PGEligibilityFetchPaymentMethods) | **POST** /eligibility/payment_methods | Get Eligible Payment Methods
 
 
 # **PGEligibilityFetchCardlessEmi**
 > List[EligibilityCardlessEMIEntity] PGEligibilityFetchCardlessEmi(x_api_version, eligibility_fetch_cardless_emi_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
-Get Eligible Cardless EMI Payment Methods for a customer on an order
+Get Eligible Cardless EMI
 
 Use this API to get eligible Cardless EMI Payment Methods available for a customer on an order basis their phone number.
 
@@ -40,7 +40,7 @@ from pprint import pprint
     x_api_version = "2022-09-01"
 
     try:
-        # Get Eligible Cardless EMI Payment Methods for a customer on an order
+        # Get Eligible Cardless EMI
         api_response = Cashfree().PGEligibilityFetchCardlessEmi(x_api_version, eligibility_fetch_cardless_emi_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
         print("The response of EligibilityApi->PGEligibilityFetchCardlessEmi:\n")
         pprint(api_response)
@@ -54,10 +54,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **eligibility_fetch_cardless_emi_request** | [**EligibilityFetchCardlessEMIRequest**](EligibilityFetchCardlessEMIRequest.md)| Request Body to get eligible cardless emi options for a customer and order | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 # **PGEligibilityFetchOffers**
 > List[EligibilityOfferEntity] PGEligibilityFetchOffers(x_api_version, eligibility_fetch_offers_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
-Get Eligible Offers for an Order
+Get Eligible Offers
 
 Use this API to get eligible offers for an order_id or order amount.
 
@@ -117,7 +117,7 @@ from pprint import pprint
     x_api_version = "2022-09-01"
 
     try:
-        # Get Eligible Offers for an Order
+        # Get Eligible Offers
         api_response = Cashfree().PGEligibilityFetchOffers(x_api_version, eligibility_fetch_offers_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
         print("The response of EligibilityApi->PGEligibilityFetchOffers:\n")
         pprint(api_response)
@@ -131,10 +131,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **eligibility_fetch_offers_request** | [**EligibilityFetchOffersRequest**](EligibilityFetchOffersRequest.md)| Request Body to get eligible offers for a customer and order | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -166,7 +166,7 @@ Name | Type | Description  | Notes
 # **PGEligibilityFetchPaylater**
 > List[EligibilityPaylaterEntity] PGEligibilityFetchPaylater(x_api_version, eligibility_fetch_paylater_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
-Get Eligible Paylater for a customer on an order
+Get Eligible Paylater
 
 Use this API to get eligible Paylater Payment Methods for a customer on an order.
 
@@ -193,7 +193,7 @@ from pprint import pprint
     x_api_version = "2022-09-01"
 
     try:
-        # Get Eligible Paylater for a customer on an order
+        # Get Eligible Paylater
         api_response = Cashfree().PGEligibilityFetchPaylater(x_api_version, eligibility_fetch_paylater_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
         print("The response of EligibilityApi->PGEligibilityFetchPaylater:\n")
         pprint(api_response)
@@ -207,10 +207,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **eligibility_fetch_paylater_request** | [**EligibilityFetchPaylaterRequest**](EligibilityFetchPaylaterRequest.md)| Request Body to get eligible paylater options for a customer and order | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 
@@ -243,7 +243,7 @@ Name | Type | Description  | Notes
 # **PGEligibilityFetchPaymentMethods**
 > List[EligibilityPaymentMethodsEntity] PGEligibilityFetchPaymentMethods(x_api_version, eligibility_fetch_payment_methods_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
-Get eligible Payment Methods
+Get Eligible Payment Methods
 
 Use this API to get eligible Payment Methods
 
@@ -270,7 +270,7 @@ from pprint import pprint
     x_api_version = "2022-09-01"
 
     try:
-        # Get eligible Payment Methods
+        # Get Eligible Payment Methods
         api_response = Cashfree().PGEligibilityFetchPaymentMethods(x_api_version, eligibility_fetch_payment_methods_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
         print("The response of EligibilityApi->PGEligibilityFetchPaymentMethods:\n")
         pprint(api_response)
@@ -284,10 +284,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
  **eligibility_fetch_payment_methods_request** | [**EligibilityFetchPaymentMethodsRequest**](EligibilityFetchPaymentMethodsRequest.md)| Request Body to get eligible payment methods for an account and order | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
 
 ### Return type
 

@@ -5,7 +5,7 @@ payment entity full object
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **str** |  | [optional] 
+**cf_payment_id** | **int** |  | [optional] 
 **order_id** | **str** |  | [optional] 
 **entity** | **str** |  | [optional] 
 **error_details** | [**ErrorDetailsInPaymentsEntity**](ErrorDetailsInPaymentsEntity.md) |  | [optional] 
