@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **bank_reference** | **str** |  | [optional] 
 **auth_id** | **str** |  | [optional] 
 **authorization** | [**AuthorizationInPaymentsEntity**](AuthorizationInPaymentsEntity.md) |  | [optional] 
-**payment_method** | [**PaymentMethodInPaymentsEntity**](PaymentMethodInPaymentsEntity.md) |  | [optional] 
+**payment_method** | **object** |  | [optional] 
 
 ## Example
 

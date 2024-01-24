@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.2.1"
+__version__ = "3.2.3"
 
 # import apis into sdk package
 # import ApiClient
@@ -131,8 +131,6 @@ from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_detail
 from cashfree_pg.models.payment_method_card_in_payments_entity import PaymentMethodCardInPaymentsEntity
 from cashfree_pg.models.payment_method_card_in_payments_entity_card import PaymentMethodCardInPaymentsEntityCard
 from cashfree_pg.models.payment_method_cardless_emiin_payments_entity import PaymentMethodCardlessEMIInPaymentsEntity
-from cashfree_pg.models.payment_method_in_payments_entity import PaymentMethodInPaymentsEntity
-from cashfree_pg.models.payment_method_in_payments_entity_payment_method import PaymentMethodInPaymentsEntityPaymentMethod
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity import PaymentMethodNetBankingInPaymentsEntity
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking import PaymentMethodNetBankingInPaymentsEntityNetbanking
 from cashfree_pg.models.payment_method_paylater_in_payments_entity import PaymentMethodPaylaterInPaymentsEntity
