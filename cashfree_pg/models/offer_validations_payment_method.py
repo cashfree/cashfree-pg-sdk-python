@@ -134,9 +134,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferAll.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -144,9 +142,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferCard.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -154,9 +150,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferNB.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -164,9 +158,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferWallet.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -174,9 +166,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferUPI.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -184,9 +174,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferPaylater.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -194,9 +182,7 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferEMI.from_json(json_str)
             match += 1
-            if (instance.actual_instance == None):
-                # do nothing
-            else:
+            if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
