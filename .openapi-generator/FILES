@@ -113,6 +113,7 @@ cashfree_pg/models/paylater_entity.py
 cashfree_pg/models/paylater_offer.py
 cashfree_pg/models/paylater_payment_method.py
 cashfree_pg/models/payment_entity.py
+cashfree_pg/models/payment_entity_payment_method.py
 cashfree_pg/models/payment_link_customer_details.py
 cashfree_pg/models/payment_link_order_entity.py
 cashfree_pg/models/payment_method_app_in_payments_entity.py
@@ -123,8 +124,6 @@ cashfree_pg/models/payment_method_card_emiin_payments_entity_emi_emi_details.py
 cashfree_pg/models/payment_method_card_in_payments_entity.py
 cashfree_pg/models/payment_method_card_in_payments_entity_card.py
 cashfree_pg/models/payment_method_cardless_emiin_payments_entity.py
-cashfree_pg/models/payment_method_in_payments_entity.py
-cashfree_pg/models/payment_method_in_payments_entity_payment_method.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity_netbanking.py
 cashfree_pg/models/payment_method_paylater_in_payments_entity.py
@@ -262,6 +261,7 @@ docs/PaylaterEntity.md
 docs/PaylaterOffer.md
 docs/PaylaterPaymentMethod.md
 docs/PaymentEntity.md
+docs/PaymentEntityPaymentMethod.md
 docs/PaymentLinkCustomerDetails.md
 docs/PaymentLinkOrderEntity.md
 docs/PaymentLinksApi.md
@@ -273,8 +273,6 @@ docs/PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails.md
 docs/PaymentMethodCardInPaymentsEntity.md
 docs/PaymentMethodCardInPaymentsEntityCard.md
 docs/PaymentMethodCardlessEMIInPaymentsEntity.md
-docs/PaymentMethodInPaymentsEntity.md
-docs/PaymentMethodInPaymentsEntityPaymentMethod.md
 docs/PaymentMethodNetBankingInPaymentsEntity.md
 docs/PaymentMethodNetBankingInPaymentsEntityNetbanking.md
 docs/PaymentMethodPaylaterInPaymentsEntity.md
@@ -422,6 +420,7 @@ test/test_paylater_entity.py
 test/test_paylater_offer.py
 test/test_paylater_payment_method.py
 test/test_payment_entity.py
+test/test_payment_entity_payment_method.py
 test/test_payment_link_customer_details.py
 test/test_payment_link_order_entity.py
 test/test_payment_links_api.py
@@ -433,8 +432,6 @@ test/test_payment_method_card_emiin_payments_entity_emi_emi_details.py
 test/test_payment_method_card_in_payments_entity.py
 test/test_payment_method_card_in_payments_entity_card.py
 test/test_payment_method_cardless_emiin_payments_entity.py
-test/test_payment_method_in_payments_entity.py
-test/test_payment_method_in_payments_entity_payment_method.py
 test/test_payment_method_net_banking_in_payments_entity.py
 test/test_payment_method_net_banking_in_payments_entity_netbanking.py
 test/test_payment_method_paylater_in_payments_entity.py

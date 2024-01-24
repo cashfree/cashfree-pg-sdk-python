@@ -55,7 +55,7 @@ class TestPaymentEntity(unittest.TestCase):
                 bank_reference = '', 
                 auth_id = '', 
                 authorization = {"action":"CAPTURE","status":"PENDING","captured_amount":100,"start_time":"2022-02-09T18:04:34+05:30","end_time":"2022-02-19T18:04:34+05:30","approve_by":"2022-02-09T18:04:34+05:30","action_reference":"6595231908096894505959","action_time":"2022-08-03T16:09:51"}, 
-                payment_method = {"$ref":"#/components/schemas/PaymentMethodCardInPaymentsEntity/example"}
+                payment_method = None
             )
         else :
             return PaymentEntity(
