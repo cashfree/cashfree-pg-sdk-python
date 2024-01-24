@@ -5,9 +5,7 @@ payment method app object in payment entity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** |  | [optional] 
-**provider** | **str** |  | [optional] 
-**phone** | **str** |  | [optional] 
+**app** | [**PaymentMethodAppInPaymentsEntityApp**](PaymentMethodAppInPaymentsEntityApp.md) |  | [optional] 
 
 ## Example
 

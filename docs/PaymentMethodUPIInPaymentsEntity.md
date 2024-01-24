@@ -5,8 +5,7 @@ UPI payment method for pay api
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** |  | 
-**upi_id** | **str** |  | [optional] 
+**upi** | [**PaymentMethodUPIInPaymentsEntityUpi**](PaymentMethodUPIInPaymentsEntityUpi.md) |  | [optional] 
 
 ## Example
 

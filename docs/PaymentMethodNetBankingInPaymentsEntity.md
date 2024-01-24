@@ -5,9 +5,7 @@ netbanking payment method object for pay
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** |  | 
-**netbanking_bank_code** | **int** |  | 
-**netbanking_bank_name** | **str** |  | 
+**netbanking** | [**PaymentMethodNetBankingInPaymentsEntityNetbanking**](PaymentMethodNetBankingInPaymentsEntityNetbanking.md) |  | [optional] 
 
 ## Example
 

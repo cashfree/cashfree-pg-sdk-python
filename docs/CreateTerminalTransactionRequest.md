@@ -5,8 +5,8 @@ Request body to create a terminal transaction
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_order_id** | **str** | cashfree order ID that was returned while creating an order. | 
-**cf_terminal_id** | **str** | cashfree terminal id. this is a required parameter when you do not provide the terminal phone number. | [optional] 
+**cf_order_id** | **int** | cashfree order ID that was returned while creating an order. | 
+**cf_terminal_id** | **int** | cashfree terminal id. this is a required parameter when you do not provide the terminal phone number. | [optional] 
 **payment_method** | **str** | mention the payment method used for the transaction. possible values - QR_CODE, LINK. | 
 **terminal_phone_no** | **str** | agent mobile number assigned to the terminal. this is a required parameter when you do not provide the cf_terminal_id. | [optional] 
 
