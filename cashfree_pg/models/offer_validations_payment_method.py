@@ -134,42 +134,70 @@ class OfferValidationsPaymentMethod(BaseModel):
         try:
             instance.actual_instance = OfferAll.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferCard
         try:
             instance.actual_instance = OfferCard.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferNB
         try:
             instance.actual_instance = OfferNB.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferWallet
         try:
             instance.actual_instance = OfferWallet.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferUPI
         try:
             instance.actual_instance = OfferUPI.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferPaylater
         try:
             instance.actual_instance = OfferPaylater.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into OfferEMI
         try:
             instance.actual_instance = OfferEMI.from_json(json_str)
             match += 1
+            if (instance.actual_instance == None):
+                # do nothing
+            else:
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
