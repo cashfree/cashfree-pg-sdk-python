@@ -5,9 +5,7 @@ paylater payment method object for pay api
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** |  | [optional] 
-**provider** | **str** |  | [optional] 
-**phone** | **str** |  | [optional] 
+**paylater** | [**PaymentMethodAppInPaymentsEntityApp**](PaymentMethodAppInPaymentsEntityApp.md) |  | [optional] 
 
 ## Example
 

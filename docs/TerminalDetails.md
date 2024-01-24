@@ -6,7 +6,7 @@ Use this if you are creating an order for cashfree's softPOS
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **added_on** | **str** | date time at which terminal is added | [optional] 
-**cf_terminal_id** | **str** | cashfree terminal id | [optional] 
+**cf_terminal_id** | **int** | cashfree terminal id | [optional] 
 **last_updated_on** | **str** | last instant when this terminal was updated | [optional] 
 **terminal_address** | **str** | location of terminal | [optional] 
 **terminal_id** | **str** | terminal id for merchant reference | 

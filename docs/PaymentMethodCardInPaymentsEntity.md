@@ -5,13 +5,7 @@ payment method card object in payment entity
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | **str** |  | [optional] 
-**card_number** | **str** |  | [optional] 
-**card_network** | **str** |  | [optional] 
-**card_type** | **str** |  | [optional] 
-**card_country** | **str** |  | [optional] 
-**card_bank_name** | **str** |  | [optional] 
-**card_network_reference_id** | **str** |  | [optional] 
+**card** | [**PaymentMethodCardInPaymentsEntityCard**](PaymentMethodCardInPaymentsEntityCard.md) |  | [optional] 
 
 ## Example
 
