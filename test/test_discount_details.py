@@ -40,14 +40,14 @@ class TestDiscountDetails(unittest.TestCase):
         if include_optional :
             return DiscountDetails(
                 discount_type = 'flat', 
-                discount_value = '0', 
-                max_discount_amount = '0'
+                discount_value = 1.337, 
+                max_discount_amount = 1.337
             )
         else :
             return DiscountDetails(
                 discount_type = 'flat',
-                discount_value = '0',
-                max_discount_amount = '0',
+                discount_value = 1.337,
+                max_discount_amount = 1.337,
         )
         """
 

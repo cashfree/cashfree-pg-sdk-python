@@ -43,7 +43,7 @@ class TestOfferEntity(unittest.TestCase):
                 offer_status = 'active', 
                 offer_meta = {"offer_title":"some title","offer_description":"some offer description","offer_code":"CFTESTOFFER","offer_start_time":"2023-03-21T08:09:51Z","offer_end_time":"2023-03-29T08:09:51Z"}, 
                 offer_tnc = {"offer_tnc_type":"text","offer_tnc_value":"TnC for the Offer."}, 
-                offer_details = {"offer_type":"DISCOUNT_AND_CASHBACK","discount_details":{"discount_type":"flat","discount_value":"10","max_discount_amount":"10"},"cashback_details":{"cashback_type":"percentage","cashback_value":"20","max_cashback_amount":"150"}}, 
+                offer_details = {"offer_type":"DISCOUNT_AND_CASHBACK","discount_details":{"discount_type":"flat","discount_value":"10","max_discount_amount":"10"},"cashback_details":{"cashback_type":"percentage","cashback_value":20,"max_cashback_amount":"150"}}, 
                 offer_validations = {"min_amount":10,"payment_method":{"wallet":{"issuer":"paytm"}},"max_allowed":2}
             )
         else :
