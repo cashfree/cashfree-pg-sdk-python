@@ -19,16 +19,16 @@ import re  # noqa: F401
 import json
 
 
-
-from pydantic import BaseModel, Field, constr, validator
+from typing import Union
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr, validator
 
 class CashbackDetails(BaseModel):
     """
     Cashback detail boject
     """
     cashback_type: constr(strict=True, max_length=50, min_length=1) = Field(..., description="Type of discount")
-    cashback_value: constr(strict=True, max_length=100, min_length=1) = Field(..., description="Value of Discount.")
-    max_cashback_amount: constr(strict=True, max_length=100, min_length=1) = Field(..., description="Maximum Value of Cashback allowed.")
+    cashback_value: Union[StrictFloat, StrictInt] = Field(..., description="Value of Discount.")
+    max_cashback_amount: Union[StrictFloat, StrictInt] = Field(..., description="Maximum Value of Cashback allowed.")
     __properties = ["cashback_type", "cashback_value", "max_cashback_amount"]
 
     @validator('cashback_type')

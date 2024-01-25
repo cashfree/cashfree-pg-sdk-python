@@ -19,16 +19,16 @@ import re  # noqa: F401
 import json
 
 
-
-from pydantic import BaseModel, Field, constr, validator
+from typing import Union
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr, validator
 
 class DiscountDetails(BaseModel):
     """
     detils of the discount object of offer
     """
     discount_type: constr(strict=True, max_length=50, min_length=3) = Field(..., description="Type of discount")
-    discount_value: constr(strict=True, max_length=100, min_length=1) = Field(..., description="Value of Discount.")
-    max_discount_amount: constr(strict=True, max_length=100, min_length=1) = Field(..., description="Maximum Value of Discount allowed.")
+    discount_value: Union[StrictFloat, StrictInt] = Field(..., description="Value of Discount.")
+    max_discount_amount: Union[StrictFloat, StrictInt] = Field(..., description="Maximum Value of Discount allowed.")
     __properties = ["discount_type", "discount_value", "max_discount_amount"]
 
     @validator('discount_type')

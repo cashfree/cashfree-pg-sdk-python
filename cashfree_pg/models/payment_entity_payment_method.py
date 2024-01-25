@@ -135,7 +135,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodCardInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodNetBankingInPaymentsEntity
@@ -143,7 +143,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodNetBankingInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodUPIInPaymentsEntity
@@ -151,7 +151,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodUPIInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodAppInPaymentsEntity
@@ -159,7 +159,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodAppInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodCardlessEMIInPaymentsEntity
@@ -167,7 +167,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodCardlessEMIInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodPaylaterInPaymentsEntity
@@ -175,7 +175,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodPaylaterInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into PaymentMethodCardEMIInPaymentsEntity
@@ -183,7 +183,7 @@ class PaymentEntityPaymentMethod(BaseModel):
             instance.actual_instance = PaymentMethodCardEMIInPaymentsEntity.from_json(json_str)
             match += 1
             if (instance.actual_instance is not None):
-                return instance.actual_instance
+                return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 

@@ -6,8 +6,8 @@ Cashback detail boject
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cashback_type** | **str** | Type of discount | 
-**cashback_value** | **str** | Value of Discount. | 
-**max_cashback_amount** | **str** | Maximum Value of Cashback allowed. | 
+**cashback_value** | **float** | Value of Discount. | 
+**max_cashback_amount** | **float** | Maximum Value of Cashback allowed. | 
 
 ## Example
 

@@ -40,14 +40,14 @@ class TestCashbackDetails(unittest.TestCase):
         if include_optional :
             return CashbackDetails(
                 cashback_type = 'flat', 
-                cashback_value = '0', 
-                max_cashback_amount = '0'
+                cashback_value = 1.337, 
+                max_cashback_amount = 1.337
             )
         else :
             return CashbackDetails(
                 cashback_type = 'flat',
-                cashback_value = '0',
-                max_cashback_amount = '0',
+                cashback_value = 1.337,
+                max_cashback_amount = 1.337,
         )
         """
 

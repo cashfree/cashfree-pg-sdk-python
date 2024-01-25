@@ -6,8 +6,8 @@ detils of the discount object of offer
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **discount_type** | **str** | Type of discount | 
-**discount_value** | **str** | Value of Discount. | 
-**max_discount_amount** | **str** | Maximum Value of Discount allowed. | 
+**discount_value** | **float** | Value of Discount. | 
+**max_discount_amount** | **float** | Maximum Value of Discount allowed. | 
 
 ## Example
 
