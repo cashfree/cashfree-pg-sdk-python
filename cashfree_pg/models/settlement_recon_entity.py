@@ -53,7 +53,7 @@ class SettlementReconEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> SettlementReconEntity:
         """Create an instance of SettlementReconEntity from a JSON string"""
-        if "cursor", "limit", "data" not in json_str:
+        if "cursor, limit, data" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

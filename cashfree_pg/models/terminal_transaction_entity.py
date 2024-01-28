@@ -55,7 +55,7 @@ class TerminalTransactionEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> TerminalTransactionEntity:
         """Create an instance of TerminalTransactionEntity from a JSON string"""
-        if "cf_payment_id", "payment_amount", "payment_method", "payment_url", "qrcode", "timeout" not in json_str:
+        if "cf_payment_id, payment_amount, payment_method, payment_url, qrcode, timeout" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

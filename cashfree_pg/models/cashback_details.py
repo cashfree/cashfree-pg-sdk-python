@@ -59,7 +59,7 @@ class CashbackDetails(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CashbackDetails:
         """Create an instance of CashbackDetails from a JSON string"""
-        if "cashback_type", "cashback_value", "max_cashback_amount" not in json_str:
+        if "cashback_type, cashback_value, max_cashback_amount" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

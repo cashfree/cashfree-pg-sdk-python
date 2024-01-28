@@ -53,7 +53,7 @@ class SettlementFetchReconRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> SettlementFetchReconRequest:
         """Create an instance of SettlementFetchReconRequest from a JSON string"""
-        if "pagination", "filters" not in json_str:
+        if "pagination, filters" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

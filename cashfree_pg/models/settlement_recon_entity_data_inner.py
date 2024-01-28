@@ -84,7 +84,7 @@ class SettlementReconEntityDataInner(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> SettlementReconEntityDataInner:
         """Create an instance of SettlementReconEntityDataInner from a JSON string"""
-        if "event_id", "event_type", "event_settlement_amount", "event_amount", "sale_type", "event_status", "entity", "event_time", "event_currency", "order_id", "order_amount", "customer_phone", "customer_email", "customer_name", "payment_amount", "payment_utr", "payment_time", "payment_service_charge", "payment_service_tax", "cf_payment_id", "cf_settlement_id", "settlement_date", "settlement_utr", "split_service_charge", "split_service_tax", "vendor_commission", "closed_in_favor_of", "dispute_resolved_on", "dispute_category", "dispute_note", "refund_processed_at", "refund_arn", "refund_note", "refund_id", "adjustment_remarks" not in json_str:
+        if "event_id, event_type, event_settlement_amount, event_amount, sale_type, event_status, entity, event_time, event_currency, order_id, order_amount, customer_phone, customer_email, customer_name, payment_amount, payment_utr, payment_time, payment_service_charge, payment_service_tax, cf_payment_id, cf_settlement_id, settlement_date, settlement_utr, split_service_charge, split_service_tax, vendor_commission, closed_in_favor_of, dispute_resolved_on, dispute_category, dispute_note, refund_processed_at, refund_arn, refund_note, refund_id, adjustment_remarks" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

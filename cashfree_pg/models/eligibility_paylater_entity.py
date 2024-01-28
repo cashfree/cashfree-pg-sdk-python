@@ -54,7 +54,7 @@ class EligibilityPaylaterEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> EligibilityPaylaterEntity:
         """Create an instance of EligibilityPaylaterEntity from a JSON string"""
-        if "eligibility", "entity_type", "entity_value", "entity_details" not in json_str:
+        if "eligibility, entity_type, entity_value, entity_details" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
