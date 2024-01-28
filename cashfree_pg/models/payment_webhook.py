@@ -53,7 +53,44 @@ class PaymentWebhook(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentWebhook:
         """Create an instance of PaymentWebhook from a JSON string"""
-        if "data", "event_time", "type" not in json_str:
+        if "CodegenProperty{openApiType&#x3D;&#39;PaymentWebhookDataEntity&#39;, baseName&#x3D;&#39;data&#39;, complexType&#x3D;&#39;PaymentWebhookDataEntity&#39;, getter&#x3D;&#39;getData&#39;, setter&#x3D;&#39;setData&#39;, description&#x3D;&#39;null&#39;, dataType&#x3D;&#39;PaymentWebhookDataEntity&#39;, datatypeWithEnum&#x3D;&#39;PaymentWebhookDataEntity&#39;, dataFormat&#x3D;&#39;null&#39;, name&#x3D;&#39;data&#39;, min&#x3D;&#39;null&#39;, max&#x3D;&#39;null&#39;, defaultValue&#x3D;&#39;null&#39;, defaultValueWithParam&#x3D;&#39; &#x3D; data.data;&#39;, baseType&#x3D;&#39;PaymentWebhookDataEntity&#39;, containerType&#x3D;&#39;null&#39;, containerTypeMapped&#x3D;&#39;null&#39;, title&#x3D;&#39;null&#39;, unescapedDescription&#x3D;&#39;null&#39;, maxLength&#x3D;null, minLength&#x3D;null, pattern&#x3D;&#39;null&#39;, example&#x3D;&#39;cashfree_pg.models.payment_webhook_data_entity.PaymentWebhookDataEntity(
+                    order &#x3D; cashfree_pg.models.payment_webhook_order_entity.PaymentWebhookOrderEntity(
+                        order_id &#x3D; &#39;&#39;, 
+                        order_amount &#x3D; 1.337, 
+                        order_currency &#x3D; &#39;&#39;, 
+                        order_tags &#x3D; {
+                            &#39;key&#39; : &#39;0&#39;
+                            }, ), 
+                    payment &#x3D; null, 
+                    customer_details &#x3D; cashfree_pg.models.payment_webhook_customer_entity.PaymentWebhookCustomerEntity(
+                        customer_name &#x3D; &#39;Yogesh&#39;, 
+                        customer_id &#x3D; &#39;12121212&#39;, 
+                        customer_email &#x3D; &#39;yogesh.miglani@gmail.com&#39;, 
+                        customer_phone &#x3D; &#39;9666699999&#39;, ), 
+                    error_details &#x3D; cashfree_pg.models.payment_webhook_error_entity.PaymentWebhookErrorEntity(
+                        error_code &#x3D; &#39;&#39;, 
+                        error_description &#x3D; &#39;&#39;, 
+                        error_reason &#x3D; &#39;&#39;, 
+                        error_source &#x3D; &#39;&#39;, 
+                        error_code_raw &#x3D; &#39;&#39;, 
+                        error_description_raw &#x3D; &#39;&#39;, ), 
+                    payment_gateway_details &#x3D; cashfree_pg.models.payment_webhook_gateway_details_entity.PaymentWebhookGatewayDetailsEntity(
+                        gateway_name &#x3D; &#39;&#39;, 
+                        gateway_order_id &#x3D; &#39;&#39;, 
+                        gateway_payment_id &#x3D; &#39;&#39;, 
+                        gateway_status_code &#x3D; &#39;&#39;, 
+                        gateway_settlement &#x3D; &#39;&#39;, ), 
+                    payment_offers &#x3D; [
+                        cashfree_pg.models.offer_entity.OfferEntity(
+                            offer_id &#x3D; &#39;d2b430fb-1afe-455a-af31-66d00377b29a&#39;, 
+                            offer_status &#x3D; &#39;active&#39;, 
+                            offer_meta &#x3D; {&quot;$ref&quot;:&quot;#/components/schemas/OfferMeta/example&quot;}, 
+                            offer_tnc &#x3D; {&quot;$ref&quot;:&quot;#/components/schemas/OfferTnc/example&quot;}, 
+                            offer_details &#x3D; {&quot;$ref&quot;:&quot;#/components/schemas/OfferDetails/example&quot;}, 
+                            offer_validations &#x3D; {&quot;$ref&quot;:&quot;#/components/schemas/OfferValidations/example&quot;}, )
+                        ], )&#39;, jsonSchema&#x3D;&#39;{
+  &quot;$ref&quot; : &quot;#/components/schemas/PaymentWebhookDataEntity&quot;
+}&#39;, minimum&#x3D;&#39;null&#39;, maximum&#x3D;&#39;null&#39;, exclusiveMinimum&#x3D;false, exclusiveMaximum&#x3D;false, required&#x3D;false, deprecated&#x3D;false, hasMoreNonReadOnly&#x3D;false, isPrimitiveType&#x3D;false, isModel&#x3D;true, isContainer&#x3D;false, isString&#x3D;false, isNumeric&#x3D;false, isInteger&#x3D;false, isShort&#x3D;false, isLong&#x3D;false, isUnboundedInteger&#x3D;false, isNumber&#x3D;false, isFloat&#x3D;false, isDouble&#x3D;false, isDecimal&#x3D;false, isByteArray&#x3D;false, isBinary&#x3D;false, isFile&#x3D;false, isBoolean&#x3D;false, isDate&#x3D;false, isDateTime&#x3D;false, isUuid&#x3D;false, isUri&#x3D;false, isEmail&#x3D;false, isPassword&#x3D;false, isFreeFormObject&#x3D;false, isArray&#x3D;false, isMap&#x3D;false, isEnum&#x3D;false, isInnerEnum&#x3D;false, isEnumRef&#x3D;false, isAnyType&#x3D;false, isReadOnly&#x3D;false, isWriteOnly&#x3D;false, isNullable&#x3D;false, isSelfReference&#x3D;false, isCircularReference&#x3D;false, isDiscriminator&#x3D;false, isNew&#x3D;false, isOverridden&#x3D;null, _enum&#x3D;null, allowableValues&#x3D;null, items&#x3D;null, additionalProperties&#x3D;null, vars&#x3D;[], requiredVars&#x3D;[], mostInnerItems&#x3D;null, vendorExtensions&#x3D;{}, hasValidation&#x3D;false, isInherited&#x3D;false, discriminatorValue&#x3D;&#39;null&#39;, nameInCamelCase&#x3D;&#39;Data&#39;, nameInSnakeCase&#x3D;&#39;DATA&#39;, enumName&#x3D;&#39;null&#39;, maxItems&#x3D;null, minItems&#x3D;null, maxProperties&#x3D;null, minProperties&#x3D;null, uniqueItems&#x3D;false, uniqueItemsBoolean&#x3D;null, multipleOf&#x3D;null, isXmlAttribute&#x3D;false, xmlPrefix&#x3D;&#39;null&#39;, xmlName&#x3D;&#39;null&#39;, xmlNamespace&#x3D;&#39;null&#39;, isXmlWrapped&#x3D;false, isNull&#x3D;false, isVoid&#x3D;false, getAdditionalPropertiesIsAnyType&#x3D;false, getHasVars&#x3D;false, getHasRequired&#x3D;false, getHasDiscriminatorWithNonEmptyMapping&#x3D;false, composedSchemas&#x3D;null, hasMultipleTypes&#x3D;false, requiredVarsMap&#x3D;null, ref&#x3D;#/components/schemas/PaymentWebhookDataEntity, schemaIsFromAdditionalProperties&#x3D;false, isBooleanSchemaTrue&#x3D;false, isBooleanSchemaFalse&#x3D;false, format&#x3D;null, dependentRequired&#x3D;null, contains&#x3D;null}" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
