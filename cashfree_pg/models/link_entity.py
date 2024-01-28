@@ -68,7 +68,7 @@ class LinkEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> LinkEntity:
         """Create an instance of LinkEntity from a JSON string"""
-        if "cf_link_id", "link_id", "link_status", "link_currency", "link_amount", "link_amount_paid", "link_partial_payments", "link_minimum_partial_amount", "link_purpose", "link_created_at", "customer_details", "link_meta", "link_url", "link_expiry_time", "link_notes", "link_auto_reminders", "link_notify" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

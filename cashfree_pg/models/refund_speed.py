@@ -53,7 +53,7 @@ class RefundSpeed(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> RefundSpeed:
         """Create an instance of RefundSpeed from a JSON string"""
-        if "requested", "accepted", "processed", "message" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

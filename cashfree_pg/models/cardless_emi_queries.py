@@ -53,7 +53,7 @@ class CardlessEMIQueries(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CardlessEMIQueries:
         """Create an instance of CardlessEMIQueries from a JSON string"""
-        if "order_id", "amount", "customer_details" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

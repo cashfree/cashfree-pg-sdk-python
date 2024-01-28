@@ -52,7 +52,7 @@ class OrderMeta(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OrderMeta:
         """Create an instance of OrderMeta from a JSON string"""
-        if "return_url", "notify_url", "payment_methods" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

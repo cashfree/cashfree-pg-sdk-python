@@ -58,7 +58,7 @@ class OfferTnc(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OfferTnc:
         """Create an instance of OfferTnc from a JSON string"""
-        if "offer_tnc_type", "offer_tnc_value" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

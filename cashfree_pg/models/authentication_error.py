@@ -52,7 +52,7 @@ class AuthenticationError(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> AuthenticationError:
         """Create an instance of AuthenticationError from a JSON string"""
-        if "message", "code", "type" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

@@ -50,7 +50,7 @@ class OfferNBNetbanking(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OfferNBNetbanking:
         """Create an instance of OfferNBNetbanking from a JSON string"""
-        if "bank_name" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

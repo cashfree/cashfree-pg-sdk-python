@@ -52,7 +52,7 @@ class CardOffer(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CardOffer:
         """Create an instance of CardOffer from a JSON string"""
-        if "type", "bank_name", "scheme_name" not in json_str:
+        if "" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
