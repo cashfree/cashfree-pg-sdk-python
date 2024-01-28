@@ -61,7 +61,7 @@ class OfferDetails(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OfferDetails:
         """Create an instance of OfferDetails from a JSON string"""
-        if "offer_type", "discount_details", "cashback_details" not in json_str:
+        if "offer_typediscount_detailscashback_details" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

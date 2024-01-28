@@ -65,7 +65,7 @@ class CardEMI(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CardEMI:
         """Create an instance of CardEMI from a JSON string"""
-        if "channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "card_alias", "card_bank_name", "emi_tenure" not in json_str:
+        if "channelcard_numbercard_holder_namecard_expiry_mmcard_expiry_yycard_cvvcard_aliascard_bank_nameemi_tenure" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

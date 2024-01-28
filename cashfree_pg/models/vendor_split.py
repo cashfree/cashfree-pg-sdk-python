@@ -52,7 +52,7 @@ class VendorSplit(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> VendorSplit:
         """Create an instance of VendorSplit from a JSON string"""
-        if "vendor_id", "amount", "percentage" not in json_str:
+        if "vendor_idamountpercentage" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

@@ -110,7 +110,7 @@ class RefundEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> RefundEntity:
         """Create an instance of RefundEntity from a JSON string"""
-        if "cf_payment_id", "cf_refund_id", "order_id", "refund_id", "entity", "refund_amount", "refund_currency", "refund_note", "refund_status", "refund_arn", "refund_charge", "status_description", "metadata", "refund_splits", "refund_type", "refund_mode", "created_at", "processed_at", "refund_speed" not in json_str:
+        if "cf_payment_idcf_refund_idorder_idrefund_identityrefund_amountrefund_currencyrefund_noterefund_statusrefund_arnrefund_chargestatus_descriptionmetadatarefund_splitsrefund_typerefund_modecreated_atprocessed_atrefund_speed" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

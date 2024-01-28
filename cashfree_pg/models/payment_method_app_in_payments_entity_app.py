@@ -52,7 +52,7 @@ class PaymentMethodAppInPaymentsEntityApp(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodAppInPaymentsEntityApp:
         """Create an instance of PaymentMethodAppInPaymentsEntityApp from a JSON string"""
-        if "channel", "provider", "phone" not in json_str:
+        if "channelproviderphone" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

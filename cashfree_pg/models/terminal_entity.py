@@ -61,7 +61,7 @@ class TerminalEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> TerminalEntity:
         """Create an instance of TerminalEntity from a JSON string"""
-        if "added_on", "cf_terminal_id", "last_updated_on", "terminal_address", "terminal_email", "terminal_type", "teminal_id", "terminal_name", "terminal_note", "terminal_phone_no", "terminal_status", "terminal_meta" not in json_str:
+        if "added_oncf_terminal_idlast_updated_onterminal_addressterminal_emailterminal_typeteminal_idterminal_nameterminal_noteterminal_phone_noterminal_statusterminal_meta" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

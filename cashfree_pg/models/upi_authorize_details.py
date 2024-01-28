@@ -52,7 +52,7 @@ class UPIAuthorizeDetails(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> UPIAuthorizeDetails:
         """Create an instance of UPIAuthorizeDetails from a JSON string"""
-        if "approve_by", "start_time", "end_time" not in json_str:
+        if "approve_bystart_timeend_time" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

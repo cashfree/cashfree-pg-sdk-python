@@ -57,7 +57,7 @@ class CreateOfferRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CreateOfferRequest:
         """Create an instance of CreateOfferRequest from a JSON string"""
-        if "offer_meta", "offer_tnc", "offer_details", "offer_validations" not in json_str:
+        if "offer_metaoffer_tncoffer_detailsoffer_validations" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
