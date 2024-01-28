@@ -52,7 +52,7 @@ class LinkCustomerDetailsEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> LinkCustomerDetailsEntity:
         """Create an instance of LinkCustomerDetailsEntity from a JSON string"""
-        if "customer_phone", "customer_email", "customer_name" not in json_str:
+        if "customer_phone, customer_email, customer_name" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

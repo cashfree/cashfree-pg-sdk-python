@@ -53,7 +53,7 @@ class EligibilityFetchPaymentMethodsRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> EligibilityFetchPaymentMethodsRequest:
         """Create an instance of EligibilityFetchPaymentMethodsRequest from a JSON string"""
-        if "queries", "filters" not in json_str:
+        if "queries, filters" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

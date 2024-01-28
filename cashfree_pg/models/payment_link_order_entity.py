@@ -73,7 +73,7 @@ class PaymentLinkOrderEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentLinkOrderEntity:
         """Create an instance of PaymentLinkOrderEntity from a JSON string"""
-        if "cf_order_id", "link_id", "order_id", "entity", "order_currency", "order_amount", "order_status", "payment_session_id", "order_expiry_time", "order_note", "created_at", "order_splits", "customer_details", "order_meta", "payments", "settlements", "refunds", "order_tags" not in json_str:
+        if "cf_order_id, link_id, order_id, entity, order_currency, order_amount, order_status, payment_session_id, order_expiry_time, order_note, created_at, order_splits, customer_details, order_meta, payments, settlements, refunds, order_tags" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

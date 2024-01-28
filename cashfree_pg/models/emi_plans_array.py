@@ -55,7 +55,7 @@ class EMIPlansArray(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> EMIPlansArray:
         """Create an instance of EMIPlansArray from a JSON string"""
-        if "tenure", "interest_rate", "currency", "emi", "total_interest", "total_amount" not in json_str:
+        if "tenure, interest_rate, currency, emi, total_interest, total_amount" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

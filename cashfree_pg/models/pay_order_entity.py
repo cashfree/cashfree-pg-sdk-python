@@ -86,7 +86,7 @@ class PayOrderEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PayOrderEntity:
         """Create an instance of PayOrderEntity from a JSON string"""
-        if "payment_amount", "cf_payment_id", "payment_method", "channel", "action", "data" not in json_str:
+        if "payment_amount, cf_payment_id, payment_method, channel, action, data" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
