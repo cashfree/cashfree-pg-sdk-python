@@ -52,6 +52,13 @@ class PaymentLinkCustomerDetails(BaseModel):
     def from_json(cls, json_str: str) -> PaymentLinkCustomerDetails:
         """Create an instance of PaymentLinkCustomerDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> PaymentLinkCustomerDetails:
+        """Create an instance of PaymentLinkCustomerDetails from a JSON string"""
+        if "customer_id", "customer_email", "customer_phone", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

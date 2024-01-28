@@ -106,6 +106,13 @@ class RefundEntity(BaseModel):
     def from_json(cls, json_str: str) -> RefundEntity:
         """Create an instance of RefundEntity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> RefundEntity:
+        """Create an instance of RefundEntity from a JSON string"""
+        if "cf_payment_id", "cf_refund_id", "order_id", "refund_id", "entity", "refund_amount", "refund_currency", "refund_note", "refund_status", "refund_arn", "refund_charge", "status_description", "metadata", "refund_splits", "refund_type", "refund_mode", "created_at", "processed_at", "refund_speed" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

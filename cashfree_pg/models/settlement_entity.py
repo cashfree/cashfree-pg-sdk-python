@@ -59,6 +59,13 @@ class SettlementEntity(BaseModel):
     def from_json(cls, json_str: str) -> SettlementEntity:
         """Create an instance of SettlementEntity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> SettlementEntity:
+        """Create an instance of SettlementEntity from a JSON string"""
+        if "cf_payment_id", "cf_settlement_id", "settlement_currency", "order_id", "entity", "order_amount", "payment_time", "service_charge", "service_tax", "settlement_amount", "settlement_id", "transfer_id", "transfer_time", "transfer_utr" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
