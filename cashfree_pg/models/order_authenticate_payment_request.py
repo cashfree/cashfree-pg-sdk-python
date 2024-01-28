@@ -58,7 +58,7 @@ class OrderAuthenticatePaymentRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OrderAuthenticatePaymentRequest:
         """Create an instance of OrderAuthenticatePaymentRequest from a JSON string"""
-        if "otp", "action" not in json_str:
+        if "otp""action" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

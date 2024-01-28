@@ -53,7 +53,7 @@ class OfferValidations(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OfferValidations:
         """Create an instance of OfferValidations from a JSON string"""
-        if "min_amount", "payment_method", "max_allowed" not in json_str:
+        if "min_amount""payment_method""max_allowed" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

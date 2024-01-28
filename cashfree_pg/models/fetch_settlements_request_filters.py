@@ -53,7 +53,7 @@ class FetchSettlementsRequestFilters(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> FetchSettlementsRequestFilters:
         """Create an instance of FetchSettlementsRequestFilters from a JSON string"""
-        if "cf_settlement_ids", "settlement_utrs", "start_date", "end_date" not in json_str:
+        if "cf_settlement_ids""settlement_utrs""start_date""end_date" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

@@ -56,7 +56,7 @@ class CryptogramEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CryptogramEntity:
         """Create an instance of CryptogramEntity from a JSON string"""
-        if "instrument_id", "token_requestor_id", "card_number", "card_expiry_mm", "card_expiry_yy", "cryptogram", "card_display" not in json_str:
+        if "instrument_id""token_requestor_id""card_number""card_expiry_mm""card_expiry_yy""cryptogram""card_display" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

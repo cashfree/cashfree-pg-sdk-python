@@ -51,7 +51,7 @@ class PaymentMethodsQueries(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodsQueries:
         """Create an instance of PaymentMethodsQueries from a JSON string"""
-        if "amount", "order_id" not in json_str:
+        if "amount""order_id" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

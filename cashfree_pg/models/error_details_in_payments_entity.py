@@ -56,7 +56,7 @@ class ErrorDetailsInPaymentsEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> ErrorDetailsInPaymentsEntity:
         """Create an instance of ErrorDetailsInPaymentsEntity from a JSON string"""
-        if "error_code", "error_description", "error_reason", "error_source", "error_code_raw", "error_description_raw", "error_subcode_raw" not in json_str:
+        if "error_code""error_description""error_reason""error_source""error_code_raw""error_description_raw""error_subcode_raw" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

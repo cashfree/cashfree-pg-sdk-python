@@ -90,7 +90,7 @@ class Card(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> Card:
         """Create an instance of Card from a JSON string"""
-        if "channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "instrument_id", "cryptogram", "token_requestor_id", "token_type", "card_display", "card_alias", "card_bank_name", "emi_tenure" not in json_str:
+        if "channel""card_number""card_holder_name""card_expiry_mm""card_expiry_yy""card_cvv""instrument_id""cryptogram""token_requestor_id""token_type""card_display""card_alias""card_bank_name""emi_tenure" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

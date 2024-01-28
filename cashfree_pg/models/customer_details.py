@@ -56,7 +56,7 @@ class CustomerDetails(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CustomerDetails:
         """Create an instance of CustomerDetails from a JSON string"""
-        if "customer_id", "customer_email", "customer_phone", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code" not in json_str:
+        if "customer_id""customer_email""customer_phone""customer_name""customer_bank_account_number""customer_bank_ifsc""customer_bank_code" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

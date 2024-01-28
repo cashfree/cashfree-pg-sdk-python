@@ -72,7 +72,7 @@ class OrderEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OrderEntity:
         """Create an instance of OrderEntity from a JSON string"""
-        if "cf_order_id", "order_id", "entity", "order_currency", "order_amount", "order_status", "payment_session_id", "order_expiry_time", "order_note", "created_at", "order_splits", "customer_details", "order_meta", "payments", "settlements", "refunds", "order_tags" not in json_str:
+        if "cf_order_id""order_id""entity""order_currency""order_amount""order_status""payment_session_id""order_expiry_time""order_note""created_at""order_splits""customer_details""order_meta""payments""settlements""refunds""order_tags" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

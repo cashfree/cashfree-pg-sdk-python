@@ -51,7 +51,7 @@ class LinkNotifyEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> LinkNotifyEntity:
         """Create an instance of LinkNotifyEntity from a JSON string"""
-        if "send_sms", "send_email" not in json_str:
+        if "send_sms""send_email" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 

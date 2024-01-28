@@ -53,7 +53,7 @@ class PaymentWebhookCustomerEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentWebhookCustomerEntity:
         """Create an instance of PaymentWebhookCustomerEntity from a JSON string"""
-        if "customer_name", "customer_id", "customer_email", "customer_phone" not in json_str:
+        if "customer_name""customer_id""customer_email""customer_phone" not in json_str:
             return None
         return cls.from_dict(json.loads(json_str))
 
