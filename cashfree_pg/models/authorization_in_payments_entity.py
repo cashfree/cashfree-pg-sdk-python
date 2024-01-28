@@ -73,6 +73,13 @@ class AuthorizationInPaymentsEntity(BaseModel):
     def from_json(cls, json_str: str) -> AuthorizationInPaymentsEntity:
         """Create an instance of AuthorizationInPaymentsEntity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> AuthorizationInPaymentsEntity:
+        """Create an instance of AuthorizationInPaymentsEntity from a JSON string"""
+        if "action", "status", "captured_amount", "start_time", "end_time", "approve_by", "action_reference", "action_time" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

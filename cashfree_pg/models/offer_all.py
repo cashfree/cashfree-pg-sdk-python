@@ -46,6 +46,13 @@ class OfferAll(BaseModel):
     def from_json(cls, json_str: str) -> OfferAll:
         """Create an instance of OfferAll from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> OfferAll:
+        """Create an instance of OfferAll from a JSON string"""
+        if "all" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

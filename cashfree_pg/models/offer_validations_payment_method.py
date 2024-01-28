@@ -132,7 +132,7 @@ class OfferValidationsPaymentMethod(BaseModel):
 
         # deserialize data into OfferAll
         try:
-            instance.actual_instance = OfferAll.from_json(json_str)
+            instance.actual_instance = OfferAll.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -140,7 +140,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferCard
         try:
-            instance.actual_instance = OfferCard.from_json(json_str)
+            instance.actual_instance = OfferCard.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -148,7 +148,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferNB
         try:
-            instance.actual_instance = OfferNB.from_json(json_str)
+            instance.actual_instance = OfferNB.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -156,7 +156,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferWallet
         try:
-            instance.actual_instance = OfferWallet.from_json(json_str)
+            instance.actual_instance = OfferWallet.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -164,7 +164,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferUPI
         try:
-            instance.actual_instance = OfferUPI.from_json(json_str)
+            instance.actual_instance = OfferUPI.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -172,7 +172,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferPaylater
         try:
-            instance.actual_instance = OfferPaylater.from_json(json_str)
+            instance.actual_instance = OfferPaylater.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -180,7 +180,7 @@ class OfferValidationsPaymentMethod(BaseModel):
             error_messages.append(str(e))
         # deserialize data into OfferEMI
         try:
-            instance.actual_instance = OfferEMI.from_json(json_str)
+            instance.actual_instance = OfferEMI.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance

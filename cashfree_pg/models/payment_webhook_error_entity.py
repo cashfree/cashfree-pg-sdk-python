@@ -51,6 +51,13 @@ class PaymentWebhookErrorEntity(BaseModel):
     def from_json(cls, json_str: str) -> PaymentWebhookErrorEntity:
         """Create an instance of PaymentWebhookErrorEntity from a JSON string"""
         return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> PaymentWebhookErrorEntity:
+        """Create an instance of PaymentWebhookErrorEntity from a JSON string"""
+        if "error_code", "error_description", "error_reason", "error_source", "error_code_raw", "error_description_raw" not in json_str:
+            return None
+        return cls.from_dict(json.loads(json_str))
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
