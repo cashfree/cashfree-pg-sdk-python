@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **customer_bank_account_number** | **str** | Customer bank account. Required if you want to do a bank account check (TPV) | [optional] 
 **customer_bank_ifsc** | **str** | Customer bank IFSC. Required if you want to do a bank account check (TPV) | [optional] 
 **customer_bank_code** | **float** | Customer bank code. Required for net banking payments, if you want to do a bank account check (TPV) | [optional] 
+**customer_uid** | **str** | Customer identifier at Cashfree. You will get this when you create/get customer | [optional] 
 
 ## Example
 

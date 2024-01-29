@@ -5,7 +5,7 @@ All URIs are relative to *https://sandbox.cashfree.com/pg*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**SposCreateTerminal**](SoftPOSApi.md#SposCreateTerminal) | **POST** /terminal | Create Terminal
-[**SposCreateTerminalTransaction**](SoftPOSApi.md#SposCreateTerminalTransaction) | **POST** /terminal/transactions | Create Terminal
+[**SposCreateTerminalTransaction**](SoftPOSApi.md#SposCreateTerminalTransaction) | **POST** /terminal/transactions | Create Terminal Transaction
 [**SposFetchTerminal**](SoftPOSApi.md#SposFetchTerminal) | **GET** /terminal/{terminal_phone_no} | Get terminal status using phone number
 [**SposFetchTerminalQrCodes**](SoftPOSApi.md#SposFetchTerminalQrCodes) | **GET** /terminal/qrcodes | Fetch Terminal QR Codes
 
@@ -54,10 +54,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
  **create_terminal_request** | [**CreateTerminalRequest**](CreateTerminalRequest.md)| Request Body to Create Terminal for SPOS | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
 
 ### Return type
 
@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 # **SposCreateTerminalTransaction**
 > TerminalTransactionEntity SposCreateTerminalTransaction(x_api_version, create_terminal_transaction_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
 
-Create Terminal
+Create Terminal Transaction
 
 Use this API to create a new terminal transaction. To use this API you should first create an order using the Create Order API. Also, you need to enter the terminal details while creating the order and pass the same terminal information while creating a transaction using the below mentioned API.
 
@@ -116,7 +116,7 @@ from pprint import pprint
     x_api_version = "2022-09-01"
 
     try:
-        # Create Terminal
+        # Create Terminal Transaction
         api_response = Cashfree().SposCreateTerminalTransaction(x_api_version, create_terminal_transaction_request, x_request_id=x_request_id, x_idempotency_key=x_idempotency_key)
         print("The response of SoftPOSApi->SposCreateTerminalTransaction:\n")
         pprint(api_response)
@@ -130,10 +130,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
  **create_terminal_transaction_request** | [**CreateTerminalTransactionRequest**](CreateTerminalTransactionRequest.md)| Request body to create a terminal transaction | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
 
 ### Return type
 
@@ -205,10 +205,10 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
  **terminal_phone_no** | **str**| The terminal for which you want to view the order details. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
 
 ### Return type
 
@@ -280,11 +280,11 @@ from pprint import pprint
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2022-09-01&#39;]
+ **x_api_version** | **str**| API version to be used. Format is in YYYY-MM-DD | [default to &#39;2023-08-01&#39;]
  **terminal_phone_no** | **str**| Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request. | 
  **cf_terminal_id** | **str**| Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request. | 
  **x_request_id** | **str**| Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree | [optional] 
- **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. | [optional] 
+ **x_idempotency_key** | **str**| An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.   | [optional] 
 
 ### Return type
 
