@@ -1,6 +1,6 @@
 # PaymentMethodsFilters
 
-Filter for specific Payment Methods
+Filter for Payment Methods
 
 ## Properties
 Name | Type | Description | Notes

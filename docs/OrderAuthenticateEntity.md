@@ -5,7 +5,7 @@ This is the response shared when merchant inovkes the OTP submit or resend API
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cf_payment_id** | **float** | The payment id for which this request was sent | [optional] 
+**cf_payment_id** | **str** | The payment id for which this request was sent | [optional] 
 **action** | **str** | The action that was invoked for this request. | [optional] 
 **authenticate_status** | **str** | Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status. | [optional] 
 **payment_message** | **str** | Human readable message which describes the status in more detail | [optional] 
