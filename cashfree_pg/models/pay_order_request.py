@@ -55,7 +55,7 @@ class PayOrderRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PayOrderRequest:
         """Create an instance of PayOrderRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["payment_session_id, payment_method, save_instrument, offer_id"] in temp_dict.keys():
+        if "payment_session_id, payment_method, save_instrument, offer_id" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

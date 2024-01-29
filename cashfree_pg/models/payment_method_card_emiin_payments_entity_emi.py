@@ -60,7 +60,7 @@ class PaymentMethodCardEMIInPaymentsEntityEmi(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodCardEMIInPaymentsEntityEmi:
         """Create an instance of PaymentMethodCardEMIInPaymentsEntityEmi from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["channel, card_number, card_network, card_type, card_country, card_bank_name, card_network_reference_id, emi_tenure, emi_details"] in temp_dict.keys():
+        if "channel, card_number, card_network, card_type, card_country, card_bank_name, card_network_reference_id, emi_tenure, emi_details" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -55,7 +55,7 @@ class OfferMeta(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferMeta:
         """Create an instance of OfferMeta from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["offer_title, offer_description, offer_code, offer_start_time, offer_end_time"] in temp_dict.keys():
+        if "offer_title, offer_description, offer_code, offer_start_time, offer_end_time" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

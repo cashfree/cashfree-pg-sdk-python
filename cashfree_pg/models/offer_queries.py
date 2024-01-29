@@ -52,7 +52,7 @@ class OfferQueries(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferQueries:
         """Create an instance of OfferQueries from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["order_id, amount"] in temp_dict.keys():
+        if "order_id, amount" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -54,7 +54,7 @@ class SettlementWebhook(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SettlementWebhook:
         """Create an instance of SettlementWebhook from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["data, event_time, type"] in temp_dict.keys():
+        if "data, event_time, type" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

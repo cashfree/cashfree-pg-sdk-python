@@ -52,7 +52,7 @@ class FetchSettlementsRequestPagination(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> FetchSettlementsRequestPagination:
         """Create an instance of FetchSettlementsRequestPagination from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["limit, cursor"] in temp_dict.keys():
+        if "limit, cursor" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

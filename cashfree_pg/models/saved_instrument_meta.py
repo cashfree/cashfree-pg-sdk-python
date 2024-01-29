@@ -55,7 +55,7 @@ class SavedInstrumentMeta(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SavedInstrumentMeta:
         """Create an instance of SavedInstrumentMeta from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["card_network, card_bank_name, card_country, card_type, card_token_details"] in temp_dict.keys():
+        if "card_network, card_bank_name, card_country, card_type, card_token_details" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

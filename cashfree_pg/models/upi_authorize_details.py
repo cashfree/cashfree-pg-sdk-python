@@ -53,7 +53,7 @@ class UPIAuthorizeDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> UPIAuthorizeDetails:
         """Create an instance of UPIAuthorizeDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["approve_by, start_time, end_time"] in temp_dict.keys():
+        if "approve_by, start_time, end_time" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

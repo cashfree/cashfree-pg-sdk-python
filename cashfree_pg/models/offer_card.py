@@ -52,7 +52,7 @@ class OfferCard(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferCard:
         """Create an instance of OfferCard from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["card"] in temp_dict.keys():
+        if "card" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

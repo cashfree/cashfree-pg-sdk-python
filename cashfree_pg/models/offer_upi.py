@@ -51,7 +51,7 @@ class OfferUPI(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferUPI:
         """Create an instance of OfferUPI from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["upi"] in temp_dict.keys():
+        if "upi" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

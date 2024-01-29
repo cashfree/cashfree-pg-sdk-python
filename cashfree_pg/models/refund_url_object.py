@@ -51,7 +51,7 @@ class RefundURLObject(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> RefundURLObject:
         """Create an instance of RefundURLObject from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["url"] in temp_dict.keys():
+        if "url" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

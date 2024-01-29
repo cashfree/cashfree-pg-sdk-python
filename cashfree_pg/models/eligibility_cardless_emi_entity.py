@@ -55,7 +55,7 @@ class EligibilityCardlessEMIEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> EligibilityCardlessEMIEntity:
         """Create an instance of EligibilityCardlessEMIEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["eligibility, entity_type, entity_value, entity_details"] in temp_dict.keys():
+        if "eligibility, entity_type, entity_value, entity_details" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

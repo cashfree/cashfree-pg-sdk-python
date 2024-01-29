@@ -54,7 +54,7 @@ class FetchSettlementsRequestFilters(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> FetchSettlementsRequestFilters:
         """Create an instance of FetchSettlementsRequestFilters from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["cf_settlement_ids, settlement_utrs, start_date, end_date"] in temp_dict.keys():
+        if "cf_settlement_ids, settlement_utrs, start_date, end_date" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

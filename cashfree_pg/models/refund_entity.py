@@ -111,7 +111,7 @@ class RefundEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> RefundEntity:
         """Create an instance of RefundEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["cf_payment_id, cf_refund_id, order_id, refund_id, entity, refund_amount, refund_currency, refund_note, refund_status, refund_arn, refund_charge, status_description, metadata, refund_splits, refund_type, refund_mode, created_at, processed_at, refund_speed"] in temp_dict.keys():
+        if "cf_payment_id, cf_refund_id, order_id, refund_id, entity, refund_amount, refund_currency, refund_note, refund_status, refund_arn, refund_charge, status_description, metadata, refund_splits, refund_type, refund_mode, created_at, processed_at, refund_speed" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

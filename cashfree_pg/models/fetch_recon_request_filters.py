@@ -52,7 +52,7 @@ class FetchReconRequestFilters(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> FetchReconRequestFilters:
         """Create an instance of FetchReconRequestFilters from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["start_date, end_date"] in temp_dict.keys():
+        if "start_date, end_date" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

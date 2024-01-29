@@ -64,7 +64,7 @@ class Upi(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> Upi:
         """Create an instance of Upi from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["channel, upi_id, upi_redirect_url, upi_expiry_minutes, authorize_only, authorization"] in temp_dict.keys():
+        if "channel, upi_id, upi_redirect_url, upi_expiry_minutes, authorize_only, authorization" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

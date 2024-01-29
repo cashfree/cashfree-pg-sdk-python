@@ -66,7 +66,7 @@ class OrderCreateRefundRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OrderCreateRefundRequest:
         """Create an instance of OrderCreateRefundRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["refund_amount, refund_id, refund_note, refund_speed, refund_splits"] in temp_dict.keys():
+        if "refund_amount, refund_id, refund_note, refund_speed, refund_splits" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

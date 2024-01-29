@@ -64,7 +64,7 @@ class CreateOrderRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateOrderRequest:
         """Create an instance of CreateOrderRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["order_id, order_amount, order_currency, customer_details, terminal, order_meta, order_expiry_time, order_note, order_tags, order_splits"] in temp_dict.keys():
+        if "order_id, order_amount, order_currency, customer_details, terminal, order_meta, order_expiry_time, order_note, order_tags, order_splits" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

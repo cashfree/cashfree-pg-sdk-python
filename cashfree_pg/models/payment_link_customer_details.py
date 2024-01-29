@@ -57,7 +57,7 @@ class PaymentLinkCustomerDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentLinkCustomerDetails:
         """Create an instance of PaymentLinkCustomerDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["customer_id, customer_email, customer_phone, customer_name, customer_bank_account_number, customer_bank_ifsc, customer_bank_code"] in temp_dict.keys():
+        if "customer_id, customer_email, customer_phone, customer_name, customer_bank_account_number, customer_bank_ifsc, customer_bank_code" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -54,7 +54,7 @@ class OrderPayData(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OrderPayData:
         """Create an instance of OrderPayData from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["url, payload, content_type, method"] in temp_dict.keys():
+        if "url, payload, content_type, method" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -64,7 +64,7 @@ class CardlessEMI(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CardlessEMI:
         """Create an instance of CardlessEMI from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["channel, provider, phone, emi_tenure"] in temp_dict.keys():
+        if "channel, provider, phone, emi_tenure" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
