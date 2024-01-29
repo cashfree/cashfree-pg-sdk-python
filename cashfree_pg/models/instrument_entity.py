@@ -79,9 +79,10 @@ class InstrumentEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> InstrumentEntity:
         """Create an instance of InstrumentEntity from a JSON string"""
-        if "customer_id, afa_reference, instrument_id, instrument_type, instrument_uid, instrument_display, instrument_status, created_at, instrument_meta" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["customer_id, afa_reference, instrument_id, instrument_type, instrument_uid, instrument_display, instrument_status, created_at, instrument_meta"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

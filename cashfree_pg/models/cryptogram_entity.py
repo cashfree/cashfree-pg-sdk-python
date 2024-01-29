@@ -56,9 +56,10 @@ class CryptogramEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> CryptogramEntity:
         """Create an instance of CryptogramEntity from a JSON string"""
-        if "instrument_id, token_requestor_id, card_number, card_expiry_mm, card_expiry_yy, cryptogram, card_display" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["instrument_id, token_requestor_id, card_number, card_expiry_mm, card_expiry_yy, cryptogram, card_display"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

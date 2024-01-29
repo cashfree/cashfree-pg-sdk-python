@@ -55,9 +55,10 @@ class TerminalTransactionEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> TerminalTransactionEntity:
         """Create an instance of TerminalTransactionEntity from a JSON string"""
-        if "cf_payment_id, payment_amount, payment_method, payment_url, qrcode, timeout" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["cf_payment_id, payment_amount, payment_method, payment_url, qrcode, timeout"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

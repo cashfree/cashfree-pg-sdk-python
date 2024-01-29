@@ -58,9 +58,10 @@ class OfferTnc(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> OfferTnc:
         """Create an instance of OfferTnc from a JSON string"""
-        if "offer_tnc_type, offer_tnc_value" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["offer_tnc_type, offer_tnc_value"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

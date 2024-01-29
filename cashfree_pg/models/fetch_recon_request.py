@@ -53,9 +53,10 @@ class FetchReconRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> FetchReconRequest:
         """Create an instance of FetchReconRequest from a JSON string"""
-        if "pagination, filters" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["pagination, filters"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

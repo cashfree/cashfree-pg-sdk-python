@@ -52,9 +52,10 @@ class PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails:
         """Create an instance of PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails from a JSON string"""
-        if "emi_amount, emi_tenure, emi_interest" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["emi_amount, emi_tenure, emi_interest"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
