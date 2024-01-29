@@ -52,7 +52,7 @@ class PaymentMethodsQueries(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodsQueries:
         """Create an instance of PaymentMethodsQueries from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["amount, order_id"] in temp_dict.keys():
+        if "amount, order_id" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

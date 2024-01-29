@@ -62,7 +62,7 @@ class OfferDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferDetails:
         """Create an instance of OfferDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["offer_type, discount_details, cashback_details"] in temp_dict.keys():
+        if "offer_type, discount_details, cashback_details" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

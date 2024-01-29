@@ -60,7 +60,7 @@ class OfferEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferEntity:
         """Create an instance of OfferEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["offer_id, offer_status, offer_meta, offer_tnc, offer_details, offer_validations"] in temp_dict.keys():
+        if "offer_id, offer_status, offer_meta, offer_tnc, offer_details, offer_validations" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

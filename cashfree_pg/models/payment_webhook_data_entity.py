@@ -62,7 +62,7 @@ class PaymentWebhookDataEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentWebhookDataEntity:
         """Create an instance of PaymentWebhookDataEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["order, payment, customer_details, error_details, payment_gateway_details, payment_offers"] in temp_dict.keys():
+        if "order, payment, customer_details, error_details, payment_gateway_details, payment_offers" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

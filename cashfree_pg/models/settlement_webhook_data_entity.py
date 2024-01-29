@@ -52,7 +52,7 @@ class SettlementWebhookDataEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SettlementWebhookDataEntity:
         """Create an instance of SettlementWebhookDataEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["settlement"] in temp_dict.keys():
+        if "settlement" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

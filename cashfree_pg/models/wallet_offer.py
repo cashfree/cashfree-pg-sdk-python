@@ -51,7 +51,7 @@ class WalletOffer(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> WalletOffer:
         """Create an instance of WalletOffer from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["provider"] in temp_dict.keys():
+        if "provider" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

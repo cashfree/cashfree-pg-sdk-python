@@ -56,7 +56,7 @@ class PaymentWebhookErrorEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentWebhookErrorEntity:
         """Create an instance of PaymentWebhookErrorEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["error_code, error_description, error_reason, error_source, error_code_raw, error_description_raw"] in temp_dict.keys():
+        if "error_code, error_description, error_reason, error_source, error_code_raw, error_description_raw" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

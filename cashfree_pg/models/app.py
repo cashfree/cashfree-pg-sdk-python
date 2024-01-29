@@ -60,7 +60,7 @@ class App(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> App:
         """Create an instance of App from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["channel, provider, phone"] in temp_dict.keys():
+        if "channel, provider, phone" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -52,7 +52,7 @@ class AppPaymentMethod(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> AppPaymentMethod:
         """Create an instance of AppPaymentMethod from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["app"] in temp_dict.keys():
+        if "app" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

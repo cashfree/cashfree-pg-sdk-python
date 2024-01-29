@@ -53,7 +53,7 @@ class PaymentMethodNetBankingInPaymentsEntityNetbanking(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodNetBankingInPaymentsEntityNetbanking:
         """Create an instance of PaymentMethodNetBankingInPaymentsEntityNetbanking from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["channel, netbanking_bank_code, netbanking_bank_name"] in temp_dict.keys():
+        if "channel, netbanking_bank_code, netbanking_bank_name" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

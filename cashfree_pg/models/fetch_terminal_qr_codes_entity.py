@@ -54,7 +54,7 @@ class FetchTerminalQRCodesEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> FetchTerminalQRCodesEntity:
         """Create an instance of FetchTerminalQRCodesEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["bank, qrCode, qrCodeUrl, status"] in temp_dict.keys():
+        if "bank, qrCode, qrCodeUrl, status" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

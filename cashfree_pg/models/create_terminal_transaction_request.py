@@ -54,7 +54,7 @@ class CreateTerminalTransactionRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateTerminalTransactionRequest:
         """Create an instance of CreateTerminalTransactionRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["cf_order_id, cf_terminal_id, payment_method, terminal_phone_no"] in temp_dict.keys():
+        if "cf_order_id, cf_terminal_id, payment_method, terminal_phone_no" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

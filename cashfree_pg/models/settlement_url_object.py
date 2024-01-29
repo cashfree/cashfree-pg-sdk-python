@@ -51,7 +51,7 @@ class SettlementURLObject(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SettlementURLObject:
         """Create an instance of SettlementURLObject from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["url"] in temp_dict.keys():
+        if "url" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

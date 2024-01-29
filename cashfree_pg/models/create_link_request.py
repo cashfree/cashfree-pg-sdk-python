@@ -65,7 +65,7 @@ class CreateLinkRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateLinkRequest:
         """Create an instance of CreateLinkRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["link_id, link_amount, link_currency, link_purpose, customer_details, link_partial_payments, link_minimum_partial_amount, link_expiry_time, link_notify, link_auto_reminders, link_notes, link_meta"] in temp_dict.keys():
+        if "link_id, link_amount, link_currency, link_purpose, customer_details, link_partial_payments, link_minimum_partial_amount, link_expiry_time, link_notify, link_auto_reminders, link_notes, link_meta" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 

@@ -53,7 +53,7 @@ class EMIOffer(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> EMIOffer:
         """Create an instance of EMIOffer from a JSON string"""
         temp_dict = json.loads(json_str)
-        if temp_dict["type, issuer, tenures"] in temp_dict.keys():
+        if "type, issuer, tenures" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
