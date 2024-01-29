@@ -51,9 +51,10 @@ class PaymentMethodCardInPaymentsEntity(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodCardInPaymentsEntity:
         """Create an instance of PaymentMethodCardInPaymentsEntity from a JSON string"""
-        if "card" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["card"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

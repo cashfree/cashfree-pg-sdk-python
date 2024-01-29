@@ -53,9 +53,10 @@ class RefundSpeed(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> RefundSpeed:
         """Create an instance of RefundSpeed from a JSON string"""
-        if "requested, accepted, processed, message" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["requested, accepted, processed, message"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

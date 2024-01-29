@@ -54,9 +54,10 @@ class PayOrderRequest(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> PayOrderRequest:
         """Create an instance of PayOrderRequest from a JSON string"""
-        if "payment_session_id, payment_method, save_instrument, offer_id" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["payment_session_id, payment_method, save_instrument, offer_id"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""

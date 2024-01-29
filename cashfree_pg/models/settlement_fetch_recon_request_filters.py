@@ -53,9 +53,10 @@ class SettlementFetchReconRequestFilters(BaseModel):
     @classmethod
     def from_json_for_one_of(cls, json_str: str) -> SettlementFetchReconRequestFilters:
         """Create an instance of SettlementFetchReconRequestFilters from a JSON string"""
-        if "cf_settlement_ids, settlement_utrs, start_date, end_date" not in json_str:
-            return None
-        return cls.from_dict(json.loads(json_str))
+        temp_dict = json.loads(json_str)
+        if temp_dict["cf_settlement_ids, settlement_utrs, start_date, end_date"] in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
