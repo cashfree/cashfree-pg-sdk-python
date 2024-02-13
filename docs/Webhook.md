@@ -9,11 +9,12 @@ Verify Webhook Signatures ([Docs](https://docs.cashfree.com/reference/pg-webhook
 
 ### Example
 ```python
-# from flask import Flask, request
-# 
-# app = Flask(__name__)
-# 
-# @app.route('/webhook', methods=['POST'])
+# the below example uses flask framework
+from flask import Flask, request
+
+app = Flask(__name__)
+
+@app.route('/webhook', methods=['POST'])
 def webhook():
     signature = request.headers.get('x-webhook-signature')
     timestamp = request.headers.get('x-webhook-timestamp')
