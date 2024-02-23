@@ -42,7 +42,9 @@ class TestPaymentMethodNetBankingInPaymentsEntity(unittest.TestCase):
                 netbanking = cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking.PaymentMethodNetBankingInPaymentsEntity_netbanking(
                     channel = '', 
                     netbanking_bank_code = 56, 
-                    netbanking_bank_name = '', )
+                    netbanking_bank_name = '', 
+                    netbanking_ifsc = '', 
+                    netbanking_account_number = '', )
             )
         else :
             return PaymentMethodNetBankingInPaymentsEntity(

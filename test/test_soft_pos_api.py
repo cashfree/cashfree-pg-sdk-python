@@ -46,7 +46,7 @@ class TestSoftPOSApi(unittest.TestCase):
     def test_spos_fetch_terminal(self):
         """Test case for spos_fetch_terminal
 
-        Get terminal status using phone number  # noqa: E501
+        Get Terminal Status using Phone Number  # noqa: E501
         """
         pass
 
@@ -54,6 +54,27 @@ class TestSoftPOSApi(unittest.TestCase):
         """Test case for spos_fetch_terminal_qr_codes
 
         Fetch Terminal QR Codes  # noqa: E501
+        """
+        pass
+
+    def test_spos_update_terminal(self):
+        """Test case for spos_update_terminal
+
+        Update Terminal  # noqa: E501
+        """
+        pass
+
+    def test_spos_update_terminal_status(self):
+        """Test case for spos_update_terminal_status
+
+        Update Terminal Sttus  # noqa: E501
+        """
+        pass
+
+    def test_spos_upload_terminal_docs(self):
+        """Test case for spos_upload_terminal_docs
+
+        Upload Terminal Docs  # noqa: E501
         """
         pass
 

@@ -29,7 +29,9 @@ class PaymentMethodNetBankingInPaymentsEntityNetbanking(BaseModel):
     channel: Optional[StrictStr] = None
     netbanking_bank_code: Optional[StrictInt] = None
     netbanking_bank_name: Optional[StrictStr] = None
-    __properties = ["channel", "netbanking_bank_code", "netbanking_bank_name"]
+    netbanking_ifsc: Optional[StrictStr] = None
+    netbanking_account_number: Optional[StrictStr] = None
+    __properties = ["channel", "netbanking_bank_code", "netbanking_bank_name", "netbanking_ifsc", "netbanking_account_number"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,7 +55,7 @@ class PaymentMethodNetBankingInPaymentsEntityNetbanking(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> PaymentMethodNetBankingInPaymentsEntityNetbanking:
         """Create an instance of PaymentMethodNetBankingInPaymentsEntityNetbanking from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "channel, netbanking_bank_code, netbanking_bank_name" in temp_dict.keys():
+        if "channel, netbanking_bank_code, netbanking_bank_name, netbanking_ifsc, netbanking_account_number" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -77,7 +79,9 @@ class PaymentMethodNetBankingInPaymentsEntityNetbanking(BaseModel):
         _obj = PaymentMethodNetBankingInPaymentsEntityNetbanking.parse_obj({
             "channel": obj.get("channel"),
             "netbanking_bank_code": obj.get("netbanking_bank_code"),
-            "netbanking_bank_name": obj.get("netbanking_bank_name")
+            "netbanking_bank_name": obj.get("netbanking_bank_name"),
+            "netbanking_ifsc": obj.get("netbanking_ifsc"),
+            "netbanking_account_number": obj.get("netbanking_account_number")
         })
         return _obj
 

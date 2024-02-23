@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking import PaymentMethodNetBankingInPaymentsEntityNetbanking  # noqa: E501
+from cashfree_pg.models.update_terminal_request import UpdateTerminalRequest  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestPaymentMethodNetBankingInPaymentsEntityNetbanking(unittest.TestCase):
-    """PaymentMethodNetBankingInPaymentsEntityNetbanking unit test stubs"""
+class TestUpdateTerminalRequest(unittest.TestCase):
+    """UpdateTerminalRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,28 +30,29 @@ class TestPaymentMethodNetBankingInPaymentsEntityNetbanking(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test PaymentMethodNetBankingInPaymentsEntityNetbanking
+        """Test UpdateTerminalRequest
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PaymentMethodNetBankingInPaymentsEntityNetbanking`
+        # uncomment below to create an instance of `UpdateTerminalRequest`
         """
-        model = cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking.PaymentMethodNetBankingInPaymentsEntityNetbanking()  # noqa: E501
+        model = cashfree_pg.models.update_terminal_request.UpdateTerminalRequest()  # noqa: E501
         if include_optional :
-            return PaymentMethodNetBankingInPaymentsEntityNetbanking(
-                channel = '', 
-                netbanking_bank_code = 56, 
-                netbanking_bank_name = '', 
-                netbanking_ifsc = '', 
-                netbanking_account_number = ''
+            return UpdateTerminalRequest(
+                terminal_email = '', 
+                terminal_phone_no = '0123456789', 
+                terminal_meta = cashfree_pg.models.update_terminal_request_terminal_meta.UpdateTerminalRequest_terminal_meta(
+                    terminal_operator = '', ), 
+                terminal_type = ''
             )
         else :
-            return PaymentMethodNetBankingInPaymentsEntityNetbanking(
+            return UpdateTerminalRequest(
+                terminal_type = '',
         )
         """
 
-    def testPaymentMethodNetBankingInPaymentsEntityNetbanking(self):
-        """Test PaymentMethodNetBankingInPaymentsEntityNetbanking"""
+    def testUpdateTerminalRequest(self):
+        """Test UpdateTerminalRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

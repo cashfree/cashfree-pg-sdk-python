@@ -195,7 +195,13 @@ from cashfree_pg.models.terminal_transaction_entity import *
 from cashfree_pg.models.terminate_order_request import *
 from cashfree_pg.models.upi_authorize_details import *
 from cashfree_pg.models.upi_payment_method import *
+from cashfree_pg.models.update_terminal_entity import *
+from cashfree_pg.models.update_terminal_request import *
+from cashfree_pg.models.update_terminal_request_terminal_meta import *
+from cashfree_pg.models.update_terminal_status_request import *
 from cashfree_pg.models.upi import *
+from cashfree_pg.models.upload_terminal_docs import *
+from cashfree_pg.models.upload_terminal_docs_entity import *
 from cashfree_pg.models.vendor_split import *
 from cashfree_pg.models.wallet_offer import *
 
@@ -341,7 +347,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -497,7 +503,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -653,7 +659,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -808,7 +814,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -964,7 +970,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1121,7 +1127,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1279,7 +1285,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1425,7 +1431,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1583,7 +1589,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1734,7 +1740,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1896,7 +1902,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2055,7 +2061,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2200,7 +2206,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2358,7 +2364,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2507,7 +2513,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2659,7 +2665,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2821,7 +2827,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2986,7 +2992,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3135,7 +3141,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3281,7 +3287,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3444,7 +3450,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3609,7 +3615,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3758,7 +3764,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3910,7 +3916,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4071,7 +4077,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4230,7 +4236,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4386,7 +4392,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4541,7 +4547,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4696,7 +4702,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4850,7 +4856,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4997,7 +5003,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5152,7 +5158,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5205,7 +5211,7 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
     def SposFetchTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="The terminal for which you want to view the order details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """Get terminal status using phone number  # noqa: E501
+        """Get Terminal Status using Phone Number  # noqa: E501
 
         Use this API to view all details of a terminal.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -5310,7 +5316,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5464,7 +5470,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.0.3"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5491,6 +5497,489 @@ class Cashfree:
 
         return api_client.call_api(
             '/terminal/qrcodes', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposUpdateTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_terminal_request : Annotated[UpdateTerminalRequest, Field(..., description="Request Body to update terminal for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Update Terminal  # noqa: E501
+
+        Use this API to update the terminal details. Email, Phone Number, and Terminal Meta are updatable for \"Storefront\". Only account status change is possible in case of \"Agent\".  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposUpdateTerminal_with_http_info(x_api_version, cf_terminal_id, update_terminal_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param cf_terminal_id: Provide the Cashfree terminal ID for which the details have to be updated. (required)
+        :type cf_terminal_id: str
+        :param update_terminal_request: Request Body to update terminal for SPOS. (required)
+        :type update_terminal_request: UpdateTerminalRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[UpdateTerminalEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'cf_terminal_id',
+            'update_terminal_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposUpdateTerminal" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['cf_terminal_id']:
+            _path_params['cf_terminal_id'] = _params['cf_terminal_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_terminal_request'] is not None:
+            _body_params = _params['update_terminal_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[UpdateTerminalEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/{cf_terminal_id}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposUpdateTerminalStatus(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_terminal_status_request : Annotated[UpdateTerminalStatusRequest, Field(..., description="Request Body to update terminal status for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Update Terminal Sttus  # noqa: E501
+
+        Use this API to update the terminal status.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposUpdateTerminalStatus_with_http_info(x_api_version, cf_terminal_id, update_terminal_status_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param cf_terminal_id: Provide the Cashfree terminal ID for which the details have to be updated. (required)
+        :type cf_terminal_id: str
+        :param update_terminal_status_request: Request Body to update terminal status for SPOS. (required)
+        :type update_terminal_status_request: UpdateTerminalStatusRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[UpdateTerminalEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'cf_terminal_id',
+            'update_terminal_status_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposUpdateTerminalStatus" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['cf_terminal_id']:
+            _path_params['cf_terminal_id'] = _params['cf_terminal_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_terminal_status_request'] is not None:
+            _body_params = _params['update_terminal_status_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[UpdateTerminalEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/{cf_terminal_id}/status', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposUploadTerminalDocs(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, upload_terminal_docs : Annotated[UploadTerminalDocs, Field(..., description="Request Body to update terminal documents for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Upload Terminal Docs  # noqa: E501
+
+        Use this API to upload the terminal documents.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposUploadTerminalDocs_with_http_info(x_api_version, cf_terminal_id, upload_terminal_docs, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param cf_terminal_id: Provide the Cashfree terminal ID for which the details have to be updated. (required)
+        :type cf_terminal_id: str
+        :param upload_terminal_docs: Request Body to update terminal documents for SPOS. (required)
+        :type upload_terminal_docs: UploadTerminalDocs
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[UploadTerminalDocsEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'cf_terminal_id',
+            'upload_terminal_docs',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposUploadTerminalDocs" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['cf_terminal_id']:
+            _path_params['cf_terminal_id'] = _params['cf_terminal_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.0.7"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['upload_terminal_docs'] is not None:
+            _body_params = _params['upload_terminal_docs']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[UploadTerminalDocsEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/{cf_terminal_id}/docs', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -5553,7 +6042,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/4.0.3/python'
+        self.user_agent = 'OpenAPI-Generator/4.0.7/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.3"
+__version__ = "4.0.7"
 
 # import apis into sdk package
 # import ApiClient
@@ -168,6 +168,12 @@ from cashfree_pg.models.terminal_transaction_entity import TerminalTransactionEn
 from cashfree_pg.models.terminate_order_request import TerminateOrderRequest
 from cashfree_pg.models.upi_authorize_details import UPIAuthorizeDetails
 from cashfree_pg.models.upi_payment_method import UPIPaymentMethod
+from cashfree_pg.models.update_terminal_entity import UpdateTerminalEntity
+from cashfree_pg.models.update_terminal_request import UpdateTerminalRequest
+from cashfree_pg.models.update_terminal_request_terminal_meta import UpdateTerminalRequestTerminalMeta
+from cashfree_pg.models.update_terminal_status_request import UpdateTerminalStatusRequest
 from cashfree_pg.models.upi import Upi
+from cashfree_pg.models.upload_terminal_docs import UploadTerminalDocs
+from cashfree_pg.models.upload_terminal_docs_entity import UploadTerminalDocsEntity
 from cashfree_pg.models.vendor_split import VendorSplit
 from cashfree_pg.models.wallet_offer import WalletOffer
