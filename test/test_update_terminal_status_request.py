@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking import PaymentMethodNetBankingInPaymentsEntityNetbanking  # noqa: E501
+from cashfree_pg.models.update_terminal_status_request import UpdateTerminalStatusRequest  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestPaymentMethodNetBankingInPaymentsEntityNetbanking(unittest.TestCase):
-    """PaymentMethodNetBankingInPaymentsEntityNetbanking unit test stubs"""
+class TestUpdateTerminalStatusRequest(unittest.TestCase):
+    """UpdateTerminalStatusRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,28 +30,25 @@ class TestPaymentMethodNetBankingInPaymentsEntityNetbanking(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test PaymentMethodNetBankingInPaymentsEntityNetbanking
+        """Test UpdateTerminalStatusRequest
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PaymentMethodNetBankingInPaymentsEntityNetbanking`
+        # uncomment below to create an instance of `UpdateTerminalStatusRequest`
         """
-        model = cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking.PaymentMethodNetBankingInPaymentsEntityNetbanking()  # noqa: E501
+        model = cashfree_pg.models.update_terminal_status_request.UpdateTerminalStatusRequest()  # noqa: E501
         if include_optional :
-            return PaymentMethodNetBankingInPaymentsEntityNetbanking(
-                channel = '', 
-                netbanking_bank_code = 56, 
-                netbanking_bank_name = '', 
-                netbanking_ifsc = '', 
-                netbanking_account_number = ''
+            return UpdateTerminalStatusRequest(
+                terminal_status = ''
             )
         else :
-            return PaymentMethodNetBankingInPaymentsEntityNetbanking(
+            return UpdateTerminalStatusRequest(
+                terminal_status = '',
         )
         """
 
-    def testPaymentMethodNetBankingInPaymentsEntityNetbanking(self):
-        """Test PaymentMethodNetBankingInPaymentsEntityNetbanking"""
+    def testUpdateTerminalStatusRequest(self):
+        """Test UpdateTerminalStatusRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
