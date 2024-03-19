@@ -46,7 +46,8 @@ class LinkEntity(BaseModel):
     link_notes: Optional[Dict[str, StrictStr]] = Field(None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
     link_auto_reminders: Optional[StrictBool] = None
     link_notify: Optional[LinkNotifyEntity] = None
-    __properties = ["cf_link_id", "link_id", "link_status", "link_currency", "link_amount", "link_amount_paid", "link_partial_payments", "link_minimum_partial_amount", "link_purpose", "link_created_at", "customer_details", "link_meta", "link_url", "link_expiry_time", "link_notes", "link_auto_reminders", "link_notify"]
+    link_qrcode: Optional[StrictStr] = Field(None, description="Base64 encoded string for payment link. You can scan with camera to open a link in the browser to complete the payment.")
+    __properties = ["cf_link_id", "link_id", "link_status", "link_currency", "link_amount", "link_amount_paid", "link_partial_payments", "link_minimum_partial_amount", "link_purpose", "link_created_at", "customer_details", "link_meta", "link_url", "link_expiry_time", "link_notes", "link_auto_reminders", "link_notify", "link_qrcode"]
 
     class Config:
         """Pydantic configuration"""
@@ -70,7 +71,7 @@ class LinkEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> LinkEntity:
         """Create an instance of LinkEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_link_id, link_id, link_status, link_currency, link_amount, link_amount_paid, link_partial_payments, link_minimum_partial_amount, link_purpose, link_created_at, customer_details, link_meta, link_url, link_expiry_time, link_notes, link_auto_reminders, link_notify" in temp_dict.keys():
+        if "cf_link_id, link_id, link_status, link_currency, link_amount, link_amount_paid, link_partial_payments, link_minimum_partial_amount, link_purpose, link_created_at, customer_details, link_meta, link_url, link_expiry_time, link_notes, link_auto_reminders, link_notify, link_qrcode" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -117,7 +118,8 @@ class LinkEntity(BaseModel):
             "link_expiry_time": obj.get("link_expiry_time"),
             "link_notes": obj.get("link_notes"),
             "link_auto_reminders": obj.get("link_auto_reminders"),
-            "link_notify": LinkNotifyEntity.from_dict(obj.get("link_notify")) if obj.get("link_notify") is not None else None
+            "link_notify": LinkNotifyEntity.from_dict(obj.get("link_notify")) if obj.get("link_notify") is not None else None,
+            "link_qrcode": obj.get("link_qrcode")
         })
         return _obj
 

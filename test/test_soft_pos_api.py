@@ -57,6 +57,13 @@ class TestSoftPOSApi(unittest.TestCase):
         """
         pass
 
+    def test_spos_fetch_terminal_transaction(self):
+        """Test case for spos_fetch_terminal_transaction
+
+        Get Terminal Transaction  # noqa: E501
+        """
+        pass
+
     def test_spos_update_terminal(self):
         """Test case for spos_update_terminal
 
@@ -67,7 +74,7 @@ class TestSoftPOSApi(unittest.TestCase):
     def test_spos_update_terminal_status(self):
         """Test case for spos_update_terminal_status
 
-        Update Terminal Sttus  # noqa: E501
+        Update Terminal Status  # noqa: E501
         """
         pass
 

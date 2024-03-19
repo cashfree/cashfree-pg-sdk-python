@@ -80,7 +80,12 @@ class TestPaymentEntityPaymentMethod(unittest.TestCase):
                     emi_details = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details.PaymentMethodCardEMIInPaymentsEntity_emi_emi_details(
                         emi_amount = 1.337, 
                         emi_tenure = 1.337, 
-                        emi_interest = 1.337, ), )
+                        emi_interest = 1.337, ), ), 
+                banktransfer = cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer.PaymentMethodBankTransferInPaymentsEntity_banktransfer(
+                    channel = '', 
+                    banktransfer_bank_name = '', 
+                    banktransfer_ifsc = '', 
+                    banktransfer_account_number = '', )
             )
         else :
             return PaymentEntityPaymentMethod(

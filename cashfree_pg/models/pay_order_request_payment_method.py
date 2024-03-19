@@ -22,6 +22,7 @@ import re  # noqa: F401
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
 from cashfree_pg.models.app_payment_method import AppPaymentMethod
+from cashfree_pg.models.banktransfer_payment_method import BanktransferPaymentMethod
 from cashfree_pg.models.card_emi_payment_method import CardEMIPaymentMethod
 from cashfree_pg.models.card_payment_method import CardPaymentMethod
 from cashfree_pg.models.cardless_emi_payment_method import CardlessEMIPaymentMethod
@@ -31,7 +32,7 @@ from cashfree_pg.models.upi_payment_method import UPIPaymentMethod
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-PAYORDERREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS = ["AppPaymentMethod", "CardEMIPaymentMethod", "CardPaymentMethod", "CardlessEMIPaymentMethod", "NetBankingPaymentMethod", "PaylaterPaymentMethod", "UPIPaymentMethod"]
+PAYORDERREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS = ["AppPaymentMethod", "BanktransferPaymentMethod", "CardEMIPaymentMethod", "CardPaymentMethod", "CardlessEMIPaymentMethod", "NetBankingPaymentMethod", "PaylaterPaymentMethod", "UPIPaymentMethod"]
 
 class PayOrderRequestPaymentMethod(BaseModel):
     """
@@ -51,8 +52,10 @@ class PayOrderRequestPaymentMethod(BaseModel):
     oneof_schema_6_validator: Optional[CardlessEMIPaymentMethod] = None
     # data type: PaylaterPaymentMethod
     oneof_schema_7_validator: Optional[PaylaterPaymentMethod] = None
+    # data type: BanktransferPaymentMethod
+    oneof_schema_8_validator: Optional[BanktransferPaymentMethod] = None
     if TYPE_CHECKING:
-        actual_instance: Union[AppPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod]
+        actual_instance: Union[AppPaymentMethod, BanktransferPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(PAYORDERREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
@@ -110,12 +113,17 @@ class PayOrderRequestPaymentMethod(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaylaterPaymentMethod`")
         else:
             match += 1
+        # validate data type: BanktransferPaymentMethod
+        if not isinstance(v, BanktransferPaymentMethod):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `BanktransferPaymentMethod`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, BanktransferPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, BanktransferPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -186,13 +194,21 @@ class PayOrderRequestPaymentMethod(BaseModel):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into BanktransferPaymentMethod
+        try:
+            instance.actual_instance = BanktransferPaymentMethod.from_json_for_one_of(json_str)
+            match += 1
+            if (instance.actual_instance is not None):
+                return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, BanktransferPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PayOrderRequestPaymentMethod with oneOf schemas: AppPaymentMethod, BanktransferPaymentMethod, CardEMIPaymentMethod, CardPaymentMethod, CardlessEMIPaymentMethod, NetBankingPaymentMethod, PaylaterPaymentMethod, UPIPaymentMethod. Details: " + ", ".join(error_messages))
         else:
             return instance
 
