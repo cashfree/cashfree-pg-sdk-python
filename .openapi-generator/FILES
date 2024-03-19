@@ -178,7 +178,6 @@ cashfree_pg/models/settlement_webhook.py
 cashfree_pg/models/settlement_webhook_data_entity.py
 cashfree_pg/models/split_after_payment_request.py
 cashfree_pg/models/split_after_payment_request_split_inner.py
-cashfree_pg/models/split_after_payment_request_split_inner_tags_inner.py
 cashfree_pg/models/split_after_payment_response.py
 cashfree_pg/models/static_split_request.py
 cashfree_pg/models/static_split_request_scheme_inner.py
@@ -381,7 +380,6 @@ docs/SettlementsApi.md
 docs/SoftPOSApi.md
 docs/SplitAfterPaymentRequest.md
 docs/SplitAfterPaymentRequestSplitInner.md
-docs/SplitAfterPaymentRequestSplitInnerTagsInner.md
 docs/SplitAfterPaymentResponse.md
 docs/StaticSplitRequest.md
 docs/StaticSplitRequestSchemeInner.md
@@ -590,7 +588,6 @@ test/test_settlements_api.py
 test/test_soft_pos_api.py
 test/test_split_after_payment_request.py
 test/test_split_after_payment_request_split_inner.py
-test/test_split_after_payment_request_split_inner_tags_inner.py
 test/test_split_after_payment_response.py
 test/test_static_split_request.py
 test/test_static_split_request_scheme_inner.py

@@ -44,11 +44,9 @@ class TestSplitAfterPaymentRequest(unittest.TestCase):
                         vendor_id = '', 
                         amount = 1.337, 
                         percentage = 1.337, 
-                        tags = [
-                            cashfree_pg.models.split_after_payment_request_split_inner_tags_inner.SplitAfterPaymentRequest_split_inner_tags_inner(
-                                key_value_1 = '', 
-                                key_value_2 = '', )
-                            ], )
+                        tags = {
+                            'key' : '0'
+                            }, )
                     ], 
                 disable_split = True
             )
@@ -59,11 +57,9 @@ class TestSplitAfterPaymentRequest(unittest.TestCase):
                         vendor_id = '', 
                         amount = 1.337, 
                         percentage = 1.337, 
-                        tags = [
-                            cashfree_pg.models.split_after_payment_request_split_inner_tags_inner.SplitAfterPaymentRequest_split_inner_tags_inner(
-                                key_value_1 = '', 
-                                key_value_2 = '', )
-                            ], )
+                        tags = {
+                            'key' : '0'
+                            }, )
                     ],
         )
         """
