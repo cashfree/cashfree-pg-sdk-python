@@ -35,12 +35,13 @@ class Card(BaseModel):
     instrument_id: Optional[StrictStr] = Field(None, description="instrument id of saved card. Required only to make payment using saved instrument.")
     cryptogram: Optional[StrictStr] = Field(None, description="cryptogram received from card network. Required only for tokenized card transactions.")
     token_requestor_id: Optional[StrictStr] = Field(None, description="TRID issued by card networks. Required only for tokenized card transactions.")
+    token_reference_id: Optional[StrictStr] = Field(None, description="Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards. ")
     token_type: Optional[StrictStr] = None
     card_display: Optional[StrictStr] = Field(None, description="last 4 digits of original card number. Required only for tokenized card transactions.")
     card_alias: Optional[StrictStr] = Field(None, description="Card alias as returned by Cashfree Vault API.")
     card_bank_name: Optional[StrictStr] = Field(None, description="One of [\"Kotak\", \"ICICI\", \"RBL\", \"BOB\", \"Standard Chartered\"]. Card bank name, required for EMI payments. This is the bank user has selected for EMI")
     emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure selected by the user")
-    __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "instrument_id", "cryptogram", "token_requestor_id", "token_type", "card_display", "card_alias", "card_bank_name", "emi_tenure"]
+    __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "instrument_id", "cryptogram", "token_requestor_id", "token_reference_id", "token_type", "card_display", "card_alias", "card_bank_name", "emi_tenure"]
 
     @validator('channel')
     def channel_validate_enum(cls, value):
@@ -91,7 +92,7 @@ class Card(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> Card:
         """Create an instance of Card from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "channel, card_number, card_holder_name, card_expiry_mm, card_expiry_yy, card_cvv, instrument_id, cryptogram, token_requestor_id, token_type, card_display, card_alias, card_bank_name, emi_tenure" in temp_dict.keys():
+        if "channel, card_number, card_holder_name, card_expiry_mm, card_expiry_yy, card_cvv, instrument_id, cryptogram, token_requestor_id, token_reference_id, token_type, card_display, card_alias, card_bank_name, emi_tenure" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -122,6 +123,7 @@ class Card(BaseModel):
             "instrument_id": obj.get("instrument_id"),
             "cryptogram": obj.get("cryptogram"),
             "token_requestor_id": obj.get("token_requestor_id"),
+            "token_reference_id": obj.get("token_reference_id"),
             "token_type": obj.get("token_type"),
             "card_display": obj.get("card_display"),
             "card_alias": obj.get("card_alias"),

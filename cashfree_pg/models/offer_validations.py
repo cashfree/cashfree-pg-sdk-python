@@ -28,8 +28,9 @@ class OfferValidations(BaseModel):
     Offer validation object
     """
     min_amount: Optional[Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)]] = Field(None, description="Minimum Amount for Offer to be Applicable")
+    max_allowed: Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)] = Field(..., description="Maximum Amount for Offer to be Applicable")
     payment_method: OfferValidationsPaymentMethod = Field(...)
-    __properties = ["min_amount", "payment_method"]
+    __properties = ["min_amount", "max_allowed", "payment_method"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,7 +54,7 @@ class OfferValidations(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> OfferValidations:
         """Create an instance of OfferValidations from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "min_amount, payment_method" in temp_dict.keys():
+        if "min_amount, max_allowed, payment_method" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -79,6 +80,7 @@ class OfferValidations(BaseModel):
 
         _obj = OfferValidations.parse_obj({
             "min_amount": obj.get("min_amount"),
+            "max_allowed": obj.get("max_allowed"),
             "payment_method": OfferValidationsPaymentMethod.from_dict(obj.get("payment_method")) if obj.get("payment_method") is not None else None
         })
         return _obj

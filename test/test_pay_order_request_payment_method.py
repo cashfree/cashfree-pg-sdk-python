@@ -45,7 +45,8 @@ class TestPayOrderRequestPaymentMethod(unittest.TestCase):
                 app = {"channel":"link","provider":"gpay","phone":"8474090552"}, 
                 emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3}, 
                 cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3}, 
-                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"}
+                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"}, 
+                banktransfer = {"channel":"link"}
             )
         else :
             return PayOrderRequestPaymentMethod(
@@ -56,6 +57,7 @@ class TestPayOrderRequestPaymentMethod(unittest.TestCase):
                 emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3},
                 cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3},
                 paylater = {"channel":"link","provider":"kotak","phone":"7789112345"},
+                banktransfer = {"channel":"link"},
         )
         """
 
