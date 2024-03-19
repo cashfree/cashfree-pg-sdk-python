@@ -19,9 +19,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
-from cashfree_pg.models.split_after_payment_request_split_inner_tags_inner import SplitAfterPaymentRequestSplitInnerTagsInner
+from typing import Dict, Optional, Union
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
 
 class SplitAfterPaymentRequestSplitInner(BaseModel):
     """
@@ -30,7 +29,7 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
     vendor_id: Optional[StrictStr] = Field(None, description="Specify the merchant vendor ID to split the payment.")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Specify the amount to be split to the vendor.")
     percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Specify the percentage of amount to be split.")
-    tags: Optional[conlist(SplitAfterPaymentRequestSplitInnerTagsInner)] = Field(None, description="Provide additional data fields using tags. Sample data fields are mentioned below.")
+    tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["vendor_id", "amount", "percentage", "tags"]
 
     class Config:
@@ -65,13 +64,6 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in tags (list)
-        _items = []
-        if self.tags:
-            for _item in self.tags:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['tags'] = _items
         return _dict
 
     @classmethod
@@ -87,7 +79,7 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
             "vendor_id": obj.get("vendor_id"),
             "amount": obj.get("amount"),
             "percentage": obj.get("percentage"),
-            "tags": [SplitAfterPaymentRequestSplitInnerTagsInner.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
+            "tags": obj.get("tags")
         })
         return _obj
 
