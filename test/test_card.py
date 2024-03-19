@@ -48,6 +48,7 @@ class TestCard(unittest.TestCase):
                 instrument_id = '', 
                 cryptogram = '', 
                 token_requestor_id = '', 
+                token_reference_id = '', 
                 token_type = 'ISSUER_TOKEN', 
                 card_display = '', 
                 card_alias = '', 
