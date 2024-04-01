@@ -106,6 +106,13 @@ class TestEasySplitApi(unittest.TestCase):
         """
         pass
 
+    def test_p_ges_upload_vendors_docs(self):
+        """Test case for p_ges_upload_vendors_docs
+
+        Upload Vendor Docs  # noqa: E501
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

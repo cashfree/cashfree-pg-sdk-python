@@ -19,11 +19,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, constr
+from typing import Dict, List, Optional, Union
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr
 from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity
 from cashfree_pg.models.link_meta_response_entity import LinkMetaResponseEntity
 from cashfree_pg.models.link_notify_entity import LinkNotifyEntity
+from cashfree_pg.models.vendor_split import VendorSplit
 
 class CreateLinkRequest(BaseModel):
     """
@@ -41,7 +42,8 @@ class CreateLinkRequest(BaseModel):
     link_auto_reminders: Optional[StrictBool] = Field(None, description="If \"true\", reminders will be sent to customers for collecting payments.")
     link_notes: Optional[Dict[str, StrictStr]] = Field(None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
     link_meta: Optional[LinkMetaResponseEntity] = None
-    __properties = ["link_id", "link_amount", "link_currency", "link_purpose", "customer_details", "link_partial_payments", "link_minimum_partial_amount", "link_expiry_time", "link_notify", "link_auto_reminders", "link_notes", "link_meta"]
+    order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
+    __properties = ["link_id", "link_amount", "link_currency", "link_purpose", "customer_details", "link_partial_payments", "link_minimum_partial_amount", "link_expiry_time", "link_notify", "link_auto_reminders", "link_notes", "link_meta", "order_splits"]
 
     class Config:
         """Pydantic configuration"""
@@ -65,7 +67,7 @@ class CreateLinkRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateLinkRequest:
         """Create an instance of CreateLinkRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "link_id, link_amount, link_currency, link_purpose, customer_details, link_partial_payments, link_minimum_partial_amount, link_expiry_time, link_notify, link_auto_reminders, link_notes, link_meta" in temp_dict.keys():
+        if "link_id, link_amount, link_currency, link_purpose, customer_details, link_partial_payments, link_minimum_partial_amount, link_expiry_time, link_notify, link_auto_reminders, link_notes, link_meta, order_splits" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -84,6 +86,13 @@ class CreateLinkRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of link_meta
         if self.link_meta:
             _dict['link_meta'] = self.link_meta.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in order_splits (list)
+        _items = []
+        if self.order_splits:
+            for _item in self.order_splits:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['order_splits'] = _items
         return _dict
 
     @classmethod
@@ -107,7 +116,8 @@ class CreateLinkRequest(BaseModel):
             "link_notify": LinkNotifyEntity.from_dict(obj.get("link_notify")) if obj.get("link_notify") is not None else None,
             "link_auto_reminders": obj.get("link_auto_reminders"),
             "link_notes": obj.get("link_notes"),
-            "link_meta": LinkMetaResponseEntity.from_dict(obj.get("link_meta")) if obj.get("link_meta") is not None else None
+            "link_meta": LinkMetaResponseEntity.from_dict(obj.get("link_meta")) if obj.get("link_meta") is not None else None,
+            "order_splits": [VendorSplit.from_dict(_item) for _item in obj.get("order_splits")] if obj.get("order_splits") is not None else None
         })
         return _obj
 

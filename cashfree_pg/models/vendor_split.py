@@ -19,17 +19,18 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
+from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
 class VendorSplit(BaseModel):
     """
     Use to split order when cashfree's Easy Split is enabled for your account.
     """
-    vendor_id: Optional[StrictStr] = Field(None, description="Vendor id created in Cashfree system")
+    vendor_id: StrictStr = Field(..., description="Vendor id created in Cashfree system")
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount which will be associated with this vendor")
     percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Percentage of order amount which shall get added to vendor account")
-    __properties = ["vendor_id", "amount", "percentage"]
+    tags: Optional[Dict[str, Dict[str, Any]]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
+    __properties = ["vendor_id", "amount", "percentage", "tags"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,7 +54,7 @@ class VendorSplit(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> VendorSplit:
         """Create an instance of VendorSplit from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "vendor_id, amount, percentage" in temp_dict.keys():
+        if "vendor_id, amount, percentage, tags" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -77,7 +78,8 @@ class VendorSplit(BaseModel):
         _obj = VendorSplit.parse_obj({
             "vendor_id": obj.get("vendor_id"),
             "amount": obj.get("amount"),
-            "percentage": obj.get("percentage")
+            "percentage": obj.get("percentage"),
+            "tags": obj.get("tags")
         })
         return _obj
 

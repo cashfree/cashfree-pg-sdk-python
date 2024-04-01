@@ -202,7 +202,6 @@ cashfree_pg/models/upi_details.py
 cashfree_pg/models/upi_payment_method.py
 cashfree_pg/models/upload_terminal_docs.py
 cashfree_pg/models/upload_terminal_docs_entity.py
-cashfree_pg/models/upload_vendor_docs_request.py
 cashfree_pg/models/upload_vendor_documents_response.py
 cashfree_pg/models/vendor_balance.py
 cashfree_pg/models/vendor_balance_transfer_charges.py
@@ -405,7 +404,6 @@ docs/Upi.md
 docs/UpiDetails.md
 docs/UploadTerminalDocs.md
 docs/UploadTerminalDocsEntity.md
-docs/UploadVendorDocsRequest.md
 docs/UploadVendorDocumentsResponse.md
 docs/VendorBalance.md
 docs/VendorBalanceTransferCharges.md
@@ -613,7 +611,6 @@ test/test_upi_details.py
 test/test_upi_payment_method.py
 test/test_upload_terminal_docs.py
 test/test_upload_terminal_docs_entity.py
-test/test_upload_vendor_docs_request.py
 test/test_upload_vendor_documents_response.py
 test/test_vendor_balance.py
 test/test_vendor_balance_transfer_charges.py

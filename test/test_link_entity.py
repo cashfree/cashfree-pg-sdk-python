@@ -56,7 +56,10 @@ class TestLinkEntity(unittest.TestCase):
                 link_notes = {"key_1":"value_1","key_2":"value_2"}, 
                 link_auto_reminders = True, 
                 link_notify = {"send_sms":false,"send_email":true}, 
-                link_qrcode = ''
+                link_qrcode = '', 
+                order_splits = [
+                    {"vendor_id":"Vendor01","amount":100.12,"description":"order amount should be more than equal to 100.12"}
+                    ]
             )
         else :
             return LinkEntity(
