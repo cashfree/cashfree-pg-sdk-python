@@ -41,10 +41,14 @@ class TestVendorSplit(unittest.TestCase):
             return VendorSplit(
                 vendor_id = '', 
                 amount = 1.337, 
-                percentage = 1.337
+                percentage = 1.337, 
+                tags = {
+                    'key' : None
+                    }
             )
         else :
             return VendorSplit(
+                vendor_id = '',
         )
         """
 

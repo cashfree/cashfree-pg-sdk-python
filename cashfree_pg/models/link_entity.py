@@ -19,11 +19,12 @@ import re  # noqa: F401
 import json
 
 
-from typing import Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from typing import Dict, List, Optional, Union
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
 from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity
 from cashfree_pg.models.link_meta_response_entity import LinkMetaResponseEntity
 from cashfree_pg.models.link_notify_entity import LinkNotifyEntity
+from cashfree_pg.models.vendor_split import VendorSplit
 
 class LinkEntity(BaseModel):
     """
@@ -47,7 +48,8 @@ class LinkEntity(BaseModel):
     link_auto_reminders: Optional[StrictBool] = None
     link_notify: Optional[LinkNotifyEntity] = None
     link_qrcode: Optional[StrictStr] = Field(None, description="Base64 encoded string for payment link. You can scan with camera to open a link in the browser to complete the payment.")
-    __properties = ["cf_link_id", "link_id", "link_status", "link_currency", "link_amount", "link_amount_paid", "link_partial_payments", "link_minimum_partial_amount", "link_purpose", "link_created_at", "customer_details", "link_meta", "link_url", "link_expiry_time", "link_notes", "link_auto_reminders", "link_notify", "link_qrcode"]
+    order_splits: Optional[conlist(VendorSplit)] = None
+    __properties = ["cf_link_id", "link_id", "link_status", "link_currency", "link_amount", "link_amount_paid", "link_partial_payments", "link_minimum_partial_amount", "link_purpose", "link_created_at", "customer_details", "link_meta", "link_url", "link_expiry_time", "link_notes", "link_auto_reminders", "link_notify", "link_qrcode", "order_splits"]
 
     class Config:
         """Pydantic configuration"""
@@ -71,7 +73,7 @@ class LinkEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> LinkEntity:
         """Create an instance of LinkEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_link_id, link_id, link_status, link_currency, link_amount, link_amount_paid, link_partial_payments, link_minimum_partial_amount, link_purpose, link_created_at, customer_details, link_meta, link_url, link_expiry_time, link_notes, link_auto_reminders, link_notify, link_qrcode" in temp_dict.keys():
+        if "cf_link_id, link_id, link_status, link_currency, link_amount, link_amount_paid, link_partial_payments, link_minimum_partial_amount, link_purpose, link_created_at, customer_details, link_meta, link_url, link_expiry_time, link_notes, link_auto_reminders, link_notify, link_qrcode, order_splits" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -90,6 +92,13 @@ class LinkEntity(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of link_notify
         if self.link_notify:
             _dict['link_notify'] = self.link_notify.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in order_splits (list)
+        _items = []
+        if self.order_splits:
+            for _item in self.order_splits:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['order_splits'] = _items
         return _dict
 
     @classmethod
@@ -119,7 +128,8 @@ class LinkEntity(BaseModel):
             "link_notes": obj.get("link_notes"),
             "link_auto_reminders": obj.get("link_auto_reminders"),
             "link_notify": LinkNotifyEntity.from_dict(obj.get("link_notify")) if obj.get("link_notify") is not None else None,
-            "link_qrcode": obj.get("link_qrcode")
+            "link_qrcode": obj.get("link_qrcode"),
+            "order_splits": [VendorSplit.from_dict(_item) for _item in obj.get("order_splits")] if obj.get("order_splits") is not None else None
         })
         return _obj
 
