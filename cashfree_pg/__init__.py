@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.0.10"
+__version__ = "4.1.2"
 
 # import apis into sdk package
 # import ApiClient
@@ -208,7 +208,6 @@ from cashfree_pg.models.upi import Upi
 from cashfree_pg.models.upi_details import UpiDetails
 from cashfree_pg.models.upload_terminal_docs import UploadTerminalDocs
 from cashfree_pg.models.upload_terminal_docs_entity import UploadTerminalDocsEntity
-from cashfree_pg.models.upload_vendor_docs_request import UploadVendorDocsRequest
 from cashfree_pg.models.upload_vendor_documents_response import UploadVendorDocumentsResponse
 from cashfree_pg.models.vendor_balance import VendorBalance
 from cashfree_pg.models.vendor_balance_transfer_charges import VendorBalanceTransferCharges
