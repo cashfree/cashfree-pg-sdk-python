@@ -40,7 +40,7 @@ class TestVendorDocumentsResponse(unittest.TestCase):
         if include_optional :
             return VendorDocumentsResponse(
                 documents = [
-                    cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
+                    cashfree_pg.models.update_vendor_response_related_docs_inner.UpdateVendorResponse_related_docs_inner(
                         vendor_id = '', 
                         doc_type = '', 
                         doc_value = '', 

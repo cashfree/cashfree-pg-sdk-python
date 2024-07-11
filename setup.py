@@ -22,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cashfree_pg"
-VERSION = "4.1.3"
+VERSION = "4.2.0"
 with open("README.md", "r", encoding="utf-8") as fh:
     readme = fh.read()
 PYTHON_REQUIRES = ">=3.7"

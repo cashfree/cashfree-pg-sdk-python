@@ -41,7 +41,10 @@ class TestLinkCustomerDetailsEntity(unittest.TestCase):
             return LinkCustomerDetailsEntity(
                 customer_phone = '', 
                 customer_email = '', 
-                customer_name = ''
+                customer_name = '', 
+                customer_bank_account_number = '', 
+                customer_bank_ifsc = '', 
+                customer_bank_code = 3003
             )
         else :
             return LinkCustomerDetailsEntity(

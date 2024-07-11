@@ -26,7 +26,7 @@ class OrderMeta(BaseModel):
     """
     Optional meta details to control how the customer pays and how payment journey completes
     """
-    return_url: Optional[StrictStr] = Field(None, description="The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. We suggest to keep context of order_id in your return_url so that you can identify the order when customer lands on your page. Example of return_url format could be https://example.com/return?order_id=myOrderId")
+    return_url: Optional[StrictStr] = Field(None, description="The URL to which user will be redirected to after the payment on bank OTP page. Maximum length: 250. We suggest to keep context of order_id in your return_url so that you can identify the order when customer lands on your page. Example of return_url format could be https://www.cashfree.com/devstudio/thankyou")
     notify_url: Optional[StrictStr] = Field(None, description="Notification URL for server-server communication. Useful when user's connection drops while re-directing. NotifyUrl should be an https URL. Maximum length: 250.")
     payment_methods: Optional[Any] = Field(None, description="Allowed payment modes for this order. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\",\"nb\",\"upi\",\"paypal\",\"app\",\"paylater\",\"cardlessemi\",\"dcemi\",\"ccemi\",\"banktransfer\". Leave it blank to show all available payment methods")
     __properties = ["return_url", "notify_url", "payment_methods"]

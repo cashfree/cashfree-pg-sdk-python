@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic import BaseModel, Field, StrictBool, StrictStr, constr
 
 class CreateTerminalTransactionRequest(BaseModel):
     """
@@ -30,7 +30,8 @@ class CreateTerminalTransactionRequest(BaseModel):
     cf_terminal_id: Optional[StrictStr] = Field(None, description="cashfree terminal id. this is a required parameter when you do not provide the terminal phone number.")
     payment_method: constr(strict=True, max_length=100, min_length=3) = Field(..., description="mention the payment method used for the transaction. possible values - QR_CODE, LINK.")
     terminal_phone_no: Optional[constr(strict=True, max_length=10, min_length=10)] = Field(None, description="agent mobile number assigned to the terminal. this is a required parameter when you do not provide the cf_terminal_id.")
-    __properties = ["cf_order_id", "cf_terminal_id", "payment_method", "terminal_phone_no"]
+    add_invoice: Optional[StrictBool] = Field(None, description="make it true to have request be sent to create a Dynamic GST QR Code.")
+    __properties = ["cf_order_id", "cf_terminal_id", "payment_method", "terminal_phone_no", "add_invoice"]
 
     class Config:
         """Pydantic configuration"""
@@ -54,7 +55,7 @@ class CreateTerminalTransactionRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateTerminalTransactionRequest:
         """Create an instance of CreateTerminalTransactionRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_order_id, cf_terminal_id, payment_method, terminal_phone_no" in temp_dict.keys():
+        if "cf_order_id, cf_terminal_id, payment_method, terminal_phone_no, add_invoice" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -79,7 +80,8 @@ class CreateTerminalTransactionRequest(BaseModel):
             "cf_order_id": obj.get("cf_order_id"),
             "cf_terminal_id": obj.get("cf_terminal_id"),
             "payment_method": obj.get("payment_method"),
-            "terminal_phone_no": obj.get("terminal_phone_no")
+            "terminal_phone_no": obj.get("terminal_phone_no"),
+            "add_invoice": obj.get("add_invoice")
         })
         return _obj
 
