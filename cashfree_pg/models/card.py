@@ -35,7 +35,7 @@ class Card(BaseModel):
     instrument_id: Optional[StrictStr] = Field(None, description="instrument id of saved card. Required only to make payment using saved instrument.")
     cryptogram: Optional[StrictStr] = Field(None, description="cryptogram received from card network. Required only for tokenized card transactions.")
     token_requestor_id: Optional[StrictStr] = Field(None, description="TRID issued by card networks. Required only for tokenized card transactions.")
-    token_reference_id: Optional[StrictStr] = Field(None, description="Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards. ")
+    token_reference_id: Optional[StrictStr] = Field(None, description="Token Reference Id provided by Diners for Guest Checkout Token.  Required only for Diners cards.")
     token_type: Optional[StrictStr] = None
     card_display: Optional[StrictStr] = Field(None, description="last 4 digits of original card number. Required only for tokenized card transactions.")
     card_alias: Optional[StrictStr] = Field(None, description="Card alias as returned by Cashfree Vault API.")

@@ -21,7 +21,7 @@ import json
 from datetime import datetime
 from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
-from cashfree_pg.models.customer_details import CustomerDetails
+from cashfree_pg.models.customer_details_response import CustomerDetailsResponse
 from cashfree_pg.models.order_meta import OrderMeta
 from cashfree_pg.models.vendor_split import VendorSplit
 
@@ -40,7 +40,7 @@ class OrderEntity(BaseModel):
     order_note: Optional[StrictStr] = Field(None, description="Additional note for order")
     created_at: Optional[datetime] = Field(None, description="When the order was created at cashfree's server")
     order_splits: Optional[conlist(VendorSplit)] = None
-    customer_details: Optional[CustomerDetails] = None
+    customer_details: Optional[CustomerDetailsResponse] = None
     order_meta: Optional[OrderMeta] = None
     order_tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["cf_order_id", "order_id", "entity", "order_currency", "order_amount", "order_status", "payment_session_id", "order_expiry_time", "order_note", "created_at", "order_splits", "customer_details", "order_meta", "order_tags"]
@@ -113,7 +113,7 @@ class OrderEntity(BaseModel):
             "order_note": obj.get("order_note"),
             "created_at": obj.get("created_at"),
             "order_splits": [VendorSplit.from_dict(_item) for _item in obj.get("order_splits")] if obj.get("order_splits") is not None else None,
-            "customer_details": CustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
+            "customer_details": CustomerDetailsResponse.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
             "order_meta": OrderMeta.from_dict(obj.get("order_meta")) if obj.get("order_meta") is not None else None,
             "order_tags": obj.get("order_tags")
         })

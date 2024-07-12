@@ -52,7 +52,6 @@ class TestTerminalDetails(unittest.TestCase):
             )
         else :
             return TerminalDetails(
-                terminal_id = '012',
                 terminal_phone_no = '',
                 terminal_type = '0123',
         )

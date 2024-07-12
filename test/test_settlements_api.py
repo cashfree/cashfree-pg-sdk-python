@@ -29,6 +29,13 @@ class TestSettlementsApi(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_mark_for_settlement(self):
+        """Test case for mark_for_settlement
+
+        Mark Order For Settlement  # noqa: E501
+        """
+        pass
+
     def test_p_g_order_fetch_settlement(self):
         """Test case for p_g_order_fetch_settlement
 
