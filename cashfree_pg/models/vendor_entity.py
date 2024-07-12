@@ -23,7 +23,7 @@ from typing import List, Optional
 from pydantic import BaseModel, StrictStr, conlist
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
-from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from cashfree_pg.models.update_vendor_response_related_docs_inner import UpdateVendorResponseRelatedDocsInner
 
 class VendorEntity(BaseModel):
     """
@@ -42,8 +42,9 @@ class VendorEntity(BaseModel):
     vendor_type: Optional[StrictStr] = None
     account_type: Optional[StrictStr] = None
     business_type: Optional[StrictStr] = None
-    related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
-    __properties = ["email", "status", "phone", "name", "vendor_id", "added_on", "updated_on", "bank", "upi", "schedule_option", "vendor_type", "account_type", "business_type", "related_docs"]
+    remarks: Optional[StrictStr] = None
+    related_docs: Optional[conlist(UpdateVendorResponseRelatedDocsInner)] = None
+    __properties = ["email", "status", "phone", "name", "vendor_id", "added_on", "updated_on", "bank", "upi", "schedule_option", "vendor_type", "account_type", "business_type", "remarks", "related_docs"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,7 +68,7 @@ class VendorEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> VendorEntity:
         """Create an instance of VendorEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "email, status, phone, name, vendor_id, added_on, updated_on, bank, upi, schedule_option, vendor_type, account_type, business_type, related_docs" in temp_dict.keys():
+        if "email, status, phone, name, vendor_id, added_on, updated_on, bank, upi, schedule_option, vendor_type, account_type, business_type, remarks, related_docs" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -123,7 +124,8 @@ class VendorEntity(BaseModel):
             "vendor_type": obj.get("vendor_type"),
             "account_type": obj.get("account_type"),
             "business_type": obj.get("business_type"),
-            "related_docs": [VendorEntityRelatedDocsInner.from_dict(_item) for _item in obj.get("related_docs")] if obj.get("related_docs") is not None else None
+            "remarks": obj.get("remarks"),
+            "related_docs": [UpdateVendorResponseRelatedDocsInner.from_dict(_item) for _item in obj.get("related_docs")] if obj.get("related_docs") is not None else None
         })
         return _obj
 

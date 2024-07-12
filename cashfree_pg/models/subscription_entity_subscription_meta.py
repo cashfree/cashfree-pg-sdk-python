@@ -20,18 +20,14 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, Field, StrictStr
 
-class VendorEntityRelatedDocsInner(BaseModel):
+class SubscriptionEntitySubscriptionMeta(BaseModel):
     """
-    VendorEntityRelatedDocsInner
+    Subscription metadata.
     """
-    vendor_id: Optional[StrictStr] = None
-    doc_type: Optional[StrictStr] = None
-    doc_value: Optional[StrictStr] = None
-    status: Optional[StrictStr] = None
-    remarks: Optional[StrictStr] = None
-    __properties = ["vendor_id", "doc_type", "doc_value", "status", "remarks"]
+    return_url: Optional[StrictStr] = Field(None, description="Return URL for the subscription.")
+    __properties = ["return_url"]
 
     class Config:
         """Pydantic configuration"""
@@ -47,15 +43,15 @@ class VendorEntityRelatedDocsInner(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> VendorEntityRelatedDocsInner:
-        """Create an instance of VendorEntityRelatedDocsInner from a JSON string"""
+    def from_json(cls, json_str: str) -> SubscriptionEntitySubscriptionMeta:
+        """Create an instance of SubscriptionEntitySubscriptionMeta from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> VendorEntityRelatedDocsInner:
-        """Create an instance of VendorEntityRelatedDocsInner from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> SubscriptionEntitySubscriptionMeta:
+        """Create an instance of SubscriptionEntitySubscriptionMeta from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "vendor_id, doc_type, doc_value, status, remarks" in temp_dict.keys():
+        if "return_url" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -68,20 +64,16 @@ class VendorEntityRelatedDocsInner(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> VendorEntityRelatedDocsInner:
-        """Create an instance of VendorEntityRelatedDocsInner from a dict"""
+    def from_dict(cls, obj: dict) -> SubscriptionEntitySubscriptionMeta:
+        """Create an instance of SubscriptionEntitySubscriptionMeta from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return VendorEntityRelatedDocsInner.parse_obj(obj)
+            return SubscriptionEntitySubscriptionMeta.parse_obj(obj)
 
-        _obj = VendorEntityRelatedDocsInner.parse_obj({
-            "vendor_id": obj.get("vendor_id"),
-            "doc_type": obj.get("doc_type"),
-            "doc_value": obj.get("doc_value"),
-            "status": obj.get("status"),
-            "remarks": obj.get("remarks")
+        _obj = SubscriptionEntitySubscriptionMeta.parse_obj({
+            "return_url": obj.get("return_url")
         })
         return _obj
 

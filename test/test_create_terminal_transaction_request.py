@@ -42,7 +42,8 @@ class TestCreateTerminalTransactionRequest(unittest.TestCase):
                 cf_order_id = '', 
                 cf_terminal_id = '', 
                 payment_method = '012', 
-                terminal_phone_no = '0123456789'
+                terminal_phone_no = '0123456789', 
+                add_invoice = True
             )
         else :
             return CreateTerminalTransactionRequest(

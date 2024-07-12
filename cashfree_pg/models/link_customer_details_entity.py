@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
 
 class LinkCustomerDetailsEntity(BaseModel):
     """
@@ -29,7 +29,20 @@ class LinkCustomerDetailsEntity(BaseModel):
     customer_phone: StrictStr = Field(..., description="Customer phone number")
     customer_email: Optional[StrictStr] = Field(None, description="Customer email address")
     customer_name: Optional[StrictStr] = Field(None, description="Customer name")
-    __properties = ["customer_phone", "customer_email", "customer_name"]
+    customer_bank_account_number: Optional[StrictStr] = Field(None, description="Customer Bank Account Number")
+    customer_bank_ifsc: Optional[StrictStr] = Field(None, description="Customer Bank Ifsc")
+    customer_bank_code: Optional[StrictInt] = Field(None, description="Customer Bank Code")
+    __properties = ["customer_phone", "customer_email", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+
+    @validator('customer_bank_code')
+    def customer_bank_code_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in (3003, 3005, 3006, 3010, 3012, 3016, 3019, 3020, 3021, 3022, 3023, 3024, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3038, 3039, 3040, 3042, 3044, 3054, 3055, 3058, 3086, 3087, 3088, 3089, 3090, 3091, 3092, 3098, 3115, 3117, 7001):
+            raise ValueError("must be one of enum values (3003, 3005, 3006, 3010, 3012, 3016, 3019, 3020, 3021, 3022, 3023, 3024, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3038, 3039, 3040, 3042, 3044, 3054, 3055, 3058, 3086, 3087, 3088, 3089, 3090, 3091, 3092, 3098, 3115, 3117, 7001)")
+        return value
 
     class Config:
         """Pydantic configuration"""
@@ -53,7 +66,7 @@ class LinkCustomerDetailsEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> LinkCustomerDetailsEntity:
         """Create an instance of LinkCustomerDetailsEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "customer_phone, customer_email, customer_name" in temp_dict.keys():
+        if "customer_phone, customer_email, customer_name, customer_bank_account_number, customer_bank_ifsc, customer_bank_code" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -77,7 +90,10 @@ class LinkCustomerDetailsEntity(BaseModel):
         _obj = LinkCustomerDetailsEntity.parse_obj({
             "customer_phone": obj.get("customer_phone"),
             "customer_email": obj.get("customer_email"),
-            "customer_name": obj.get("customer_name")
+            "customer_name": obj.get("customer_name"),
+            "customer_bank_account_number": obj.get("customer_bank_account_number"),
+            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
+            "customer_bank_code": obj.get("customer_bank_code")
         })
         return _obj
 
