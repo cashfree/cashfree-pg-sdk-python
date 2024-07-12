@@ -24,7 +24,7 @@ from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, c
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
-from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from cashfree_pg.models.update_vendor_response_related_docs_inner import UpdateVendorResponseRelatedDocsInner
 
 class UpdateVendorResponse(BaseModel):
     """
@@ -46,7 +46,7 @@ class UpdateVendorResponse(BaseModel):
     kyc_details: Optional[conlist(KycDetails)] = None
     dashboard_access: Optional[StrictBool] = None
     bank_details: Optional[StrictStr] = None
-    related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
+    related_docs: Optional[conlist(UpdateVendorResponseRelatedDocsInner)] = None
     __properties = ["email", "status", "bank", "upi", "added_on", "updated_on", "vendor_type", "account_type", "business_type", "phone", "name", "vendor_id", "schedule_option", "kyc_details", "dashboard_access", "bank_details", "related_docs"]
 
     class Config:
@@ -137,7 +137,7 @@ class UpdateVendorResponse(BaseModel):
             "kyc_details": [KycDetails.from_dict(_item) for _item in obj.get("kyc_details")] if obj.get("kyc_details") is not None else None,
             "dashboard_access": obj.get("dashboard_access"),
             "bank_details": obj.get("bank_details"),
-            "related_docs": [VendorEntityRelatedDocsInner.from_dict(_item) for _item in obj.get("related_docs")] if obj.get("related_docs") is not None else None
+            "related_docs": [UpdateVendorResponseRelatedDocsInner.from_dict(_item) for _item in obj.get("related_docs")] if obj.get("related_docs") is not None else None
         })
         return _obj
 

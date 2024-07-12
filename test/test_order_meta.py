@@ -39,7 +39,7 @@ class TestOrderMeta(unittest.TestCase):
         model = cashfree_pg.models.order_meta.OrderMeta()  # noqa: E501
         if include_optional :
             return OrderMeta(
-                return_url = 'https://example.com/return?order_id=myOrderId', 
+                return_url = 'https://www.cashfree.com/devstudio/thankyou', 
                 notify_url = 'https://example.com/cf_notify', 
                 payment_methods = cc,dc,upi
             )

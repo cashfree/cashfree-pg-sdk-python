@@ -24,7 +24,7 @@ from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
 
 class CustomerDetails(BaseModel):
     """
-    The customer details that are necessary. Note that you can pass dummy details if your use case does not require the customer details.
+    The customer details that are necessary.
     """
     customer_id: constr(strict=True, max_length=50, min_length=3) = Field(..., description="A unique identifier for the customer. Use alphanumeric values only.")
     customer_email: Optional[constr(strict=True, max_length=100, min_length=3)] = Field(None, description="Customer email address.")

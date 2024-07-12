@@ -30,7 +30,7 @@ class TerminalDetails(BaseModel):
     cf_terminal_id: Optional[StrictStr] = Field(None, description="cashfree terminal id")
     last_updated_on: Optional[StrictStr] = Field(None, description="last instant when this terminal was updated")
     terminal_address: Optional[StrictStr] = Field(None, description="location of terminal")
-    terminal_id: constr(strict=True, max_length=100, min_length=3) = Field(..., description="terminal id for merchant reference")
+    terminal_id: Optional[constr(strict=True, max_length=100, min_length=3)] = Field(None, description="terminal id for merchant reference")
     terminal_name: Optional[StrictStr] = Field(None, description="name of terminal/agent/storefront")
     terminal_note: Optional[StrictStr] = Field(None, description="note given by merchant while creating the terminal")
     terminal_phone_no: StrictStr = Field(..., description="mobile num of the terminal/agent/storefront")

@@ -21,13 +21,13 @@ import json
 
 from typing import List, Optional
 from pydantic import BaseModel, conlist
-from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from cashfree_pg.models.update_vendor_response_related_docs_inner import UpdateVendorResponseRelatedDocsInner
 
 class VendorDocumentsResponse(BaseModel):
     """
     Get Vendor Documents
     """
-    documents: Optional[conlist(VendorEntityRelatedDocsInner)] = None
+    documents: Optional[conlist(UpdateVendorResponseRelatedDocsInner)] = None
     __properties = ["documents"]
 
     class Config:
@@ -81,7 +81,7 @@ class VendorDocumentsResponse(BaseModel):
             return VendorDocumentsResponse.parse_obj(obj)
 
         _obj = VendorDocumentsResponse.parse_obj({
-            "documents": [VendorEntityRelatedDocsInner.from_dict(_item) for _item in obj.get("documents")] if obj.get("documents") is not None else None
+            "documents": [UpdateVendorResponseRelatedDocsInner.from_dict(_item) for _item in obj.get("documents")] if obj.get("documents") is not None else None
         })
         return _obj
 

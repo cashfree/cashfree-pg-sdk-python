@@ -48,7 +48,7 @@ class TestCreateVendorRequest(unittest.TestCase):
                 dashboard_access = True, 
                 schedule_option = 1.337, 
                 bank = [
-                    {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
+                    {"account_number":123456111110,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
                     ], 
                 upi = [
                     {"vpa":"success@upi","account_holder":"JOHN DOE"}

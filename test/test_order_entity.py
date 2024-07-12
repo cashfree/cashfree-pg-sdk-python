@@ -54,7 +54,7 @@ class TestOrderEntity(unittest.TestCase):
                     ], 
                 customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_bank_account_number":"1518121112","customer_bank_ifsc":"XITI0000001","customer_bank_code":3333,"customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"}, 
                 order_meta = cashfree_pg.models.order_meta.OrderMeta(
-                    return_url = 'https://example.com/return?order_id=myOrderId', 
+                    return_url = 'https://www.cashfree.com/devstudio/thankyou', 
                     notify_url = 'https://example.com/cf_notify', 
                     payment_methods = cc,dc,upi, ), 
                 order_tags = {"product":"Laptop","shipping_address":"123 Main St"}
