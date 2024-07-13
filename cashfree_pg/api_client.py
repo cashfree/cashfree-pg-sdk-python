@@ -242,7 +242,7 @@ from cashfree_pg.models.static_split_request import *
 from cashfree_pg.models.static_split_request_scheme_inner import *
 from cashfree_pg.models.static_split_response import *
 from cashfree_pg.models.static_split_response_scheme_inner import *
-from cashfree_pg.models.subs_create_payment_200_response import *
+from cashfree_pg.models.subs_create_payment200_response import *
 from cashfree_pg.models.subscription_bank_details import *
 from cashfree_pg.models.subscription_customer_details import *
 from cashfree_pg.models.subscription_eligibility_request import *
