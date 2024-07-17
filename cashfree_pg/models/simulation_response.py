@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictInt, StrictStr
 from cashfree_pg.models.entity_simulation_response import EntitySimulationResponse
 
 class SimulationResponse(BaseModel):
@@ -29,7 +29,7 @@ class SimulationResponse(BaseModel):
     """
     simulation_id: Optional[StrictStr] = None
     entity: Optional[StrictStr] = None
-    entity_id: Optional[StrictStr] = None
+    entity_id: Optional[StrictInt] = None
     entity_simulation: Optional[EntitySimulationResponse] = None
     __properties = ["simulation_id", "entity", "entity_id", "entity_simulation"]
 

@@ -29,12 +29,12 @@ class SubscriptionCustomerDetails(BaseModel):
     customer_name: Optional[StrictStr] = Field(None, description="Name of the customer.")
     customer_email: StrictStr = Field(..., description="Email of the customer.")
     customer_phone: StrictStr = Field(..., description="Phone number of the customer.")
-    customer_bank_account_holder_name: Optional[StrictStr] = Field(None, description="Bank holder name of the customer.")
+    customer_bank_holder_name: Optional[StrictStr] = Field(None, description="Bank holder name of the customer.")
     customer_bank_account_number: Optional[StrictStr] = Field(None, description="Bank account number of the customer.")
     customer_bank_ifsc: Optional[StrictStr] = Field(None, description="IFSC code of the customer.")
     customer_bank_code: Optional[StrictStr] = Field(None, description="Bank code of the customer.")
     customer_bank_account_type: Optional[StrictStr] = Field(None, description="Bank account type of the customer.")
-    __properties = ["customer_name", "customer_email", "customer_phone", "customer_bank_account_holder_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_bank_account_type"]
+    __properties = ["customer_name", "customer_email", "customer_phone", "customer_bank_holder_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_bank_account_type"]
 
     class Config:
         """Pydantic configuration"""
@@ -58,7 +58,7 @@ class SubscriptionCustomerDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SubscriptionCustomerDetails:
         """Create an instance of SubscriptionCustomerDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "customer_name, customer_email, customer_phone, customer_bank_account_holder_name, customer_bank_account_number, customer_bank_ifsc, customer_bank_code, customer_bank_account_type" in temp_dict.keys():
+        if "customer_name, customer_email, customer_phone, customer_bank_holder_name, customer_bank_account_number, customer_bank_ifsc, customer_bank_code, customer_bank_account_type" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -83,7 +83,7 @@ class SubscriptionCustomerDetails(BaseModel):
             "customer_name": obj.get("customer_name"),
             "customer_email": obj.get("customer_email"),
             "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_holder_name": obj.get("customer_bank_account_holder_name"),
+            "customer_bank_holder_name": obj.get("customer_bank_holder_name"),
             "customer_bank_account_number": obj.get("customer_bank_account_number"),
             "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
             "customer_bank_code": obj.get("customer_bank_code"),

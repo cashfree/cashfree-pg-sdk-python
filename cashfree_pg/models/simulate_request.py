@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
 from cashfree_pg.models.entity_simulation_request import EntitySimulationRequest
 
 class SimulateRequest(BaseModel):
@@ -28,7 +28,7 @@ class SimulateRequest(BaseModel):
     simulate payment request object
     """
     entity: StrictStr = Field(..., description="Entity type should be PAYMENTS only.")
-    entity_id: StrictStr = Field(..., description="In case of Entity type is PAYMENTS, entity_id will be transactionId")
+    entity_id: StrictInt = Field(..., description="In case of Entity type is PAYMENTS, entity_id will be transactionId")
     entity_simulation: EntitySimulationRequest = Field(...)
     __properties = ["entity", "entity_id", "entity_simulation"]
 
