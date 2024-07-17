@@ -109,14 +109,14 @@ class TestSubscriptionApi(unittest.TestCase):
     def test_subscription_document_upload(self):
         """Test case for subscription_document_upload
 
-        Upload Physical Nach for Physical Nach Authorization.  # noqa: E501
+        API to upload Physical Nach for Physical Nach Authorization.  # noqa: E501
         """
         pass
 
     def test_subscription_eligibility(self):
         """Test case for subscription_eligibility
 
-        Get Eligible payment methods available for a subscription  # noqa: E501
+        API to get all the payment method details available for subscription payments.  # noqa: E501
         """
         pass
 

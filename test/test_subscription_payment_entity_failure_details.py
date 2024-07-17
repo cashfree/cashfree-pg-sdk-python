@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.vendor_documents_response import VendorDocumentsResponse  # noqa: E501
+from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestVendorDocumentsResponse(unittest.TestCase):
-    """VendorDocumentsResponse unit test stubs"""
+class TestSubscriptionPaymentEntityFailureDetails(unittest.TestCase):
+    """SubscriptionPaymentEntityFailureDetails unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,31 +30,24 @@ class TestVendorDocumentsResponse(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test VendorDocumentsResponse
+        """Test SubscriptionPaymentEntityFailureDetails
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `VendorDocumentsResponse`
+        # uncomment below to create an instance of `SubscriptionPaymentEntityFailureDetails`
         """
-        model = cashfree_pg.models.vendor_documents_response.VendorDocumentsResponse()  # noqa: E501
+        model = cashfree_pg.models.subscription_payment_entity_failure_details.SubscriptionPaymentEntityFailureDetails()  # noqa: E501
         if include_optional :
-            return VendorDocumentsResponse(
-                documents = [
-                    cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
-                        vendor_id = '', 
-                        doc_type = '', 
-                        doc_value = '', 
-                        status = '', 
-                        remarks = '', )
-                    ]
+            return SubscriptionPaymentEntityFailureDetails(
+                failure_reason = ''
             )
         else :
-            return VendorDocumentsResponse(
+            return SubscriptionPaymentEntityFailureDetails(
         )
         """
 
-    def testVendorDocumentsResponse(self):
-        """Test VendorDocumentsResponse"""
+    def testSubscriptionPaymentEntityFailureDetails(self):
+        """Test SubscriptionPaymentEntityFailureDetails"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

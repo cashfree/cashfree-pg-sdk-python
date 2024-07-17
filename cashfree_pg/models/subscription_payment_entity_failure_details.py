@@ -22,9 +22,9 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
 
-class CreateSubscriptionPaymentAuthResponseFailureDetails(BaseModel):
+class SubscriptionPaymentEntityFailureDetails(BaseModel):
     """
-    CreateSubscriptionPaymentAuthResponseFailureDetails
+    SubscriptionPaymentEntityFailureDetails
     """
     failure_reason: Optional[StrictStr] = Field(None, description="Failure reason of the payment if the payment_status is failed.")
     __properties = ["failure_reason"]
@@ -43,13 +43,13 @@ class CreateSubscriptionPaymentAuthResponseFailureDetails(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreateSubscriptionPaymentAuthResponseFailureDetails:
-        """Create an instance of CreateSubscriptionPaymentAuthResponseFailureDetails from a JSON string"""
+    def from_json(cls, json_str: str) -> SubscriptionPaymentEntityFailureDetails:
+        """Create an instance of SubscriptionPaymentEntityFailureDetails from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionPaymentAuthResponseFailureDetails:
-        """Create an instance of CreateSubscriptionPaymentAuthResponseFailureDetails from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> SubscriptionPaymentEntityFailureDetails:
+        """Create an instance of SubscriptionPaymentEntityFailureDetails from a JSON string"""
         temp_dict = json.loads(json_str)
         if "failure_reason" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
@@ -64,15 +64,15 @@ class CreateSubscriptionPaymentAuthResponseFailureDetails(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreateSubscriptionPaymentAuthResponseFailureDetails:
-        """Create an instance of CreateSubscriptionPaymentAuthResponseFailureDetails from a dict"""
+    def from_dict(cls, obj: dict) -> SubscriptionPaymentEntityFailureDetails:
+        """Create an instance of SubscriptionPaymentEntityFailureDetails from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionPaymentAuthResponseFailureDetails.parse_obj(obj)
+            return SubscriptionPaymentEntityFailureDetails.parse_obj(obj)
 
-        _obj = CreateSubscriptionPaymentAuthResponseFailureDetails.parse_obj({
+        _obj = SubscriptionPaymentEntityFailureDetails.parse_obj({
             "failure_reason": obj.get("failure_reason")
         })
         return _obj

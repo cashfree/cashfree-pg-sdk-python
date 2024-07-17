@@ -19,25 +19,25 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
+from typing import Any, Dict, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
-from cashfree_pg.models.create_subscription_payment_auth_response_failure_details import CreateSubscriptionPaymentAuthResponseFailureDetails
+from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
 
-class CreateSubscriptionPaymentChargeResponse(BaseModel):
+class CreateSubscriptionPaymentResponse(BaseModel):
     """
-    The response returned in Get, Create or Manage Subscription Payment APIs.
+    The response returned is Create Subscription Auth or Charge APIs.
     """
     cf_payment_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment reference number")
-    cf_subscription_id: Optional[StrictStr] = Field(None, description="Cashfree subscription reference number")
-    failure_details: Optional[CreateSubscriptionPaymentAuthResponseFailureDetails] = None
+    failure_details: Optional[SubscriptionPaymentEntityFailureDetails] = None
     payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The charge amount of the payment.")
     payment_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the transaction.")
     payment_initiated_date: Optional[StrictStr] = Field(None, description="The date on which the payment was initiated.")
     payment_status: Optional[StrictStr] = Field(None, description="Status of the payment.")
     payment_type: Optional[StrictStr] = Field(None, description="Payment type. Can be AUTH or CHARGE.")
     subscription_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the subscription.")
+    data: Optional[Dict[str, Any]] = Field(None, description="Contains a payload for auth app links in case of AUTH. For charge, the payload is empty.")
     payment_method: Optional[StrictStr] = Field(None, description="Payment method used for the authorization.")
-    __properties = ["cf_payment_id", "cf_subscription_id", "failure_details", "payment_amount", "payment_id", "payment_initiated_date", "payment_status", "payment_type", "subscription_id", "payment_method"]
+    __properties = ["cf_payment_id", "failure_details", "payment_amount", "payment_id", "payment_initiated_date", "payment_status", "payment_type", "subscription_id", "data", "payment_method"]
 
     class Config:
         """Pydantic configuration"""
@@ -53,15 +53,15 @@ class CreateSubscriptionPaymentChargeResponse(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> CreateSubscriptionPaymentChargeResponse:
-        """Create an instance of CreateSubscriptionPaymentChargeResponse from a JSON string"""
+    def from_json(cls, json_str: str) -> CreateSubscriptionPaymentResponse:
+        """Create an instance of CreateSubscriptionPaymentResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionPaymentChargeResponse:
-        """Create an instance of CreateSubscriptionPaymentChargeResponse from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionPaymentResponse:
+        """Create an instance of CreateSubscriptionPaymentResponse from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_payment_id, cf_subscription_id, failure_details, payment_amount, payment_id, payment_initiated_date, payment_status, payment_type, subscription_id, payment_method" in temp_dict.keys():
+        if "cf_payment_id, failure_details, payment_amount, payment_id, payment_initiated_date, payment_status, payment_type, subscription_id, data, payment_method" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -77,24 +77,24 @@ class CreateSubscriptionPaymentChargeResponse(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> CreateSubscriptionPaymentChargeResponse:
-        """Create an instance of CreateSubscriptionPaymentChargeResponse from a dict"""
+    def from_dict(cls, obj: dict) -> CreateSubscriptionPaymentResponse:
+        """Create an instance of CreateSubscriptionPaymentResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionPaymentChargeResponse.parse_obj(obj)
+            return CreateSubscriptionPaymentResponse.parse_obj(obj)
 
-        _obj = CreateSubscriptionPaymentChargeResponse.parse_obj({
+        _obj = CreateSubscriptionPaymentResponse.parse_obj({
             "cf_payment_id": obj.get("cf_payment_id"),
-            "cf_subscription_id": obj.get("cf_subscription_id"),
-            "failure_details": CreateSubscriptionPaymentAuthResponseFailureDetails.from_dict(obj.get("failure_details")) if obj.get("failure_details") is not None else None,
+            "failure_details": SubscriptionPaymentEntityFailureDetails.from_dict(obj.get("failure_details")) if obj.get("failure_details") is not None else None,
             "payment_amount": obj.get("payment_amount"),
             "payment_id": obj.get("payment_id"),
             "payment_initiated_date": obj.get("payment_initiated_date"),
             "payment_status": obj.get("payment_status"),
             "payment_type": obj.get("payment_type"),
             "subscription_id": obj.get("subscription_id"),
+            "data": obj.get("data"),
             "payment_method": obj.get("payment_method")
         })
         return _obj

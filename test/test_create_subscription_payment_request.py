@@ -46,7 +46,7 @@ class TestCreateSubscriptionPaymentRequest(unittest.TestCase):
                 payment_schedule_date = '', 
                 payment_remarks = '', 
                 payment_type = '', 
-                payment_method = None
+                payment_method = cashfree_pg.models.create_subscription_payment_request_payment_method.CreateSubscriptionPaymentRequest_payment_method()
             )
         else :
             return CreateSubscriptionPaymentRequest(

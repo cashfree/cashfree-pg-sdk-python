@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.card import CARD  # noqa: E501
+from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestCARD(unittest.TestCase):
-    """CARD unit test stubs"""
+class TestCreateSubscriptionPaymentRequestPaymentMethod(unittest.TestCase):
+    """CreateSubscriptionPaymentRequestPaymentMethod unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,16 +30,25 @@ class TestCARD(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test CARD
+        """Test CreateSubscriptionPaymentRequestPaymentMethod
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CARD`
+        # uncomment below to create an instance of `CreateSubscriptionPaymentRequestPaymentMethod`
         """
-        model = cashfree_pg.models.card.CARD()  # noqa: E501
+        model = cashfree_pg.models.create_subscription_payment_request_payment_method.CreateSubscriptionPaymentRequestPaymentMethod()  # noqa: E501
         if include_optional :
-            return CARD(
+            return CreateSubscriptionPaymentRequestPaymentMethod(
+                upi_id = '', 
                 channel = '', 
+                auth_mode = '', 
+                account_holder_name = '', 
+                account_number = '', 
+                account_bank_code = '', 
+                account_type = '', 
+                account_ifsc = '', 
+                mandate_creation_date = '', 
+                mandate_start_date = '', 
                 card_number = '', 
                 card_holder_name = '', 
                 card_expiry_mm = '', 
@@ -49,12 +58,12 @@ class TestCARD(unittest.TestCase):
                 card_type = ''
             )
         else :
-            return CARD(
+            return CreateSubscriptionPaymentRequestPaymentMethod(
         )
         """
 
-    def testCARD(self):
-        """Test CARD"""
+    def testCreateSubscriptionPaymentRequestPaymentMethod(self):
+        """Test CreateSubscriptionPaymentRequestPaymentMethod"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

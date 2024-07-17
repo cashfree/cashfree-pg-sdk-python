@@ -40,7 +40,7 @@ class TestCreateSubscriptionRequest(unittest.TestCase):
         if include_optional :
             return CreateSubscriptionRequest(
                 subscription_id = '0', 
-                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_holder_name":"","customer_bank_account_holder_name":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""}, 
+                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_account_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""}, 
                 plan_details = cashfree_pg.models.create_subscription_request_plan_details.CreateSubscriptionRequest_plan_details(
                     plan_id = '', 
                     plan_name = '', 
@@ -71,7 +71,7 @@ class TestCreateSubscriptionRequest(unittest.TestCase):
         else :
             return CreateSubscriptionRequest(
                 subscription_id = '0',
-                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_holder_name":"","customer_bank_account_holder_name":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""},
+                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_account_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""},
                 plan_details = cashfree_pg.models.create_subscription_request_plan_details.CreateSubscriptionRequest_plan_details(
                     plan_id = '', 
                     plan_name = '', 

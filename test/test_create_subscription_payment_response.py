@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.subscription_payment_entity import SubscriptionPaymentEntity  # noqa: E501
+from cashfree_pg.models.create_subscription_payment_response import CreateSubscriptionPaymentResponse  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestSubscriptionPaymentEntity(unittest.TestCase):
-    """SubscriptionPaymentEntity unit test stubs"""
+class TestCreateSubscriptionPaymentResponse(unittest.TestCase):
+    """CreateSubscriptionPaymentResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,39 +30,34 @@ class TestSubscriptionPaymentEntity(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test SubscriptionPaymentEntity
+        """Test CreateSubscriptionPaymentResponse
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SubscriptionPaymentEntity`
+        # uncomment below to create an instance of `CreateSubscriptionPaymentResponse`
         """
-        model = cashfree_pg.models.subscription_payment_entity.SubscriptionPaymentEntity()  # noqa: E501
+        model = cashfree_pg.models.create_subscription_payment_response.CreateSubscriptionPaymentResponse()  # noqa: E501
         if include_optional :
-            return SubscriptionPaymentEntity(
-                authorization_details = {"authorization_amount":1,"authorization_amount_refund":false,"authorization_reference":"","authorization_time":"2022-06-14T23:47:52+05:30","authorization_status":"INITIALIZED","payment_id":"97877","payment_method":"NPCI_SBC"}, 
+            return CreateSubscriptionPaymentResponse(
                 cf_payment_id = '', 
-                cf_subscription_id = '', 
-                cf_txn_id = '', 
-                cf_order_id = '', 
                 failure_details = cashfree_pg.models.subscription_payment_entity_failure_details.SubscriptionPaymentEntity_failure_details(
                     failure_reason = '', ), 
                 payment_amount = 1.337, 
                 payment_id = '', 
                 payment_initiated_date = '', 
-                payment_remarks = '', 
-                payment_schedule_date = '', 
                 payment_status = '', 
-                payment_type = '', 
-                retry_attempts = 56, 
-                subscription_id = ''
+                payment_type = 'CHARGE', 
+                subscription_id = '', 
+                data = None, 
+                payment_method = ''
             )
         else :
-            return SubscriptionPaymentEntity(
+            return CreateSubscriptionPaymentResponse(
         )
         """
 
-    def testSubscriptionPaymentEntity(self):
-        """Test SubscriptionPaymentEntity"""
+    def testCreateSubscriptionPaymentResponse(self):
+        """Test CreateSubscriptionPaymentResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 
