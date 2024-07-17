@@ -21,29 +21,29 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
-from cashfree_pg.models.card import CARD
-from cashfree_pg.models.enach import ENACH
-from cashfree_pg.models.pnach import PNACH
-from cashfree_pg.models.upi import UPI
+from cashfree_pg.models.create_subscription_payment_request_card import CreateSubscriptionPaymentRequestCard
+from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack
+from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach
+from cashfree_pg.models.create_subscripton_payment_request_upi import CreateSubscriptonPaymentRequestUpi
 from typing import Union, Any, List, TYPE_CHECKING
 from pydantic import StrictStr, Field
 
-CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS = ["CARD", "ENACH", "PNACH", "UPI"]
+CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS = ["CreateSubscriptionPaymentRequestCard", "CreateSubscriptionPaymentRequestEnack", "CreateSubscriptionPaymentRequestPnach", "CreateSubscriptonPaymentRequestUpi"]
 
 class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
     """
     Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]
     """
-    # data type: UPI
-    oneof_schema_1_validator: Optional[UPI] = None
-    # data type: ENACH
-    oneof_schema_2_validator: Optional[ENACH] = None
-    # data type: PNACH
-    oneof_schema_3_validator: Optional[PNACH] = None
-    # data type: CARD
-    oneof_schema_4_validator: Optional[CARD] = None
+    # data type: CreateSubscriptonPaymentRequestUpi
+    oneof_schema_1_validator: Optional[CreateSubscriptonPaymentRequestUpi] = None
+    # data type: CreateSubscriptionPaymentRequestEnack
+    oneof_schema_2_validator: Optional[CreateSubscriptionPaymentRequestEnack] = None
+    # data type: CreateSubscriptionPaymentRequestPnach
+    oneof_schema_3_validator: Optional[CreateSubscriptionPaymentRequestPnach] = None
+    # data type: CreateSubscriptionPaymentRequestCard
+    oneof_schema_4_validator: Optional[CreateSubscriptionPaymentRequestCard] = None
     if TYPE_CHECKING:
-        actual_instance: Union[CARD, ENACH, PNACH, UPI]
+        actual_instance: Union[CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Field(CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
@@ -66,32 +66,32 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
         instance = CreateSubscriptionPaymentRequestPaymentMethod.construct()
         error_messages = []
         match = 0
-        # validate data type: UPI
-        if not isinstance(v, UPI):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `UPI`")
+        # validate data type: CreateSubscriptonPaymentRequestUpi
+        if not isinstance(v, CreateSubscriptonPaymentRequestUpi):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateSubscriptonPaymentRequestUpi`")
         else:
             match += 1
-        # validate data type: ENACH
-        if not isinstance(v, ENACH):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ENACH`")
+        # validate data type: CreateSubscriptionPaymentRequestEnack
+        if not isinstance(v, CreateSubscriptionPaymentRequestEnack):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateSubscriptionPaymentRequestEnack`")
         else:
             match += 1
-        # validate data type: PNACH
-        if not isinstance(v, PNACH):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PNACH`")
+        # validate data type: CreateSubscriptionPaymentRequestPnach
+        if not isinstance(v, CreateSubscriptionPaymentRequestPnach):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateSubscriptionPaymentRequestPnach`")
         else:
             match += 1
-        # validate data type: CARD
-        if not isinstance(v, CARD):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `CARD`")
+        # validate data type: CreateSubscriptionPaymentRequestCard
+        if not isinstance(v, CreateSubscriptionPaymentRequestCard):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `CreateSubscriptionPaymentRequestCard`")
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CARD, ENACH, PNACH, UPI. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CARD, ENACH, PNACH, UPI. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -106,33 +106,33 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
         error_messages = []
         match = 0
 
-        # deserialize data into UPI
+        # deserialize data into CreateSubscriptonPaymentRequestUpi
         try:
-            instance.actual_instance = UPI.from_json_for_one_of(json_str)
+            instance.actual_instance = CreateSubscriptonPaymentRequestUpi.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ENACH
+        # deserialize data into CreateSubscriptionPaymentRequestEnack
         try:
-            instance.actual_instance = ENACH.from_json_for_one_of(json_str)
+            instance.actual_instance = CreateSubscriptionPaymentRequestEnack.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into PNACH
+        # deserialize data into CreateSubscriptionPaymentRequestPnach
         try:
-            instance.actual_instance = PNACH.from_json_for_one_of(json_str)
+            instance.actual_instance = CreateSubscriptionPaymentRequestPnach.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into CARD
+        # deserialize data into CreateSubscriptionPaymentRequestCard
         try:
-            instance.actual_instance = CARD.from_json_for_one_of(json_str)
+            instance.actual_instance = CreateSubscriptionPaymentRequestCard.from_json_for_one_of(json_str)
             match += 1
             if (instance.actual_instance is not None):
                 return instance
@@ -141,10 +141,10 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CARD, ENACH, PNACH, UPI. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CARD, ENACH, PNACH, UPI. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into CreateSubscriptionPaymentRequestPaymentMethod with oneOf schemas: CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi. Details: " + ", ".join(error_messages))
         else:
             return instance
 

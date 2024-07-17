@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.upi import Upi  # noqa: E501
+from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestUpi(unittest.TestCase):
-    """Upi unit test stubs"""
+class TestCreateSubscriptionPaymentRequestPnach(unittest.TestCase):
+    """CreateSubscriptionPaymentRequestPnach unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,30 +30,31 @@ class TestUpi(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test Upi
+        """Test CreateSubscriptionPaymentRequestPnach
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `Upi`
+        # uncomment below to create an instance of `CreateSubscriptionPaymentRequestPnach`
         """
-        model = cashfree_pg.models.upi.Upi()  # noqa: E501
+        model = cashfree_pg.models.create_subscription_payment_request_pnach.CreateSubscriptionPaymentRequestPnach()  # noqa: E501
         if include_optional :
-            return Upi(
-                channel = 'link', 
-                upi_id = '', 
-                upi_redirect_url = True, 
-                upi_expiry_minutes = 1.337, 
-                authorize_only = True, 
-                authorization = {"authorization":{"approve_by":"2022-07-02T10:20:12+05:30","start_time":"2022-09-21T12:34:34Z","end_time":"2022-10-22T12:34:34Z"}}
+            return CreateSubscriptionPaymentRequestPnach(
+                channel = '', 
+                account_holder_name = '', 
+                account_number = '', 
+                account_bank_code = '', 
+                account_type = '', 
+                account_ifsc = '', 
+                mandate_creation_date = '', 
+                mandate_start_date = ''
             )
         else :
-            return Upi(
-                channel = 'link',
+            return CreateSubscriptionPaymentRequestPnach(
         )
         """
 
-    def testUpi(self):
-        """Test Upi"""
+    def testCreateSubscriptionPaymentRequestPnach(self):
+        """Test CreateSubscriptionPaymentRequestPnach"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

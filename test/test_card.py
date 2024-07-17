@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.card import CARD  # noqa: E501
+from cashfree_pg.models.card import Card  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestCARD(unittest.TestCase):
-    """CARD unit test stubs"""
+class TestCard(unittest.TestCase):
+    """Card unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,31 +30,39 @@ class TestCARD(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test CARD
+        """Test Card
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `CARD`
+        # uncomment below to create an instance of `Card`
         """
-        model = cashfree_pg.models.card.CARD()  # noqa: E501
+        model = cashfree_pg.models.card.Card()  # noqa: E501
         if include_optional :
-            return CARD(
-                channel = '', 
+            return Card(
+                channel = 'link', 
                 card_number = '', 
                 card_holder_name = '', 
                 card_expiry_mm = '', 
                 card_expiry_yy = '', 
                 card_cvv = '', 
-                card_network = '', 
-                card_type = ''
+                instrument_id = '', 
+                cryptogram = '', 
+                token_requestor_id = '', 
+                token_reference_id = '', 
+                token_type = 'ISSUER_TOKEN', 
+                card_display = '', 
+                card_alias = '', 
+                card_bank_name = 'Kotak', 
+                emi_tenure = 56
             )
         else :
-            return CARD(
+            return Card(
+                channel = 'link',
         )
         """
 
-    def testCARD(self):
-        """Test CARD"""
+    def testCard(self):
+        """Test Card"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

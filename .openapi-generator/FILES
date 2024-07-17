@@ -44,7 +44,6 @@ cashfree_pg/models/bank_details.py
 cashfree_pg/models/banktransfer.py
 cashfree_pg/models/banktransfer_payment_method.py
 cashfree_pg/models/card.py
-cashfree_pg/models/card.py
 cashfree_pg/models/card_emi.py
 cashfree_pg/models/card_emi_payment_method.py
 cashfree_pg/models/card_offer.py
@@ -63,13 +62,17 @@ cashfree_pg/models/create_order_settlement_request_body.py
 cashfree_pg/models/create_order_settlement_request_body_meta_data.py
 cashfree_pg/models/create_plan_request.py
 cashfree_pg/models/create_subscription_payment_request.py
+cashfree_pg/models/create_subscription_payment_request_card.py
+cashfree_pg/models/create_subscription_payment_request_enack.py
 cashfree_pg/models/create_subscription_payment_request_payment_method.py
+cashfree_pg/models/create_subscription_payment_request_pnach.py
 cashfree_pg/models/create_subscription_payment_response.py
 cashfree_pg/models/create_subscription_refund_request.py
 cashfree_pg/models/create_subscription_request.py
 cashfree_pg/models/create_subscription_request_authorization_details.py
 cashfree_pg/models/create_subscription_request_plan_details.py
 cashfree_pg/models/create_subscription_request_subscription_meta.py
+cashfree_pg/models/create_subscripton_payment_request_upi.py
 cashfree_pg/models/create_terminal_request.py
 cashfree_pg/models/create_terminal_request_terminal_meta.py
 cashfree_pg/models/create_terminal_transaction_request.py
@@ -95,7 +98,6 @@ cashfree_pg/models/eligibility_payment_methods_entity.py
 cashfree_pg/models/eligibility_payment_methods_entity_entity_details.py
 cashfree_pg/models/emi_offer.py
 cashfree_pg/models/emi_plans_array.py
-cashfree_pg/models/enach.py
 cashfree_pg/models/entity_simulation_request.py
 cashfree_pg/models/entity_simulation_response.py
 cashfree_pg/models/error_details_in_payments_entity.py
@@ -188,7 +190,6 @@ cashfree_pg/models/payment_webhook_error_entity.py
 cashfree_pg/models/payment_webhook_gateway_details_entity.py
 cashfree_pg/models/payment_webhook_order_entity.py
 cashfree_pg/models/plan_entity.py
-cashfree_pg/models/pnach.py
 cashfree_pg/models/rate_limit_error.py
 cashfree_pg/models/recon_entity.py
 cashfree_pg/models/recon_entity_data_inner.py
@@ -239,7 +240,6 @@ cashfree_pg/models/update_terminal_status_request.py
 cashfree_pg/models/update_vendor_request.py
 cashfree_pg/models/update_vendor_response.py
 cashfree_pg/models/upi.py
-cashfree_pg/models/upi.py
 cashfree_pg/models/upi_authorize_details.py
 cashfree_pg/models/upi_details.py
 cashfree_pg/models/upi_payment_method.py
@@ -274,7 +274,6 @@ docs/BalanceDetails.md
 docs/BankDetails.md
 docs/Banktransfer.md
 docs/BanktransferPaymentMethod.md
-docs/CARD.md
 docs/Card.md
 docs/CardEMI.md
 docs/CardEMIPaymentMethod.md
@@ -294,13 +293,17 @@ docs/CreateOrderSettlementRequestBody.md
 docs/CreateOrderSettlementRequestBodyMetaData.md
 docs/CreatePlanRequest.md
 docs/CreateSubscriptionPaymentRequest.md
+docs/CreateSubscriptionPaymentRequestCard.md
+docs/CreateSubscriptionPaymentRequestEnack.md
 docs/CreateSubscriptionPaymentRequestPaymentMethod.md
+docs/CreateSubscriptionPaymentRequestPnach.md
 docs/CreateSubscriptionPaymentResponse.md
 docs/CreateSubscriptionRefundRequest.md
 docs/CreateSubscriptionRequest.md
 docs/CreateSubscriptionRequestAuthorizationDetails.md
 docs/CreateSubscriptionRequestPlanDetails.md
 docs/CreateSubscriptionRequestSubscriptionMeta.md
+docs/CreateSubscriptonPaymentRequestUpi.md
 docs/CreateTerminalRequest.md
 docs/CreateTerminalRequestTerminalMeta.md
 docs/CreateTerminalTransactionRequest.md
@@ -315,7 +318,6 @@ docs/CustomersApi.md
 docs/DiscountDetails.md
 docs/EMIOffer.md
 docs/EMIPlansArray.md
-docs/ENACH.md
 docs/ESOrderReconRequest.md
 docs/ESOrderReconRequestFilters.md
 docs/ESOrderReconRequestPagination.md
@@ -389,7 +391,6 @@ docs/OrderMeta.md
 docs/OrderPayData.md
 docs/OrdersApi.md
 docs/PGReconciliationApi.md
-docs/PNACH.md
 docs/PayOrderEntity.md
 docs/PayOrderRequest.md
 docs/PayOrderRequestPaymentMethod.md
@@ -478,7 +479,6 @@ docs/TerminateOrderRequest.md
 docs/TokenVaultApi.md
 docs/TransferDetails.md
 docs/TransferDetailsTagsInner.md
-docs/UPI.md
 docs/UPIAuthorizeDetails.md
 docs/UPIPaymentMethod.md
 docs/UpdateTerminalEntity.md
@@ -544,13 +544,17 @@ test/test_create_order_settlement_request_body.py
 test/test_create_order_settlement_request_body_meta_data.py
 test/test_create_plan_request.py
 test/test_create_subscription_payment_request.py
+test/test_create_subscription_payment_request_card.py
+test/test_create_subscription_payment_request_enack.py
 test/test_create_subscription_payment_request_payment_method.py
+test/test_create_subscription_payment_request_pnach.py
 test/test_create_subscription_payment_response.py
 test/test_create_subscription_refund_request.py
 test/test_create_subscription_request.py
 test/test_create_subscription_request_authorization_details.py
 test/test_create_subscription_request_plan_details.py
 test/test_create_subscription_request_subscription_meta.py
+test/test_create_subscripton_payment_request_upi.py
 test/test_create_terminal_request.py
 test/test_create_terminal_request_terminal_meta.py
 test/test_create_terminal_transaction_request.py
@@ -579,7 +583,6 @@ test/test_eligibility_payment_methods_entity.py
 test/test_eligibility_payment_methods_entity_entity_details.py
 test/test_emi_offer.py
 test/test_emi_plans_array.py
-test/test_enach.py
 test/test_entity_simulation_request.py
 test/test_entity_simulation_response.py
 test/test_error_details_in_payments_entity.py
@@ -677,7 +680,6 @@ test/test_payment_webhook_order_entity.py
 test/test_payments_api.py
 test/test_pg_reconciliation_api.py
 test/test_plan_entity.py
-test/test_pnach.py
 test/test_rate_limit_error.py
 test/test_recon_entity.py
 test/test_recon_entity_data_inner.py
