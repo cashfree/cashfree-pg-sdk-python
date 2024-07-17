@@ -40,13 +40,13 @@ class TestSimulateRequest(unittest.TestCase):
         if include_optional :
             return SimulateRequest(
                 entity = 'PAYMENTS', 
-                entity_id = '', 
+                entity_id = 56, 
                 entity_simulation = {"payment_status":"FAILED","payment_error_code":"ISSUER_NOT_AVAILABLE"}
             )
         else :
             return SimulateRequest(
                 entity = 'PAYMENTS',
-                entity_id = '',
+                entity_id = 56,
                 entity_simulation = {"payment_status":"FAILED","payment_error_code":"ISSUER_NOT_AVAILABLE"},
         )
         """

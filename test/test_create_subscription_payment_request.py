@@ -46,7 +46,7 @@ class TestCreateSubscriptionPaymentRequest(unittest.TestCase):
                 payment_schedule_date = '', 
                 payment_remarks = '', 
                 payment_type = '', 
-                payment_method = None
+                payment_method = ''
             )
         else :
             return CreateSubscriptionPaymentRequest(

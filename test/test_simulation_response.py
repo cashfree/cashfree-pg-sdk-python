@@ -41,7 +41,7 @@ class TestSimulationResponse(unittest.TestCase):
             return SimulationResponse(
                 simulation_id = '', 
                 entity = '', 
-                entity_id = '', 
+                entity_id = 56, 
                 entity_simulation = {"payment_status":"FAILED","payment_error_code":"ISSUER_NOT_AVAILABLE"}
             )
         else :

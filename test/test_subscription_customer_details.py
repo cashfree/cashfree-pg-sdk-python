@@ -42,7 +42,7 @@ class TestSubscriptionCustomerDetails(unittest.TestCase):
                 customer_name = '', 
                 customer_email = '', 
                 customer_phone = '', 
-                customer_bank_account_holder_name = '', 
+                customer_bank_holder_name = '', 
                 customer_bank_account_number = '', 
                 customer_bank_ifsc = '', 
                 customer_bank_code = '', 
