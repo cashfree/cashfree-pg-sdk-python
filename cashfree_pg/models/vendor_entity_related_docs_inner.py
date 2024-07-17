@@ -22,9 +22,9 @@ import json
 from typing import Optional
 from pydantic import BaseModel, StrictStr
 
-class UpdateVendorResponseRelatedDocsInner(BaseModel):
+class VendorEntityRelatedDocsInner(BaseModel):
     """
-    UpdateVendorResponseRelatedDocsInner
+    VendorEntityRelatedDocsInner
     """
     vendor_id: Optional[StrictStr] = None
     doc_type: Optional[StrictStr] = None
@@ -47,13 +47,13 @@ class UpdateVendorResponseRelatedDocsInner(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> UpdateVendorResponseRelatedDocsInner:
-        """Create an instance of UpdateVendorResponseRelatedDocsInner from a JSON string"""
+    def from_json(cls, json_str: str) -> VendorEntityRelatedDocsInner:
+        """Create an instance of VendorEntityRelatedDocsInner from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> UpdateVendorResponseRelatedDocsInner:
-        """Create an instance of UpdateVendorResponseRelatedDocsInner from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> VendorEntityRelatedDocsInner:
+        """Create an instance of VendorEntityRelatedDocsInner from a JSON string"""
         temp_dict = json.loads(json_str)
         if "vendor_id, doc_type, doc_value, status, remarks" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
@@ -68,15 +68,15 @@ class UpdateVendorResponseRelatedDocsInner(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> UpdateVendorResponseRelatedDocsInner:
-        """Create an instance of UpdateVendorResponseRelatedDocsInner from a dict"""
+    def from_dict(cls, obj: dict) -> VendorEntityRelatedDocsInner:
+        """Create an instance of VendorEntityRelatedDocsInner from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return UpdateVendorResponseRelatedDocsInner.parse_obj(obj)
+            return VendorEntityRelatedDocsInner.parse_obj(obj)
 
-        _obj = UpdateVendorResponseRelatedDocsInner.parse_obj({
+        _obj = VendorEntityRelatedDocsInner.parse_obj({
             "vendor_id": obj.get("vendor_id"),
             "doc_type": obj.get("doc_type"),
             "doc_value": obj.get("doc_value"),

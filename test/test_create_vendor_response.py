@@ -42,7 +42,7 @@ class TestCreateVendorResponse(unittest.TestCase):
                 email = '', 
                 status = '', 
                 bank = [
-                    {"account_number":123456111110,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
+                    {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
                     ], 
                 upi = '', 
                 phone = 1.337, 

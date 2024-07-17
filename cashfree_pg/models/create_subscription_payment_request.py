@@ -19,8 +19,9 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
+from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod
 
 class CreateSubscriptionPaymentRequest(BaseModel):
     """
@@ -33,7 +34,7 @@ class CreateSubscriptionPaymentRequest(BaseModel):
     payment_schedule_date: Optional[StrictStr] = Field(None, description="The date on which the payment is scheduled to be processed. Required for UPI and CARD payment modes.")
     payment_remarks: Optional[StrictStr] = Field(None, description="Payment remarks.")
     payment_type: StrictStr = Field(..., description="Payment type. Can be AUTH or CHARGE.")
-    payment_method: Optional[Dict[str, Any]] = Field(None, description="Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]")
+    payment_method: Optional[CreateSubscriptionPaymentRequestPaymentMethod] = None
     __properties = ["subscription_id", "subscription_session_id", "payment_id", "payment_amount", "payment_schedule_date", "payment_remarks", "payment_type", "payment_method"]
 
     class Config:
@@ -68,6 +69,9 @@ class CreateSubscriptionPaymentRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of payment_method
+        if self.payment_method:
+            _dict['payment_method'] = self.payment_method.to_dict()
         return _dict
 
     @classmethod
@@ -87,7 +91,7 @@ class CreateSubscriptionPaymentRequest(BaseModel):
             "payment_schedule_date": obj.get("payment_schedule_date"),
             "payment_remarks": obj.get("payment_remarks"),
             "payment_type": obj.get("payment_type"),
-            "payment_method": obj.get("payment_method")
+            "payment_method": CreateSubscriptionPaymentRequestPaymentMethod.from_dict(obj.get("payment_method")) if obj.get("payment_method") is not None else None
         })
         return _obj
 

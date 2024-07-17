@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import cashfree_pg
-from cashfree_pg.models.vendor_documents_response import VendorDocumentsResponse  # noqa: E501
+from cashfree_pg.models.pnach import PNACH  # noqa: E501
 from cashfree_pg.rest import ApiException
 
-class TestVendorDocumentsResponse(unittest.TestCase):
-    """VendorDocumentsResponse unit test stubs"""
+class TestPNACH(unittest.TestCase):
+    """PNACH unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,31 +30,31 @@ class TestVendorDocumentsResponse(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test VendorDocumentsResponse
+        """Test PNACH
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `VendorDocumentsResponse`
+        # uncomment below to create an instance of `PNACH`
         """
-        model = cashfree_pg.models.vendor_documents_response.VendorDocumentsResponse()  # noqa: E501
+        model = cashfree_pg.models.pnach.PNACH()  # noqa: E501
         if include_optional :
-            return VendorDocumentsResponse(
-                documents = [
-                    cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
-                        vendor_id = '', 
-                        doc_type = '', 
-                        doc_value = '', 
-                        status = '', 
-                        remarks = '', )
-                    ]
+            return PNACH(
+                channel = '', 
+                account_holder_name = '', 
+                account_number = '', 
+                account_bank_code = '', 
+                account_type = '', 
+                account_ifsc = '', 
+                mandate_creation_date = '', 
+                mandate_start_date = ''
             )
         else :
-            return VendorDocumentsResponse(
+            return PNACH(
         )
         """
 
-    def testVendorDocumentsResponse(self):
-        """Test VendorDocumentsResponse"""
+    def testPNACH(self):
+        """Test PNACH"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

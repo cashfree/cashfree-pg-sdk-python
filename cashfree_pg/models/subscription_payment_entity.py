@@ -22,7 +22,7 @@ import json
 from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 from cashfree_pg.models.authorization_details import AuthorizationDetails
-from cashfree_pg.models.create_subscription_payment_auth_response_failure_details import CreateSubscriptionPaymentAuthResponseFailureDetails
+from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
 
 class SubscriptionPaymentEntity(BaseModel):
     """
@@ -33,7 +33,7 @@ class SubscriptionPaymentEntity(BaseModel):
     cf_subscription_id: Optional[StrictStr] = Field(None, description="Cashfree subscription reference number")
     cf_txn_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment transaction ID")
     cf_order_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment order ID")
-    failure_details: Optional[CreateSubscriptionPaymentAuthResponseFailureDetails] = None
+    failure_details: Optional[SubscriptionPaymentEntityFailureDetails] = None
     payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The charge amount of the payment.")
     payment_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the transaction.")
     payment_initiated_date: Optional[StrictStr] = Field(None, description="The date on which the payment was initiated.")
@@ -100,7 +100,7 @@ class SubscriptionPaymentEntity(BaseModel):
             "cf_subscription_id": obj.get("cf_subscription_id"),
             "cf_txn_id": obj.get("cf_txn_id"),
             "cf_order_id": obj.get("cf_order_id"),
-            "failure_details": CreateSubscriptionPaymentAuthResponseFailureDetails.from_dict(obj.get("failure_details")) if obj.get("failure_details") is not None else None,
+            "failure_details": SubscriptionPaymentEntityFailureDetails.from_dict(obj.get("failure_details")) if obj.get("failure_details") is not None else None,
             "payment_amount": obj.get("payment_amount"),
             "payment_id": obj.get("payment_id"),
             "payment_initiated_date": obj.get("payment_initiated_date"),

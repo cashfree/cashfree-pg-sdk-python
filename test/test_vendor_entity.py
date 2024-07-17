@@ -47,7 +47,7 @@ class TestVendorEntity(unittest.TestCase):
                 added_on = '', 
                 updated_on = '', 
                 bank = [
-                    {"account_number":123456111110,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
+                    {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
                     ], 
                 upi = '', 
                 schedule_option = [
@@ -58,7 +58,7 @@ class TestVendorEntity(unittest.TestCase):
                 business_type = '', 
                 remarks = '', 
                 related_docs = [
-                    cashfree_pg.models.update_vendor_response_related_docs_inner.UpdateVendorResponse_related_docs_inner(
+                    cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
                         vendor_id = '', 
                         doc_type = '', 
                         doc_value = '', 

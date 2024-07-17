@@ -33,7 +33,7 @@ class CustomerDetailsResponse(BaseModel):
     customer_bank_account_number: Optional[constr(strict=True, max_length=20, min_length=3)] = Field(None, description="Customer bank account. Required if you want to do a bank account check (TPV)")
     customer_bank_ifsc: Optional[StrictStr] = Field(None, description="Customer bank IFSC. Required if you want to do a bank account check (TPV)")
     customer_bank_code: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Customer bank code. Required for net banking payments, if you want to do a bank account check (TPV)")
-    customer_uid: Optional[StrictStr] = Field(None, description="Customer identifier at Cashfree. You will get this when you create/get customer        ")
+    customer_uid: Optional[StrictStr] = Field(None, description="Customer identifier at Cashfree. You will get this when you create/get customer")
     __properties = ["customer_id", "customer_email", "customer_phone", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_uid"]
 
     class Config:
