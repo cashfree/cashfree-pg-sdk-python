@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.2.2"
+__version__ = "4.2.3"
 
 # import apis into sdk package
 # import ApiClient
@@ -47,7 +47,6 @@ from cashfree_pg.models.balance_details import BalanceDetails
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.banktransfer import Banktransfer
 from cashfree_pg.models.banktransfer_payment_method import BanktransferPaymentMethod
-from cashfree_pg.models.card import CARD
 from cashfree_pg.models.card import Card
 from cashfree_pg.models.card_emi import CardEMI
 from cashfree_pg.models.card_emi_payment_method import CardEMIPaymentMethod
@@ -67,13 +66,17 @@ from cashfree_pg.models.create_order_settlement_request_body import CreateOrderS
 from cashfree_pg.models.create_order_settlement_request_body_meta_data import CreateOrderSettlementRequestBodyMetaData
 from cashfree_pg.models.create_plan_request import CreatePlanRequest
 from cashfree_pg.models.create_subscription_payment_request import CreateSubscriptionPaymentRequest
+from cashfree_pg.models.create_subscription_payment_request_card import CreateSubscriptionPaymentRequestCard
+from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack
 from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod
+from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach
 from cashfree_pg.models.create_subscription_payment_response import CreateSubscriptionPaymentResponse
 from cashfree_pg.models.create_subscription_refund_request import CreateSubscriptionRefundRequest
 from cashfree_pg.models.create_subscription_request import CreateSubscriptionRequest
 from cashfree_pg.models.create_subscription_request_authorization_details import CreateSubscriptionRequestAuthorizationDetails
 from cashfree_pg.models.create_subscription_request_plan_details import CreateSubscriptionRequestPlanDetails
 from cashfree_pg.models.create_subscription_request_subscription_meta import CreateSubscriptionRequestSubscriptionMeta
+from cashfree_pg.models.create_subscripton_payment_request_upi import CreateSubscriptonPaymentRequestUpi
 from cashfree_pg.models.create_terminal_request import CreateTerminalRequest
 from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
 from cashfree_pg.models.create_terminal_transaction_request import CreateTerminalTransactionRequest
@@ -87,7 +90,6 @@ from cashfree_pg.models.customer_entity import CustomerEntity
 from cashfree_pg.models.discount_details import DiscountDetails
 from cashfree_pg.models.emi_offer import EMIOffer
 from cashfree_pg.models.emi_plans_array import EMIPlansArray
-from cashfree_pg.models.enach import ENACH
 from cashfree_pg.models.es_order_recon_request import ESOrderReconRequest
 from cashfree_pg.models.es_order_recon_request_filters import ESOrderReconRequestFilters
 from cashfree_pg.models.es_order_recon_request_pagination import ESOrderReconRequestPagination
@@ -156,7 +158,6 @@ from cashfree_pg.models.order_create_refund_request import OrderCreateRefundRequ
 from cashfree_pg.models.order_entity import OrderEntity
 from cashfree_pg.models.order_meta import OrderMeta
 from cashfree_pg.models.order_pay_data import OrderPayData
-from cashfree_pg.models.pnach import PNACH
 from cashfree_pg.models.pay_order_entity import PayOrderEntity
 from cashfree_pg.models.pay_order_request import PayOrderRequest
 from cashfree_pg.models.pay_order_request_payment_method import PayOrderRequestPaymentMethod
@@ -236,7 +237,6 @@ from cashfree_pg.models.terminal_transaction_entity import TerminalTransactionEn
 from cashfree_pg.models.terminate_order_request import TerminateOrderRequest
 from cashfree_pg.models.transfer_details import TransferDetails
 from cashfree_pg.models.transfer_details_tags_inner import TransferDetailsTagsInner
-from cashfree_pg.models.upi import UPI
 from cashfree_pg.models.upi_authorize_details import UPIAuthorizeDetails
 from cashfree_pg.models.upi_payment_method import UPIPaymentMethod
 from cashfree_pg.models.update_terminal_entity import UpdateTerminalEntity

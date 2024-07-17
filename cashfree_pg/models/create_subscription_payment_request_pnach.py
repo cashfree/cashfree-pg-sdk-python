@@ -22,7 +22,7 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
 
-class PNACH(BaseModel):
+class CreateSubscriptionPaymentRequestPnach(BaseModel):
     """
     payment method pnach.
     """
@@ -50,13 +50,13 @@ class PNACH(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> PNACH:
-        """Create an instance of PNACH from a JSON string"""
+    def from_json(cls, json_str: str) -> CreateSubscriptionPaymentRequestPnach:
+        """Create an instance of CreateSubscriptionPaymentRequestPnach from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> PNACH:
-        """Create an instance of PNACH from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionPaymentRequestPnach:
+        """Create an instance of CreateSubscriptionPaymentRequestPnach from a JSON string"""
         temp_dict = json.loads(json_str)
         if "channel, account_holder_name, account_number, account_bank_code, account_type, account_ifsc, mandate_creation_date, mandate_start_date" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
@@ -71,15 +71,15 @@ class PNACH(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> PNACH:
-        """Create an instance of PNACH from a dict"""
+    def from_dict(cls, obj: dict) -> CreateSubscriptionPaymentRequestPnach:
+        """Create an instance of CreateSubscriptionPaymentRequestPnach from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return PNACH.parse_obj(obj)
+            return CreateSubscriptionPaymentRequestPnach.parse_obj(obj)
 
-        _obj = PNACH.parse_obj({
+        _obj = CreateSubscriptionPaymentRequestPnach.parse_obj({
             "channel": obj.get("channel"),
             "account_holder_name": obj.get("account_holder_name"),
             "account_number": obj.get("account_number"),

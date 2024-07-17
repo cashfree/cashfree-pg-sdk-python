@@ -22,7 +22,7 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
 
-class ENACH(BaseModel):
+class CreateSubscriptionPaymentRequestEnack(BaseModel):
     """
     payment method enach.
     """
@@ -49,13 +49,13 @@ class ENACH(BaseModel):
         return json.dumps(self.to_dict())
 
     @classmethod
-    def from_json(cls, json_str: str) -> ENACH:
-        """Create an instance of ENACH from a JSON string"""
+    def from_json(cls, json_str: str) -> CreateSubscriptionPaymentRequestEnack:
+        """Create an instance of CreateSubscriptionPaymentRequestEnack from a JSON string"""
         return cls.from_dict(json.loads(json_str))
     
     @classmethod
-    def from_json_for_one_of(cls, json_str: str) -> ENACH:
-        """Create an instance of ENACH from a JSON string"""
+    def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionPaymentRequestEnack:
+        """Create an instance of CreateSubscriptionPaymentRequestEnack from a JSON string"""
         temp_dict = json.loads(json_str)
         if "channel, auth_mode, account_holder_name, account_number, account_bank_code, account_type, account_ifsc" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
@@ -70,15 +70,15 @@ class ENACH(BaseModel):
         return _dict
 
     @classmethod
-    def from_dict(cls, obj: dict) -> ENACH:
-        """Create an instance of ENACH from a dict"""
+    def from_dict(cls, obj: dict) -> CreateSubscriptionPaymentRequestEnack:
+        """Create an instance of CreateSubscriptionPaymentRequestEnack from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
-            return ENACH.parse_obj(obj)
+            return CreateSubscriptionPaymentRequestEnack.parse_obj(obj)
 
-        _obj = ENACH.parse_obj({
+        _obj = CreateSubscriptionPaymentRequestEnack.parse_obj({
             "channel": obj.get("channel"),
             "auth_mode": obj.get("auth_mode"),
             "account_holder_name": obj.get("account_holder_name"),
