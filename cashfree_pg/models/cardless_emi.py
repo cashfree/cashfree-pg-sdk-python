@@ -27,7 +27,7 @@ class CardlessEMI(BaseModel):
     Request body for cardless emi payment method
     """
     channel: Optional[StrictStr] = Field(None, description="The channel for cardless EMI is always `link`")
-    provider: Optional[StrictStr] = Field(None, description="One of [`flexmoney`, `zestmoney`, `hdfc`, `icici`, `cashe`, `idfc`, `kotak`, `snapmint`, `bharatx`]")
+    provider: Optional[StrictStr] = Field(None, description="One of [`flexmoney`, `zestmoney`, `hdfc`, `icici`, `cashe`, `idfc`, `kotak`]")
     phone: Optional[StrictStr] = Field(None, description="Customers phone number for this payment instrument. If the customer is not eligible you will receive a 400 error with type as 'invalid_request_error' and code as 'invalid_request_error'")
     emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure for the selected provider. This is mandatory when provider is one of [`hdfc`, `icici`, `cashe`, `idfc`, `kotak`]")
     __properties = ["channel", "provider", "phone", "emi_tenure"]
@@ -38,8 +38,8 @@ class CardlessEMI(BaseModel):
         if value is None:
             return value
 
-        if value not in ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak', 'snapmint', 'bharatx'):
-            raise ValueError("must be one of enum values ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak', 'snapmint', 'bharatx')")
+        if value not in ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak'):
+            raise ValueError("must be one of enum values ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak')")
         return value
 
     class Config:

@@ -78,7 +78,6 @@ cashfree_pg/models/create_vendor_response.py
 cashfree_pg/models/cryptogram_entity.py
 cashfree_pg/models/customer_details.py
 cashfree_pg/models/customer_details_cardless_emi.py
-cashfree_pg/models/customer_details_response.py
 cashfree_pg/models/customer_entity.py
 cashfree_pg/models/discount_details.py
 cashfree_pg/models/eligibility_cardless_emi_entity.py
@@ -306,7 +305,6 @@ docs/CreateVendorResponse.md
 docs/CryptogramEntity.md
 docs/CustomerDetails.md
 docs/CustomerDetailsCardlessEMI.md
-docs/CustomerDetailsResponse.md
 docs/CustomerEntity.md
 docs/CustomersApi.md
 docs/DiscountDetails.md
@@ -554,7 +552,6 @@ test/test_create_vendor_response.py
 test/test_cryptogram_entity.py
 test/test_customer_details.py
 test/test_customer_details_cardless_emi.py
-test/test_customer_details_response.py
 test/test_customer_entity.py
 test/test_customers_api.py
 test/test_discount_details.py

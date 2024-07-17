@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
+from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
 class CreateSubscriptionPaymentRequest(BaseModel):
@@ -29,11 +29,11 @@ class CreateSubscriptionPaymentRequest(BaseModel):
     subscription_id: StrictStr = Field(..., description="A unique ID passed by merchant for identifying the subscription.")
     subscription_session_id: Optional[StrictStr] = Field(None, description="Session ID for the subscription. Required only for Auth.")
     payment_id: StrictStr = Field(..., description="A unique ID passed by merchant for identifying the subscription payment.")
-    payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The charge amount of the payment. Required in case of charge.")
+    payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The charge amount of the payment. Requried in case of charge.")
     payment_schedule_date: Optional[StrictStr] = Field(None, description="The date on which the payment is scheduled to be processed. Required for UPI and CARD payment modes.")
     payment_remarks: Optional[StrictStr] = Field(None, description="Payment remarks.")
     payment_type: StrictStr = Field(..., description="Payment type. Can be AUTH or CHARGE.")
-    payment_method: Optional[Dict[str, Any]] = Field(None, description="Payment method. Can be one of [\"upi\", \"enach\", \"pnach\", \"card\"]")
+    payment_method: Optional[StrictStr] = Field(None, description="Payment method. Can be upi or card or enach or pnach.")
     __properties = ["subscription_id", "subscription_session_id", "payment_id", "payment_amount", "payment_schedule_date", "payment_remarks", "payment_type", "payment_method"]
 
     class Config:

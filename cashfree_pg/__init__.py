@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.2.0"
+__version__ = "4.2.1"
 
 # import apis into sdk package
 # import ApiClient
@@ -82,7 +82,6 @@ from cashfree_pg.models.create_vendor_response import CreateVendorResponse
 from cashfree_pg.models.cryptogram_entity import CryptogramEntity
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.customer_details_cardless_emi import CustomerDetailsCardlessEMI
-from cashfree_pg.models.customer_details_response import CustomerDetailsResponse
 from cashfree_pg.models.customer_entity import CustomerEntity
 from cashfree_pg.models.discount_details import DiscountDetails
 from cashfree_pg.models.emi_offer import EMIOffer

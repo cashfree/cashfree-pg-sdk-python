@@ -41,7 +41,7 @@ class TestSubscriptionEntity(unittest.TestCase):
             return SubscriptionEntity(
                 authorisation_details = {"authorization_amount":1,"authorization_amount_refund":false,"authorization_reference":"","authorization_time":"2022-06-14T23:47:52+05:30","authorization_status":"INITIALIZED","payment_id":"97877","payment_method":"NPCI_SBC"}, 
                 cf_subscription_id = '', 
-                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_holder_name":"","customer_bank_account_holder_name":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""}, 
+                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""}, 
                 plan_details = {"plan_currency":"INR","plan_id":"144436-03471-JD_TEST","plan_interval_type":"WEEK","plan_intervals":1,"plan_max_amount":1,"plan_max_cycles":4,"plan_name":"abscede","plan_note":"lsdkdn","plan_recurring_amount":1,"plan_status":"ACTIVE","plan_type":"PERIODIC"}, 
                 subscription_expiry_time = '', 
                 subscription_first_charge_time = '', 
