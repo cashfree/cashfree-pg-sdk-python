@@ -25,6 +25,7 @@ pip install cashfree_pg
 from cashfree_pg.models.create_order_request import CreateOrderRequest
 from cashfree_pg.api_client import Cashfree
 from cashfree_pg.models.customer_details import CustomerDetails
+from cashfree_pg.models.order_meta import OrderMeta
 
 Cashfree.XClientId = "<x-client-id>"
 Cashfree.XClientSecret = "<x-client-secret>"
@@ -38,7 +39,7 @@ Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant D
 Create Order
 ```python
 customerDetails = CustomerDetails(customer_id="walterwNrcMi", customer_phone="9999999999")
-orderMeta = CreateOrderRequestOrderMeta(return_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
+orderMeta = OrderMeta(return_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
 createOrderRequest = CreateOrderRequest(order_amount=1, order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
 try:
     api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None)
