@@ -434,7 +434,7 @@ conf = cashfree_pg.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2023-08-01\n"\
-               "SDK Package Version: 4.2.4".\
+               "SDK Package Version: 4.3.0".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self):

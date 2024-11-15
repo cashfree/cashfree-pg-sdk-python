@@ -50,7 +50,8 @@ class TestTerminalEntity(unittest.TestCase):
                 terminal_note = '', 
                 terminal_phone_no = '', 
                 terminal_status = '', 
-                terminal_meta = ''
+                terminal_meta = cashfree_pg.models.create_terminal_request_terminal_meta.CreateTerminalRequest_terminal_meta(
+                    terminal_operator = '', )
             )
         else :
             return TerminalEntity(
