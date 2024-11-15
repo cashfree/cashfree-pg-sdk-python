@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, StrictInt, StrictStr
+from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
 
 class TerminalEntity(BaseModel):
     """
@@ -37,7 +38,7 @@ class TerminalEntity(BaseModel):
     terminal_note: Optional[StrictStr] = None
     terminal_phone_no: Optional[StrictStr] = None
     terminal_status: Optional[StrictStr] = None
-    terminal_meta: Optional[StrictStr] = None
+    terminal_meta: Optional[CreateTerminalRequestTerminalMeta] = None
     __properties = ["added_on", "cf_terminal_id", "last_updated_on", "terminal_address", "terminal_email", "terminal_type", "teminal_id", "terminal_name", "terminal_note", "terminal_phone_no", "terminal_status", "terminal_meta"]
 
     class Config:
@@ -72,6 +73,9 @@ class TerminalEntity(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of terminal_meta
+        if self.terminal_meta:
+            _dict['terminal_meta'] = self.terminal_meta.to_dict()
         return _dict
 
     @classmethod
@@ -95,7 +99,7 @@ class TerminalEntity(BaseModel):
             "terminal_note": obj.get("terminal_note"),
             "terminal_phone_no": obj.get("terminal_phone_no"),
             "terminal_status": obj.get("terminal_status"),
-            "terminal_meta": obj.get("terminal_meta")
+            "terminal_meta": CreateTerminalRequestTerminalMeta.from_dict(obj.get("terminal_meta")) if obj.get("terminal_meta") is not None else None
         })
         return _obj
 
