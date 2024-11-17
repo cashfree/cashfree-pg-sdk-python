@@ -40,7 +40,7 @@ class TestLinkMetaResponseEntity(unittest.TestCase):
         if include_optional :
             return LinkMetaResponseEntity(
                 notify_url = '', 
-                upi_intent = True, 
+                upi_intent = '', 
                 return_url = '', 
                 payment_methods = ''
             )
