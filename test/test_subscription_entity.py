@@ -49,6 +49,7 @@ class TestSubscriptionEntity(unittest.TestCase):
                 subscription_meta = cashfree_pg.models.subscription_entity_subscription_meta.SubscriptionEntity_subscription_meta(
                     return_url = '', ), 
                 subscription_note = '', 
+                subscription_session_id = '', 
                 subscription_payment_splits = [
                     {"vendor_id":"123","percentage":12.05}
                     ], 

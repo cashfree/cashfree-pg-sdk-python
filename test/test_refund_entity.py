@@ -56,7 +56,7 @@ class TestRefundEntity(unittest.TestCase):
                     {"vendor_id":"Vendor01","amount":100.12,"description":"order amount should be more than equal to 100.12"}
                     ], 
                 refund_type = 'PAYMENT_AUTO_REFUND', 
-                refund_mode = 'STANDARD', 
+                refund_mode = '', 
                 created_at = '', 
                 processed_at = '', 
                 refund_speed = {"requested":"STANDARD","accepted":"STANDARD","processed":"STANDARD","message":"Error message, if any"}

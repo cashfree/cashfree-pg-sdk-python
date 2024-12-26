@@ -43,10 +43,24 @@ class TestOrdersApi(unittest.TestCase):
         """
         pass
 
+    def test_p_g_fetch_order_extended_data(self):
+        """Test case for p_g_fetch_order_extended_data
+
+        Get Order Extended  # noqa: E501
+        """
+        pass
+
     def test_p_g_terminate_order(self):
         """Test case for p_g_terminate_order
 
         Terminate Order  # noqa: E501
+        """
+        pass
+
+    def test_p_g_update_order_extended_data(self):
+        """Test case for p_g_update_order_extended_data
+
+        Update Order Extended  # noqa: E501
         """
         pass
 

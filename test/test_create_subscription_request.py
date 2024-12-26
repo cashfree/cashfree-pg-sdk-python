@@ -54,7 +54,10 @@ class TestCreateSubscriptionRequest(unittest.TestCase):
                     plan_note = '', ), 
                 authorization_details = cashfree_pg.models.create_subscription_request_authorization_details.CreateSubscriptionRequest_authorization_details(
                     authorization_amount = 1.337, 
-                    authorization_amount_refund = True, ), 
+                    authorization_amount_refund = True, 
+                    payment_methods = [
+                        ''
+                        ], ), 
                 subscription_meta = cashfree_pg.models.create_subscription_request_subscription_meta.CreateSubscriptionRequest_subscription_meta(
                     return_url = '', 
                     notification_channel = [

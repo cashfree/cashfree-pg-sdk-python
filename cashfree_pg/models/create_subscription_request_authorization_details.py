@@ -19,8 +19,8 @@ import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt
+from typing import List, Optional, Union
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
 
 class CreateSubscriptionRequestAuthorizationDetails(BaseModel):
     """
@@ -28,7 +28,8 @@ class CreateSubscriptionRequestAuthorizationDetails(BaseModel):
     """
     authorization_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Authorization amount for the auth payment.")
     authorization_amount_refund: Optional[StrictBool] = Field(None, description="Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription.")
-    __properties = ["authorization_amount", "authorization_amount_refund"]
+    payment_methods: Optional[conlist(StrictStr)] = Field(None, description="Payment methods for the subscription. enach, pnach, upi, card are possible values.")
+    __properties = ["authorization_amount", "authorization_amount_refund", "payment_methods"]
 
     class Config:
         """Pydantic configuration"""
@@ -52,7 +53,7 @@ class CreateSubscriptionRequestAuthorizationDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateSubscriptionRequestAuthorizationDetails:
         """Create an instance of CreateSubscriptionRequestAuthorizationDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "authorization_amount, authorization_amount_refund" in temp_dict.keys():
+        if "authorization_amount, authorization_amount_refund, payment_methods" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -75,7 +76,8 @@ class CreateSubscriptionRequestAuthorizationDetails(BaseModel):
 
         _obj = CreateSubscriptionRequestAuthorizationDetails.parse_obj({
             "authorization_amount": obj.get("authorization_amount"),
-            "authorization_amount_refund": obj.get("authorization_amount_refund")
+            "authorization_amount_refund": obj.get("authorization_amount_refund"),
+            "payment_methods": obj.get("payment_methods")
         })
         return _obj
 

@@ -21,6 +21,7 @@ import json
 
 from typing import Dict, List, Optional, Union
 from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr
+from cashfree_pg.models.cart_details import CartDetails
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.order_meta import OrderMeta
 from cashfree_pg.models.terminal_details import TerminalDetails
@@ -33,6 +34,7 @@ class CreateOrderRequest(BaseModel):
     order_id: Optional[constr(strict=True, max_length=45, min_length=3)] = Field(None, description="Order identifier present in your system. Alphanumeric, '_' and '-' only")
     order_amount: Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)] = Field(..., description="Bill amount for the order. Provide upto two decimals. 10.15 means Rs 10 and 15 paisa")
     order_currency: StrictStr = Field(..., description="Currency for the order. INR if left empty. Contact care@cashfree.com to enable new currencies.")
+    cart_details: Optional[CartDetails] = None
     customer_details: CustomerDetails = Field(...)
     terminal: Optional[TerminalDetails] = None
     order_meta: Optional[OrderMeta] = None
@@ -40,7 +42,7 @@ class CreateOrderRequest(BaseModel):
     order_note: Optional[constr(strict=True, max_length=200, min_length=3)] = Field(None, description="Order note for reference.")
     order_tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
-    __properties = ["order_id", "order_amount", "order_currency", "customer_details", "terminal", "order_meta", "order_expiry_time", "order_note", "order_tags", "order_splits"]
+    __properties = ["order_id", "order_amount", "order_currency", "cart_details", "customer_details", "terminal", "order_meta", "order_expiry_time", "order_note", "order_tags", "order_splits"]
 
     class Config:
         """Pydantic configuration"""
@@ -64,7 +66,7 @@ class CreateOrderRequest(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> CreateOrderRequest:
         """Create an instance of CreateOrderRequest from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "order_id, order_amount, order_currency, customer_details, terminal, order_meta, order_expiry_time, order_note, order_tags, order_splits" in temp_dict.keys():
+        if "order_id, order_amount, order_currency, cart_details, customer_details, terminal, order_meta, order_expiry_time, order_note, order_tags, order_splits" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -74,6 +76,9 @@ class CreateOrderRequest(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
+        # override the default output from pydantic by calling `to_dict()` of cart_details
+        if self.cart_details:
+            _dict['cart_details'] = self.cart_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of customer_details
         if self.customer_details:
             _dict['customer_details'] = self.customer_details.to_dict()
@@ -105,6 +110,7 @@ class CreateOrderRequest(BaseModel):
             "order_id": obj.get("order_id"),
             "order_amount": obj.get("order_amount"),
             "order_currency": obj.get("order_currency"),
+            "cart_details": CartDetails.from_dict(obj.get("cart_details")) if obj.get("cart_details") is not None else None,
             "customer_details": CustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
             "terminal": TerminalDetails.from_dict(obj.get("terminal")) if obj.get("terminal") is not None else None,
             "order_meta": OrderMeta.from_dict(obj.get("order_meta")) if obj.get("order_meta") is not None else None,
