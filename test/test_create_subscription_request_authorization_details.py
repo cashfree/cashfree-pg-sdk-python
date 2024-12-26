@@ -40,7 +40,10 @@ class TestCreateSubscriptionRequestAuthorizationDetails(unittest.TestCase):
         if include_optional :
             return CreateSubscriptionRequestAuthorizationDetails(
                 authorization_amount = 1.337, 
-                authorization_amount_refund = True
+                authorization_amount_refund = True, 
+                payment_methods = [
+                    ''
+                    ]
             )
         else :
             return CreateSubscriptionRequestAuthorizationDetails(

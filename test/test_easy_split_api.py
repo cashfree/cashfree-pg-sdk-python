@@ -43,6 +43,20 @@ class TestEasySplitApi(unittest.TestCase):
         """
         pass
 
+    def test_p_g_split_order_recon(self):
+        """Test case for p_g_split_order_recon
+
+        Get Split and Settlement Details by OrderID  # noqa: E501
+        """
+        pass
+
+    def test_p_ges_create_adjustment(self):
+        """Test case for p_ges_create_adjustment
+
+        Create Adjustment  # noqa: E501
+        """
+        pass
+
     def test_p_ges_create_on_demand_transfer(self):
         """Test case for p_ges_create_on_demand_transfer
 

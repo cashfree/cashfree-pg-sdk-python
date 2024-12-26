@@ -60,6 +60,7 @@ from cashfree_pg.api_response import ApiResponse
 import cashfree_pg.models
 from cashfree_pg import rest
 
+from cashfree_pg.models.address_details import *
 from cashfree_pg.models.adjust_vendor_balance_request import *
 from cashfree_pg.models.adjust_vendor_balance_response import *
 from cashfree_pg.models.api_error import *
@@ -86,14 +87,19 @@ from cashfree_pg.models.cardless_emi import *
 from cashfree_pg.models.cardless_emi_entity import *
 from cashfree_pg.models.cardless_emi_payment_method import *
 from cashfree_pg.models.cardless_emi_queries import *
+from cashfree_pg.models.cart_details import *
+from cashfree_pg.models.cart_details_entity import *
+from cashfree_pg.models.cart_item import *
 from cashfree_pg.models.cashback_details import *
 from cashfree_pg.models.charges_details import *
+from cashfree_pg.models.charges_entity import *
 from cashfree_pg.models.create_customer_request import *
 from cashfree_pg.models.create_link_request import *
 from cashfree_pg.models.create_offer_request import *
 from cashfree_pg.models.create_order_request import *
 from cashfree_pg.models.create_order_settlement_request_body import *
 from cashfree_pg.models.create_order_settlement_request_body_meta_data import *
+from cashfree_pg.models.create_partner_vpa_request import *
 from cashfree_pg.models.create_plan_request import *
 from cashfree_pg.models.create_subscription_payment_request import *
 from cashfree_pg.models.create_subscription_payment_request_card import *
@@ -115,9 +121,14 @@ from cashfree_pg.models.create_vendor_response import *
 from cashfree_pg.models.cryptogram_entity import *
 from cashfree_pg.models.customer_details import *
 from cashfree_pg.models.customer_details_cardless_emi import *
+from cashfree_pg.models.customer_details_in_disputes_entity import *
 from cashfree_pg.models.customer_details_response import *
 from cashfree_pg.models.customer_entity import *
+from cashfree_pg.models.demap_soundbox_vpa_request import *
 from cashfree_pg.models.discount_details import *
+from cashfree_pg.models.dispute_evidence import *
+from cashfree_pg.models.disputes_entity import *
+from cashfree_pg.models.disputes_entity_merchant_accepted import *
 from cashfree_pg.models.emi_offer import *
 from cashfree_pg.models.emi_plans_array import *
 from cashfree_pg.models.es_order_recon_request import *
@@ -142,6 +153,11 @@ from cashfree_pg.models.eligibility_payment_methods_entity_entity_details import
 from cashfree_pg.models.entity_simulation_request import *
 from cashfree_pg.models.entity_simulation_response import *
 from cashfree_pg.models.error_details_in_payments_entity import *
+from cashfree_pg.models.evidence import *
+from cashfree_pg.models.evidence_submitted_to_contest_dispute import *
+from cashfree_pg.models.evidences_to_contest_dispute import *
+from cashfree_pg.models.extended_cart_details import *
+from cashfree_pg.models.extended_customer_details import *
 from cashfree_pg.models.fetch_recon_request import *
 from cashfree_pg.models.fetch_recon_request_filters import *
 from cashfree_pg.models.fetch_recon_request_pagination import *
@@ -170,6 +186,7 @@ from cashfree_pg.models.offer_card import *
 from cashfree_pg.models.offer_details import *
 from cashfree_pg.models.offer_emi import *
 from cashfree_pg.models.offer_entity import *
+from cashfree_pg.models.offer_extended_details import *
 from cashfree_pg.models.offer_filters import *
 from cashfree_pg.models.offer_meta import *
 from cashfree_pg.models.offer_nb import *
@@ -182,10 +199,14 @@ from cashfree_pg.models.offer_upi import *
 from cashfree_pg.models.offer_validations import *
 from cashfree_pg.models.offer_validations_payment_method import *
 from cashfree_pg.models.offer_wallet import *
+from cashfree_pg.models.onboard_soundbox_vpa_request import *
 from cashfree_pg.models.order_authenticate_entity import *
 from cashfree_pg.models.order_authenticate_payment_request import *
 from cashfree_pg.models.order_create_refund_request import *
+from cashfree_pg.models.order_delivery_status import *
+from cashfree_pg.models.order_details_in_disputes_entity import *
 from cashfree_pg.models.order_entity import *
+from cashfree_pg.models.order_extended_data_entity import *
 from cashfree_pg.models.order_meta import *
 from cashfree_pg.models.order_pay_data import *
 from cashfree_pg.models.pay_order_entity import *
@@ -224,6 +245,7 @@ from cashfree_pg.models.payment_webhook_error_entity import *
 from cashfree_pg.models.payment_webhook_gateway_details_entity import *
 from cashfree_pg.models.payment_webhook_order_entity import *
 from cashfree_pg.models.plan_entity import *
+from cashfree_pg.models.preferred_evidence import *
 from cashfree_pg.models.rate_limit_error import *
 from cashfree_pg.models.recon_entity import *
 from cashfree_pg.models.recon_entity_data_inner import *
@@ -239,11 +261,17 @@ from cashfree_pg.models.settlement_recon_entity import *
 from cashfree_pg.models.settlement_recon_entity_data_inner import *
 from cashfree_pg.models.settlement_webhook import *
 from cashfree_pg.models.settlement_webhook_data_entity import *
+from cashfree_pg.models.shipment_details import *
 from cashfree_pg.models.simulate_request import *
 from cashfree_pg.models.simulation_response import *
+from cashfree_pg.models.soundbox_vpa_entity import *
 from cashfree_pg.models.split_after_payment_request import *
 from cashfree_pg.models.split_after_payment_request_split_inner import *
 from cashfree_pg.models.split_after_payment_response import *
+from cashfree_pg.models.split_order_recon_success_response import *
+from cashfree_pg.models.split_order_recon_success_response_settlement import *
+from cashfree_pg.models.split_order_recon_success_response_vendors_inner import *
+from cashfree_pg.models.static_qr_response_entity import *
 from cashfree_pg.models.static_split_request import *
 from cashfree_pg.models.static_split_request_scheme_inner import *
 from cashfree_pg.models.static_split_response import *
@@ -269,6 +297,9 @@ from cashfree_pg.models.transfer_details import *
 from cashfree_pg.models.transfer_details_tags_inner import *
 from cashfree_pg.models.upi_authorize_details import *
 from cashfree_pg.models.upi_payment_method import *
+from cashfree_pg.models.update_order_extended_data_entity import *
+from cashfree_pg.models.update_order_extended_request import *
+from cashfree_pg.models.update_soundbox_vpa_request import *
 from cashfree_pg.models.update_terminal_entity import *
 from cashfree_pg.models.update_terminal_request import *
 from cashfree_pg.models.update_terminal_request_terminal_meta import *
@@ -281,6 +312,8 @@ from cashfree_pg.models.upload_pnach_image_response import *
 from cashfree_pg.models.upload_terminal_docs import *
 from cashfree_pg.models.upload_terminal_docs_entity import *
 from cashfree_pg.models.upload_vendor_documents_response import *
+from cashfree_pg.models.vendor_adjustment_request import *
+from cashfree_pg.models.vendor_adjustment_success_response import *
 from cashfree_pg.models.vendor_balance import *
 from cashfree_pg.models.vendor_balance_transfer_charges import *
 from cashfree_pg.models.vendor_document_download_response import *
@@ -432,7 +465,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -469,6 +502,772 @@ class Cashfree:
 
         return api_client.call_api(
             '/customers', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @validate_arguments
+    def PGAcceptDisputeById(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Accept Dispute by Dispute ID  # noqa: E501
+
+        Use this API to get accept the Dispute by specifying the Dispute ID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGAcceptDisputeById_with_http_info(x_api_version, dispute_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param dispute_id: (required)
+        :type dispute_id: int
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DisputesEntityMerchantAccepted, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'dispute_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGAcceptDisputeById" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['dispute_id']:
+            _path_params['dispute_id'] = _params['dispute_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DisputesEntityMerchantAccepted",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/disputes/{dispute_id}/accept', 'PUT',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGFetchDisputeById(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Disputes by Dispute ID  # noqa: E501
+
+        Use this API to get Dispute details by specifying the Dispute ID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGFetchDisputeById_with_http_info(x_api_version, dispute_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param dispute_id: (required)
+        :type dispute_id: int
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(DisputesEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'dispute_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGFetchDisputeById" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['dispute_id']:
+            _path_params['dispute_id'] = _params['dispute_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "DisputesEntity",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/disputes/{dispute_id}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGFetchOrderDisputes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : StrictStr = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Disputes by Order Id  # noqa: E501
+
+        Use this API to get all Dispute details by specifying the Order ID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGFetchOrderDisputes_with_http_info(x_api_version, order_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param order_id: (required)
+        :type order_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'order_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGFetchOrderDisputes" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['order_id']:
+            _path_params['order_id'] = _params['order_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[DisputesEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/orders/{order_id}/disputes', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGFetchPaymentDisputes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_payment_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Disputes by Payment ID  # noqa: E501
+
+        Use this API to get all Dispute details by specifying the Payment ID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGFetchPaymentDisputes_with_http_info(x_api_version, cf_payment_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param cf_payment_id: (required)
+        :type cf_payment_id: int
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'cf_payment_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGFetchPaymentDisputes" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['cf_payment_id']:
+            _path_params['cf_payment_id'] = _params['cf_payment_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[DisputesEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/payments/{cf_payment_id}/disputes', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGUploadDisputesDocuments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, file : Annotated[StrictStr, Field(..., description="File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB.")] = None, doc_type : Annotated[StrictStr, Field(..., description="Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms & Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, note : Optional[StrictStr] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Submit Evidence to contest the Dispute by Dispute ID  # noqa: E501
+
+        Use this API to Submit the Evidences to contest the Dispute by specifying the Dispute ID.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGUploadDisputesDocuments_with_http_info(x_api_version, dispute_id, file, doc_type, x_request_id, x_idempotency_key, note, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param dispute_id: (required)
+        :type dispute_id: int
+        :param file: File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB. (required)
+        :type file: str
+        :param doc_type: Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms & Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute. (required)
+        :type doc_type: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param note:
+        :type note: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'dispute_id',
+            'file',
+            'doc_type',
+            'x_request_id',
+            'x_idempotency_key',
+            'note'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGUploadDisputesDocuments" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['dispute_id']:
+            _path_params['dispute_id'] = _params['dispute_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        if _params['file']:
+            _form_params.append(('file', _params['file']))
+
+        if _params['doc_type']:
+            _form_params.append(('doc_type', _params['doc_type']))
+
+        if _params['note']:
+            _form_params.append(('note', _params['note']))
+
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['multipart/form-data']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[DisputesEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/disputes/{dispute_id}/documents', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -594,7 +1393,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -745,7 +1544,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -776,6 +1575,303 @@ class Cashfree:
 
         return api_client.call_api(
             '/easy-split/static-split', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGSplitOrderRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Split and Settlement Details by OrderID  # noqa: E501
+
+        Use this API to get all the split details, settled and unsettled transactions details of each vendor who were part of a particular order by providing order Id or start date and end date.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGSplitOrderRecon_with_http_info(x_api_version, order_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param order_id: The id which uniquely identifies your order (required)
+        :type order_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(SplitOrderReconSuccessResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'order_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGSplitOrderRecon" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['order_id']:
+            _path_params['order_id'] = _params['order_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "SplitOrderReconSuccessResponse",
+            '404': "BadRequestError",
+        }
+
+        return api_client.call_api(
+            '/easy-split/orders/{order_id}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGesCreateAdjustment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, vendor_adjustment_request : Annotated[Optional[VendorAdjustmentRequest], Field(description="Vendor Adjustment Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Create Adjustment  # noqa: E501
+
+        The Create Adjustment API will create a adjustment request either from vendor to the merchant or from merchant to the vendor.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGesCreateAdjustment_with_http_info(x_api_version, vendor_id, x_request_id, x_idempotency_key, vendor_adjustment_request, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param vendor_id: The id which uniquely identifies your vendor. (required)
+        :type vendor_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param vendor_adjustment_request: Vendor Adjustment Request Body.
+        :type vendor_adjustment_request: VendorAdjustmentRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(VendorAdjustmentSuccessResponse, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'vendor_id',
+            'x_request_id',
+            'x_idempotency_key',
+            'vendor_adjustment_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGesCreateAdjustment" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['vendor_id']:
+            _path_params['vendor_id'] = _params['vendor_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['vendor_adjustment_request'] is not None:
+            _body_params = _params['vendor_adjustment_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "VendorAdjustmentSuccessResponse",
+            '400': "BadRequestError",
+        }
+
+        return api_client.call_api(
+            '/easy-split/vendors/{vendor_id}/adjustment', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -900,7 +1996,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1049,7 +2145,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1207,7 +2303,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1348,7 +2444,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1490,7 +2586,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1638,7 +2734,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1780,7 +2876,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -1919,7 +3015,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2076,7 +3172,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2237,7 +3333,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2393,7 +3489,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2549,7 +3645,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2704,7 +3800,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -2860,7 +3956,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3017,7 +4113,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3175,7 +4271,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3321,7 +4417,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3479,7 +4575,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3506,6 +4602,154 @@ class Cashfree:
 
         return api_client.call_api(
             '/orders/{order_id}', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGFetchOrderExtendedData(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Order Extended  # noqa: E501
+
+        Use this API to fetch the order related data like address,cart,offers,customer details etc using the Cashfree's `order_id`. ## When to use this API - To get the extended data associated with order. - Once the order is PAID - Once your customer returns to `return_url`   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGFetchOrderExtendedData_with_http_info(x_api_version, order_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param order_id: The id which uniquely identifies your order (required)
+        :type order_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(OrderExtendedDataEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'order_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGFetchOrderExtendedData" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['order_id']:
+            _path_params['order_id'] = _params['order_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "OrderExtendedDataEntity",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/orders/{order_id}/extended', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -3630,7 +4874,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3667,6 +4911,167 @@ class Cashfree:
 
         return api_client.call_api(
             '/orders/{order_id}', 'PATCH',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def PGUpdateOrderExtendedData(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, update_order_extended_request : Annotated[UpdateOrderExtendedRequest, Field(..., description="Request Body to Update extended data related to order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Update Order Extended  # noqa: E501
+
+        Use this api to update the order related data like shipment details,order delivery status etc. ## When to use this API - To provide/update the shipment details or order delivery status. - Once the order is PAID.   # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.PGUpdateOrderExtendedData_with_http_info(x_api_version, order_id, update_order_extended_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param order_id: The id which uniquely identifies your order (required)
+        :type order_id: str
+        :param update_order_extended_request: Request Body to Update extended data related to order (required)
+        :type update_order_extended_request: UpdateOrderExtendedRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(UpdateOrderExtendedDataEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'order_id',
+            'update_order_extended_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method PGUpdateOrderExtendedData" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['order_id']:
+            _path_params['order_id'] = _params['order_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_order_extended_request'] is not None:
+            _body_params = _params['update_order_extended_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "UpdateOrderExtendedDataEntity",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/orders/{order_id}/extended', 'PUT',
             _path_params,
             _query_params,
             _header_params,
@@ -3792,7 +5197,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -3951,7 +5356,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4096,7 +5501,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4254,7 +5659,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4409,7 +5814,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4561,7 +5966,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4723,7 +6128,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -4888,7 +6293,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5037,7 +6442,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5183,7 +6588,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5346,7 +6751,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5511,7 +6916,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5660,7 +7065,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5812,7 +7217,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -5973,7 +7378,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6129,7 +7534,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6284,7 +7689,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6434,7 +7839,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6577,7 +7982,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6631,7 +8036,7 @@ class Cashfree:
     def SubsCreatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_subscription_payment_request : Annotated[CreateSubscriptionPaymentRequest, Field(..., description="Request body to create a subscription payment.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Raise a charge or create an auth.  # noqa: E501
 
-        Use this API to create an auth or to raise a charge .  # noqa: E501
+        Use this API to create an auth or to raise a charge.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -6731,7 +8136,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -6885,7 +8290,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7045,7 +8450,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7199,7 +8604,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7356,7 +8761,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7502,7 +8907,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7654,7 +9059,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7800,7 +9205,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -7953,7 +9358,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8102,7 +9507,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8268,7 +9673,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8319,9 +9724,9 @@ class Cashfree:
             _request_auth=_params.get('_request_auth'))
     @validate_arguments
     def SubscriptionDocumentUpload(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, payment_id : Annotated[StrictStr, Field(..., description="Provide the PaymentId using which the payment was created.")] = None, file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.")] = None, payment_id2 : Annotated[StrictStr, Field(..., description="Authorization Payment Id for physical nach authorization")] = None, action : Annotated[StrictStr, Field(..., description="Action to be performed on the file. Can be SUBMIT_DOCUMENT")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
-        """API to upload Physical Nach for Physical Nach Authorization.  # noqa: E501
+        """API to upload file for Physical Nach Authorization.  # noqa: E501
 
-        Use this API to upload Physical Nach for Physical Nach Authorization.  # noqa: E501
+        Use this API to upload file for Physical Nach Authorization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8433,7 +9838,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8593,7 +9998,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8757,7 +10162,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -8912,7 +10317,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9067,7 +10472,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9221,7 +10626,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9249,6 +10654,316 @@ class Cashfree:
 
         return api_client.call_api(
             '/customers/{customer_id}/instruments/{instrument_id}/cryptogram', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+
+    @validate_arguments
+    def TerminalCreateQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, create_partner_vpa_request : Optional[CreatePartnerVpaRequest] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Create Pre-Activated Vpas for partner  # noqa: E501
+
+        Use this API to create a pre-activated vpa for partner.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.TerminalCreateQrCodes_with_http_info(x_api_version, x_request_id, x_idempotency_key, create_partner_vpa_request, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param create_partner_vpa_request:
+        :type create_partner_vpa_request: CreatePartnerVpaRequest
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[StaticQrResponseEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'x_request_id',
+            'x_idempotency_key',
+            'create_partner_vpa_request'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method TerminalCreateQrCodes" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['create_partner_vpa_request'] is not None:
+            _body_params = _params['create_partner_vpa_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = []  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[StaticQrResponseEntity]",
+            '401': "AuthenticationError",
+            '400': "BadRequestError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/partners/merchant/qrcodes', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def TerminalGetQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, status : Annotated[StrictStr, Field(..., description="Status of pre-created Qr.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get pre-generated staticQRs.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Get Pre-Activated Vpas for partner  # noqa: E501
+
+        Use this API to get a pre-activated vpa for partner.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.TerminalGetQrCodes_with_http_info(x_api_version, status, cf_terminal_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param status: Status of pre-created Qr. (required)
+        :type status: str
+        :param cf_terminal_id: Cashfree terminal id for which you want to get pre-generated staticQRs. (required)
+        :type cf_terminal_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[StaticQrResponseEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'status',
+            'cf_terminal_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method TerminalGetQrCodes" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('status') is not None:  # noqa: E501
+            _query_params.append(('status', _params['status']))
+
+        if _params.get('cf_terminal_id') is not None:  # noqa: E501
+            _query_params.append(('cf_terminal_id', _params['cf_terminal_id']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = []  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[StaticQrResponseEntity]",
+            '401': "AuthenticationError",
+            '400': "BadRequestError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/partners/merchant/qrcodes', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -9368,7 +11083,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9523,7 +11238,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9560,6 +11275,161 @@ class Cashfree:
 
         return api_client.call_api(
             '/terminal/transactions', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposDemapSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, demap_soundbox_vpa_request : Annotated[DemapSoundboxVpaRequest, Field(..., description="Request body to demap soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Demap Soundbox Vpa  # noqa: E501
+
+        Use this API to demap a device from soundbox.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposDemapSoundboxVpa_with_http_info(x_api_version, demap_soundbox_vpa_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param demap_soundbox_vpa_request: Request body to demap soundbox vpa (required)
+        :type demap_soundbox_vpa_request: DemapSoundboxVpaRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[SoundboxVpaEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'demap_soundbox_vpa_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposDemapSoundboxVpa" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['demap_soundbox_vpa_request'] is not None:
+            _body_params = _params['demap_soundbox_vpa_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[SoundboxVpaEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/demap/soundbox', 'POST',
             _path_params,
             _query_params,
             _header_params,
@@ -9681,7 +11551,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9835,7 +11705,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -9862,6 +11732,160 @@ class Cashfree:
 
         return api_client.call_api(
             '/terminal/qrcodes', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposFetchTerminalSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, device_serial_no : Annotated[StrictStr, Field(..., description="Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Fetch Terminal Soundbox vpa  # noqa: E501
+
+        You can fetch all the active and mapped SoundboxVpa corresponding to given terminal id or deviceSerialNo. Provide either the device_serial_no or cf_terminal_id in the request.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposFetchTerminalSoundboxVpa_with_http_info(x_api_version, device_serial_no, cf_terminal_id, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param device_serial_no: Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request. (required)
+        :type device_serial_no: str
+        :param cf_terminal_id: Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request. (required)
+        :type cf_terminal_id: str
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(List[SoundboxVpaEntity], status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'device_serial_no',
+            'cf_terminal_id',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposFetchTerminalSoundboxVpa" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        if _params.get('device_serial_no') is not None:  # noqa: E501
+            _query_params.append(('device_serial_no', _params['device_serial_no']))
+
+        if _params.get('cf_terminal_id') is not None:  # noqa: E501
+            _query_params.append(('cf_terminal_id', _params['cf_terminal_id']))
+
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "List[SoundboxVpaEntity]",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/soundbox/qrcodes', 'GET',
             _path_params,
             _query_params,
             _header_params,
@@ -9989,7 +12013,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -10016,6 +12040,322 @@ class Cashfree:
 
         return api_client.call_api(
             '/terminal/{cf_terminal_id}/payments', 'GET',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposOnboardSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, onboard_soundbox_vpa_request : Annotated[OnboardSoundboxVpaRequest, Field(..., description="Request body to onboard soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Onboard Soundbox Vpa  # noqa: E501
+
+        Use this API to onboard a terminal Vpa to soundbox.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposOnboardSoundboxVpa_with_http_info(x_api_version, onboard_soundbox_vpa_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param onboard_soundbox_vpa_request: Request body to onboard soundbox vpa (required)
+        :type onboard_soundbox_vpa_request: OnboardSoundboxVpaRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(SoundboxVpaEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'onboard_soundbox_vpa_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposOnboardSoundboxVpa" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['onboard_soundbox_vpa_request'] is not None:
+            _body_params = _params['onboard_soundbox_vpa_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "SoundboxVpaEntity",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/soundbox', 'POST',
+            _path_params,
+            _query_params,
+            _header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            response_types_map=_response_types_map,
+            auth_settings=_auth_settings,
+            async_req=_params.get('async_req'),
+            _return_http_data_only=_params.get('_return_http_data_only'),  # noqa: E501
+            _preload_content=_params.get('_preload_content', True),
+            _request_timeout=_params.get('_request_timeout'),
+            collection_formats=_collection_formats,
+            _request_auth=_params.get('_request_auth'))
+    @validate_arguments
+    def SposUpdateSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_soundbox_vpa_request : Annotated[UpdateSoundboxVpaRequest, Field(..., description="Request body to update soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
+        """Update Soundbox Vpa  # noqa: E501
+
+        Use this API to update a terminal Vpa to soundbox.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+
+        >>> thread = api.SposUpdateSoundboxVpa_with_http_info(x_api_version, cf_terminal_id, update_soundbox_vpa_request, x_request_id, x_idempotency_key, async_req=True)
+        >>> result = thread.get()
+
+        :param x_api_version: API version to be used. Format is in YYYY-MM-DD (required)
+        :type x_api_version: str
+        :param cf_terminal_id: Provide the Cashfree terminal ID for which the details have to be updated. (required)
+        :type cf_terminal_id: str
+        :param update_soundbox_vpa_request: Request body to update soundbox vpa (required)
+        :type update_soundbox_vpa_request: UpdateSoundboxVpaRequest
+        :param x_request_id: Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
+        :type x_request_id: str
+        :param x_idempotency_key: An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  
+        :type x_idempotency_key: str
+        :param async_req: Whether to execute the request asynchronously.
+        :type async_req: bool, optional
+        :param _preload_content: if False, the ApiResponse.data will
+                                 be set to none and raw_data will store the 
+                                 HTTP response body without reading/decoding.
+                                 Default is True.
+        :type _preload_content: bool, optional
+        :param _return_http_data_only: response data instead of ApiResponse
+                                       object with status code, headers, etc
+        :type _return_http_data_only: bool, optional
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the authentication
+                              in the spec for a single request.
+        :type _request_auth: dict, optional
+        :type _content_type: string, optional: force content-type for the request
+        :return: Returns the result object.
+                 If the method is called asynchronously,
+                 returns the request thread.
+        :rtype: tuple(SoundboxVpaEntity, status_code(int), headers(HTTPHeaderDict))
+        """
+
+        api_client = ApiClient.get_default()
+        host = "https://api.cashfree.com/pg"
+        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.cashfree.com/pg"
+        configuration = Configuration(
+            host = host
+        )
+        configuration.api_key['XClientID'] = Cashfree.XClientId
+        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
+        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        api_client.configuration = configuration
+        _params = locals()
+
+        _all_params = [
+            'x_api_version',
+            'cf_terminal_id',
+            'update_soundbox_vpa_request',
+            'x_request_id',
+            'x_idempotency_key'
+        ]
+        _all_params.extend(
+            [
+                'async_req',
+                '_return_http_data_only',
+                '_preload_content',
+                '_request_timeout',
+                '_request_auth',
+                '_content_type',
+                '_headers'
+            ]
+        )
+
+        # validate the arguments
+        for _key, _val in _params['kwargs'].items():
+            if _key not in _all_params:
+                raise ApiTypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method SposUpdateSoundboxVpa" % _key
+                )
+            _params[_key] = _val
+        del _params['kwargs']
+
+        _collection_formats = {}
+
+        # process the path parameters
+        _path_params = {}
+        if _params['cf_terminal_id']:
+            _path_params['cf_terminal_id'] = _params['cf_terminal_id']
+
+
+        # process the query parameters
+        _query_params = []
+        # process the header parameters
+        _header_params = dict(_params.get('_headers', {}))
+        if x_request_id:
+            _header_params["x-request-id"] = x_request_id
+
+        if x_api_version:
+            _header_params["x-api-version"] = x_api_version
+
+        if x_idempotency_key:
+            _header_params["x-idempotency-key"] = x_idempotency_key
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
+
+        # process the form parameters
+        _form_params = []
+        _files = {}
+        # process the body parameter
+        _body_params = None
+        if _params['update_soundbox_vpa_request'] is not None:
+            _body_params = _params['update_soundbox_vpa_request']
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
+        # set the HTTP header `Content-Type`
+        _content_types_list = _params.get('_content_type',
+            api_client.select_header_content_type(
+                ['application/json']))
+        if _content_types_list:
+                _header_params['Content-Type'] = _content_types_list
+
+        # authentication setting
+        _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
+
+        _response_types_map = {
+            '200': "SoundboxVpaEntity",
+            '400': "BadRequestError",
+            '401': "AuthenticationError",
+            '404': "ApiError404",
+            '409': "ApiError409",
+            '422': "IdempotencyError",
+            '429': "RateLimitError",
+            '500': "ApiError",
+        }
+
+        return api_client.call_api(
+            '/terminal/{cf_terminal_id}/soundbox', 'PATCH',
             _path_params,
             _query_params,
             _header_params,
@@ -10140,7 +12480,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -10301,7 +12641,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -10462,7 +12802,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.3.0"
+        _header_params["x-sdk-platform"] = "pythonsdk-4.3.6"
 
         # process the form parameters
         _form_params = []
@@ -10561,7 +12901,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/4.3.0/python'
+        self.user_agent = 'OpenAPI-Generator/4.3.6/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

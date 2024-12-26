@@ -79,16 +79,6 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('PAYMENT_AUTO_REFUND', 'MERCHANT_INITIATED', 'UNRECONCILED_AUTO_REFUND')")
         return value
 
-    @validator('refund_mode')
-    def refund_mode_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in ('STANDARD', 'INSTANT'):
-            raise ValueError("must be one of enum values ('STANDARD', 'INSTANT')")
-        return value
-
     class Config:
         """Pydantic configuration"""
         allow_population_by_field_name = True

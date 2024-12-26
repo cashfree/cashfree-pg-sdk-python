@@ -43,6 +43,13 @@ class TestSoftPOSApi(unittest.TestCase):
         """
         pass
 
+    def test_spos_demap_soundbox_vpa(self):
+        """Test case for spos_demap_soundbox_vpa
+
+        Demap Soundbox Vpa  # noqa: E501
+        """
+        pass
+
     def test_spos_fetch_terminal(self):
         """Test case for spos_fetch_terminal
 
@@ -57,10 +64,31 @@ class TestSoftPOSApi(unittest.TestCase):
         """
         pass
 
+    def test_spos_fetch_terminal_soundbox_vpa(self):
+        """Test case for spos_fetch_terminal_soundbox_vpa
+
+        Fetch Terminal Soundbox vpa  # noqa: E501
+        """
+        pass
+
     def test_spos_fetch_terminal_transaction(self):
         """Test case for spos_fetch_terminal_transaction
 
         Get Terminal Transaction  # noqa: E501
+        """
+        pass
+
+    def test_spos_onboard_soundbox_vpa(self):
+        """Test case for spos_onboard_soundbox_vpa
+
+        Onboard Soundbox Vpa  # noqa: E501
+        """
+        pass
+
+    def test_spos_update_soundbox_vpa(self):
+        """Test case for spos_update_soundbox_vpa
+
+        Update Soundbox Vpa  # noqa: E501
         """
         pass
 

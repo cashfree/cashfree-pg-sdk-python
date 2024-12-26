@@ -42,6 +42,24 @@ class TestCreateOrderRequest(unittest.TestCase):
                 order_id = 'your-order-id', 
                 order_amount = 10.15, 
                 order_currency = 'INR', 
+                cart_details = cashfree_pg.models.cart_details.CartDetails(
+                    shipping_charge = 1.337, 
+                    cart_name = '', 
+                    cart_items = [
+                        cashfree_pg.models.cart_item.CartItem(
+                            item_id = '', 
+                            item_name = '', 
+                            item_description = '', 
+                            item_tags = [
+                                ''
+                                ], 
+                            item_details_url = '', 
+                            item_image_url = '', 
+                            item_original_unit_price = 1.337, 
+                            item_discounted_unit_price = 1.337, 
+                            item_currency = '', 
+                            item_quantity = 1.337, )
+                        ], ), 
                 customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_bank_account_number":"1518121112","customer_bank_ifsc":"XITI0000001","customer_bank_code":3333,"customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"}, 
                 terminal = {"added_on":"2023-08-04T13:12:58+05:30","cf_terminal_id":"31051123","last_updated_on":"2023-09-06T14:07:00+05:30","terminal_address":"Banglore","terminal_id":"terminal-123","terminal_name":"test","terminal_note":"POS vertical","terminal_phone_no":"6309291183","terminal_status":"ACTIVE","terminal_type":"SPOS"}, 
                 order_meta = cashfree_pg.models.order_meta.OrderMeta(

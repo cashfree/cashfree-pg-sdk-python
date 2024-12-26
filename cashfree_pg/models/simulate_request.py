@@ -27,16 +27,16 @@ class SimulateRequest(BaseModel):
     """
     simulate payment request object
     """
-    entity: StrictStr = Field(..., description="Entity type should be PAYMENTS only.")
-    entity_id: StrictStr = Field(..., description="In case of Entity type is PAYMENTS, entity_id will be transactionId")
+    entity: StrictStr = Field(..., description="Entity type should be PAYMENTS or SUBS_PAYMENTS only.")
+    entity_id: StrictStr = Field(..., description="If the entity type is PAYMENTS, the entity_id will be the transactionId. If the entity type is SUBS_PAYMENTS, the entity_id will be the merchantTxnId")
     entity_simulation: EntitySimulationRequest = Field(...)
     __properties = ["entity", "entity_id", "entity_simulation"]
 
     @validator('entity')
     def entity_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in ('PAYMENTS'):
-            raise ValueError("must be one of enum values ('PAYMENTS')")
+        if value not in ('PAYMENTS', 'SUBS_PAYMENTS'):
+            raise ValueError("must be one of enum values ('PAYMENTS', 'SUBS_PAYMENTS')")
         return value
 
     class Config:

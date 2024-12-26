@@ -109,7 +109,7 @@ class TestSubscriptionApi(unittest.TestCase):
     def test_subscription_document_upload(self):
         """Test case for subscription_document_upload
 
-        API to upload Physical Nach for Physical Nach Authorization.  # noqa: E501
+        API to upload file for Physical Nach Authorization.  # noqa: E501
         """
         pass
 

@@ -32,7 +32,7 @@ class SubscriptionCustomerDetails(BaseModel):
     customer_bank_account_holder_name: Optional[StrictStr] = Field(None, description="Bank holder name of the customer.")
     customer_bank_account_number: Optional[StrictStr] = Field(None, description="Bank account number of the customer.")
     customer_bank_ifsc: Optional[StrictStr] = Field(None, description="IFSC code of the customer.")
-    customer_bank_code: Optional[StrictStr] = Field(None, description="Bank code of the customer.")
+    customer_bank_code: Optional[StrictStr] = Field(None, description="Bank code of the customer. Refer to https://www.npci.org.in/PDF/nach/live-members-e-mandates/Live-Banks-in-API-E-Mandate.pdf")
     customer_bank_account_type: Optional[StrictStr] = Field(None, description="Bank account type of the customer.")
     __properties = ["customer_name", "customer_email", "customer_phone", "customer_bank_account_holder_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_bank_account_type"]
 

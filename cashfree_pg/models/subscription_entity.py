@@ -40,10 +40,11 @@ class SubscriptionEntity(BaseModel):
     subscription_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the subscription.")
     subscription_meta: Optional[SubscriptionEntitySubscriptionMeta] = None
     subscription_note: Optional[StrictStr] = Field(None, description="Note for the subscription.")
+    subscription_session_id: Optional[StrictStr] = Field(None, description="Subscription Session Id.")
     subscription_payment_splits: Optional[conlist(SubscriptionPaymentSplitItem)] = Field(None, description="Payment splits for the subscription.")
     subscription_status: Optional[StrictStr] = Field(None, description="Status of the subscription.")
     subscription_tags: Optional[Dict[str, Any]] = Field(None, description="Tags for the subscription.")
-    __properties = ["authorisation_details", "cf_subscription_id", "customer_details", "plan_details", "subscription_expiry_time", "subscription_first_charge_time", "subscription_id", "subscription_meta", "subscription_note", "subscription_payment_splits", "subscription_status", "subscription_tags"]
+    __properties = ["authorisation_details", "cf_subscription_id", "customer_details", "plan_details", "subscription_expiry_time", "subscription_first_charge_time", "subscription_id", "subscription_meta", "subscription_note", "subscription_session_id", "subscription_payment_splits", "subscription_status", "subscription_tags"]
 
     class Config:
         """Pydantic configuration"""
@@ -67,7 +68,7 @@ class SubscriptionEntity(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SubscriptionEntity:
         """Create an instance of SubscriptionEntity from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "authorisation_details, cf_subscription_id, customer_details, plan_details, subscription_expiry_time, subscription_first_charge_time, subscription_id, subscription_meta, subscription_note, subscription_payment_splits, subscription_status, subscription_tags" in temp_dict.keys():
+        if "authorisation_details, cf_subscription_id, customer_details, plan_details, subscription_expiry_time, subscription_first_charge_time, subscription_id, subscription_meta, subscription_note, subscription_session_id, subscription_payment_splits, subscription_status, subscription_tags" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -117,6 +118,7 @@ class SubscriptionEntity(BaseModel):
             "subscription_id": obj.get("subscription_id"),
             "subscription_meta": SubscriptionEntitySubscriptionMeta.from_dict(obj.get("subscription_meta")) if obj.get("subscription_meta") is not None else None,
             "subscription_note": obj.get("subscription_note"),
+            "subscription_session_id": obj.get("subscription_session_id"),
             "subscription_payment_splits": [SubscriptionPaymentSplitItem.from_dict(_item) for _item in obj.get("subscription_payment_splits")] if obj.get("subscription_payment_splits") is not None else None,
             "subscription_status": obj.get("subscription_status"),
             "subscription_tags": obj.get("subscription_tags")

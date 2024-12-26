@@ -57,7 +57,9 @@ class TestOrderEntity(unittest.TestCase):
                     return_url = 'https://www.cashfree.com/devstudio/thankyou', 
                     notify_url = 'https://example.com/cf_notify', 
                     payment_methods = cc,dc,upi, ), 
-                order_tags = {"product":"Laptop","shipping_address":"123 Main St"}
+                order_tags = {"product":"Laptop","shipping_address":"123 Main St"}, 
+                cart_details = cashfree_pg.models.cart_details_entity.CartDetailsEntity(
+                    cart_id = '', )
             )
         else :
             return OrderEntity(
