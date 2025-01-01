@@ -94,7 +94,7 @@ cashfree_pg/models/customer_details_response.py
 cashfree_pg/models/customer_entity.py
 cashfree_pg/models/demap_soundbox_vpa_request.py
 cashfree_pg/models/discount_details.py
-cashfree_pg/models/dispute_evidence.py
+cashfree_pg/models/dispute_evidence_inner.py
 cashfree_pg/models/disputes_entity.py
 cashfree_pg/models/disputes_entity_merchant_accepted.py
 cashfree_pg/models/eligibility_cardless_emi_entity.py
@@ -213,7 +213,7 @@ cashfree_pg/models/payment_webhook_error_entity.py
 cashfree_pg/models/payment_webhook_gateway_details_entity.py
 cashfree_pg/models/payment_webhook_order_entity.py
 cashfree_pg/models/plan_entity.py
-cashfree_pg/models/preferred_evidence.py
+cashfree_pg/models/preferred_evidence_inner.py
 cashfree_pg/models/rate_limit_error.py
 cashfree_pg/models/recon_entity.py
 cashfree_pg/models/recon_entity_data_inner.py
@@ -360,7 +360,7 @@ docs/CustomersApi.md
 docs/DefaultApi.md
 docs/DemapSoundboxVpaRequest.md
 docs/DiscountDetails.md
-docs/DisputeEvidence.md
+docs/DisputeEvidenceInner.md
 docs/DisputesApi.md
 docs/DisputesEntity.md
 docs/DisputesEntityMerchantAccepted.md
@@ -487,7 +487,7 @@ docs/PaymentWebhookGatewayDetailsEntity.md
 docs/PaymentWebhookOrderEntity.md
 docs/PaymentsApi.md
 docs/PlanEntity.md
-docs/PreferredEvidence.md
+docs/PreferredEvidenceInner.md
 docs/RateLimitError.md
 docs/ReconEntity.md
 docs/ReconEntityDataInner.md
@@ -646,7 +646,7 @@ test/test_customers_api.py
 test/test_default_api.py
 test/test_demap_soundbox_vpa_request.py
 test/test_discount_details.py
-test/test_dispute_evidence.py
+test/test_dispute_evidence_inner.py
 test/test_disputes_api.py
 test/test_disputes_entity.py
 test/test_disputes_entity_merchant_accepted.py
@@ -773,7 +773,7 @@ test/test_payment_webhook_order_entity.py
 test/test_payments_api.py
 test/test_pg_reconciliation_api.py
 test/test_plan_entity.py
-test/test_preferred_evidence.py
+test/test_preferred_evidence_inner.py
 test/test_rate_limit_error.py
 test/test_recon_entity.py
 test/test_recon_entity_data_inner.py
