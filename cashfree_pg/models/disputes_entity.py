@@ -22,9 +22,9 @@ import json
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, validator
 from cashfree_pg.models.customer_details_in_disputes_entity import CustomerDetailsInDisputesEntity
-from cashfree_pg.models.dispute_evidence_inner import DisputeEvidenceInner
+from cashfree_pg.models.evidence import Evidence
+from cashfree_pg.models.evidences_to_contest_dispute import EvidencesToContestDispute
 from cashfree_pg.models.order_details_in_disputes_entity import OrderDetailsInDisputesEntity
-from cashfree_pg.models.preferred_evidence_inner import PreferredEvidenceInner
 
 class DisputesEntity(BaseModel):
     """
@@ -41,8 +41,8 @@ class DisputesEntity(BaseModel):
     resolved_at: Optional[StrictStr] = Field(None, description="This is the time when the dispute case was closed.")
     dispute_status: Optional[StrictStr] = None
     cf_dispute_remarks: Optional[StrictStr] = None
-    preferred_evidence: Optional[conlist(PreferredEvidenceInner)] = None
-    dispute_evidence: Optional[conlist(DisputeEvidenceInner)] = None
+    preferred_evidence: Optional[conlist(EvidencesToContestDispute)] = None
+    dispute_evidence: Optional[conlist(Evidence)] = None
     order_details: Optional[OrderDetailsInDisputesEntity] = None
     customer_details: Optional[CustomerDetailsInDisputesEntity] = None
     __properties = ["dispute_id", "dispute_type", "reason_code", "reason_description", "dispute_amount", "created_at", "respond_by", "updated_at", "resolved_at", "dispute_status", "cf_dispute_remarks", "preferred_evidence", "dispute_evidence", "order_details", "customer_details"]
@@ -142,8 +142,8 @@ class DisputesEntity(BaseModel):
             "resolved_at": obj.get("resolved_at"),
             "dispute_status": obj.get("dispute_status"),
             "cf_dispute_remarks": obj.get("cf_dispute_remarks"),
-            "preferred_evidence": [PreferredEvidenceInner.from_dict(_item) for _item in obj.get("preferred_evidence")] if obj.get("preferred_evidence") is not None else None,
-            "dispute_evidence": [DisputeEvidenceInner.from_dict(_item) for _item in obj.get("dispute_evidence")] if obj.get("dispute_evidence") is not None else None,
+            "preferred_evidence": [EvidencesToContestDispute.from_dict(_item) for _item in obj.get("preferred_evidence")] if obj.get("preferred_evidence") is not None else None,
+            "dispute_evidence": [Evidence.from_dict(_item) for _item in obj.get("dispute_evidence")] if obj.get("dispute_evidence") is not None else None,
             "order_details": OrderDetailsInDisputesEntity.from_dict(obj.get("order_details")) if obj.get("order_details") is not None else None,
             "customer_details": CustomerDetailsInDisputesEntity.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None
         })
