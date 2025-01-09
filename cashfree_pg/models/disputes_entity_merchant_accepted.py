@@ -41,8 +41,8 @@ class DisputesEntityMerchantAccepted(BaseModel):
     resolved_at: Optional[StrictStr] = Field(None, description="This is the time when the dispute case was closed.")
     dispute_status: Optional[StrictStr] = None
     cf_dispute_remarks: Optional[StrictStr] = None
-    preferred_evidence: Optional[conlist(conlist(EvidencesToContestDispute))] = None
-    dispute_evidence: Optional[conlist(conlist(Evidence))] = None
+    preferred_evidence: Optional[conlist(EvidencesToContestDispute)] = None
+    dispute_evidence: Optional[conlist(Evidence)] = None
     order_details: Optional[OrderDetailsInDisputesEntity] = None
     customer_details: Optional[CustomerDetailsInDisputesEntity] = None
     __properties = ["dispute_id", "dispute_type", "reason_code", "reason_description", "dispute_amount", "created_at", "respond_by", "updated_at", "resolved_at", "dispute_status", "cf_dispute_remarks", "preferred_evidence", "dispute_evidence", "order_details", "customer_details"]
@@ -99,23 +99,19 @@ class DisputesEntityMerchantAccepted(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in preferred_evidence (list of list)
+        # override the default output from pydantic by calling `to_dict()` of each item in preferred_evidence (list)
         _items = []
         if self.preferred_evidence:
             for _item in self.preferred_evidence:
                 if _item:
-                    _items.append(
-                         [_inner_item.to_dict() for _inner_item in _item if _inner_item is not None]
-                    )
+                    _items.append(_item.to_dict())
             _dict['preferred_evidence'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in dispute_evidence (list of list)
+        # override the default output from pydantic by calling `to_dict()` of each item in dispute_evidence (list)
         _items = []
         if self.dispute_evidence:
             for _item in self.dispute_evidence:
                 if _item:
-                    _items.append(
-                         [_inner_item.to_dict() for _inner_item in _item if _inner_item is not None]
-                    )
+                    _items.append(_item.to_dict())
             _dict['dispute_evidence'] = _items
         # override the default output from pydantic by calling `to_dict()` of order_details
         if self.order_details:
@@ -146,14 +142,8 @@ class DisputesEntityMerchantAccepted(BaseModel):
             "resolved_at": obj.get("resolved_at"),
             "dispute_status": obj.get("dispute_status"),
             "cf_dispute_remarks": obj.get("cf_dispute_remarks"),
-            "preferred_evidence": [
-                    [EvidencesToContestDispute.from_dict(_inner_item) for _inner_item in _item]
-                    for _item in obj.get("preferred_evidence")
-                ] if obj.get("preferred_evidence") is not None else None,
-            "dispute_evidence": [
-                    [Evidence.from_dict(_inner_item) for _inner_item in _item]
-                    for _item in obj.get("dispute_evidence")
-                ] if obj.get("dispute_evidence") is not None else None,
+            "preferred_evidence": [EvidencesToContestDispute.from_dict(_item) for _item in obj.get("preferred_evidence")] if obj.get("preferred_evidence") is not None else None,
+            "dispute_evidence": [Evidence.from_dict(_item) for _item in obj.get("dispute_evidence")] if obj.get("dispute_evidence") is not None else None,
             "order_details": OrderDetailsInDisputesEntity.from_dict(obj.get("order_details")) if obj.get("order_details") is not None else None,
             "customer_details": CustomerDetailsInDisputesEntity.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None
         })
