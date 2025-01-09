@@ -50,8 +50,12 @@ class TestDisputesEntityMerchantAccepted(unittest.TestCase):
                 resolved_at = '', 
                 dispute_status = 'DISPUTE_CREATED', 
                 cf_dispute_remarks = '', 
-                preferred_evidence = {"prefferred_evidence":[{"document_type":"Delivery/Service Proof","document_description":"Proof that the cardholder/customer received the goods or services."},{"document_type":"Statement of Service","document_description":"Account Statement of wallet where funds were loaded by customer."}]}, 
-                dispute_evidence = [{"document_id":18150,"document_name":"disputeSampleFile.pdf","document_type":"DeliveryProof"}], 
+                preferred_evidence = [
+                    {"prefferred_evidence":[{"document_type":"Delivery/Service Proof","document_description":"Proof that the cardholder/customer received the goods or services."},{"document_type":"Statement of Service","document_description":"Account Statement of wallet where funds were loaded by customer."}]}
+                    ], 
+                dispute_evidence = [
+                    [{"document_id":18150,"document_name":"disputeSampleFile.pdf","document_type":"DeliveryProof"}]
+                    ], 
                 order_details = {"order_id":"Load_test_0103_FGA4HF12AC","order_currency":"INR","order_amount":10.0,"cf_payment_id":1489901523,"payment_currency":"INR","payment_amount":10.0}, 
                 customer_details = {"customer_name":"Manideep Ellur","customer_phone":8281554863,"customer_email":"manideep.ellur@cashfree.com"}
             )
