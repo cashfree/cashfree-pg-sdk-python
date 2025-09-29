@@ -184,7 +184,6 @@ cashfree_pg/models/paylater_entity.py
 cashfree_pg/models/paylater_offer.py
 cashfree_pg/models/paylater_payment_method.py
 cashfree_pg/models/payment_entity.py
-cashfree_pg/models/payment_entity_payment_method.py
 cashfree_pg/models/payment_link_customer_details.py
 cashfree_pg/models/payment_link_order_entity.py
 cashfree_pg/models/payment_method_app_in_payments_entity.py
@@ -199,6 +198,7 @@ cashfree_pg/models/payment_method_card_in_payments_entity_card.py
 cashfree_pg/models/payment_method_cardless_emiin_payments_entity.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity_netbanking.py
+cashfree_pg/models/payment_method_others_in_payments_entity.py
 cashfree_pg/models/payment_method_paylater_in_payments_entity.py
 cashfree_pg/models/payment_method_upiin_payments_entity.py
 cashfree_pg/models/payment_method_upiin_payments_entity_upi.py
@@ -257,6 +257,7 @@ cashfree_pg/models/subscription_payment_split_item.py
 cashfree_pg/models/terminal_details.py
 cashfree_pg/models/terminal_entity.py
 cashfree_pg/models/terminal_payment_entity.py
+cashfree_pg/models/terminal_payment_entity_payment_method.py
 cashfree_pg/models/terminal_transaction_entity.py
 cashfree_pg/models/terminate_order_request.py
 cashfree_pg/models/transfer_details.py
@@ -454,7 +455,6 @@ docs/PaylaterEntity.md
 docs/PaylaterOffer.md
 docs/PaylaterPaymentMethod.md
 docs/PaymentEntity.md
-docs/PaymentEntityPaymentMethod.md
 docs/PaymentLinkCustomerDetails.md
 docs/PaymentLinkOrderEntity.md
 docs/PaymentLinksApi.md
@@ -470,6 +470,7 @@ docs/PaymentMethodCardInPaymentsEntityCard.md
 docs/PaymentMethodCardlessEMIInPaymentsEntity.md
 docs/PaymentMethodNetBankingInPaymentsEntity.md
 docs/PaymentMethodNetBankingInPaymentsEntityNetbanking.md
+docs/PaymentMethodOthersInPaymentsEntity.md
 docs/PaymentMethodPaylaterInPaymentsEntity.md
 docs/PaymentMethodUPIInPaymentsEntity.md
 docs/PaymentMethodUPIInPaymentsEntityUpi.md
@@ -535,6 +536,7 @@ docs/SubscriptionPaymentSplitItem.md
 docs/TerminalDetails.md
 docs/TerminalEntity.md
 docs/TerminalPaymentEntity.md
+docs/TerminalPaymentEntityPaymentMethod.md
 docs/TerminalTransactionEntity.md
 docs/TerminateOrderRequest.md
 docs/TokenVaultApi.md
@@ -737,7 +739,6 @@ test/test_paylater_entity.py
 test/test_paylater_offer.py
 test/test_paylater_payment_method.py
 test/test_payment_entity.py
-test/test_payment_entity_payment_method.py
 test/test_payment_link_customer_details.py
 test/test_payment_link_order_entity.py
 test/test_payment_links_api.py
@@ -753,6 +754,7 @@ test/test_payment_method_card_in_payments_entity_card.py
 test/test_payment_method_cardless_emiin_payments_entity.py
 test/test_payment_method_net_banking_in_payments_entity.py
 test/test_payment_method_net_banking_in_payments_entity_netbanking.py
+test/test_payment_method_others_in_payments_entity.py
 test/test_payment_method_paylater_in_payments_entity.py
 test/test_payment_method_upiin_payments_entity.py
 test/test_payment_method_upiin_payments_entity_upi.py
@@ -819,6 +821,7 @@ test/test_subscription_payment_split_item.py
 test/test_terminal_details.py
 test/test_terminal_entity.py
 test/test_terminal_payment_entity.py
+test/test_terminal_payment_entity_payment_method.py
 test/test_terminal_transaction_entity.py
 test/test_terminate_order_request.py
 test/test_token_vault_api.py

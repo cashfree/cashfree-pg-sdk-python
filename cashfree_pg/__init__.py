@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "4.3.10"
+__version__ = "4.5.1"
 
 # import apis into sdk package
 # import ApiClient
@@ -186,7 +186,6 @@ from cashfree_pg.models.paylater_entity import PaylaterEntity
 from cashfree_pg.models.paylater_offer import PaylaterOffer
 from cashfree_pg.models.paylater_payment_method import PaylaterPaymentMethod
 from cashfree_pg.models.payment_entity import PaymentEntity
-from cashfree_pg.models.payment_entity_payment_method import PaymentEntityPaymentMethod
 from cashfree_pg.models.payment_link_customer_details import PaymentLinkCustomerDetails
 from cashfree_pg.models.payment_link_order_entity import PaymentLinkOrderEntity
 from cashfree_pg.models.payment_method_app_in_payments_entity import PaymentMethodAppInPaymentsEntity
@@ -201,6 +200,7 @@ from cashfree_pg.models.payment_method_card_in_payments_entity_card import Payme
 from cashfree_pg.models.payment_method_cardless_emiin_payments_entity import PaymentMethodCardlessEMIInPaymentsEntity
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity import PaymentMethodNetBankingInPaymentsEntity
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking import PaymentMethodNetBankingInPaymentsEntityNetbanking
+from cashfree_pg.models.payment_method_others_in_payments_entity import PaymentMethodOthersInPaymentsEntity
 from cashfree_pg.models.payment_method_paylater_in_payments_entity import PaymentMethodPaylaterInPaymentsEntity
 from cashfree_pg.models.payment_method_upiin_payments_entity import PaymentMethodUPIInPaymentsEntity
 from cashfree_pg.models.payment_method_upiin_payments_entity_upi import PaymentMethodUPIInPaymentsEntityUpi
@@ -259,6 +259,7 @@ from cashfree_pg.models.subscription_payment_split_item import SubscriptionPayme
 from cashfree_pg.models.terminal_details import TerminalDetails
 from cashfree_pg.models.terminal_entity import TerminalEntity
 from cashfree_pg.models.terminal_payment_entity import TerminalPaymentEntity
+from cashfree_pg.models.terminal_payment_entity_payment_method import TerminalPaymentEntityPaymentMethod
 from cashfree_pg.models.terminal_transaction_entity import TerminalTransactionEntity
 from cashfree_pg.models.terminate_order_request import TerminateOrderRequest
 from cashfree_pg.models.transfer_details import TransferDetails

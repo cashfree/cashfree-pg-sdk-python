@@ -24,7 +24,7 @@ from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, Stric
 from cashfree_pg.models.authorization_in_payments_entity import AuthorizationInPaymentsEntity
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.error_details_in_payments_entity import ErrorDetailsInPaymentsEntity
-from cashfree_pg.models.payment_entity_payment_method import PaymentEntityPaymentMethod
+from cashfree_pg.models.terminal_payment_entity_payment_method import TerminalPaymentEntityPaymentMethod
 
 class TerminalPaymentEntity(BaseModel):
     """
@@ -47,7 +47,7 @@ class TerminalPaymentEntity(BaseModel):
     auth_id: Optional[StrictStr] = None
     authorization: Optional[AuthorizationInPaymentsEntity] = None
     customer_details: Optional[CustomerDetails] = None
-    payment_method: Optional[PaymentEntityPaymentMethod] = None
+    payment_method: Optional[TerminalPaymentEntityPaymentMethod] = None
     __properties = ["cf_payment_id", "order_id", "entity", "error_details", "is_captured", "order_amount", "payment_group", "payment_currency", "payment_amount", "payment_time", "payment_completion_time", "payment_status", "payment_message", "bank_reference", "auth_id", "authorization", "customer_details", "payment_method"]
 
     @validator('payment_status')
@@ -133,7 +133,7 @@ class TerminalPaymentEntity(BaseModel):
             "auth_id": obj.get("auth_id"),
             "authorization": AuthorizationInPaymentsEntity.from_dict(obj.get("authorization")) if obj.get("authorization") is not None else None,
             "customer_details": CustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
-            "payment_method": PaymentEntityPaymentMethod.from_dict(obj.get("payment_method")) if obj.get("payment_method") is not None else None
+            "payment_method": TerminalPaymentEntityPaymentMethod.from_dict(obj.get("payment_method")) if obj.get("payment_method") is not None else None
         })
         return _obj
 

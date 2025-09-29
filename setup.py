@@ -22,7 +22,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "cashfree_pg"
-VERSION = "4.3.10"
+VERSION = "4.5.1"
 with open("README.md", "r", encoding="utf-8") as fh:
     readme = fh.read()
 PYTHON_REQUIRES = ">=3.7"
@@ -30,7 +30,7 @@ REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
     "python-dateutil",
     "sentry-sdk >= 1.32.0, < 1.33.0",
-    "pydantic >= 1.10.5, < 2",
+    "pydantic >= 1.10.24, < 2",
     "aenum"
 ]
 
