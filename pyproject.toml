@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cashfree_pg"
-version = "4.3.10"
+version = "4.5.1"
 description = "Cashfree Payment Gateway APIs"
 authors = ["API Support <developers@cashfree.com>"]
 license = "Apache 2.0"

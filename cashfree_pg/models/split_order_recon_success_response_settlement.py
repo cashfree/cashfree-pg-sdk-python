@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
+
 from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
 
@@ -38,8 +38,8 @@ class SplitOrderReconSuccessResponseSettlement(BaseModel):
     settlement_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount to be settled after charges and tax.")
     settlement_currency: Optional[StrictStr] = Field(None, description="Currency of the settlement. Example: \"INR\".")
     transfer_utr: Optional[StrictStr] = Field(None, description="UTR (Unique Transaction Reference) for the transfer if available, otherwise null.")
-    transfer_time: Optional[datetime] = Field(None, description="Time of transfer if available, otherwise null.")
-    payment_time: Optional[datetime] = Field(None, description="Timestamp when payment was made.")
+    transfer_time: Optional[StrictStr] = Field(None, description="Time of transfer if available, otherwise null.")
+    payment_time: Optional[StrictStr] = Field(None, description="Timestamp when payment was made.")
     __properties = ["entity", "cf_settlement_id", "cf_payment_id", "order_id", "order_currency", "transfer_id", "order_amount", "service_charge", "service_tax", "settlement_amount", "settlement_currency", "transfer_utr", "transfer_time", "payment_time"]
 
     class Config:

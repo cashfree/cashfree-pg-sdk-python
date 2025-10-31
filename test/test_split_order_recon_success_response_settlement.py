@@ -51,8 +51,8 @@ class TestSplitOrderReconSuccessResponseSettlement(unittest.TestCase):
                 settlement_amount = 1.337, 
                 settlement_currency = '', 
                 transfer_utr = '', 
-                transfer_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                payment_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+                transfer_time = '', 
+                payment_time = ''
             )
         else :
             return SplitOrderReconSuccessResponseSettlement(
