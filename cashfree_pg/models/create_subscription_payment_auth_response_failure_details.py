@@ -1,3 +1,0 @@
-from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
-
-CreateSubscriptionPaymentAuthResponseFailureDetails = SubscriptionPaymentEntityFailureDetails

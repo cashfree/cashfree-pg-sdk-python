@@ -17,23 +17,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from cashfree_pg.models.recon_request_filters import ReconRequestFilters
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class ReconRequest(BaseModel):
     """
-    CustomerDetails
+    ReconRequest
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    filters: Optional[ReconRequestFilters] = None
+    __properties: ClassVar[List[str]] = ["filters"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +48,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of ReconRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,11 +69,14 @@ class CustomerDetails(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of filters
+        if self.filters:
+            _dict['filters'] = self.filters.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of ReconRequest from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +84,7 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "filters": ReconRequestFilters.from_dict(obj["filters"]) if obj.get("filters") is not None else None
         })
         return _obj
 

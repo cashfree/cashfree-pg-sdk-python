@@ -17,23 +17,22 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class PaymentLink(BaseModel):
     """
-    CustomerDetails
+    Payment link representation (simplified).
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    link_id: Optional[StrictStr] = None
+    link_url: Optional[StrictStr] = None
+    link_status: Optional[StrictStr] = None
+    link_amount: Optional[Union[StrictFloat, StrictInt]] = None
+    link_currency: Optional[StrictStr] = None
+    customer_details: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["link_id", "link_url", "link_status", "link_amount", "link_currency", "customer_details"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +52,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of PaymentLink from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,7 +77,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of PaymentLink from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +85,12 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "link_id": obj.get("link_id"),
+            "link_url": obj.get("link_url"),
+            "link_status": obj.get("link_status"),
+            "link_amount": obj.get("link_amount"),
+            "link_currency": obj.get("link_currency"),
+            "customer_details": obj.get("customer_details")
         })
         return _obj
 

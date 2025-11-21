@@ -17,23 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from cashfree_pg.models.payment_session_response_data import PaymentSessionResponseData
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class PaymentSessionResponse(BaseModel):
     """
-    CustomerDetails
+    Payment session response (simplified).
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    payment_method: Optional[StrictStr] = None
+    channel: Optional[StrictStr] = None
+    action: Optional[StrictStr] = None
+    cf_payment_id: Optional[StrictStr] = None
+    payment_amount: Optional[Union[StrictFloat, StrictInt]] = None
+    data: Optional[PaymentSessionResponseData] = None
+    __properties: ClassVar[List[str]] = ["payment_method", "channel", "action", "cf_payment_id", "payment_amount", "data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +53,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of PaymentSessionResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,11 +74,14 @@ class CustomerDetails(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of PaymentSessionResponse from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +89,12 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "payment_method": obj.get("payment_method"),
+            "channel": obj.get("channel"),
+            "action": obj.get("action"),
+            "cf_payment_id": obj.get("cf_payment_id"),
+            "payment_amount": obj.get("payment_amount"),
+            "data": PaymentSessionResponseData.from_dict(obj["data"]) if obj.get("data") is not None else None
         })
         return _obj
 

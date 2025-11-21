@@ -1,3 +1,0 @@
-from cashfree_pg.models.terminal_details import TerminalDetails
-
-CreateOrderRequestTerminal = TerminalDetails
