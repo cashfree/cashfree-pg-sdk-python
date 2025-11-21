@@ -1,0 +1,72 @@
+from __future__ import annotations
+import pprint
+import json
+
+
+from typing import Optional
+from pydantic import BaseModel, Field, StrictStr, field_validator, ConfigDict
+
+class ApiError502(BaseModel):
+    """
+    Error when there is error at partner bank
+    """
+    message: Optional[StrictStr] = None
+    code: Optional[StrictStr] = Field(None, description="`bank_processing_failure` will be returned here to denote failure at bank. ")
+    type: Optional[StrictStr] = Field(None, description="api_error")
+    __properties = ["message", "code", "type"]
+
+    @field_validator('type')
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in ('api_error'):
+            raise ValueError("must be one of enum values ('api_error')")
+        return value
+
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
+    def to_str(self) -> str:
+        """Returns the string representation of the model using alias"""
+        return pprint.pformat(self.model_dump(by_alias=True))
+
+    def to_json(self) -> str:
+        """Returns the JSON representation of the model using alias"""
+        return json.dumps(self.to_dict())
+
+    @classmethod
+    def from_json(cls, json_str: str) -> ApiError502:
+        """Create an instance of ApiError502 from a JSON string"""
+        return cls.from_dict(json.loads(json_str))
+    
+    @classmethod
+    def from_json_for_one_of(cls, json_str: str) -> ApiError502:
+        """Create an instance of ApiError502 from a JSON string"""
+        temp_dict = json.loads(json_str)
+        if "message, code, type" in temp_dict.keys():
+            return cls.from_dict(json.loads(json_str))
+        return None
+
+    def to_dict(self):
+        """Returns the dictionary representation of the model using alias"""
+        _dict = self.model_dump(by_alias=True,
+                          exclude={
+                          },
+                          exclude_none=True)
+        return _dict
+
+    @classmethod
+    def from_dict(cls, obj: dict) -> ApiError502:
+        """Create an instance of ApiError502 from a dict"""
+        if obj is None:
+            return None
+
+        if not isinstance(obj, dict):
+            return ApiError502.model_validate(obj)
+
+        _obj = ApiError502.model_validate({
+            "message": obj.get("message"),
+            "code": obj.get("code"),
+            "type": obj.get("type")
+        })
+        return _obj
