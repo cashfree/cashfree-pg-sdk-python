@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class FetchReconRequestFilters(BaseModel):
     """
@@ -30,14 +30,10 @@ class FetchReconRequestFilters(BaseModel):
     end_date: StrictStr = Field(..., description="Specify the end date till when you want the settlement reconciliation details.")
     __properties = ["start_date", "end_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class FetchReconRequestFilters(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class FetchReconRequestFilters(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return FetchReconRequestFilters.parse_obj(obj)
+            return FetchReconRequestFilters.model_validate(obj)
 
-        _obj = FetchReconRequestFilters.parse_obj({
+        _obj = FetchReconRequestFilters.model_validate({
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date")
         })

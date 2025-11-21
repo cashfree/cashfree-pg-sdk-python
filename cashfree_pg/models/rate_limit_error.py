@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import BaseModel, Field, StrictStr, field_validator, ConfigDict
 
 class RateLimitError(BaseModel):
     """
@@ -31,7 +31,7 @@ class RateLimitError(BaseModel):
     type: Optional[StrictStr] = Field(None, description="rate_limit_error")
     __properties = ["message", "code", "type"]
 
-    @validator('type')
+    @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -41,14 +41,10 @@ class RateLimitError(BaseModel):
             raise ValueError("must be one of enum values ('rate_limit_error')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -69,7 +65,7 @@ class RateLimitError(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -82,9 +78,9 @@ class RateLimitError(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return RateLimitError.parse_obj(obj)
+            return RateLimitError.model_validate(obj)
 
-        _obj = RateLimitError.parse_obj({
+        _obj = RateLimitError.model_validate({
             "message": obj.get("message"),
             "code": obj.get("code"),
             "type": obj.get("type")

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, confloat, conint
+from pydantic import BaseModel, Field, confloat, conint, ConfigDict
 from cashfree_pg.models.offer_validations_payment_method import OfferValidationsPaymentMethod
 
 class OfferValidations(BaseModel):
@@ -32,14 +32,10 @@ class OfferValidations(BaseModel):
     payment_method: OfferValidationsPaymentMethod = Field(...)
     __properties = ["min_amount", "max_allowed", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class OfferValidations(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class OfferValidations(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferValidations.parse_obj(obj)
+            return OfferValidations.model_validate(obj)
 
-        _obj = OfferValidations.parse_obj({
+        _obj = OfferValidations.model_validate({
             "min_amount": obj.get("min_amount"),
             "max_allowed": obj.get("max_allowed"),
             "payment_method": OfferValidationsPaymentMethod.from_dict(obj.get("payment_method")) if obj.get("payment_method") is not None else None

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class OrderMeta(BaseModel):
     """
@@ -31,14 +31,10 @@ class OrderMeta(BaseModel):
     payment_methods: Optional[Any] = Field(None, description="Allowed payment modes for this order. Pass comma-separated values among following options - \"cc\", \"dc\", \"ccc\", \"ppc\",\"nb\",\"upi\",\"paypal\",\"app\",\"paylater\",\"cardlessemi\",\"dcemi\",\"ccemi\",\"banktransfer\". Leave it blank to show all available payment methods")
     __properties = ["return_url", "notify_url", "payment_methods"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class OrderMeta(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -77,9 +73,9 @@ class OrderMeta(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderMeta.parse_obj(obj)
+            return OrderMeta.model_validate(obj)
 
-        _obj = OrderMeta.parse_obj({
+        _obj = OrderMeta.model_validate({
             "return_url": obj.get("return_url"),
             "notify_url": obj.get("notify_url"),
             "payment_methods": obj.get("payment_methods")

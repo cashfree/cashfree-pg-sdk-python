@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import BaseModel, Field, StrictStr, field_validator, ConfigDict
 
 class OrderDeliveryStatus(BaseModel):
     """
@@ -30,21 +30,17 @@ class OrderDeliveryStatus(BaseModel):
     reason: Optional[StrictStr] = Field(None, description="Reason of provided order delivery status. This is optional field.")
     __properties = ["status", "reason"]
 
-    @validator('status')
+    @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('AWAITING_PICKUP', 'CANCELLED', 'SELF_FULFILLED', 'PICKED_UP', 'SHIPPED', 'IN_TRANSIT', 'DELAY_COURIER_COMPANY_ISSUES', 'DELAY_INCORRECT_ADDRESS', 'DELAY_SELLER_ISSUES', 'REACHED_DESTINATION_HUB', 'OUT_FOR_DELIVERY', 'DELIVERED', 'POTENTIAL_RTO_DELIVERY_ATTEMPTED', 'RTO', 'LOST', 'DAMAGED', 'UNTRACKABLE_404', 'MANUAL_INTERVENTION_BROKEN_URL', 'ASSOCIATED_WITH_RETURN_PICKUP', 'UNSERVICEABLE'):
             raise ValueError("must be one of enum values ('AWAITING_PICKUP', 'CANCELLED', 'SELF_FULFILLED', 'PICKED_UP', 'SHIPPED', 'IN_TRANSIT', 'DELAY_COURIER_COMPANY_ISSUES', 'DELAY_INCORRECT_ADDRESS', 'DELAY_SELLER_ISSUES', 'REACHED_DESTINATION_HUB', 'OUT_FOR_DELIVERY', 'DELIVERED', 'POTENTIAL_RTO_DELIVERY_ATTEMPTED', 'RTO', 'LOST', 'DAMAGED', 'UNTRACKABLE_404', 'MANUAL_INTERVENTION_BROKEN_URL', 'ASSOCIATED_WITH_RETURN_PICKUP', 'UNSERVICEABLE')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -65,7 +61,7 @@ class OrderDeliveryStatus(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -78,9 +74,9 @@ class OrderDeliveryStatus(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderDeliveryStatus.parse_obj(obj)
+            return OrderDeliveryStatus.model_validate(obj)
 
-        _obj = OrderDeliveryStatus.parse_obj({
+        _obj = OrderDeliveryStatus.model_validate({
             "status": obj.get("status"),
             "reason": obj.get("reason")
         })

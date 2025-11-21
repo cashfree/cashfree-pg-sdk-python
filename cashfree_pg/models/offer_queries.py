@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, confloat, conint, constr
+from pydantic import BaseModel, Field, confloat, conint, constr, ConfigDict
 
 class OfferQueries(BaseModel):
     """
@@ -30,14 +30,10 @@ class OfferQueries(BaseModel):
     amount: Optional[Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)]] = Field(None, description="Amount of the order. OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
     __properties = ["order_id", "amount"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class OfferQueries(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class OfferQueries(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferQueries.parse_obj(obj)
+            return OfferQueries.model_validate(obj)
 
-        _obj = OfferQueries.parse_obj({
+        _obj = OfferQueries.model_validate({
             "order_id": obj.get("order_id"),
             "amount": obj.get("amount")
         })

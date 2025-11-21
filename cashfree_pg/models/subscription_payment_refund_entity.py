@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class SubscriptionPaymentRefundEntity(BaseModel):
     """
@@ -36,14 +36,10 @@ class SubscriptionPaymentRefundEntity(BaseModel):
     refund_status: Optional[StrictStr] = Field(None, description="Status of the refund.")
     __properties = ["payment_id", "cf_payment_id", "refund_id", "cf_refund_id", "refund_amount", "refund_note", "refund_speed", "refund_status"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -64,7 +60,7 @@ class SubscriptionPaymentRefundEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -77,9 +73,9 @@ class SubscriptionPaymentRefundEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SubscriptionPaymentRefundEntity.parse_obj(obj)
+            return SubscriptionPaymentRefundEntity.model_validate(obj)
 
-        _obj = SubscriptionPaymentRefundEntity.parse_obj({
+        _obj = SubscriptionPaymentRefundEntity.model_validate({
             "payment_id": obj.get("payment_id"),
             "cf_payment_id": obj.get("cf_payment_id"),
             "refund_id": obj.get("refund_id"),

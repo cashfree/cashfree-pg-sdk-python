@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner import EligibilityMethodItemEntityDetailsAvailableHandlesInner
 from cashfree_pg.models.subscription_bank_details import SubscriptionBankDetails
 
@@ -35,14 +35,10 @@ class EligibilityMethodItemEntityDetails(BaseModel):
     allowed_card_types: Optional[conlist(StrictStr)] = Field(None, description="List of allowed card types. (e.g. DEBIT_CARD, CREDIT_CARD)")
     __properties = ["account_types", "frequent_bank_details", "all_bank_details", "available_handles", "allowed_card_types"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class EligibilityMethodItemEntityDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -97,9 +93,9 @@ class EligibilityMethodItemEntityDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return EligibilityMethodItemEntityDetails.parse_obj(obj)
+            return EligibilityMethodItemEntityDetails.model_validate(obj)
 
-        _obj = EligibilityMethodItemEntityDetails.parse_obj({
+        _obj = EligibilityMethodItemEntityDetails.model_validate({
             "account_types": obj.get("account_types"),
             "frequent_bank_details": [SubscriptionBankDetails.from_dict(_item) for _item in obj.get("frequent_bank_details")] if obj.get("frequent_bank_details") is not None else None,
             "all_bank_details": [SubscriptionBankDetails.from_dict(_item) for _item in obj.get("all_bank_details")] if obj.get("all_bank_details") is not None else None,

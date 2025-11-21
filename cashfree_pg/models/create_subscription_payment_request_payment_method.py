@@ -20,7 +20,7 @@ import pprint
 import re  # noqa: F401
 
 from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator, ConfigDict
 from cashfree_pg.models.create_subscription_payment_request_card import CreateSubscriptionPaymentRequestCard
 from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack
 from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach
@@ -46,10 +46,9 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
         actual_instance: Union[CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi]
     else:
         actual_instance: Any
-    one_of_schemas: List[str] = Field(CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, frozen=True)
 
-    class Config:
-        validate_assignment = True
+    model_config = ConfigDict(validate_assignment=True)
 
     def __init__(self, *args, **kwargs):
         if args:
@@ -61,9 +60,9 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
         else:
             super().__init__(**kwargs)
 
-    @validator('actual_instance')
+    @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = CreateSubscriptionPaymentRequestPaymentMethod.construct()
+        instance = CreateSubscriptionPaymentRequestPaymentMethod.model_construct()
         error_messages = []
         match = 0
         # validate data type: CreateSubscriptonPaymentRequestUpi
@@ -102,7 +101,7 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
     @classmethod
     def from_json(cls, json_str: str) -> CreateSubscriptionPaymentRequestPaymentMethod:
         """Returns the object represented by the json string"""
-        instance = CreateSubscriptionPaymentRequestPaymentMethod.construct()
+        instance = CreateSubscriptionPaymentRequestPaymentMethod.model_construct()
         error_messages = []
         match = 0
 
@@ -173,6 +172,6 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
 
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
-        return pprint.pformat(self.dict())
+        return pprint.pformat(self.model_dump())
 
 

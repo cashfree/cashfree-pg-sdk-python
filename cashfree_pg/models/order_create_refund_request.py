@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, field_validator, ConfigDict
 from cashfree_pg.models.vendor_split import VendorSplit
 
 class OrderCreateRefundRequest(BaseModel):
@@ -34,7 +34,7 @@ class OrderCreateRefundRequest(BaseModel):
     refund_splits: Optional[conlist(VendorSplit)] = None
     __properties = ["refund_amount", "refund_id", "refund_note", "refund_speed", "refund_splits"]
 
-    @validator('refund_speed')
+    @field_validator('refund_speed')
     def refund_speed_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -44,14 +44,10 @@ class OrderCreateRefundRequest(BaseModel):
             raise ValueError("must be one of enum values ('STANDARD', 'INSTANT')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -72,7 +68,7 @@ class OrderCreateRefundRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -92,9 +88,9 @@ class OrderCreateRefundRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderCreateRefundRequest.parse_obj(obj)
+            return OrderCreateRefundRequest.model_validate(obj)
 
-        _obj = OrderCreateRefundRequest.parse_obj({
+        _obj = OrderCreateRefundRequest.model_validate({
             "refund_amount": obj.get("refund_amount"),
             "refund_id": obj.get("refund_id"),
             "refund_note": obj.get("refund_note"),

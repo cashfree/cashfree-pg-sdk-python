@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic import BaseModel, Field, conlist, ConfigDict
 from cashfree_pg.models.eligibility_method_item import EligibilityMethodItem
 
 class SubscriptionEligibilityResponse(BaseModel):
@@ -30,14 +30,10 @@ class SubscriptionEligibilityResponse(BaseModel):
     type: Optional[conlist(EligibilityMethodItem)] = Field(None, description="List of eligibile payment methods for the subscription.")
     __properties = ["type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class SubscriptionEligibilityResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -78,9 +74,9 @@ class SubscriptionEligibilityResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SubscriptionEligibilityResponse.parse_obj(obj)
+            return SubscriptionEligibilityResponse.model_validate(obj)
 
-        _obj = SubscriptionEligibilityResponse.parse_obj({
+        _obj = SubscriptionEligibilityResponse.model_validate({
             "type": [EligibilityMethodItem.from_dict(_item) for _item in obj.get("type")] if obj.get("type") is not None else None
         })
         return _obj

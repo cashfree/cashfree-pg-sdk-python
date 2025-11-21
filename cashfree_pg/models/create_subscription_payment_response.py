@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
 
 class CreateSubscriptionPaymentResponse(BaseModel):
@@ -39,14 +39,10 @@ class CreateSubscriptionPaymentResponse(BaseModel):
     payment_method: Optional[StrictStr] = Field(None, description="Payment method used for the authorization.")
     __properties = ["cf_payment_id", "failure_details", "payment_amount", "payment_id", "payment_initiated_date", "payment_status", "payment_type", "subscription_id", "data", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -67,7 +63,7 @@ class CreateSubscriptionPaymentResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class CreateSubscriptionPaymentResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionPaymentResponse.parse_obj(obj)
+            return CreateSubscriptionPaymentResponse.model_validate(obj)
 
-        _obj = CreateSubscriptionPaymentResponse.parse_obj({
+        _obj = CreateSubscriptionPaymentResponse.model_validate({
             "cf_payment_id": obj.get("cf_payment_id"),
             "failure_details": SubscriptionPaymentEntityFailureDetails.from_dict(obj.get("failure_details")) if obj.get("failure_details") is not None else None,
             "payment_amount": obj.get("payment_amount"),

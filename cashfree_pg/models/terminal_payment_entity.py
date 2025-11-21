@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator, ConfigDict
 from cashfree_pg.models.authorization_in_payments_entity import AuthorizationInPaymentsEntity
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.error_details_in_payments_entity import ErrorDetailsInPaymentsEntity
@@ -50,7 +50,7 @@ class TerminalPaymentEntity(BaseModel):
     payment_method: Optional[TerminalPaymentEntityPaymentMethod] = None
     __properties = ["cf_payment_id", "order_id", "entity", "error_details", "is_captured", "order_amount", "payment_group", "payment_currency", "payment_amount", "payment_time", "payment_completion_time", "payment_status", "payment_message", "bank_reference", "auth_id", "authorization", "customer_details", "payment_method"]
 
-    @validator('payment_status')
+    @field_validator('payment_status')
     def payment_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -60,14 +60,10 @@ class TerminalPaymentEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUCCESS', 'NOT_ATTEMPTED', 'FAILED', 'USER_DROPPED', 'VOID', 'CANCELLED', 'PENDING')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -88,7 +84,7 @@ class TerminalPaymentEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -113,9 +109,9 @@ class TerminalPaymentEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TerminalPaymentEntity.parse_obj(obj)
+            return TerminalPaymentEntity.model_validate(obj)
 
-        _obj = TerminalPaymentEntity.parse_obj({
+        _obj = TerminalPaymentEntity.model_validate({
             "cf_payment_id": obj.get("cf_payment_id"),
             "order_id": obj.get("order_id"),
             "entity": obj.get("entity"),

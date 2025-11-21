@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.upi_details import UpiDetails
@@ -41,14 +41,10 @@ class UpdateVendorRequest(BaseModel):
     kyc_details: conlist(KycDetails) = Field(..., description="Specify the kyc details that should be updated.")
     __properties = ["status", "name", "email", "phone", "verify_account", "dashboard_access", "schedule_option", "bank", "upi", "kyc_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -69,7 +65,7 @@ class UpdateVendorRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -103,9 +99,9 @@ class UpdateVendorRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UpdateVendorRequest.parse_obj(obj)
+            return UpdateVendorRequest.model_validate(obj)
 
-        _obj = UpdateVendorRequest.parse_obj({
+        _obj = UpdateVendorRequest.model_validate({
             "status": obj.get("status"),
             "name": obj.get("name"),
             "email": obj.get("email"),

@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from cashfree_pg.models.offer_details import OfferDetails
 from cashfree_pg.models.offer_meta import OfferMeta
 from cashfree_pg.models.offer_tnc import OfferTnc
@@ -36,14 +36,10 @@ class CreateOfferRequest(BaseModel):
     offer_validations: OfferValidations = Field(...)
     __properties = ["offer_meta", "offer_tnc", "offer_details", "offer_validations"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -64,7 +60,7 @@ class CreateOfferRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -89,9 +85,9 @@ class CreateOfferRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateOfferRequest.parse_obj(obj)
+            return CreateOfferRequest.model_validate(obj)
 
-        _obj = CreateOfferRequest.parse_obj({
+        _obj = CreateOfferRequest.model_validate({
             "offer_meta": OfferMeta.from_dict(obj.get("offer_meta")) if obj.get("offer_meta") is not None else None,
             "offer_tnc": OfferTnc.from_dict(obj.get("offer_tnc")) if obj.get("offer_tnc") is not None else None,
             "offer_details": OfferDetails.from_dict(obj.get("offer_details")) if obj.get("offer_details") is not None else None,

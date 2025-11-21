@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, field_validator, ConfigDict
 from cashfree_pg.models.refund_speed import RefundSpeed
 from cashfree_pg.models.vendor_split import VendorSplit
 
@@ -49,7 +49,7 @@ class RefundEntity(BaseModel):
     refund_speed: Optional[RefundSpeed] = None
     __properties = ["cf_payment_id", "cf_refund_id", "order_id", "refund_id", "entity", "refund_amount", "refund_currency", "refund_note", "refund_status", "refund_arn", "refund_charge", "status_description", "metadata", "refund_splits", "refund_type", "refund_mode", "created_at", "processed_at", "refund_speed"]
 
-    @validator('entity')
+    @field_validator('entity')
     def entity_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -59,7 +59,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('refund')")
         return value
 
-    @validator('refund_status')
+    @field_validator('refund_status')
     def refund_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -69,7 +69,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUCCESS', 'PENDING', 'CANCELLED', 'ONHOLD')")
         return value
 
-    @validator('refund_type')
+    @field_validator('refund_type')
     def refund_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -79,14 +79,10 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('PAYMENT_AUTO_REFUND', 'MERCHANT_INITIATED', 'UNRECONCILED_AUTO_REFUND')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -107,7 +103,7 @@ class RefundEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -130,9 +126,9 @@ class RefundEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return RefundEntity.parse_obj(obj)
+            return RefundEntity.model_validate(obj)
 
-        _obj = RefundEntity.parse_obj({
+        _obj = RefundEntity.model_validate({
             "cf_payment_id": obj.get("cf_payment_id"),
             "cf_refund_id": obj.get("cf_refund_id"),
             "order_id": obj.get("order_id"),

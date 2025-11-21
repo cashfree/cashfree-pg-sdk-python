@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, constr
+from pydantic import BaseModel, Field, constr, ConfigDict
 
 class CustomerDetailsCardlessEMI(BaseModel):
     """
@@ -29,14 +29,10 @@ class CustomerDetailsCardlessEMI(BaseModel):
     customer_phone: constr(strict=True, max_length=50, min_length=3) = Field(..., description="Phone Number of the customer")
     __properties = ["customer_phone"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -57,7 +53,7 @@ class CustomerDetailsCardlessEMI(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -70,9 +66,9 @@ class CustomerDetailsCardlessEMI(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CustomerDetailsCardlessEMI.parse_obj(obj)
+            return CustomerDetailsCardlessEMI.model_validate(obj)
 
-        _obj = CustomerDetailsCardlessEMI.parse_obj({
+        _obj = CustomerDetailsCardlessEMI.model_validate({
             "customer_phone": obj.get("customer_phone")
         })
         return _obj

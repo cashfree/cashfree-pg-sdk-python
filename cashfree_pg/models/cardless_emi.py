@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictInt, StrictStr, field_validator, ConfigDict
 
 class CardlessEMI(BaseModel):
     """
@@ -32,7 +32,7 @@ class CardlessEMI(BaseModel):
     emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure for the selected provider. This is mandatory when provider is one of [`hdfc`, `icici`, `cashe`, `idfc`, `kotak`]")
     __properties = ["channel", "provider", "phone", "emi_tenure"]
 
-    @validator('provider')
+    @field_validator('provider')
     def provider_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -42,14 +42,10 @@ class CardlessEMI(BaseModel):
             raise ValueError("must be one of enum values ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak', 'snapmint', 'bharatx')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -70,7 +66,7 @@ class CardlessEMI(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class CardlessEMI(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CardlessEMI.parse_obj(obj)
+            return CardlessEMI.model_validate(obj)
 
-        _obj = CardlessEMI.parse_obj({
+        _obj = CardlessEMI.model_validate({
             "channel": obj.get("channel"),
             "provider": obj.get("provider"),
             "phone": obj.get("phone"),

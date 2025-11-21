@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictInt, StrictStr
+from pydantic import BaseModel, StrictInt, StrictStr, ConfigDict
 from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
 
 class UpdateTerminalEntity(BaseModel):
@@ -41,14 +41,10 @@ class UpdateTerminalEntity(BaseModel):
     terminal_meta: Optional[CreateTerminalRequestTerminalMeta] = None
     __properties = ["added_on", "cf_terminal_id", "last_updated_on", "terminal_address", "terminal_email", "terminal_type", "teminal_id", "terminal_name", "terminal_note", "terminal_phone_no", "terminal_status", "terminal_meta"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -69,7 +65,7 @@ class UpdateTerminalEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -85,9 +81,9 @@ class UpdateTerminalEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UpdateTerminalEntity.parse_obj(obj)
+            return UpdateTerminalEntity.model_validate(obj)
 
-        _obj = UpdateTerminalEntity.parse_obj({
+        _obj = UpdateTerminalEntity.model_validate({
             "added_on": obj.get("added_on"),
             "cf_terminal_id": obj.get("cf_terminal_id"),
             "last_updated_on": obj.get("last_updated_on"),

@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictBool, conlist
+from pydantic import BaseModel, Field, StrictBool, conlist, ConfigDict
 from cashfree_pg.models.split_after_payment_request_split_inner import SplitAfterPaymentRequestSplitInner
 
 class SplitAfterPaymentRequest(BaseModel):
@@ -31,14 +31,10 @@ class SplitAfterPaymentRequest(BaseModel):
     disable_split: Optional[StrictBool] = Field(None, description="Specify if you want to end the split or continue creating further splits in future.")
     __properties = ["split", "disable_split"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class SplitAfterPaymentRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class SplitAfterPaymentRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SplitAfterPaymentRequest.parse_obj(obj)
+            return SplitAfterPaymentRequest.model_validate(obj)
 
-        _obj = SplitAfterPaymentRequest.parse_obj({
+        _obj = SplitAfterPaymentRequest.model_validate({
             "split": [SplitAfterPaymentRequestSplitInner.from_dict(_item) for _item in obj.get("split")] if obj.get("split") is not None else None,
             "disable_split": obj.get("disable_split")
         })

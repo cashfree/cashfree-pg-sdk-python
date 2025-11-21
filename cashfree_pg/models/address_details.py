@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class AddressDetails(BaseModel):
     """
@@ -39,14 +39,10 @@ class AddressDetails(BaseModel):
     email: Optional[StrictStr] = Field(None, description="Cutomer Email Address.")
     __properties = ["name", "address_line_one", "address_line_two", "country", "country_code", "state", "state_code", "city", "pin_code", "phone", "email"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -67,7 +63,7 @@ class AddressDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -80,9 +76,9 @@ class AddressDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AddressDetails.parse_obj(obj)
+            return AddressDetails.model_validate(obj)
 
-        _obj = AddressDetails.parse_obj({
+        _obj = AddressDetails.model_validate({
             "name": obj.get("name"),
             "address_line_one": obj.get("address_line_one"),
             "address_line_two": obj.get("address_line_two"),

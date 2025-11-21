@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist, constr
+from pydantic import BaseModel, Field, StrictStr, conlist, constr, ConfigDict
 from cashfree_pg.models.create_subscription_request_authorization_details import CreateSubscriptionRequestAuthorizationDetails
 from cashfree_pg.models.create_subscription_request_plan_details import CreateSubscriptionRequestPlanDetails
 from cashfree_pg.models.create_subscription_request_subscription_meta import CreateSubscriptionRequestSubscriptionMeta
@@ -43,14 +43,10 @@ class CreateSubscriptionRequest(BaseModel):
     subscription_payment_splits: Optional[conlist(SubscriptionPaymentSplitItem)] = Field(None, description="Payment splits for the subscription.")
     __properties = ["subscription_id", "customer_details", "plan_details", "authorization_details", "subscription_meta", "subscription_expiry_time", "subscription_first_charge_time", "subscription_note", "subscription_tags", "subscription_payment_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -71,7 +67,7 @@ class CreateSubscriptionRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -103,9 +99,9 @@ class CreateSubscriptionRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionRequest.parse_obj(obj)
+            return CreateSubscriptionRequest.model_validate(obj)
 
-        _obj = CreateSubscriptionRequest.parse_obj({
+        _obj = CreateSubscriptionRequest.model_validate({
             "subscription_id": obj.get("subscription_id"),
             "customer_details": SubscriptionCustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
             "plan_details": CreateSubscriptionRequestPlanDetails.from_dict(obj.get("plan_details")) if obj.get("plan_details") is not None else None,

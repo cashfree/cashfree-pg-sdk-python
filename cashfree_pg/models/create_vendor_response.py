@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
@@ -42,14 +42,10 @@ class CreateVendorResponse(BaseModel):
     bank_details: Optional[StrictStr] = None
     __properties = ["email", "status", "bank", "upi", "phone", "name", "vendor_id", "schedule_option", "kyc_details", "dashboard_access", "bank_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -70,7 +66,7 @@ class CreateVendorResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -104,9 +100,9 @@ class CreateVendorResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateVendorResponse.parse_obj(obj)
+            return CreateVendorResponse.model_validate(obj)
 
-        _obj = CreateVendorResponse.parse_obj({
+        _obj = CreateVendorResponse.model_validate({
             "email": obj.get("email"),
             "status": obj.get("status"),
             "bank": [BankDetails.from_dict(_item) for _item in obj.get("bank")] if obj.get("bank") is not None else None,

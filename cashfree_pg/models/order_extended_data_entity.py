@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 from cashfree_pg.models.address_details import AddressDetails
 from cashfree_pg.models.charges_entity import ChargesEntity
 from cashfree_pg.models.extended_cart_details import ExtendedCartDetails
@@ -44,14 +44,10 @@ class OrderExtendedDataEntity(BaseModel):
     offer: Optional[OfferExtendedDetails] = None
     __properties = ["cf_order_id", "order_id", "order_amount", "order_currency", "created_at", "charges", "customer_details", "shipping_address", "billing_address", "cart", "offer"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -72,7 +68,7 @@ class OrderExtendedDataEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -103,9 +99,9 @@ class OrderExtendedDataEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderExtendedDataEntity.parse_obj(obj)
+            return OrderExtendedDataEntity.model_validate(obj)
 
-        _obj = OrderExtendedDataEntity.parse_obj({
+        _obj = OrderExtendedDataEntity.model_validate({
             "cf_order_id": obj.get("cf_order_id"),
             "order_id": obj.get("order_id"),
             "order_amount": obj.get("order_amount"),

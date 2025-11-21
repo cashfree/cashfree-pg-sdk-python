@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import BaseModel, Field, StrictStr, field_validator, ConfigDict
 from cashfree_pg.models.entity_simulation_request import EntitySimulationRequest
 
 class SimulateRequest(BaseModel):
@@ -32,21 +32,17 @@ class SimulateRequest(BaseModel):
     entity_simulation: EntitySimulationRequest = Field(...)
     __properties = ["entity", "entity_id", "entity_simulation"]
 
-    @validator('entity')
+    @field_validator('entity')
     def entity_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('PAYMENTS', 'SUBS_PAYMENTS'):
             raise ValueError("must be one of enum values ('PAYMENTS', 'SUBS_PAYMENTS')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -67,7 +63,7 @@ class SimulateRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class SimulateRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SimulateRequest.parse_obj(obj)
+            return SimulateRequest.model_validate(obj)
 
-        _obj = SimulateRequest.parse_obj({
+        _obj = SimulateRequest.model_validate({
             "entity": obj.get("entity"),
             "entity_id": obj.get("entity_id"),
             "entity_simulation": EntitySimulationRequest.from_dict(obj.get("entity_simulation")) if obj.get("entity_simulation") is not None else None

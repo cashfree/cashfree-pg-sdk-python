@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic import BaseModel, Field, conlist, ConfigDict
 from cashfree_pg.models.offer_type import OfferType
 
 class OfferFilters(BaseModel):
@@ -30,14 +30,10 @@ class OfferFilters(BaseModel):
     offer_type: Optional[conlist(OfferType)] = Field(None, description="Array of offer_type to be filtered.")
     __properties = ["offer_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class OfferFilters(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class OfferFilters(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferFilters.parse_obj(obj)
+            return OfferFilters.model_validate(obj)
 
-        _obj = OfferFilters.parse_obj({
+        _obj = OfferFilters.model_validate({
             "offer_type": obj.get("offer_type")
         })
         return _obj

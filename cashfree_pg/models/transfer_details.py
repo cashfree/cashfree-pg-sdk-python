@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.transfer_details_tags_inner import TransferDetailsTagsInner
 
 class TransferDetails(BaseModel):
@@ -35,14 +35,10 @@ class TransferDetails(BaseModel):
     tags: Optional[conlist(TransferDetailsTagsInner)] = None
     __properties = ["vendor_id", "transfer_from", "transfer_type", "transfer_amount", "remark", "tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class TransferDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class TransferDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return TransferDetails.parse_obj(obj)
+            return TransferDetails.model_validate(obj)
 
-        _obj = TransferDetails.parse_obj({
+        _obj = TransferDetails.model_validate({
             "vendor_id": obj.get("vendor_id"),
             "transfer_from": obj.get("transfer_from"),
             "transfer_type": obj.get("transfer_type"),

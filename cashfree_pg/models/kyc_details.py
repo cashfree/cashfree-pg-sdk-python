@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class KycDetails(BaseModel):
     """
@@ -37,14 +37,10 @@ class KycDetails(BaseModel):
     voter_id: Optional[StrictStr] = None
     __properties = ["account_type", "business_type", "uidai", "gst", "cin", "pan", "passport_number", "driving_license", "voter_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -65,7 +61,7 @@ class KycDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -78,9 +74,9 @@ class KycDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return KycDetails.parse_obj(obj)
+            return KycDetails.model_validate(obj)
 
-        _obj = KycDetails.parse_obj({
+        _obj = KycDetails.model_validate({
             "account_type": obj.get("account_type"),
             "business_type": obj.get("business_type"),
             "uidai": obj.get("uidai"),

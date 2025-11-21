@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, ConfigDict
 
 class PaymentLinkCustomerDetails(BaseModel):
     """
@@ -35,14 +35,10 @@ class PaymentLinkCustomerDetails(BaseModel):
     customer_bank_code: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Customer bank code. Required for net banking payments, if you want to do a bank account check (TPV)")
     __properties = ["customer_id", "customer_email", "customer_phone", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class PaymentLinkCustomerDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class PaymentLinkCustomerDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaymentLinkCustomerDetails.parse_obj(obj)
+            return PaymentLinkCustomerDetails.model_validate(obj)
 
-        _obj = PaymentLinkCustomerDetails.parse_obj({
+        _obj = PaymentLinkCustomerDetails.model_validate({
             "customer_id": obj.get("customer_id"),
             "customer_email": obj.get("customer_email"),
             "customer_phone": obj.get("customer_phone"),

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, constr, field_validator, ConfigDict
 
 class CashbackDetails(BaseModel):
     """
@@ -31,21 +31,17 @@ class CashbackDetails(BaseModel):
     max_cashback_amount: Union[StrictFloat, StrictInt] = Field(..., description="Maximum Value of Cashback allowed.")
     __properties = ["cashback_type", "cashback_value", "max_cashback_amount"]
 
-    @validator('cashback_type')
+    @field_validator('cashback_type')
     def cashback_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('flat', 'percentage'):
             raise ValueError("must be one of enum values ('flat', 'percentage')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -66,7 +62,7 @@ class CashbackDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class CashbackDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CashbackDetails.parse_obj(obj)
+            return CashbackDetails.model_validate(obj)
 
-        _obj = CashbackDetails.parse_obj({
+        _obj = CashbackDetails.model_validate({
             "cashback_type": obj.get("cashback_type"),
             "cashback_value": obj.get("cashback_value"),
             "max_cashback_amount": obj.get("max_cashback_amount")

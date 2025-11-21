@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, StrictStr, conlist
+from pydantic import BaseModel, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner import ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
 
 class ESOrderReconResponseDataInnerOrderSplitsInner(BaseModel):
@@ -31,14 +31,10 @@ class ESOrderReconResponseDataInnerOrderSplitsInner(BaseModel):
     created_at: Optional[StrictStr] = None
     __properties = ["split", "created_at"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class ESOrderReconResponseDataInnerOrderSplitsInner(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class ESOrderReconResponseDataInnerOrderSplitsInner(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ESOrderReconResponseDataInnerOrderSplitsInner.parse_obj(obj)
+            return ESOrderReconResponseDataInnerOrderSplitsInner.model_validate(obj)
 
-        _obj = ESOrderReconResponseDataInnerOrderSplitsInner.parse_obj({
+        _obj = ESOrderReconResponseDataInnerOrderSplitsInner.model_validate({
             "split": [ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner.from_dict(_item) for _item in obj.get("split")] if obj.get("split") is not None else None,
             "created_at": obj.get("created_at")
         })

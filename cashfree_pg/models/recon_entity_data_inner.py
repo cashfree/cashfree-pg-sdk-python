@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class ReconEntityDataInner(BaseModel):
     """
@@ -75,14 +75,10 @@ class ReconEntityDataInner(BaseModel):
     remarks: Optional[StrictStr] = Field(None, description="Remarks on the settlement.")
     __properties = ["event_id", "event_type", "event_settlement_amount", "event_amount", "sale_type", "event_status", "entity", "event_time", "event_currency", "order_id", "order_amount", "customer_phone", "customer_email", "customer_name", "payment_amount", "payment_utr", "payment_time", "payment_service_charge", "payment_service_tax", "cf_payment_id", "cf_settlement_id", "settlement_date", "settlement_utr", "split_service_charge", "split_service_tax", "vendor_commission", "closed_in_favor_of", "dispute_resolved_on", "dispute_category", "dispute_note", "refund_processed_at", "refund_arn", "refund_note", "refund_id", "adjustment_remarks", "adjustment", "service_tax", "service_charge", "amount_settled", "payment_from", "payment_till", "reason", "settlement_initiated_on", "settlement_type", "settlement_charge", "settlement_tax", "remarks"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -103,7 +99,7 @@ class ReconEntityDataInner(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -116,9 +112,9 @@ class ReconEntityDataInner(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ReconEntityDataInner.parse_obj(obj)
+            return ReconEntityDataInner.model_validate(obj)
 
-        _obj = ReconEntityDataInner.parse_obj({
+        _obj = ReconEntityDataInner.model_validate({
             "event_id": obj.get("event_id"),
             "event_type": obj.get("event_type"),
             "event_settlement_amount": obj.get("event_settlement_amount"),

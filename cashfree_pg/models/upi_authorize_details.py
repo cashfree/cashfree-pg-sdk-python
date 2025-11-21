@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class UPIAuthorizeDetails(BaseModel):
     """
@@ -31,14 +31,10 @@ class UPIAuthorizeDetails(BaseModel):
     end_time: Optional[StrictStr] = Field(None, description="This is the time when the UPI mandate will be over. If the mandate has not been executed by this time, the funds will be returned back to the customer after this time.")
     __properties = ["approve_by", "start_time", "end_time"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class UPIAuthorizeDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -72,9 +68,9 @@ class UPIAuthorizeDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UPIAuthorizeDetails.parse_obj(obj)
+            return UPIAuthorizeDetails.model_validate(obj)
 
-        _obj = UPIAuthorizeDetails.parse_obj({
+        _obj = UPIAuthorizeDetails.model_validate({
             "approve_by": obj.get("approve_by"),
             "start_time": obj.get("start_time"),
             "end_time": obj.get("end_time")

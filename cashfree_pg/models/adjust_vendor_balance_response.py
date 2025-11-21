@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt
+from pydantic import BaseModel, StrictFloat, StrictInt, ConfigDict
 from cashfree_pg.models.balance_details import BalanceDetails
 from cashfree_pg.models.charges_details import ChargesDetails
 from cashfree_pg.models.transfer_details import TransferDetails
@@ -35,14 +35,10 @@ class AdjustVendorBalanceResponse(BaseModel):
     charges: Optional[ChargesDetails] = None
     __properties = ["settlement_id", "transfer_details", "balances", "charges"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class AdjustVendorBalanceResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -85,9 +81,9 @@ class AdjustVendorBalanceResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AdjustVendorBalanceResponse.parse_obj(obj)
+            return AdjustVendorBalanceResponse.model_validate(obj)
 
-        _obj = AdjustVendorBalanceResponse.parse_obj({
+        _obj = AdjustVendorBalanceResponse.model_validate({
             "settlement_id": obj.get("settlement_id"),
             "transfer_details": TransferDetails.from_dict(obj.get("transfer_details")) if obj.get("transfer_details") is not None else None,
             "balances": BalanceDetails.from_dict(obj.get("balances")) if obj.get("balances") is not None else None,

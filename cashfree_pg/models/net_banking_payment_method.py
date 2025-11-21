@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from cashfree_pg.models.netbanking import Netbanking
 
 class NetBankingPaymentMethod(BaseModel):
@@ -30,14 +30,10 @@ class NetBankingPaymentMethod(BaseModel):
     netbanking: Netbanking = Field(...)
     __properties = ["netbanking"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class NetBankingPaymentMethod(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -74,9 +70,9 @@ class NetBankingPaymentMethod(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return NetBankingPaymentMethod.parse_obj(obj)
+            return NetBankingPaymentMethod.model_validate(obj)
 
-        _obj = NetBankingPaymentMethod.parse_obj({
+        _obj = NetBankingPaymentMethod.model_validate({
             "netbanking": Netbanking.from_dict(obj.get("netbanking")) if obj.get("netbanking") is not None else None
         })
         return _obj

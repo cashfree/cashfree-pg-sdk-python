@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.authorization_details import AuthorizationDetails
 from cashfree_pg.models.plan_entity import PlanEntity
 from cashfree_pg.models.subscription_customer_details import SubscriptionCustomerDetails
@@ -46,14 +46,10 @@ class SubscriptionEntity(BaseModel):
     subscription_tags: Optional[Dict[str, Any]] = Field(None, description="Tags for the subscription.")
     __properties = ["authorisation_details", "cf_subscription_id", "customer_details", "plan_details", "subscription_expiry_time", "subscription_first_charge_time", "subscription_id", "subscription_meta", "subscription_note", "subscription_session_id", "subscription_payment_splits", "subscription_status", "subscription_tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -74,7 +70,7 @@ class SubscriptionEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -106,9 +102,9 @@ class SubscriptionEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SubscriptionEntity.parse_obj(obj)
+            return SubscriptionEntity.model_validate(obj)
 
-        _obj = SubscriptionEntity.parse_obj({
+        _obj = SubscriptionEntity.model_validate({
             "authorisation_details": AuthorizationDetails.from_dict(obj.get("authorisation_details")) if obj.get("authorisation_details") is not None else None,
             "cf_subscription_id": obj.get("cf_subscription_id"),
             "customer_details": SubscriptionCustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,

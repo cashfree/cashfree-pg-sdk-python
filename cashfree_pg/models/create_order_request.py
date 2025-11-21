@@ -20,7 +20,7 @@ import json
 
 
 from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr
+from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr, ConfigDict
 from cashfree_pg.models.cart_details import CartDetails
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.order_meta import OrderMeta
@@ -44,14 +44,10 @@ class CreateOrderRequest(BaseModel):
     order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
     __properties = ["order_id", "order_amount", "order_currency", "cart_details", "customer_details", "terminal", "order_meta", "order_expiry_time", "order_note", "order_tags", "order_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -72,7 +68,7 @@ class CreateOrderRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -104,9 +100,9 @@ class CreateOrderRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateOrderRequest.parse_obj(obj)
+            return CreateOrderRequest.model_validate(obj)
 
-        _obj = CreateOrderRequest.parse_obj({
+        _obj = CreateOrderRequest.model_validate({
             "order_id": obj.get("order_id"),
             "order_amount": obj.get("order_amount"),
             "order_currency": obj.get("order_currency"),

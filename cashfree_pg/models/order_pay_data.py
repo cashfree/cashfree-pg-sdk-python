@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 
 class OrderPayData(BaseModel):
     """
@@ -32,14 +32,10 @@ class OrderPayData(BaseModel):
     method: Optional[StrictStr] = None
     __properties = ["url", "payload", "content_type", "method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class OrderPayData(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -73,9 +69,9 @@ class OrderPayData(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderPayData.parse_obj(obj)
+            return OrderPayData.model_validate(obj)
 
-        _obj = OrderPayData.parse_obj({
+        _obj = OrderPayData.model_validate({
             "url": obj.get("url"),
             "payload": obj.get("payload"),
             "content_type": obj.get("content_type"),

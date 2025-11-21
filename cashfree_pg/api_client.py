@@ -17,7 +17,7 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError
+from pydantic import validate_call, ValidationError
 from typing_extensions import Annotated
 
 from cashfree_pg.configuration import Configuration
@@ -41,7 +41,7 @@ import warnings
 import base64
 import hashlib
 import hmac
-from pydantic import validate_arguments, ValidationError
+from pydantic import validate_call, ValidationError
 from typing_extensions import Annotated
 from typing import overload, Optional, Union, Awaitable
 from pydantic import Field, StrictStr, StrictBytes
@@ -360,7 +360,7 @@ class Cashfree:
             return PGWebhookEvent(type=json_response['type'], rawBody=rawBody, object=json_response)
         raise Exception("Generated signature and received signature did not match.")
 
-    @validate_arguments
+    @validate_call
     def PGCreateCustomer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_customer_request : Annotated[CreateCustomerRequest, Field(..., description="Request to create a new customer at Cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Customer at Cashfree  # noqa: E501
 
@@ -516,7 +516,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGAcceptDisputeById(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Accept Dispute by Dispute ID  # noqa: E501
 
@@ -664,7 +664,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchDisputeById(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Disputes by Dispute ID  # noqa: E501
 
@@ -812,7 +812,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchOrderDisputes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : StrictStr = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Disputes by Order Id  # noqa: E501
 
@@ -960,7 +960,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchPaymentDisputes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_payment_id : StrictInt = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Disputes by Payment ID  # noqa: E501
 
@@ -1108,7 +1108,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGUploadDisputesDocuments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, dispute_id : StrictInt = None, file : Annotated[StrictStr, Field(..., description="File types supported are jpeg, jpg, png, pdf and maximum file size allowed is 20 MB.")] = None, doc_type : Annotated[StrictStr, Field(..., description="Mention the type of the document you are uploading. Possible values :- Delivery/Service Proof, Shipping Proof, Statement of Service, Proof of Service Used, Cancellation of Service Proof, Refund Proof, Business model explanation, Extra Charges Declaration, Terms & Conditions, Customer Withdrawal Letter, Certificate of Authenticity, Reseller Agreement. You can use get evidences to contest dispute API to fetch set of documents required to contest particular dispute.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, note : Optional[StrictStr] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Submit Evidence to contest the Dispute by Dispute ID  # noqa: E501
 
@@ -1282,7 +1282,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGOrderSplitAfterPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, split_after_payment_request : Annotated[Optional[SplitAfterPaymentRequest], Field(description="Request Body to Create Split for an order.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Split After Payment  # noqa: E501
 
@@ -1439,7 +1439,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderStaticSplit(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, static_split_request : Annotated[Optional[StaticSplitRequest], Field(description="Static Split")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Static Split Configuration  # noqa: E501
 
@@ -1588,7 +1588,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGSplitOrderRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Split and Settlement Details by OrderID  # noqa: E501
 
@@ -1730,7 +1730,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesCreateAdjustment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, vendor_adjustment_request : Annotated[Optional[VendorAdjustmentRequest], Field(description="Vendor Adjustment Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Adjustment  # noqa: E501
 
@@ -1885,7 +1885,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesCreateOnDemandTransfer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, adjust_vendor_balance_request : Annotated[Optional[AdjustVendorBalanceRequest], Field(description="Adjust Vendor Balance Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create On Demand Transfer  # noqa: E501
 
@@ -2040,7 +2040,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesCreateVendors(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, create_vendor_request : Annotated[Optional[CreateVendorRequest], Field(description="Create Vendor Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create vendor  # noqa: E501
 
@@ -2189,7 +2189,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesDownloadVendorsDocs(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, doc_type : Annotated[StrictStr, Field(..., description="Mention the document type that has to be downloaded. Only an uploaded document can be downloaded.")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Download Vendor Documents  # noqa: E501
 
@@ -2336,7 +2336,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesFetchVendors(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Vendor All Details  # noqa: E501
 
@@ -2478,7 +2478,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesGetVendorBalance(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get On Demand Balance  # noqa: E501
 
@@ -2620,7 +2620,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesGetVendorBalanceTransferCharges(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, amount : Annotated[Union[StrictFloat, StrictInt], Field(..., description="Specify the amount for which you want to view the service charges and service taxes in the response.")] = None, rate_type : Annotated[StrictStr, Field(..., description="Mention the type of rate for which you want to check the charges. Possible value: VENDOR_ON_DEMAND")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Vendor Balance Transfer Charges  # noqa: E501
 
@@ -2768,7 +2768,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesGetVendorsDocs(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Vendor All Documents Status  # noqa: E501
 
@@ -2910,7 +2910,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesOrderRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, es_order_recon_request : Annotated[Optional[ESOrderReconRequest], Field(description="Get Split and Settlement Details by OrderID v2.0")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Split and Settlement Details by OrderID v2.0  # noqa: E501
 
@@ -3061,7 +3061,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesUpdateVendors(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, update_vendor_request : Annotated[Optional[UpdateVendorRequest], Field(description="Create Vendor Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Update vendor Details  # noqa: E501
 
@@ -3216,7 +3216,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGesUploadVendorsDocs(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, vendor_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your vendor.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, doc_type : Annotated[Optional[StrictStr], Field(description="Mention the type of the document you are uploading. Possible values: UIDAI_FRONT, UIDAI_BACK, UIDAI_NUMBER, DL, DL_NUMBER, PASSPORT_FRONT, PASSPORT_BACK, PASSPORT_NUMBER, VOTER_ID, VOTER_ID_NUMBER, PAN, PAN_NUMBER, GST, GSTIN_NUMBER, CIN, CIN_NUMBER, NBFC_CERTIFICATE. If the doc type ends with a number you should add the doc value else upload the doc file.")] = None, doc_value : Annotated[Optional[StrictStr], Field(description="Enter the display name of the uploaded file.")] = None, file : Annotated[Optional[Union[StrictBytes, StrictStr]], Field(description="Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Upload Vendor Docs  # noqa: E501
 
@@ -3384,7 +3384,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGEligibilityFetchCardlessEmi(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_cardless_emi_request : Annotated[EligibilityFetchCardlessEMIRequest, Field(..., description="Request Body to get eligible cardless emi options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Cardless EMI Payment Methods for a customer on an order  # noqa: E501
 
@@ -3540,7 +3540,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGEligibilityFetchOffers(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_offers_request : Annotated[EligibilityFetchOffersRequest, Field(..., description="Request Body to get eligible offers for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Offers for an Order  # noqa: E501
 
@@ -3695,7 +3695,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGEligibilityFetchPaylater(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_paylater_request : Annotated[EligibilityFetchPaylaterRequest, Field(..., description="Request Body to get eligible paylater options for a customer and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Eligible Paylater for a customer on an order  # noqa: E501
 
@@ -3851,7 +3851,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGEligibilityFetchPaymentMethods(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, eligibility_fetch_payment_methods_request : Annotated[EligibilityFetchPaymentMethodsRequest, Field(..., description="Request Body to get eligible payment methods for an account and order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get eligible Payment Methods  # noqa: E501
 
@@ -4008,7 +4008,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGCreateOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_offer_request : Annotated[CreateOfferRequest, Field(..., description="Request body to create an offer at Cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Offer  # noqa: E501
 
@@ -4163,7 +4163,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchOffer(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, offer_id : Annotated[StrictStr, Field(..., description="The offer ID for which you want to view the offer details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Offer by ID  # noqa: E501
 
@@ -4312,7 +4312,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGCreateOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_order_request : Annotated[CreateOrderRequest, Field(..., description="Request body to create an order at cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Order  # noqa: E501
 
@@ -4467,7 +4467,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Order  # noqa: E501
 
@@ -4615,7 +4615,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchOrderExtendedData(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Order Extended  # noqa: E501
 
@@ -4763,7 +4763,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGTerminateOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, terminate_order_request : Annotated[TerminateOrderRequest, Field(..., description="Request body to terminate an order at cashfree")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Terminate Order  # noqa: E501
 
@@ -4924,7 +4924,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGUpdateOrderExtendedData(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, update_order_extended_request : Annotated[UpdateOrderExtendedRequest, Field(..., description="Request Body to Update extended data related to order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Update Order Extended  # noqa: E501
 
@@ -5086,7 +5086,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_recon_request : Annotated[FetchReconRequest, Field(..., description="Request Body for the reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """PG Reconciliation  # noqa: E501
 
@@ -5248,7 +5248,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGCancelLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Cancel Payment Link  # noqa: E501
 
@@ -5396,7 +5396,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGCreateLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_link_request : Annotated[CreateLinkRequest, Field(..., description="Request Body to Create Payment Links")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Payment Link  # noqa: E501
 
@@ -5551,7 +5551,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGFetchLink(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Payment Link Details  # noqa: E501
 
@@ -5700,7 +5700,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGLinkFetchOrders(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, link_id : Annotated[StrictStr, Field(..., description="The payment link ID for which you want to view the details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, status : Annotated[Optional[StrictStr], Field(description="Mention What is status of orders you want to fetch, default is PAID. Possible value: ALL, PAID")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Orders for a Payment Link  # noqa: E501
 
@@ -5855,7 +5855,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGAuthorizeOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, authorize_order_request : Annotated[AuthorizeOrderRequest, Field(..., description="Request to Capture or Void Transactions")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Preauthorization  # noqa: E501
 
@@ -6017,7 +6017,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderAuthenticatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, order_authenticate_payment_request : Annotated[OrderAuthenticatePaymentRequest, Field(..., description="Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Submit or Resend OTP  # noqa: E501
 
@@ -6179,7 +6179,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderFetchPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, cf_payment_id : Annotated[StrictStr, Field(..., description="The Cashfree payment or transaction ID.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Payment by ID  # noqa: E501
 
@@ -6334,7 +6334,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderFetchPayments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Payments for an Order  # noqa: E501
 
@@ -6483,7 +6483,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGPayOrder(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, pay_order_request : Annotated[PayOrderRequest, Field(..., description="Request body to create a transaction at cashfree using `payment_session_id`")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Order Pay  # noqa: E501
 
@@ -6640,7 +6640,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGOrderCreateRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, order_create_refund_request : Annotated[OrderCreateRefundRequest, Field(..., description="Request Body to Create Refunds")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Refund  # noqa: E501
 
@@ -6802,7 +6802,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderFetchRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, refund_id : Annotated[StrictStr, Field(..., description="Refund Id of the refund you want to fetch.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Refund  # noqa: E501
 
@@ -6957,7 +6957,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderFetchRefunds(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get All Refunds for an Order  # noqa: E501
 
@@ -7106,7 +7106,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGFetchSettlements(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, fetch_settlements_request : Annotated[FetchSettlementsRequest, Field(..., description="Request Body to get the settlements")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get All Settlements  # noqa: E501
 
@@ -7267,7 +7267,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGSettlementFetchRecon(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, settlement_fetch_recon_request : Annotated[SettlementFetchReconRequest, Field(..., description="Request Body for the settlement reconciliation")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Settlement Reconciliation  # noqa: E501
 
@@ -7429,7 +7429,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def MarkForSettlement(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, create_order_settlement_request_body : Annotated[Optional[CreateOrderSettlementRequestBody], Field(description="Create Order Settlement Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Mark Order For Settlement  # noqa: E501
 
@@ -7581,7 +7581,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGOrderFetchSettlement(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, order_id : Annotated[StrictStr, Field(..., description="The id which uniquely identifies your order")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Settlements by Order ID  # noqa: E501
 
@@ -7731,7 +7731,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGFetchSimulation(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, simulation_id : Annotated[StrictStr, Field(..., description="Provide the SimulationId for which the details have to be fetched.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Simulation  # noqa: E501
 
@@ -7877,7 +7877,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGSimulatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, simulate_request : Annotated[SimulateRequest, Field(..., description="Request Body to Make Simulation")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Simulate Payment  # noqa: E501
 
@@ -8031,7 +8031,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def SubsCreatePayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_subscription_payment_request : Annotated[CreateSubscriptionPaymentRequest, Field(..., description="Request body to create a subscription payment.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Raise a charge or create an auth.  # noqa: E501
 
@@ -8185,7 +8185,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsCreatePlan(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_plan_request : Annotated[CreatePlanRequest, Field(..., description="Request body to create a plan.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create a plan.  # noqa: E501
 
@@ -8339,7 +8339,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsCreateRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, create_subscription_refund_request : Annotated[CreateSubscriptionRefundRequest, Field(..., description="Request body to create a subscription refund.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create a refund.  # noqa: E501
 
@@ -8499,7 +8499,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsCreateSubscription(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_subscription_request : Annotated[CreateSubscriptionRequest, Field(..., description="Request body to create a subscription.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Subscription  # noqa: E501
 
@@ -8653,7 +8653,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsFetchPlan(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, plan_id : Annotated[StrictStr, Field(..., description="Provide the PlanId for which the details have to be fetched.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Plan  # noqa: E501
 
@@ -8799,7 +8799,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsFetchSubscription(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Subscription  # noqa: E501
 
@@ -8945,7 +8945,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsFetchSubscriptionPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, payment_id : Annotated[StrictStr, Field(..., description="Provide the PaymentId using which the payment was created.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch details of a single payment.  # noqa: E501
 
@@ -9097,7 +9097,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsFetchSubscriptionPayments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch details of all payments of a subscription.  # noqa: E501
 
@@ -9244,7 +9244,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsFetchSubscriptionRefund(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, refund_id : Annotated[StrictStr, Field(..., description="Provide the PaymentId for which the details have to be fetched.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch details of a refund.  # noqa: E501
 
@@ -9396,7 +9396,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsManageSubscription(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, manage_subscription_request : Annotated[ManageSubscriptionRequest, Field(..., description="Request body to manage a subscription.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Manage a subscription.  # noqa: E501
 
@@ -9556,7 +9556,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubsManageSubscriptionPayment(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_id : Annotated[StrictStr, Field(..., description="Provide the SubscriptionId using which the subscription was created.")] = None, payment_id : Annotated[StrictStr, Field(..., description="Provide the PaymentId using which the payment was created.")] = None, manage_subscription_payment_request : Annotated[ManageSubscriptionPaymentRequest, Field(..., description="Request body to manage a subscription payment.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Manage a single payment.  # noqa: E501
 
@@ -9721,7 +9721,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubscriptionDocumentUpload(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, payment_id : Annotated[StrictStr, Field(..., description="Provide the PaymentId using which the payment was created.")] = None, file : Annotated[Union[StrictBytes, StrictStr], Field(..., description="Select the .jpg file that should be uploaded or provide the path of that file. You cannot upload a file that is more than 1MB in size.")] = None, payment_id2 : Annotated[StrictStr, Field(..., description="Authorization Payment Id for physical nach authorization")] = None, action : Annotated[StrictStr, Field(..., description="Action to be performed on the file. Can be SUBMIT_DOCUMENT")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """API to upload file for Physical Nach Authorization.  # noqa: E501
 
@@ -9893,7 +9893,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SubscriptionEligibility(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, subscription_eligibility_request : Annotated[SubscriptionEligibilityRequest, Field(..., description="Request body to fetch subscription eligibile payment method details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """API to get all the payment method details available for subscription payments.  # noqa: E501
 
@@ -10048,7 +10048,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def PGCustomerDeleteInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id which needs to be deleted")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Delete Saved Card Instrument  # noqa: E501
 
@@ -10203,7 +10203,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGCustomerFetchInstrument(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Specific Saved Card Instrument  # noqa: E501
 
@@ -10358,7 +10358,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGCustomerFetchInstruments(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_type : Annotated[StrictStr, Field(..., description="Payment mode or type of saved instrument ")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch All Saved Card Instrument  # noqa: E501
 
@@ -10512,7 +10512,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def PGCustomerInstrumentsFetchCryptogram(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, customer_id : Annotated[StrictStr, Field(..., description="Your Customer ID that you had sent during create order API `POST/orders`")] = None, instrument_id : Annotated[StrictStr, Field(..., description="The instrument_id of the saved card instrument which needs to be queried")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch cryptogram for a saved card instrument  # noqa: E501
 
@@ -10668,7 +10668,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def TerminalCreateQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, create_partner_vpa_request : Optional[CreatePartnerVpaRequest] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Pre-Activated Vpas for partner  # noqa: E501
 
@@ -10823,7 +10823,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def TerminalGetQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, status : Annotated[StrictStr, Field(..., description="Status of pre-created Qr.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get pre-generated staticQRs.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Pre-Activated Vpas for partner  # noqa: E501
 
@@ -10978,7 +10978,7 @@ class Cashfree:
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
 
-    @validate_arguments
+    @validate_call
     def SposCreateTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_request : Annotated[CreateTerminalRequest, Field(..., description="Request Body to Create Terminal for SPOS")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Terminal  # noqa: E501
 
@@ -11133,7 +11133,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposCreateTerminalTransaction(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, create_terminal_transaction_request : Annotated[CreateTerminalTransactionRequest, Field(..., description="Request body to create a terminal transaction")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Create Terminal Transaction  # noqa: E501
 
@@ -11288,7 +11288,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposDemapSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, demap_soundbox_vpa_request : Annotated[DemapSoundboxVpaRequest, Field(..., description="Request body to demap soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Demap Soundbox Vpa  # noqa: E501
 
@@ -11443,7 +11443,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposFetchTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="The terminal for which you want to view the order details.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Terminal Status using Phone Number  # noqa: E501
 
@@ -11591,7 +11591,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposFetchTerminalQrCodes(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, terminal_phone_no : Annotated[StrictStr, Field(..., description="Phone number assigned to the terminal. Required if you are not providing the cf_terminal_id in the request.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get staticQRs. Required if you are not providing the terminal_phone_number in the request.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Terminal QR Codes  # noqa: E501
 
@@ -11745,7 +11745,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposFetchTerminalSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, device_serial_no : Annotated[StrictStr, Field(..., description="Device Serial No assinged. Required if you are not providing the cf_terminal_id in the request.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Cashfree terminal id for which you want to get Soundbox Vpa. Required if you are not providing the device_serial_no in the request.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Fetch Terminal Soundbox vpa  # noqa: E501
 
@@ -11899,7 +11899,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposFetchTerminalTransaction(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, utr : Annotated[StrictStr, Field(..., description="Utr of the transaction.")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Terminal Transaction  # noqa: E501
 
@@ -12053,7 +12053,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposOnboardSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, onboard_soundbox_vpa_request : Annotated[OnboardSoundboxVpaRequest, Field(..., description="Request body to onboard soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Onboard Soundbox Vpa  # noqa: E501
 
@@ -12208,7 +12208,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposUpdateSoundboxVpa(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_soundbox_vpa_request : Annotated[UpdateSoundboxVpaRequest, Field(..., description="Request body to update soundbox vpa")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Update Soundbox Vpa  # noqa: E501
 
@@ -12369,7 +12369,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposUpdateTerminal(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_terminal_request : Annotated[UpdateTerminalRequest, Field(..., description="Request Body to update terminal for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Update Terminal  # noqa: E501
 
@@ -12530,7 +12530,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposUpdateTerminalStatus(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, update_terminal_status_request : Annotated[UpdateTerminalStatusRequest, Field(..., description="Request Body to update terminal status for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Update Terminal Status  # noqa: E501
 
@@ -12691,7 +12691,7 @@ class Cashfree:
             _request_timeout=_params.get('_request_timeout'),
             collection_formats=_collection_formats,
             _request_auth=_params.get('_request_auth'))
-    @validate_arguments
+    @validate_call
     def SposUploadTerminalDocs(self, x_api_version : Annotated[StrictStr, Field(..., description="API version to be used. Format is in YYYY-MM-DD")] = None, cf_terminal_id : Annotated[StrictStr, Field(..., description="Provide the Cashfree terminal ID for which the details have to be updated.")] = None, upload_terminal_docs : Annotated[UploadTerminalDocs, Field(..., description="Request Body to update terminal documents for SPOS.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions.  ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Upload Terminal Docs  # noqa: E501
 

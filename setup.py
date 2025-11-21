@@ -29,8 +29,8 @@ PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
     "python-dateutil",
-    "sentry-sdk >= 1.32.0, < 1.33.0",
-    "pydantic >= 1.10.24, < 2",
+    "sentry-sdk >= 1.45.1",
+    "pydantic >= 2.10.2",
     "aenum"
 ]
 

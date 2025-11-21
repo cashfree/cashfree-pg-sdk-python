@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class SettlementEntity(BaseModel):
     """
@@ -42,14 +42,10 @@ class SettlementEntity(BaseModel):
     transfer_utr: Optional[StrictStr] = None
     __properties = ["cf_payment_id", "cf_settlement_id", "settlement_currency", "order_id", "entity", "order_amount", "payment_time", "service_charge", "service_tax", "settlement_amount", "settlement_id", "transfer_id", "transfer_time", "transfer_utr"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -70,7 +66,7 @@ class SettlementEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class SettlementEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SettlementEntity.parse_obj(obj)
+            return SettlementEntity.model_validate(obj)
 
-        _obj = SettlementEntity.parse_obj({
+        _obj = SettlementEntity.model_validate({
             "cf_payment_id": obj.get("cf_payment_id"),
             "cf_settlement_id": obj.get("cf_settlement_id"),
             "settlement_currency": obj.get("settlement_currency"),

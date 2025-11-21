@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, constr, validator
+from pydantic import BaseModel, Field, constr, field_validator, ConfigDict
 
 class OfferTnc(BaseModel):
     """
@@ -30,21 +30,17 @@ class OfferTnc(BaseModel):
     offer_tnc_value: constr(strict=True, max_length=100, min_length=3) = Field(..., description="TnC for the Offer.")
     __properties = ["offer_tnc_type", "offer_tnc_value"]
 
-    @validator('offer_tnc_type')
+    @field_validator('offer_tnc_type')
     def offer_tnc_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('text', 'link'):
             raise ValueError("must be one of enum values ('text', 'link')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -65,7 +61,7 @@ class OfferTnc(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -78,9 +74,9 @@ class OfferTnc(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferTnc.parse_obj(obj)
+            return OfferTnc.model_validate(obj)
 
-        _obj = OfferTnc.parse_obj({
+        _obj = OfferTnc.model_validate({
             "offer_tnc_type": obj.get("offer_tnc_type"),
             "offer_tnc_value": obj.get("offer_tnc_value")
         })

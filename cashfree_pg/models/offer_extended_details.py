@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 from cashfree_pg.models.offer_details import OfferDetails
 from cashfree_pg.models.offer_meta import OfferMeta
 from cashfree_pg.models.offer_tnc import OfferTnc
@@ -38,14 +38,10 @@ class OfferExtendedDetails(BaseModel):
     offer_validations: Optional[OfferValidations] = None
     __properties = ["offer_id", "offer_status", "offer_meta", "offer_tnc", "offer_details", "offer_validations"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -66,7 +62,7 @@ class OfferExtendedDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -91,9 +87,9 @@ class OfferExtendedDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferExtendedDetails.parse_obj(obj)
+            return OfferExtendedDetails.model_validate(obj)
 
-        _obj = OfferExtendedDetails.parse_obj({
+        _obj = OfferExtendedDetails.model_validate({
             "offer_id": obj.get("offer_id"),
             "offer_status": obj.get("offer_status"),
             "offer_meta": OfferMeta.from_dict(obj.get("offer_meta")) if obj.get("offer_meta") is not None else None,

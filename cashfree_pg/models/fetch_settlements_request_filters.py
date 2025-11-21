@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist, ConfigDict
 
 class FetchSettlementsRequestFilters(BaseModel):
     """
@@ -32,14 +32,10 @@ class FetchSettlementsRequestFilters(BaseModel):
     end_date: Optional[StrictStr] = Field(None, description="Specify the end date till when you want the settlement reconciliation details.")
     __properties = ["cf_settlement_ids", "settlement_utrs", "start_date", "end_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class FetchSettlementsRequestFilters(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -73,9 +69,9 @@ class FetchSettlementsRequestFilters(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return FetchSettlementsRequestFilters.parse_obj(obj)
+            return FetchSettlementsRequestFilters.model_validate(obj)
 
-        _obj = FetchSettlementsRequestFilters.parse_obj({
+        _obj = FetchSettlementsRequestFilters.model_validate({
             "cf_settlement_ids": obj.get("cf_settlement_ids"),
             "settlement_utrs": obj.get("settlement_utrs"),
             "start_date": obj.get("start_date"),

@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr, constr
+from pydantic import BaseModel, Field, StrictStr, constr, ConfigDict
 
 class OfferMeta(BaseModel):
     """
@@ -33,14 +33,10 @@ class OfferMeta(BaseModel):
     offer_end_time: StrictStr = Field(..., description="Expiry Time for the Offer")
     __properties = ["offer_title", "offer_description", "offer_code", "offer_start_time", "offer_end_time"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -61,7 +57,7 @@ class OfferMeta(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -74,9 +70,9 @@ class OfferMeta(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferMeta.parse_obj(obj)
+            return OfferMeta.model_validate(obj)
 
-        _obj = OfferMeta.parse_obj({
+        _obj = OfferMeta.model_validate({
             "offer_title": obj.get("offer_title"),
             "offer_description": obj.get("offer_description"),
             "offer_code": obj.get("offer_code"),

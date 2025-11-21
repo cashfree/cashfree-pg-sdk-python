@@ -20,7 +20,7 @@ import json
 
 from datetime import datetime
 from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, ConfigDict
 from cashfree_pg.models.cart_details_entity import CartDetailsEntity
 from cashfree_pg.models.customer_details_response import CustomerDetailsResponse
 from cashfree_pg.models.order_meta import OrderMeta
@@ -47,14 +47,10 @@ class OrderEntity(BaseModel):
     cart_details: Optional[CartDetailsEntity] = None
     __properties = ["cf_order_id", "order_id", "entity", "order_currency", "order_amount", "order_status", "payment_session_id", "order_expiry_time", "order_note", "created_at", "order_splits", "customer_details", "order_meta", "order_tags", "cart_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -75,7 +71,7 @@ class OrderEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -104,9 +100,9 @@ class OrderEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OrderEntity.parse_obj(obj)
+            return OrderEntity.model_validate(obj)
 
-        _obj = OrderEntity.parse_obj({
+        _obj = OrderEntity.model_validate({
             "cf_order_id": obj.get("cf_order_id"),
             "order_id": obj.get("order_id"),
             "entity": obj.get("entity"),

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class CryptogramEntity(BaseModel):
     """
@@ -35,14 +35,10 @@ class CryptogramEntity(BaseModel):
     card_display: Optional[StrictStr] = Field(None, description="last 4 digits of original card number")
     __properties = ["instrument_id", "token_requestor_id", "card_number", "card_expiry_mm", "card_expiry_yy", "cryptogram", "card_display"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class CryptogramEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class CryptogramEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CryptogramEntity.parse_obj(obj)
+            return CryptogramEntity.model_validate(obj)
 
-        _obj = CryptogramEntity.parse_obj({
+        _obj = CryptogramEntity.model_validate({
             "instrument_id": obj.get("instrument_id"),
             "token_requestor_id": obj.get("token_requestor_id"),
             "card_number": obj.get("card_number"),

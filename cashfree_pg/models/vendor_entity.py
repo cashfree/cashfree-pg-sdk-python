@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, StrictStr, conlist
+from pydantic import BaseModel, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
 from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
@@ -46,14 +46,10 @@ class VendorEntity(BaseModel):
     related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
     __properties = ["email", "status", "phone", "name", "vendor_id", "added_on", "updated_on", "bank", "upi", "schedule_option", "vendor_type", "account_type", "business_type", "remarks", "related_docs"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -74,7 +70,7 @@ class VendorEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -108,9 +104,9 @@ class VendorEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return VendorEntity.parse_obj(obj)
+            return VendorEntity.model_validate(obj)
 
-        _obj = VendorEntity.parse_obj({
+        _obj = VendorEntity.model_validate({
             "email": obj.get("email"),
             "status": obj.get("status"),
             "phone": obj.get("phone"),

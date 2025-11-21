@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import BaseModel, Field, StrictStr, field_validator, ConfigDict
 
 class ApiError(BaseModel):
     """
@@ -31,7 +31,7 @@ class ApiError(BaseModel):
     type: Optional[StrictStr] = Field(None, description="api_error")
     __properties = ["message", "code", "type"]
 
-    @validator('type')
+    @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -41,14 +41,10 @@ class ApiError(BaseModel):
             raise ValueError("must be one of enum values ('api_error')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -69,7 +65,7 @@ class ApiError(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -82,9 +78,9 @@ class ApiError(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ApiError.parse_obj(obj)
+            return ApiError.model_validate(obj)
 
-        _obj = ApiError.parse_obj({
+        _obj = ApiError.model_validate({
             "message": obj.get("message"),
             "code": obj.get("code"),
             "type": obj.get("type")

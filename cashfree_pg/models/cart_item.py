@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 
 class CartItem(BaseModel):
     """
@@ -38,14 +38,10 @@ class CartItem(BaseModel):
     item_quantity: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Quantity if that item")
     __properties = ["item_id", "item_name", "item_description", "item_tags", "item_details_url", "item_image_url", "item_original_unit_price", "item_discounted_unit_price", "item_currency", "item_quantity"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -66,7 +62,7 @@ class CartItem(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class CartItem(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CartItem.parse_obj(obj)
+            return CartItem.model_validate(obj)
 
-        _obj = CartItem.parse_obj({
+        _obj = CartItem.model_validate({
             "item_id": obj.get("item_id"),
             "item_name": obj.get("item_name"),
             "item_description": obj.get("item_description"),

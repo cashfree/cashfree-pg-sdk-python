@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from cashfree_pg.models.card_emi import CardEMI
 
 class CardEMIPaymentMethod(BaseModel):
@@ -30,14 +30,10 @@ class CardEMIPaymentMethod(BaseModel):
     emi: CardEMI = Field(...)
     __properties = ["emi"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class CardEMIPaymentMethod(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -74,9 +70,9 @@ class CardEMIPaymentMethod(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CardEMIPaymentMethod.parse_obj(obj)
+            return CardEMIPaymentMethod.model_validate(obj)
 
-        _obj = CardEMIPaymentMethod.parse_obj({
+        _obj = CardEMIPaymentMethod.model_validate({
             "emi": CardEMI.from_dict(obj.get("emi")) if obj.get("emi") is not None else None
         })
         return _obj

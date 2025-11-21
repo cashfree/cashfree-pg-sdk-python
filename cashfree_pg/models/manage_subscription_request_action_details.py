@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class ManageSubscriptionRequestActionDetails(BaseModel):
     """
@@ -30,14 +30,10 @@ class ManageSubscriptionRequestActionDetails(BaseModel):
     plan_id: Optional[StrictStr] = Field(None, description="Plan ID to update. Required for CHANGE_PLAN action.")
     __properties = ["next_scheduled_time", "plan_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class ManageSubscriptionRequestActionDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class ManageSubscriptionRequestActionDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ManageSubscriptionRequestActionDetails.parse_obj(obj)
+            return ManageSubscriptionRequestActionDetails.model_validate(obj)
 
-        _obj = ManageSubscriptionRequestActionDetails.parse_obj({
+        _obj = ManageSubscriptionRequestActionDetails.model_validate({
             "next_scheduled_time": obj.get("next_scheduled_time"),
             "plan_id": obj.get("plan_id")
         })

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator, ConfigDict
 
 class AuthorizationInPaymentsEntity(BaseModel):
     """
@@ -36,7 +36,7 @@ class AuthorizationInPaymentsEntity(BaseModel):
     action_time: Optional[StrictStr] = Field(None, description="Time of action (CAPTURE or VOID)")
     __properties = ["action", "status", "captured_amount", "start_time", "end_time", "approve_by", "action_reference", "action_time"]
 
-    @validator('action')
+    @field_validator('action')
     def action_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -46,7 +46,7 @@ class AuthorizationInPaymentsEntity(BaseModel):
             raise ValueError("must be one of enum values ('CAPTURE', 'VOID')")
         return value
 
-    @validator('status')
+    @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -56,14 +56,10 @@ class AuthorizationInPaymentsEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUCCESS', 'PENDING')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -84,7 +80,7 @@ class AuthorizationInPaymentsEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -97,9 +93,9 @@ class AuthorizationInPaymentsEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AuthorizationInPaymentsEntity.parse_obj(obj)
+            return AuthorizationInPaymentsEntity.model_validate(obj)
 
-        _obj = AuthorizationInPaymentsEntity.parse_obj({
+        _obj = AuthorizationInPaymentsEntity.model_validate({
             "action": obj.get("action"),
             "status": obj.get("status"),
             "captured_amount": obj.get("captured_amount"),
