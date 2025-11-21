@@ -17,23 +17,29 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from cashfree_pg.models.customer_details import CustomerDetails
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class Order(BaseModel):
     """
-    CustomerDetails
+    Order representation from Cashfree. Shape is simplified; extend as needed. :contentReference[oaicite:15]{index=15} 
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    cf_order_id: Optional[StrictStr] = None
+    order_id: Optional[StrictStr] = None
+    order_amount: Optional[Union[StrictFloat, StrictInt]] = None
+    order_currency: Optional[StrictStr] = None
+    order_status: Optional[StrictStr] = None
+    order_expiry_time: Optional[datetime] = None
+    payment_session_id: Optional[StrictStr] = None
+    customer_details: Optional[CustomerDetails] = None
+    order_meta: Optional[Dict[str, Any]] = None
+    order_tags: Optional[Dict[str, StrictStr]] = None
+    cart_details: Optional[Dict[str, Any]] = None
+    __properties: ClassVar[List[str]] = ["cf_order_id", "order_id", "order_amount", "order_currency", "order_status", "order_expiry_time", "payment_session_id", "customer_details", "order_meta", "order_tags", "cart_details"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +59,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of Order from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,11 +80,14 @@ class CustomerDetails(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of customer_details
+        if self.customer_details:
+            _dict['customer_details'] = self.customer_details.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of Order from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +95,17 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "cf_order_id": obj.get("cf_order_id"),
+            "order_id": obj.get("order_id"),
+            "order_amount": obj.get("order_amount"),
+            "order_currency": obj.get("order_currency"),
+            "order_status": obj.get("order_status"),
+            "order_expiry_time": obj.get("order_expiry_time"),
+            "payment_session_id": obj.get("payment_session_id"),
+            "customer_details": CustomerDetails.from_dict(obj["customer_details"]) if obj.get("customer_details") is not None else None,
+            "order_meta": obj.get("order_meta"),
+            "order_tags": obj.get("order_tags"),
+            "cart_details": obj.get("cart_details")
         })
         return _obj
 

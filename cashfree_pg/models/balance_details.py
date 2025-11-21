@@ -78,5 +78,3 @@ class BalanceDetails(BaseModel):
             "vendor_unsettled": obj.get("vendor_unsettled")
         })
         return _obj
-
-

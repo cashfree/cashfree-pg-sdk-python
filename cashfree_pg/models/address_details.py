@@ -93,4 +93,3 @@ class AddressDetails(BaseModel):
         })
         return _obj
 
-

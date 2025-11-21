@@ -80,5 +80,3 @@ class ChargesDetails(BaseModel):
             "is_postpaid": obj.get("is_postpaid")
         })
         return _obj
-
-

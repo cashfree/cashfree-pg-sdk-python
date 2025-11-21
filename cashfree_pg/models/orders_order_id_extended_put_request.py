@@ -17,23 +17,20 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from cashfree_pg.models.orders_order_id_extended_put_request_charges import OrdersOrderIdExtendedPutRequestCharges
+from cashfree_pg.models.orders_order_id_extended_put_request_shipment_details_inner import OrdersOrderIdExtendedPutRequestShipmentDetailsInner
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class OrdersOrderIdExtendedPutRequest(BaseModel):
     """
-    CustomerDetails
+    OrdersOrderIdExtendedPutRequest
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    shipment_details: Optional[List[OrdersOrderIdExtendedPutRequestShipmentDetailsInner]] = None
+    charges: Optional[OrdersOrderIdExtendedPutRequestCharges] = None
+    __properties: ClassVar[List[str]] = ["shipment_details", "charges"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +50,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of OrdersOrderIdExtendedPutRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,11 +71,21 @@ class CustomerDetails(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in shipment_details (list)
+        _items = []
+        if self.shipment_details:
+            for _item_shipment_details in self.shipment_details:
+                if _item_shipment_details:
+                    _items.append(_item_shipment_details.to_dict())
+            _dict['shipment_details'] = _items
+        # override the default output from pydantic by calling `to_dict()` of charges
+        if self.charges:
+            _dict['charges'] = self.charges.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of OrdersOrderIdExtendedPutRequest from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +93,8 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "shipment_details": [OrdersOrderIdExtendedPutRequestShipmentDetailsInner.from_dict(_item) for _item in obj["shipment_details"]] if obj.get("shipment_details") is not None else None,
+            "charges": OrdersOrderIdExtendedPutRequestCharges.from_dict(obj["charges"]) if obj.get("charges") is not None else None
         })
         return _obj
 

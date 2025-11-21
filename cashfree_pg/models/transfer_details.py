@@ -90,5 +90,3 @@ class TransferDetails(BaseModel):
             "tags": [TransferDetailsTagsInner.from_dict(_item) for _item in obj.get("tags")] if obj.get("tags") is not None else None
         })
         return _obj
-
-

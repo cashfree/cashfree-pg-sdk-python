@@ -80,5 +80,3 @@ class AdjustVendorBalanceRequest(BaseModel):
             "tags": obj.get("tags")
         })
         return _obj
-
-

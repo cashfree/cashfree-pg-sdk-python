@@ -74,5 +74,3 @@ class TransferDetailsTagsInner(BaseModel):
             "size": obj.get("size")
         })
         return _obj
-
-

@@ -90,5 +90,3 @@ class AdjustVendorBalanceResponse(BaseModel):
             "charges": ChargesDetails.from_dict(obj.get("charges")) if obj.get("charges") is not None else None
         })
         return _obj
-
-

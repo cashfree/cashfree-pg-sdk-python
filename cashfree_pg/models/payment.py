@@ -17,23 +17,26 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, StrictFloat, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerDetails(BaseModel):
+class Payment(BaseModel):
     """
-    CustomerDetails
+    Simplified payment object.
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = None
-    customer_name: Optional[StrictStr] = None
-    customer_email: Optional[StrictStr] = None
-    customer_phone: Optional[StrictStr] = None
-    customer_bank_account_number: Optional[StrictStr] = None
-    customer_bank_ifsc: Optional[StrictStr] = None
-    customer_bank_code: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = ["customer_id", "customer_name", "customer_email", "customer_phone", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
+    cf_payment_id: Optional[StrictStr] = None
+    payment_id: Optional[StrictStr] = None
+    subscription_id: Optional[StrictStr] = None
+    payment_amount: Optional[Union[StrictFloat, StrictInt]] = None
+    payment_currency: Optional[StrictStr] = None
+    payment_status: Optional[StrictStr] = None
+    payment_method: Optional[StrictStr] = None
+    payment_type: Optional[StrictStr] = None
+    created_at: Optional[datetime] = None
+    __properties: ClassVar[List[str]] = ["cf_payment_id", "payment_id", "subscription_id", "payment_amount", "payment_currency", "payment_status", "payment_method", "payment_type", "created_at"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -53,7 +56,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a JSON string"""
+        """Create an instance of Payment from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -78,7 +81,7 @@ class CustomerDetails(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerDetails from a dict"""
+        """Create an instance of Payment from a dict"""
         if obj is None:
             return None
 
@@ -86,13 +89,15 @@ class CustomerDetails(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer_id": obj.get("customer_id"),
-            "customer_name": obj.get("customer_name"),
-            "customer_email": obj.get("customer_email"),
-            "customer_phone": obj.get("customer_phone"),
-            "customer_bank_account_number": obj.get("customer_bank_account_number"),
-            "customer_bank_ifsc": obj.get("customer_bank_ifsc"),
-            "customer_bank_code": obj.get("customer_bank_code")
+            "cf_payment_id": obj.get("cf_payment_id"),
+            "payment_id": obj.get("payment_id"),
+            "subscription_id": obj.get("subscription_id"),
+            "payment_amount": obj.get("payment_amount"),
+            "payment_currency": obj.get("payment_currency"),
+            "payment_status": obj.get("payment_status"),
+            "payment_method": obj.get("payment_method"),
+            "payment_type": obj.get("payment_type"),
+            "created_at": obj.get("created_at")
         })
         return _obj
 
