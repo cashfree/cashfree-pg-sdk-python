@@ -20,7 +20,7 @@ import json
 
 
 from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr
+from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr, ConfigDict
 from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity
 from cashfree_pg.models.link_meta_response_entity import LinkMetaResponseEntity
 from cashfree_pg.models.link_notify_entity import LinkNotifyEntity
@@ -45,14 +45,10 @@ class CreateLinkRequest(BaseModel):
     order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
     __properties = ["link_id", "link_amount", "link_currency", "link_purpose", "customer_details", "link_partial_payments", "link_minimum_partial_amount", "link_expiry_time", "link_notify", "link_auto_reminders", "link_notes", "link_meta", "order_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -73,7 +69,7 @@ class CreateLinkRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -102,9 +98,9 @@ class CreateLinkRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateLinkRequest.parse_obj(obj)
+            return CreateLinkRequest.model_validate(obj)
 
-        _obj = CreateLinkRequest.parse_obj({
+        _obj = CreateLinkRequest.model_validate({
             "link_id": obj.get("link_id"),
             "link_amount": obj.get("link_amount"),
             "link_currency": obj.get("link_currency"),

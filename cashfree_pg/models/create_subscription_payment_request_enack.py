@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class CreateSubscriptionPaymentRequestEnack(BaseModel):
     """
@@ -35,14 +35,10 @@ class CreateSubscriptionPaymentRequestEnack(BaseModel):
     account_ifsc: Optional[StrictStr] = Field(None, description="Account IFSC")
     __properties = ["channel", "auth_mode", "account_holder_name", "account_number", "account_bank_code", "account_type", "account_ifsc"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class CreateSubscriptionPaymentRequestEnack(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class CreateSubscriptionPaymentRequestEnack(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionPaymentRequestEnack.parse_obj(obj)
+            return CreateSubscriptionPaymentRequestEnack.model_validate(obj)
 
-        _obj = CreateSubscriptionPaymentRequestEnack.parse_obj({
+        _obj = CreateSubscriptionPaymentRequestEnack.model_validate({
             "channel": obj.get("channel"),
             "auth_mode": obj.get("auth_mode"),
             "account_holder_name": obj.get("account_holder_name"),

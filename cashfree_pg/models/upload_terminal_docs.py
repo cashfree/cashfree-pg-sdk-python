@@ -20,7 +20,7 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, ConfigDict
 
 class UploadTerminalDocs(BaseModel):
     """
@@ -31,14 +31,10 @@ class UploadTerminalDocs(BaseModel):
     file: StrictStr = Field(..., description="Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.")
     __properties = ["doc_type", "doc_value", "file"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class UploadTerminalDocs(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -72,9 +68,9 @@ class UploadTerminalDocs(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return UploadTerminalDocs.parse_obj(obj)
+            return UploadTerminalDocs.model_validate(obj)
 
-        _obj = UploadTerminalDocs.parse_obj({
+        _obj = UploadTerminalDocs.model_validate({
             "doc_type": obj.get("doc_type"),
             "doc_value": obj.get("doc_value"),
             "file": obj.get("file")

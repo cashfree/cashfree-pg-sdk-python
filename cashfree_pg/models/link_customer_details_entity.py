@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictInt, StrictStr, field_validator, ConfigDict
 
 class LinkCustomerDetailsEntity(BaseModel):
     """
@@ -34,7 +34,7 @@ class LinkCustomerDetailsEntity(BaseModel):
     customer_bank_code: Optional[StrictInt] = Field(None, description="Customer Bank Code")
     __properties = ["customer_phone", "customer_email", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code"]
 
-    @validator('customer_bank_code')
+    @field_validator('customer_bank_code')
     def customer_bank_code_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -44,14 +44,10 @@ class LinkCustomerDetailsEntity(BaseModel):
             raise ValueError("must be one of enum values (3003, 3005, 3006, 3010, 3012, 3016, 3019, 3020, 3021, 3022, 3023, 3024, 3026, 3027, 3028, 3029, 3030, 3031, 3032, 3033, 3038, 3039, 3040, 3042, 3044, 3054, 3055, 3058, 3086, 3087, 3088, 3089, 3090, 3091, 3092, 3098, 3115, 3117, 7001)")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -72,7 +68,7 @@ class LinkCustomerDetailsEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -85,9 +81,9 @@ class LinkCustomerDetailsEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return LinkCustomerDetailsEntity.parse_obj(obj)
+            return LinkCustomerDetailsEntity.model_validate(obj)
 
-        _obj = LinkCustomerDetailsEntity.parse_obj({
+        _obj = LinkCustomerDetailsEntity.model_validate({
             "customer_phone": obj.get("customer_phone"),
             "customer_email": obj.get("customer_email"),
             "customer_name": obj.get("customer_name"),

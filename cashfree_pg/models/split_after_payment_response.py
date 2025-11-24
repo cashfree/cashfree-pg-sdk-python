@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 
 class SplitAfterPaymentResponse(BaseModel):
     """
@@ -30,14 +30,10 @@ class SplitAfterPaymentResponse(BaseModel):
     message: Optional[StrictStr] = None
     __properties = ["status", "message"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class SplitAfterPaymentResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class SplitAfterPaymentResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SplitAfterPaymentResponse.parse_obj(obj)
+            return SplitAfterPaymentResponse.model_validate(obj)
 
-        _obj = SplitAfterPaymentResponse.parse_obj({
+        _obj = SplitAfterPaymentResponse.model_validate({
             "status": obj.get("status"),
             "message": obj.get("message")
         })

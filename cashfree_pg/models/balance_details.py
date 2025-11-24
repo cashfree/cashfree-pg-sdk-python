@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class BalanceDetails(BaseModel):
     """
@@ -32,14 +32,10 @@ class BalanceDetails(BaseModel):
     vendor_unsettled: Optional[Union[StrictFloat, StrictInt]] = None
     __properties = ["merchant_id", "vendor_id", "merchant_unsettled", "vendor_unsettled"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class BalanceDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -73,14 +69,12 @@ class BalanceDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return BalanceDetails.parse_obj(obj)
+            return BalanceDetails.model_validate(obj)
 
-        _obj = BalanceDetails.parse_obj({
+        _obj = BalanceDetails.model_validate({
             "merchant_id": obj.get("merchant_id"),
             "vendor_id": obj.get("vendor_id"),
             "merchant_unsettled": obj.get("merchant_unsettled"),
             "vendor_unsettled": obj.get("vendor_unsettled")
         })
         return _obj
-
-

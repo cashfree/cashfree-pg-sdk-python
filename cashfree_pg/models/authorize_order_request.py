@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator, ConfigDict
 
 class AuthorizeOrderRequest(BaseModel):
     """
@@ -30,7 +30,7 @@ class AuthorizeOrderRequest(BaseModel):
     amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The amount if you are running a 'CAPTURE'")
     __properties = ["action", "amount"]
 
-    @validator('action')
+    @field_validator('action')
     def action_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -40,14 +40,10 @@ class AuthorizeOrderRequest(BaseModel):
             raise ValueError("must be one of enum values ('CAPTURE', 'VOID')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -68,7 +64,7 @@ class AuthorizeOrderRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -81,9 +77,9 @@ class AuthorizeOrderRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return AuthorizeOrderRequest.parse_obj(obj)
+            return AuthorizeOrderRequest.model_validate(obj)
 
-        _obj = AuthorizeOrderRequest.parse_obj({
+        _obj = AuthorizeOrderRequest.model_validate({
             "action": obj.get("action"),
             "amount": obj.get("amount")
         })

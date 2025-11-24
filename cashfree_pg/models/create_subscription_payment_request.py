@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod
 
 class CreateSubscriptionPaymentRequest(BaseModel):
@@ -37,14 +37,10 @@ class CreateSubscriptionPaymentRequest(BaseModel):
     payment_method: Optional[CreateSubscriptionPaymentRequestPaymentMethod] = None
     __properties = ["subscription_id", "subscription_session_id", "payment_id", "payment_amount", "payment_schedule_date", "payment_remarks", "payment_type", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -65,7 +61,7 @@ class CreateSubscriptionPaymentRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -81,9 +77,9 @@ class CreateSubscriptionPaymentRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionPaymentRequest.parse_obj(obj)
+            return CreateSubscriptionPaymentRequest.model_validate(obj)
 
-        _obj = CreateSubscriptionPaymentRequest.parse_obj({
+        _obj = CreateSubscriptionPaymentRequest.model_validate({
             "subscription_id": obj.get("subscription_id"),
             "subscription_session_id": obj.get("subscription_session_id"),
             "payment_id": obj.get("payment_id"),

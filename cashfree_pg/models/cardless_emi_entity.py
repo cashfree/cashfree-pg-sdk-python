@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, conlist, constr
+from pydantic import BaseModel, conlist, constr, ConfigDict
 from cashfree_pg.models.emi_plans_array import EMIPlansArray
 
 class CardlessEMIEntity(BaseModel):
@@ -31,14 +31,10 @@ class CardlessEMIEntity(BaseModel):
     emi_plans: Optional[conlist(EMIPlansArray)] = None
     __properties = ["payment_method", "emi_plans"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class CardlessEMIEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class CardlessEMIEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CardlessEMIEntity.parse_obj(obj)
+            return CardlessEMIEntity.model_validate(obj)
 
-        _obj = CardlessEMIEntity.parse_obj({
+        _obj = CardlessEMIEntity.model_validate({
             "payment_method": obj.get("payment_method"),
             "emi_plans": [EMIPlansArray.from_dict(_item) for _item in obj.get("emi_plans")] if obj.get("emi_plans") is not None else None
         })

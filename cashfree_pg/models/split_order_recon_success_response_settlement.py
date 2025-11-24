@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class SplitOrderReconSuccessResponseSettlement(BaseModel):
     """
@@ -42,14 +42,10 @@ class SplitOrderReconSuccessResponseSettlement(BaseModel):
     payment_time: Optional[StrictStr] = Field(None, description="Timestamp when payment was made.")
     __properties = ["entity", "cf_settlement_id", "cf_payment_id", "order_id", "order_currency", "transfer_id", "order_amount", "service_charge", "service_tax", "settlement_amount", "settlement_currency", "transfer_utr", "transfer_time", "payment_time"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -70,7 +66,7 @@ class SplitOrderReconSuccessResponseSettlement(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -98,9 +94,9 @@ class SplitOrderReconSuccessResponseSettlement(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SplitOrderReconSuccessResponseSettlement.parse_obj(obj)
+            return SplitOrderReconSuccessResponseSettlement.model_validate(obj)
 
-        _obj = SplitOrderReconSuccessResponseSettlement.parse_obj({
+        _obj = SplitOrderReconSuccessResponseSettlement.model_validate({
             "entity": obj.get("entity"),
             "cf_settlement_id": obj.get("cf_settlement_id"),
             "cf_payment_id": obj.get("cf_payment_id"),

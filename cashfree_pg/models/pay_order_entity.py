@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, validator
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator, ConfigDict
 from cashfree_pg.models.order_pay_data import OrderPayData
 
 class PayOrderEntity(BaseModel):
@@ -35,7 +35,7 @@ class PayOrderEntity(BaseModel):
     data: Optional[OrderPayData] = None
     __properties = ["payment_amount", "cf_payment_id", "payment_method", "channel", "action", "data"]
 
-    @validator('payment_method')
+    @field_validator('payment_method')
     def payment_method_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -45,7 +45,7 @@ class PayOrderEntity(BaseModel):
             raise ValueError("must be one of enum values ('netbanking', 'card', 'upi', 'app', 'cardless_emi', 'paylater', 'banktransfer')")
         return value
 
-    @validator('channel')
+    @field_validator('channel')
     def channel_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -55,7 +55,7 @@ class PayOrderEntity(BaseModel):
             raise ValueError("must be one of enum values ('link', 'collect', 'qrcode', 'post')")
         return value
 
-    @validator('action')
+    @field_validator('action')
     def action_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -65,14 +65,10 @@ class PayOrderEntity(BaseModel):
             raise ValueError("must be one of enum values ('link', 'custom', 'form', 'post')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -93,7 +89,7 @@ class PayOrderEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -109,9 +105,9 @@ class PayOrderEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PayOrderEntity.parse_obj(obj)
+            return PayOrderEntity.model_validate(obj)
 
-        _obj = PayOrderEntity.parse_obj({
+        _obj = PayOrderEntity.model_validate({
             "payment_amount": obj.get("payment_amount"),
             "cf_payment_id": obj.get("cf_payment_id"),
             "payment_method": obj.get("payment_method"),

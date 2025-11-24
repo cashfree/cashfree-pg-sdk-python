@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictBool, StrictStr
+from pydantic import BaseModel, StrictBool, StrictStr, ConfigDict
 from cashfree_pg.models.cardless_emi_entity import CardlessEMIEntity
 
 class EligibilityCardlessEMIEntity(BaseModel):
@@ -33,14 +33,10 @@ class EligibilityCardlessEMIEntity(BaseModel):
     entity_details: Optional[CardlessEMIEntity] = None
     __properties = ["eligibility", "entity_type", "entity_value", "entity_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -61,7 +57,7 @@ class EligibilityCardlessEMIEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -77,9 +73,9 @@ class EligibilityCardlessEMIEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return EligibilityCardlessEMIEntity.parse_obj(obj)
+            return EligibilityCardlessEMIEntity.model_validate(obj)
 
-        _obj = EligibilityCardlessEMIEntity.parse_obj({
+        _obj = EligibilityCardlessEMIEntity.model_validate({
             "eligibility": obj.get("eligibility"),
             "entity_type": obj.get("entity_type"),
             "entity_value": obj.get("entity_value"),

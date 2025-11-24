@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 
 class PaymentMethodAppInPaymentsEntityApp(BaseModel):
     """
@@ -31,14 +31,10 @@ class PaymentMethodAppInPaymentsEntityApp(BaseModel):
     phone: Optional[StrictStr] = None
     __properties = ["channel", "provider", "phone"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class PaymentMethodAppInPaymentsEntityApp(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -72,9 +68,9 @@ class PaymentMethodAppInPaymentsEntityApp(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaymentMethodAppInPaymentsEntityApp.parse_obj(obj)
+            return PaymentMethodAppInPaymentsEntityApp.model_validate(obj)
 
-        _obj = PaymentMethodAppInPaymentsEntityApp.parse_obj({
+        _obj = PaymentMethodAppInPaymentsEntityApp.model_validate({
             "channel": obj.get("channel"),
             "provider": obj.get("provider"),
             "phone": obj.get("phone")

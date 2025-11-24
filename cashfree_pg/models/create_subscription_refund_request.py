@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class CreateSubscriptionRefundRequest(BaseModel):
     """
@@ -35,14 +35,10 @@ class CreateSubscriptionRefundRequest(BaseModel):
     refund_speed: Optional[StrictStr] = Field(None, description="Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds.")
     __properties = ["subscription_id", "payment_id", "cf_payment_id", "refund_id", "refund_amount", "refund_note", "refund_speed"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class CreateSubscriptionRefundRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class CreateSubscriptionRefundRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateSubscriptionRefundRequest.parse_obj(obj)
+            return CreateSubscriptionRefundRequest.model_validate(obj)
 
-        _obj = CreateSubscriptionRefundRequest.parse_obj({
+        _obj = CreateSubscriptionRefundRequest.model_validate({
             "subscription_id": obj.get("subscription_id"),
             "payment_id": obj.get("payment_id"),
             "cf_payment_id": obj.get("cf_payment_id"),

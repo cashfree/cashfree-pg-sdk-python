@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 
 class ErrorDetailsInPaymentsEntity(BaseModel):
     """
@@ -35,14 +35,10 @@ class ErrorDetailsInPaymentsEntity(BaseModel):
     error_subcode_raw: Optional[StrictStr] = None
     __properties = ["error_code", "error_description", "error_reason", "error_source", "error_code_raw", "error_description_raw", "error_subcode_raw"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class ErrorDetailsInPaymentsEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -76,9 +72,9 @@ class ErrorDetailsInPaymentsEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ErrorDetailsInPaymentsEntity.parse_obj(obj)
+            return ErrorDetailsInPaymentsEntity.model_validate(obj)
 
-        _obj = ErrorDetailsInPaymentsEntity.parse_obj({
+        _obj = ErrorDetailsInPaymentsEntity.model_validate({
             "error_code": obj.get("error_code"),
             "error_description": obj.get("error_description"),
             "error_reason": obj.get("error_reason"),

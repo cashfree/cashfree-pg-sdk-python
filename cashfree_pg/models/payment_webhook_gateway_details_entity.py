@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, StrictStr
+from pydantic import BaseModel, StrictStr, ConfigDict
 
 class PaymentWebhookGatewayDetailsEntity(BaseModel):
     """
@@ -33,14 +33,10 @@ class PaymentWebhookGatewayDetailsEntity(BaseModel):
     gateway_settlement: Optional[StrictStr] = None
     __properties = ["gateway_name", "gateway_order_id", "gateway_payment_id", "gateway_status_code", "gateway_settlement"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -61,7 +57,7 @@ class PaymentWebhookGatewayDetailsEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -74,9 +70,9 @@ class PaymentWebhookGatewayDetailsEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaymentWebhookGatewayDetailsEntity.parse_obj(obj)
+            return PaymentWebhookGatewayDetailsEntity.model_validate(obj)
 
-        _obj = PaymentWebhookGatewayDetailsEntity.parse_obj({
+        _obj = PaymentWebhookGatewayDetailsEntity.model_validate({
             "gateway_name": obj.get("gateway_name"),
             "gateway_order_id": obj.get("gateway_order_id"),
             "gateway_payment_id": obj.get("gateway_payment_id"),

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool
+from pydantic import BaseModel, Field, StrictBool, ConfigDict
 
 class LinkNotifyEntity(BaseModel):
     """
@@ -30,14 +30,10 @@ class LinkNotifyEntity(BaseModel):
     send_email: Optional[StrictBool] = Field(None, description="If \"true\", Cashfree will send email on customer_email")
     __properties = ["send_sms", "send_email"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -58,7 +54,7 @@ class LinkNotifyEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -71,9 +67,9 @@ class LinkNotifyEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return LinkNotifyEntity.parse_obj(obj)
+            return LinkNotifyEntity.model_validate(obj)
 
-        _obj = LinkNotifyEntity.parse_obj({
+        _obj = LinkNotifyEntity.model_validate({
             "send_sms": obj.get("send_sms"),
             "send_email": obj.get("send_email")
         })

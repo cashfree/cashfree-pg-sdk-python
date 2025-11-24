@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, constr, validator
+from pydantic import BaseModel, Field, constr, field_validator, ConfigDict
 from cashfree_pg.models.cashback_details import CashbackDetails
 from cashfree_pg.models.discount_details import DiscountDetails
 
@@ -33,21 +33,17 @@ class OfferDetails(BaseModel):
     cashback_details: Optional[CashbackDetails] = None
     __properties = ["offer_type", "discount_details", "cashback_details"]
 
-    @validator('offer_type')
+    @field_validator('offer_type')
     def offer_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('DISCOUNT', 'CASHBACK', 'DISCOUNT_AND_CASHBACK', 'NO_COST_EMI'):
             raise ValueError("must be one of enum values ('DISCOUNT', 'CASHBACK', 'DISCOUNT_AND_CASHBACK', 'NO_COST_EMI')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -68,7 +64,7 @@ class OfferDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -87,9 +83,9 @@ class OfferDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return OfferDetails.parse_obj(obj)
+            return OfferDetails.model_validate(obj)
 
-        _obj = OfferDetails.parse_obj({
+        _obj = OfferDetails.model_validate({
             "offer_type": obj.get("offer_type"),
             "discount_details": DiscountDetails.from_dict(obj.get("discount_details")) if obj.get("discount_details") is not None else None,
             "cashback_details": CashbackDetails.from_dict(obj.get("cashback_details")) if obj.get("cashback_details") is not None else None

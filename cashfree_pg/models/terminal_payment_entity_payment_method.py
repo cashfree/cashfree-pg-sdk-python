@@ -20,7 +20,7 @@ import pprint
 import re  # noqa: F401
 
 from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator, ConfigDict
 from cashfree_pg.models.payment_method_app_in_payments_entity import PaymentMethodAppInPaymentsEntity
 from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity import PaymentMethodBankTransferInPaymentsEntity
 from cashfree_pg.models.payment_method_card_emiin_payments_entity import PaymentMethodCardEMIInPaymentsEntity
@@ -58,10 +58,9 @@ class TerminalPaymentEntityPaymentMethod(BaseModel):
         actual_instance: Union[PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity]
     else:
         actual_instance: Any
-    one_of_schemas: List[str] = Field(TERMINALPAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Field(TERMINALPAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS, frozen=True)
 
-    class Config:
-        validate_assignment = True
+    model_config = ConfigDict(validate_assignment=True)
 
     def __init__(self, *args, **kwargs):
         if args:
@@ -73,9 +72,9 @@ class TerminalPaymentEntityPaymentMethod(BaseModel):
         else:
             super().__init__(**kwargs)
 
-    @validator('actual_instance')
+    @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
-        instance = TerminalPaymentEntityPaymentMethod.construct()
+        instance = TerminalPaymentEntityPaymentMethod.model_construct()
         error_messages = []
         match = 0
         # validate data type: PaymentMethodCardInPaymentsEntity
@@ -134,7 +133,7 @@ class TerminalPaymentEntityPaymentMethod(BaseModel):
     @classmethod
     def from_json(cls, json_str: str) -> TerminalPaymentEntityPaymentMethod:
         """Returns the object represented by the json string"""
-        instance = TerminalPaymentEntityPaymentMethod.construct()
+        instance = TerminalPaymentEntityPaymentMethod.model_construct()
         error_messages = []
         match = 0
 
@@ -237,6 +236,6 @@ class TerminalPaymentEntityPaymentMethod(BaseModel):
 
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
-        return pprint.pformat(self.dict())
+        return pprint.pformat(self.model_dump())
 
 

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, constr
+from pydantic import BaseModel, Field, constr, ConfigDict
 from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
 
 class CreateTerminalRequest(BaseModel):
@@ -37,14 +37,10 @@ class CreateTerminalRequest(BaseModel):
     terminal_meta: Optional[CreateTerminalRequestTerminalMeta] = None
     __properties = ["terminal_id", "terminal_phone_no", "terminal_name", "terminal_address", "terminal_email", "terminal_note", "terminal_type", "terminal_meta"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -65,7 +61,7 @@ class CreateTerminalRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -81,9 +77,9 @@ class CreateTerminalRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateTerminalRequest.parse_obj(obj)
+            return CreateTerminalRequest.model_validate(obj)
 
-        _obj = CreateTerminalRequest.parse_obj({
+        _obj = CreateTerminalRequest.model_validate({
             "terminal_id": obj.get("terminal_id"),
             "terminal_phone_no": obj.get("terminal_phone_no"),
             "terminal_name": obj.get("terminal_name"),

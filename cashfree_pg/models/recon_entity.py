@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.recon_entity_data_inner import ReconEntityDataInner
 
 class ReconEntity(BaseModel):
@@ -32,14 +32,10 @@ class ReconEntity(BaseModel):
     data: Optional[conlist(ReconEntityDataInner)] = None
     __properties = ["cursor", "limit", "data"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class ReconEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -80,9 +76,9 @@ class ReconEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ReconEntity.parse_obj(obj)
+            return ReconEntity.model_validate(obj)
 
-        _obj = ReconEntity.parse_obj({
+        _obj = ReconEntity.model_validate({
             "cursor": obj.get("cursor"),
             "limit": obj.get("limit"),
             "data": [ReconEntityDataInner.from_dict(_item) for _item in obj.get("data")] if obj.get("data") is not None else None

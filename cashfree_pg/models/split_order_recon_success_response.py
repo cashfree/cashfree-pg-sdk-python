@@ -20,7 +20,7 @@ import json
 
 
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, conlist
+from pydantic import BaseModel, Field, conlist, ConfigDict
 from cashfree_pg.models.split_order_recon_success_response_settlement import SplitOrderReconSuccessResponseSettlement
 from cashfree_pg.models.split_order_recon_success_response_vendors_inner import SplitOrderReconSuccessResponseVendorsInner
 
@@ -33,14 +33,10 @@ class SplitOrderReconSuccessResponse(BaseModel):
     vendors: Optional[conlist(SplitOrderReconSuccessResponseVendorsInner)] = Field(None, description="List of vendor settlements associated with the split settlement.")
     __properties = ["settlement", "refunds", "vendors"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -61,7 +57,7 @@ class SplitOrderReconSuccessResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -84,9 +80,9 @@ class SplitOrderReconSuccessResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SplitOrderReconSuccessResponse.parse_obj(obj)
+            return SplitOrderReconSuccessResponse.model_validate(obj)
 
-        _obj = SplitOrderReconSuccessResponse.parse_obj({
+        _obj = SplitOrderReconSuccessResponse.model_validate({
             "settlement": SplitOrderReconSuccessResponseSettlement.from_dict(obj.get("settlement")) if obj.get("settlement") is not None else None,
             "refunds": obj.get("refunds"),
             "vendors": [SplitOrderReconSuccessResponseVendorsInner.from_dict(_item) for _item in obj.get("vendors")] if obj.get("vendors") is not None else None

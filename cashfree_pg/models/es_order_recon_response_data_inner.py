@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner import ESOrderReconResponseDataInnerOrderSplitsInner
 
 class ESOrderReconResponseDataInner(BaseModel):
@@ -55,14 +55,10 @@ class ESOrderReconResponseDataInner(BaseModel):
     eligible_split_balance: Optional[StrictStr] = None
     __properties = ["amount", "settlement_eligibility_time", "merchant_order_id", "tx_time", "settled", "entity_id", "merchant_settlement_utr", "currency", "sale_type", "customer_name", "customer_email", "customer_phone", "merchant_vendor_commission", "split_service_charge", "split_service_tax", "pg_service_tax", "pg_service_charge", "pg_charge_postpaid", "merchant_settlement_id", "added_on", "tags", "entity_type", "settlement_initiated_on", "settlement_time", "order_splits", "eligible_split_balance"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -83,7 +79,7 @@ class ESOrderReconResponseDataInner(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -103,9 +99,9 @@ class ESOrderReconResponseDataInner(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ESOrderReconResponseDataInner.parse_obj(obj)
+            return ESOrderReconResponseDataInner.model_validate(obj)
 
-        _obj = ESOrderReconResponseDataInner.parse_obj({
+        _obj = ESOrderReconResponseDataInner.model_validate({
             "amount": obj.get("amount"),
             "settlement_eligibility_time": obj.get("settlement_eligibility_time"),
             "merchant_order_id": obj.get("merchant_order_id"),

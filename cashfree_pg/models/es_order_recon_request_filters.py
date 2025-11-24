@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist, ConfigDict
 
 class ESOrderReconRequestFilters(BaseModel):
     """
@@ -31,14 +31,10 @@ class ESOrderReconRequestFilters(BaseModel):
     order_ids: Optional[conlist(StrictStr)] = Field(None, description="Please provide list of order ids for which you want to get the recon data.")
     __properties = ["start_date", "end_date", "order_ids"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class ESOrderReconRequestFilters(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -72,9 +68,9 @@ class ESOrderReconRequestFilters(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return ESOrderReconRequestFilters.parse_obj(obj)
+            return ESOrderReconRequestFilters.model_validate(obj)
 
-        _obj = ESOrderReconRequestFilters.parse_obj({
+        _obj = ESOrderReconRequestFilters.model_validate({
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date"),
             "order_ids": obj.get("order_ids")

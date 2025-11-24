@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, ConfigDict
 
 class CreatePlanRequest(BaseModel):
     """
@@ -38,14 +38,10 @@ class CreatePlanRequest(BaseModel):
     plan_note: Optional[StrictStr] = Field(None, description="Note for the plan.")
     __properties = ["plan_id", "plan_name", "plan_type", "plan_currency", "plan_recurring_amount", "plan_max_amount", "plan_max_cycles", "plan_intervals", "plan_interval_type", "plan_note"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -66,7 +62,7 @@ class CreatePlanRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class CreatePlanRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreatePlanRequest.parse_obj(obj)
+            return CreatePlanRequest.model_validate(obj)
 
-        _obj = CreatePlanRequest.parse_obj({
+        _obj = CreatePlanRequest.model_validate({
             "plan_id": obj.get("plan_id"),
             "plan_name": obj.get("plan_name"),
             "plan_type": obj.get("plan_type"),

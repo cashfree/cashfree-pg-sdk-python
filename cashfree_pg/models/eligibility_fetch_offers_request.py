@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from cashfree_pg.models.offer_filters import OfferFilters
 from cashfree_pg.models.offer_queries import OfferQueries
 
@@ -32,14 +32,10 @@ class EligibilityFetchOffersRequest(BaseModel):
     filters: Optional[OfferFilters] = None
     __properties = ["queries", "filters"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class EligibilityFetchOffersRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -79,9 +75,9 @@ class EligibilityFetchOffersRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return EligibilityFetchOffersRequest.parse_obj(obj)
+            return EligibilityFetchOffersRequest.model_validate(obj)
 
-        _obj = EligibilityFetchOffersRequest.parse_obj({
+        _obj = EligibilityFetchOffersRequest.model_validate({
             "queries": OfferQueries.from_dict(obj.get("queries")) if obj.get("queries") is not None else None,
             "filters": OfferFilters.from_dict(obj.get("filters")) if obj.get("filters") is not None else None
         })

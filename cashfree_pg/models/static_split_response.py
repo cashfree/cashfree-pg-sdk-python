@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional, Union
-from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, ConfigDict
 from cashfree_pg.models.static_split_response_scheme_inner import StaticSplitResponseSchemeInner
 
 class StaticSplitResponse(BaseModel):
@@ -35,14 +35,10 @@ class StaticSplitResponse(BaseModel):
     added_on: Optional[StrictStr] = None
     __properties = ["active", "terminal_id", "terminal_reference_id", "product_type", "scheme", "added_on"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -63,7 +59,7 @@ class StaticSplitResponse(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -83,9 +79,9 @@ class StaticSplitResponse(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return StaticSplitResponse.parse_obj(obj)
+            return StaticSplitResponse.model_validate(obj)
 
-        _obj = StaticSplitResponse.parse_obj({
+        _obj = StaticSplitResponse.model_validate({
             "active": obj.get("active"),
             "terminal_id": obj.get("terminal_id"),
             "terminal_reference_id": obj.get("terminal_reference_id"),

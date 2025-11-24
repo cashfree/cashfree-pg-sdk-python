@@ -1,0 +1,3 @@
+from cashfree_pg.models.subscription_payment_entity import SubscriptionPaymentEntity
+
+CreateSubscriptionPaymentAuthResponse = SubscriptionPaymentEntity

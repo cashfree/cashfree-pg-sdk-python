@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import BaseModel, Field, StrictStr, conlist, ConfigDict
 
 class SubscriptionBankDetails(BaseModel):
     """
@@ -31,14 +31,10 @@ class SubscriptionBankDetails(BaseModel):
     account_auth_modes: Optional[conlist(StrictStr)] = Field(None, description="List of account authentication modes supported by the bank. (e.g. DEBIT_CARD, NET_BANKING, AADHAAR)")
     __properties = ["bank_id", "bank_name", "account_auth_modes"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -59,7 +55,7 @@ class SubscriptionBankDetails(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -72,9 +68,9 @@ class SubscriptionBankDetails(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SubscriptionBankDetails.parse_obj(obj)
+            return SubscriptionBankDetails.model_validate(obj)
 
-        _obj = SubscriptionBankDetails.parse_obj({
+        _obj = SubscriptionBankDetails.model_validate({
             "bank_id": obj.get("bank_id"),
             "bank_name": obj.get("bank_name"),
             "account_auth_modes": obj.get("account_auth_modes")

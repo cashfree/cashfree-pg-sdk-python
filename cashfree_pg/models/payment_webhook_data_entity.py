@@ -20,7 +20,7 @@ import json
 
 
 from typing import List, Optional
-from pydantic import BaseModel, conlist
+from pydantic import BaseModel, conlist, ConfigDict
 from cashfree_pg.models.offer_entity import OfferEntity
 from cashfree_pg.models.payment_entity import PaymentEntity
 from cashfree_pg.models.payment_webhook_customer_entity import PaymentWebhookCustomerEntity
@@ -40,14 +40,10 @@ class PaymentWebhookDataEntity(BaseModel):
     payment_offers: Optional[conlist(OfferEntity)] = None
     __properties = ["order", "payment", "customer_details", "error_details", "payment_gateway_details", "payment_offers"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -68,7 +64,7 @@ class PaymentWebhookDataEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -103,9 +99,9 @@ class PaymentWebhookDataEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaymentWebhookDataEntity.parse_obj(obj)
+            return PaymentWebhookDataEntity.model_validate(obj)
 
-        _obj = PaymentWebhookDataEntity.parse_obj({
+        _obj = PaymentWebhookDataEntity.model_validate({
             "order": PaymentWebhookOrderEntity.from_dict(obj.get("order")) if obj.get("order") is not None else None,
             "payment": PaymentEntity.from_dict(obj.get("payment")) if obj.get("payment") is not None else None,
             "customer_details": PaymentWebhookCustomerEntity.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,

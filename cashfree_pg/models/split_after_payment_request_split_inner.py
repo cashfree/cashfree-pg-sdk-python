@@ -20,7 +20,7 @@ import json
 
 
 from typing import Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr, ConfigDict
 
 class SplitAfterPaymentRequestSplitInner(BaseModel):
     """
@@ -32,14 +32,10 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
     tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["vendor_id", "amount", "percentage", "tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -60,7 +56,7 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -73,9 +69,9 @@ class SplitAfterPaymentRequestSplitInner(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return SplitAfterPaymentRequestSplitInner.parse_obj(obj)
+            return SplitAfterPaymentRequestSplitInner.model_validate(obj)
 
-        _obj = SplitAfterPaymentRequestSplitInner.parse_obj({
+        _obj = SplitAfterPaymentRequestSplitInner.model_validate({
             "vendor_id": obj.get("vendor_id"),
             "amount": obj.get("amount"),
             "percentage": obj.get("percentage"),

@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr, constr
+from pydantic import BaseModel, Field, StrictBool, StrictStr, constr, ConfigDict
 
 class CreateTerminalTransactionRequest(BaseModel):
     """
@@ -33,14 +33,10 @@ class CreateTerminalTransactionRequest(BaseModel):
     add_invoice: Optional[StrictBool] = Field(None, description="make it true to have request be sent to create a Dynamic GST QR Code.")
     __properties = ["cf_order_id", "cf_terminal_id", "payment_method", "terminal_phone_no", "add_invoice"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -61,7 +57,7 @@ class CreateTerminalTransactionRequest(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -74,9 +70,9 @@ class CreateTerminalTransactionRequest(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return CreateTerminalTransactionRequest.parse_obj(obj)
+            return CreateTerminalTransactionRequest.model_validate(obj)
 
-        _obj = CreateTerminalTransactionRequest.parse_obj({
+        _obj = CreateTerminalTransactionRequest.model_validate({
             "cf_order_id": obj.get("cf_order_id"),
             "cf_terminal_id": obj.get("cf_terminal_id"),
             "payment_method": obj.get("payment_method"),

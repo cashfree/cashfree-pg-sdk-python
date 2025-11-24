@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr, ConfigDict
 from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details import PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails
 
 class PaymentMethodCardEMIInPaymentsEntityEmi(BaseModel):
@@ -38,14 +38,10 @@ class PaymentMethodCardEMIInPaymentsEntityEmi(BaseModel):
     emi_details: Optional[PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails] = None
     __properties = ["channel", "card_number", "card_network", "card_type", "card_country", "card_bank_name", "card_network_reference_id", "emi_tenure", "emi_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -66,7 +62,7 @@ class PaymentMethodCardEMIInPaymentsEntityEmi(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -82,9 +78,9 @@ class PaymentMethodCardEMIInPaymentsEntityEmi(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PaymentMethodCardEMIInPaymentsEntityEmi.parse_obj(obj)
+            return PaymentMethodCardEMIInPaymentsEntityEmi.model_validate(obj)
 
-        _obj = PaymentMethodCardEMIInPaymentsEntityEmi.parse_obj({
+        _obj = PaymentMethodCardEMIInPaymentsEntityEmi.model_validate({
             "channel": obj.get("channel"),
             "card_number": obj.get("card_number"),
             "card_network": obj.get("card_network"),

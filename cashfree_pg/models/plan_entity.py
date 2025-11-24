@@ -20,7 +20,7 @@ import json
 
 
 from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, ConfigDict
 
 class PlanEntity(BaseModel):
     """
@@ -39,14 +39,10 @@ class PlanEntity(BaseModel):
     plan_type: Optional[StrictStr] = Field(None, description="Type of the plan.")
     __properties = ["plan_currency", "plan_id", "plan_interval_type", "plan_intervals", "plan_max_amount", "plan_max_cycles", "plan_name", "plan_note", "plan_recurring_amount", "plan_status", "plan_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
-
+    model_config = ConfigDict(populate_by_name=True, validate_assignment=True)
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
-        return pprint.pformat(self.dict(by_alias=True))
+        return pprint.pformat(self.model_dump(by_alias=True))
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
@@ -67,7 +63,7 @@ class PlanEntity(BaseModel):
 
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
-        _dict = self.dict(by_alias=True,
+        _dict = self.model_dump(by_alias=True,
                           exclude={
                           },
                           exclude_none=True)
@@ -80,9 +76,9 @@ class PlanEntity(BaseModel):
             return None
 
         if not isinstance(obj, dict):
-            return PlanEntity.parse_obj(obj)
+            return PlanEntity.model_validate(obj)
 
-        _obj = PlanEntity.parse_obj({
+        _obj = PlanEntity.model_validate({
             "plan_currency": obj.get("plan_currency"),
             "plan_id": obj.get("plan_id"),
             "plan_interval_type": obj.get("plan_interval_type"),
