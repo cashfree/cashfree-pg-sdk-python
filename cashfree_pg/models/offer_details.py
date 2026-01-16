@@ -33,17 +33,19 @@ class OfferDetails(BaseModel):
     cashback_details: Optional[CashbackDetails] = None
     __properties = ["offer_type", "discount_details", "cashback_details"]
 
-    @validator('offer_type')
+    @field_validator('offer_type')
     def offer_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('DISCOUNT', 'CASHBACK', 'DISCOUNT_AND_CASHBACK', 'NO_COST_EMI'):
             raise ValueError("must be one of enum values ('DISCOUNT', 'CASHBACK', 'DISCOUNT_AND_CASHBACK', 'NO_COST_EMI')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

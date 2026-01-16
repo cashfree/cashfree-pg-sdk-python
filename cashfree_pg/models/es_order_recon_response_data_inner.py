@@ -55,10 +55,12 @@ class ESOrderReconResponseDataInner(BaseModel):
     eligible_split_balance: Optional[StrictStr] = None
     __properties = ["amount", "settlement_eligibility_time", "merchant_order_id", "tx_time", "settled", "entity_id", "merchant_settlement_utr", "currency", "sale_type", "customer_name", "customer_email", "customer_phone", "merchant_vendor_commission", "split_service_charge", "split_service_tax", "pg_service_tax", "pg_service_charge", "pg_charge_postpaid", "merchant_settlement_id", "added_on", "tags", "entity_type", "settlement_initiated_on", "settlement_time", "order_splits", "eligible_split_balance"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

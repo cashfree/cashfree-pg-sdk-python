@@ -39,10 +39,12 @@ class CreateSubscriptionPaymentResponse(BaseModel):
     payment_method: Optional[StrictStr] = Field(None, description="Payment method used for the authorization.")
     __properties = ["cf_payment_id", "failure_details", "payment_amount", "payment_id", "payment_initiated_date", "payment_status", "payment_type", "subscription_id", "data", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

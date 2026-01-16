@@ -44,10 +44,12 @@ class OrderExtendedDataEntity(BaseModel):
     offer: Optional[OfferExtendedDetails] = None
     __properties = ["cf_order_id", "order_id", "order_amount", "order_currency", "created_at", "charges", "customer_details", "shipping_address", "billing_address", "cart", "offer"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

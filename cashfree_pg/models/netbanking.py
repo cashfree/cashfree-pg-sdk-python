@@ -31,7 +31,7 @@ class Netbanking(BaseModel):
     netbanking_bank_name: Optional[constr(strict=True)] = Field(None, description="String code for bank")
     __properties = ["channel", "netbanking_bank_code", "netbanking_bank_name"]
 
-    @validator('netbanking_bank_name')
+    @field_validator('netbanking_bank_name')
     def netbanking_bank_name_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
@@ -41,10 +41,12 @@ class Netbanking(BaseModel):
             raise ValueError(r"must validate the regular expression /^[A-Z]{5}$/")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

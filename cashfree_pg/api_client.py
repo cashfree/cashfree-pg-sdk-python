@@ -17,7 +17,7 @@ import re  # noqa: F401
 import io
 import warnings
 
-from pydantic import validate_arguments, ValidationError
+from pydantic import validate_arguments, ValidationError, Field, StrictStr, StrictBytes
 from typing_extensions import Annotated
 
 from cashfree_pg.configuration import Configuration
@@ -41,10 +41,8 @@ import warnings
 import base64
 import hashlib
 import hmac
-from pydantic import validate_arguments, ValidationError
 from typing_extensions import Annotated
 from typing import overload, Optional, Union, Awaitable
-from pydantic import Field, StrictStr, StrictBytes
 
 from cashfree_pg.configuration import Configuration
 from cashfree_pg.api_response import ApiResponse
@@ -349,10 +347,23 @@ class Cashfree:
 
     XApiVersion = "2023-08-01";
 
+    def __init__(self, XEnvironment, XClientId, XClientSecret, XPartnerKey, XPartnerMerchantId, XClientSignature):
+        if XClientId != None:
+            self.XClientId = XClientId
+        if XClientSecret != None:
+            self.XClientSecret = XClientSecret
+        if XPartnerKey != None:
+            self.XPartnerKey = XPartnerKey
+        if XPartnerMerchantId != None:
+            self.XPartnerMerchantId = XPartnerMerchantId
+        if XClientSignature != None:
+            self.XClientSignature = XClientSignature
+        self.XEnvironment = XEnvironment;
+
     def PGVerifyWebhookSignature(self, signature, rawBody, timestamp):
         signatureData = timestamp+rawBody
         message = bytes(signatureData, 'utf-8')
-        secretkey=bytes(Cashfree.XClientSecret,'utf-8')
+        secretkey=bytes(self.XClientSecret,'utf-8')
         generatedSignature = base64.b64encode(hmac.new(secretkey, message, digestmod=hashlib.sha256).digest())
         computed_signature = str(generatedSignature, encoding='utf8')
         if computed_signature == signature:
@@ -404,18 +415,19 @@ class Cashfree:
         :rtype: tuple(CustomerEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -464,7 +476,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -560,18 +572,19 @@ class Cashfree:
         :rtype: tuple(DisputesEntityMerchantAccepted, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -623,7 +636,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -708,18 +721,19 @@ class Cashfree:
         :rtype: tuple(DisputesEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -771,7 +785,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -856,18 +870,19 @@ class Cashfree:
         :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -919,7 +934,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1004,18 +1019,19 @@ class Cashfree:
         :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1067,7 +1083,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1158,18 +1174,19 @@ class Cashfree:
         :rtype: tuple(List[DisputesEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1224,7 +1241,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1328,18 +1345,19 @@ class Cashfree:
         :rtype: tuple(SplitAfterPaymentResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1392,7 +1410,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1483,18 +1501,19 @@ class Cashfree:
         :rtype: tuple(StaticSplitResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1543,7 +1562,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1632,18 +1651,19 @@ class Cashfree:
         :rtype: tuple(SplitOrderReconSuccessResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1695,7 +1715,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1776,18 +1796,19 @@ class Cashfree:
         :rtype: tuple(VendorAdjustmentSuccessResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1840,7 +1861,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -1931,18 +1952,19 @@ class Cashfree:
         :rtype: tuple(AdjustVendorBalanceResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -1995,7 +2017,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2084,18 +2106,19 @@ class Cashfree:
         :rtype: tuple(CreateVendorResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2144,7 +2167,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2235,18 +2258,19 @@ class Cashfree:
         :rtype: tuple(VendorDocumentDownloadResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2302,7 +2326,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2380,18 +2404,19 @@ class Cashfree:
         :rtype: tuple(VendorEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2443,7 +2468,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2522,18 +2547,19 @@ class Cashfree:
         :rtype: tuple(VendorBalance, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2585,7 +2611,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2666,18 +2692,19 @@ class Cashfree:
         :rtype: tuple(VendorBalanceTransferCharges, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2733,7 +2760,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2812,18 +2839,19 @@ class Cashfree:
         :rtype: tuple(VendorDocumentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -2875,7 +2903,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -2954,18 +2982,19 @@ class Cashfree:
         :rtype: tuple(ESOrderReconResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3014,7 +3043,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3107,18 +3136,19 @@ class Cashfree:
         :rtype: tuple(UpdateVendorResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3171,7 +3201,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3266,18 +3296,19 @@ class Cashfree:
         :rtype: tuple(UploadVendorDocumentsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3332,7 +3363,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3428,18 +3459,19 @@ class Cashfree:
         :rtype: tuple(List[EligibilityCardlessEMIEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3488,7 +3520,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3584,18 +3616,19 @@ class Cashfree:
         :rtype: tuple(List[EligibilityOfferEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3644,7 +3677,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3739,18 +3772,19 @@ class Cashfree:
         :rtype: tuple(List[EligibilityPaylaterEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3799,7 +3833,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -3895,18 +3929,19 @@ class Cashfree:
         :rtype: tuple(List[EligibilityPaymentMethodsEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -3955,7 +3990,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4052,18 +4087,19 @@ class Cashfree:
         :rtype: tuple(OfferEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4112,7 +4148,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4207,18 +4243,19 @@ class Cashfree:
         :rtype: tuple(OfferEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4270,7 +4307,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4356,18 +4393,19 @@ class Cashfree:
         :rtype: tuple(OrderEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4416,7 +4454,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4511,18 +4549,19 @@ class Cashfree:
         :rtype: tuple(OrderEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4574,7 +4613,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4659,18 +4698,19 @@ class Cashfree:
         :rtype: tuple(OrderExtendedDataEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4722,7 +4762,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4809,18 +4849,19 @@ class Cashfree:
         :rtype: tuple(OrderEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -4873,7 +4914,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -4970,18 +5011,19 @@ class Cashfree:
         :rtype: tuple(UpdateOrderExtendedDataEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5034,7 +5076,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5134,18 +5176,19 @@ class Cashfree:
         :rtype: tuple(ReconEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5196,7 +5239,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5292,18 +5335,19 @@ class Cashfree:
         :rtype: tuple(LinkEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5355,7 +5399,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5440,18 +5484,19 @@ class Cashfree:
         :rtype: tuple(LinkEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5500,7 +5545,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5595,18 +5640,19 @@ class Cashfree:
         :rtype: tuple(LinkEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5658,7 +5704,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5746,18 +5792,19 @@ class Cashfree:
         :rtype: tuple(List[PaymentLinkOrderEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5813,7 +5860,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -5901,18 +5948,19 @@ class Cashfree:
         :rtype: tuple(PaymentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -5965,7 +6013,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6063,18 +6111,19 @@ class Cashfree:
         :rtype: tuple(OrderAuthenticateEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6127,7 +6176,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6225,18 +6274,19 @@ class Cashfree:
         :rtype: tuple(PaymentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6292,7 +6342,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6378,18 +6428,19 @@ class Cashfree:
         :rtype: tuple(List[PaymentEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6441,7 +6492,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6527,18 +6578,19 @@ class Cashfree:
         :rtype: tuple(PayOrderEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6587,7 +6639,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6686,18 +6738,19 @@ class Cashfree:
         :rtype: tuple(RefundEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6750,7 +6803,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -6848,18 +6901,19 @@ class Cashfree:
         :rtype: tuple(RefundEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -6915,7 +6969,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7001,18 +7055,19 @@ class Cashfree:
         :rtype: tuple(List[RefundEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7064,7 +7119,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7154,18 +7209,19 @@ class Cashfree:
         :rtype: tuple(SettlementEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7216,7 +7272,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7315,18 +7371,19 @@ class Cashfree:
         :rtype: tuple(SettlementReconEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7377,7 +7434,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7473,18 +7530,19 @@ class Cashfree:
         :rtype: tuple(object, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7533,7 +7591,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7625,18 +7683,19 @@ class Cashfree:
         :rtype: tuple(SettlementEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7688,7 +7747,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7775,18 +7834,19 @@ class Cashfree:
         :rtype: tuple(SimulationResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7838,7 +7898,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -7921,18 +7981,19 @@ class Cashfree:
         :rtype: tuple(SimulationResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -7981,7 +8042,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8075,18 +8136,19 @@ class Cashfree:
         :rtype: tuple(CreateSubscriptionPaymentResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8135,7 +8197,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8229,18 +8291,19 @@ class Cashfree:
         :rtype: tuple(PlanEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8289,7 +8352,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8385,18 +8448,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionPaymentRefundEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8449,7 +8513,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8543,18 +8607,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8603,7 +8668,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8697,18 +8762,19 @@ class Cashfree:
         :rtype: tuple(PlanEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8760,7 +8826,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8843,18 +8909,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -8906,7 +8973,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -8991,18 +9058,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionPaymentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9058,7 +9126,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9141,18 +9209,19 @@ class Cashfree:
         :rtype: tuple(List[SubscriptionPaymentEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9204,7 +9273,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9290,18 +9359,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionPaymentRefundEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9357,7 +9427,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9442,18 +9512,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9506,7 +9577,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9604,18 +9675,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionPaymentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9672,7 +9744,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9771,18 +9843,19 @@ class Cashfree:
         :rtype: tuple(UploadPnachImageResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9837,7 +9910,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -9937,18 +10010,19 @@ class Cashfree:
         :rtype: tuple(SubscriptionEligibilityResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -9997,7 +10071,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10094,18 +10168,19 @@ class Cashfree:
         :rtype: tuple(InstrumentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10161,7 +10236,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10249,18 +10324,19 @@ class Cashfree:
         :rtype: tuple(InstrumentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10316,7 +10392,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10404,18 +10480,19 @@ class Cashfree:
         :rtype: tuple(List[InstrumentEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10471,7 +10548,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10558,18 +10635,19 @@ class Cashfree:
         :rtype: tuple(CryptogramEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10625,7 +10703,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10712,18 +10790,19 @@ class Cashfree:
         :rtype: tuple(List[StaticQrResponseEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10772,7 +10851,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -10869,18 +10948,19 @@ class Cashfree:
         :rtype: tuple(List[StaticQrResponseEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -10936,7 +11016,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11022,18 +11102,19 @@ class Cashfree:
         :rtype: tuple(TerminalEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11082,7 +11163,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11177,18 +11258,19 @@ class Cashfree:
         :rtype: tuple(TerminalTransactionEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11237,7 +11319,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11332,18 +11414,19 @@ class Cashfree:
         :rtype: tuple(List[SoundboxVpaEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11392,7 +11475,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11487,18 +11570,19 @@ class Cashfree:
         :rtype: tuple(TerminalEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11550,7 +11634,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11637,18 +11721,19 @@ class Cashfree:
         :rtype: tuple(List[FetchTerminalQRCodesEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11704,7 +11789,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11791,18 +11876,19 @@ class Cashfree:
         :rtype: tuple(List[SoundboxVpaEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -11858,7 +11944,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -11945,18 +12031,19 @@ class Cashfree:
         :rtype: tuple(TerminalPaymentEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12012,7 +12099,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12097,18 +12184,19 @@ class Cashfree:
         :rtype: tuple(SoundboxVpaEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12157,7 +12245,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12254,18 +12342,19 @@ class Cashfree:
         :rtype: tuple(SoundboxVpaEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12318,7 +12407,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12415,18 +12504,19 @@ class Cashfree:
         :rtype: tuple(List[UpdateTerminalEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12479,7 +12569,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12576,18 +12666,19 @@ class Cashfree:
         :rtype: tuple(List[UpdateTerminalEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12640,7 +12731,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12737,18 +12828,19 @@ class Cashfree:
         :rtype: tuple(List[UploadTerminalDocsEntity], status_code(int), headers(HTTPHeaderDict))
         """
 
+        x_api_version = self.XApiVersion
         api_client = ApiClient.get_default()
         host = "https://api.cashfree.com/pg"
-        if Cashfree.XEnvironment == CFEnvironment.SANDBOX:
-            host = "https://sandbox.cashfree.com/pg"
+        if self.XEnvironment == CFEnvironment.SANDBOX:
+            host = "https://sandbox.self.com/pg"
         configuration = Configuration(
             host = host
         )
-        configuration.api_key['XClientID'] = Cashfree.XClientId
-        configuration.api_key['XClientSecret'] = Cashfree.XClientSecret
-        configuration.api_key['XClientSignature'] = Cashfree.XClientSignature
-        configuration.api_key['XPartnerMerchantId'] = Cashfree.XPartnerMerchantId
-        configuration.api_key['XPartnerKey'] = Cashfree.XPartnerKey
+        configuration.api_key['XClientID'] = self.XClientId
+        configuration.api_key['XClientSecret'] = self.XClientSecret
+        configuration.api_key['XClientSignature'] = self.XClientSignature
+        configuration.api_key['XPartnerMerchantId'] = self.XPartnerMerchantId
+        configuration.api_key['XPartnerKey'] = self.XPartnerKey
         api_client.configuration = configuration
         _params = locals()
 
@@ -12801,7 +12893,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-4.5.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-5.0.1"
 
         # process the form parameters
         _form_params = []
@@ -12900,7 +12992,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/4.5.1/python'
+        self.user_agent = 'OpenAPI-Generator/5.0.1/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

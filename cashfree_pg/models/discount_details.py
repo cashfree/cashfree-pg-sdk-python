@@ -31,17 +31,19 @@ class DiscountDetails(BaseModel):
     max_discount_amount: Union[StrictFloat, StrictInt] = Field(..., description="Maximum Value of Discount allowed.")
     __properties = ["discount_type", "discount_value", "max_discount_amount"]
 
-    @validator('discount_type')
+    @field_validator('discount_type')
     def discount_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('flat', 'percentage'):
             raise ValueError("must be one of enum values ('flat', 'percentage')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

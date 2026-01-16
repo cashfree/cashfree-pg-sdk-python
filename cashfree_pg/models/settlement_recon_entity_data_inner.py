@@ -63,10 +63,12 @@ class SettlementReconEntityDataInner(BaseModel):
     adjustment_remarks: Optional[StrictStr] = Field(None, description="Other adjustment remarks.")
     __properties = ["event_id", "event_type", "event_settlement_amount", "event_amount", "sale_type", "event_status", "entity", "event_time", "event_currency", "order_id", "order_amount", "customer_phone", "customer_email", "customer_name", "payment_amount", "payment_utr", "payment_time", "payment_service_charge", "payment_service_tax", "cf_payment_id", "cf_settlement_id", "settlement_date", "settlement_utr", "split_service_charge", "split_service_tax", "vendor_commission", "closed_in_favor_of", "dispute_resolved_on", "dispute_category", "dispute_note", "refund_processed_at", "refund_arn", "refund_note", "refund_id", "adjustment_remarks"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

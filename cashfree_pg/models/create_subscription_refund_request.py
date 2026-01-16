@@ -35,10 +35,12 @@ class CreateSubscriptionRefundRequest(BaseModel):
     refund_speed: Optional[StrictStr] = Field(None, description="Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds.")
     __properties = ["subscription_id", "payment_id", "cf_payment_id", "refund_id", "refund_amount", "refund_note", "refund_speed"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

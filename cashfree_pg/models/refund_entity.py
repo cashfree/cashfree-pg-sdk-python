@@ -49,7 +49,7 @@ class RefundEntity(BaseModel):
     refund_speed: Optional[RefundSpeed] = None
     __properties = ["cf_payment_id", "cf_refund_id", "order_id", "refund_id", "entity", "refund_amount", "refund_currency", "refund_note", "refund_status", "refund_arn", "refund_charge", "status_description", "metadata", "refund_splits", "refund_type", "refund_mode", "created_at", "processed_at", "refund_speed"]
 
-    @validator('entity')
+    @field_validator('entity')
     def entity_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -59,7 +59,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('refund')")
         return value
 
-    @validator('refund_status')
+    @field_validator('refund_status')
     def refund_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -69,7 +69,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUCCESS', 'PENDING', 'CANCELLED', 'ONHOLD')")
         return value
 
-    @validator('refund_type')
+    @field_validator('refund_type')
     def refund_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -79,10 +79,12 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('PAYMENT_AUTO_REFUND', 'MERCHANT_INITIATED', 'UNRECONCILED_AUTO_REFUND')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

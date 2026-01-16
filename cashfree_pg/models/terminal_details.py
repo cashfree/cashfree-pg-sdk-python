@@ -38,10 +38,12 @@ class TerminalDetails(BaseModel):
     terminal_type: constr(strict=True, max_length=10, min_length=4) = Field(..., description="To identify the type of terminal product in use, in this case it is SPOS.")
     __properties = ["added_on", "cf_terminal_id", "last_updated_on", "terminal_address", "terminal_id", "terminal_name", "terminal_note", "terminal_phone_no", "terminal_status", "terminal_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

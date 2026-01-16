@@ -32,10 +32,12 @@ class CartDetails(BaseModel):
     cart_items: Optional[conlist(CartItem)] = None
     __properties = ["shipping_charge", "cart_name", "cart_items"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
