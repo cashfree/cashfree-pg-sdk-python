@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, StrictStr, validator
+from pydantic import field_validator
 
 class BadRequestError(BaseModel):
     """
@@ -31,7 +32,7 @@ class BadRequestError(BaseModel):
     type: Optional[StrictStr] = None
     __properties = ["message", "code", "type"]
 
-    @validator('type')
+    @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -41,10 +42,12 @@ class BadRequestError(BaseModel):
             raise ValueError("must be one of enum values ('invalid_request_error')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

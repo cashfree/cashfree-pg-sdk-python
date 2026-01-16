@@ -19,7 +19,9 @@ import re  # noqa: F401
 from aenum import Enum, no_arg
 
 
+from pydantic import Field
 
+# Updated imports for Pydantic v2 compatibility
 
 
 class OfferType(str, Enum):

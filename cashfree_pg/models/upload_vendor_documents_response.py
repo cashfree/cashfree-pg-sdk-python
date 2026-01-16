@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, StrictStr
+from pydantic import field_validator
 
 class UploadVendorDocumentsResponse(BaseModel):
     """
@@ -33,10 +34,12 @@ class UploadVendorDocumentsResponse(BaseModel):
     remarks: Optional[StrictStr] = None
     __properties = ["vendor_id", "doc_type", "doc_value", "status", "remarks"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

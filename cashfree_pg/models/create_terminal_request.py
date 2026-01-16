@@ -22,6 +22,7 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, constr
 from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
+from pydantic import field_validator
 
 class CreateTerminalRequest(BaseModel):
     """
@@ -37,10 +38,12 @@ class CreateTerminalRequest(BaseModel):
     terminal_meta: Optional[CreateTerminalRequestTerminalMeta] = None
     __properties = ["terminal_id", "terminal_phone_no", "terminal_name", "terminal_address", "terminal_email", "terminal_note", "terminal_type", "terminal_meta"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -24,6 +24,7 @@ from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlis
 from cashfree_pg.models.order_meta import OrderMeta
 from cashfree_pg.models.payment_link_customer_details import PaymentLinkCustomerDetails
 from cashfree_pg.models.vendor_split import VendorSplit
+from pydantic import field_validator
 
 class PaymentLinkOrderEntity(BaseModel):
     """
@@ -46,10 +47,12 @@ class PaymentLinkOrderEntity(BaseModel):
     order_tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["cf_order_id", "link_id", "order_id", "entity", "order_currency", "order_amount", "order_status", "payment_session_id", "order_expiry_time", "order_note", "created_at", "order_splits", "customer_details", "order_meta", "order_tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

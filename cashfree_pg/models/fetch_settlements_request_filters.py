@@ -21,6 +21,7 @@ import json
 
 from typing import List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
+from pydantic import field_validator
 
 class FetchSettlementsRequestFilters(BaseModel):
     """
@@ -32,10 +33,12 @@ class FetchSettlementsRequestFilters(BaseModel):
     end_date: Optional[StrictStr] = Field(None, description="Specify the end date till when you want the settlement reconciliation details.")
     __properties = ["cf_settlement_ids", "settlement_utrs", "start_date", "end_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

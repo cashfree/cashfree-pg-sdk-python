@@ -22,6 +22,7 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr, validator
 from cashfree_pg.models.saved_instrument_meta import SavedInstrumentMeta
+from pydantic import field_validator
 
 class InstrumentEntity(BaseModel):
     """
@@ -38,7 +39,7 @@ class InstrumentEntity(BaseModel):
     instrument_meta: Optional[SavedInstrumentMeta] = None
     __properties = ["customer_id", "afa_reference", "instrument_id", "instrument_type", "instrument_uid", "instrument_display", "instrument_status", "created_at", "instrument_meta"]
 
-    @validator('instrument_type')
+    @field_validator('instrument_type')
     def instrument_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -48,7 +49,7 @@ class InstrumentEntity(BaseModel):
             raise ValueError("must be one of enum values ('card')")
         return value
 
-    @validator('instrument_status')
+    @field_validator('instrument_status')
     def instrument_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -58,10 +59,12 @@ class InstrumentEntity(BaseModel):
             raise ValueError("must be one of enum values ('ACTIVE', 'INACTIVE')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

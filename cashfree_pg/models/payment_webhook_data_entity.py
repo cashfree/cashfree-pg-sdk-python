@@ -27,6 +27,7 @@ from cashfree_pg.models.payment_webhook_customer_entity import PaymentWebhookCus
 from cashfree_pg.models.payment_webhook_error_entity import PaymentWebhookErrorEntity
 from cashfree_pg.models.payment_webhook_gateway_details_entity import PaymentWebhookGatewayDetailsEntity
 from cashfree_pg.models.payment_webhook_order_entity import PaymentWebhookOrderEntity
+from pydantic import field_validator
 
 class PaymentWebhookDataEntity(BaseModel):
     """
@@ -40,10 +41,12 @@ class PaymentWebhookDataEntity(BaseModel):
     payment_offers: Optional[conlist(OfferEntity)] = None
     __properties = ["order", "payment", "customer_details", "error_details", "payment_gateway_details", "payment_offers"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

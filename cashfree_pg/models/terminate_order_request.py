@@ -21,6 +21,7 @@ import json
 
 
 from pydantic import BaseModel, Field, StrictStr
+from pydantic import field_validator
 
 class TerminateOrderRequest(BaseModel):
     """
@@ -29,10 +30,12 @@ class TerminateOrderRequest(BaseModel):
     order_status: StrictStr = Field(..., description="To terminate an order, pass order_status as \"TERMINATED\". Please note, order might not be terminated - confirm with the order_status in response. \"TERMINATION_REQUESTED\" states that the request is recieved and we are working on it. If the order terminates successfully, status will change to \"TERMINATED\". Incase there's any active transaction which moved to success - order might not get terminated.")
     __properties = ["order_status"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

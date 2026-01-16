@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
+from pydantic import field_validator
 
 class CryptogramEntity(BaseModel):
     """
@@ -35,10 +36,12 @@ class CryptogramEntity(BaseModel):
     card_display: Optional[StrictStr] = Field(None, description="last 4 digits of original card number")
     __properties = ["instrument_id", "token_requestor_id", "card_number", "card_expiry_mm", "card_expiry_yy", "cryptogram", "card_display"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
