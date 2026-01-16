@@ -23,6 +23,7 @@ from typing import Any, Dict, List, Optional
 from pydantic import BaseModel, Field, conlist
 from cashfree_pg.models.split_order_recon_success_response_settlement import SplitOrderReconSuccessResponseSettlement
 from cashfree_pg.models.split_order_recon_success_response_vendors_inner import SplitOrderReconSuccessResponseVendorsInner
+from pydantic import field_validator
 
 class SplitOrderReconSuccessResponse(BaseModel):
     """
@@ -33,10 +34,12 @@ class SplitOrderReconSuccessResponse(BaseModel):
     vendors: Optional[conlist(SplitOrderReconSuccessResponseVendorsInner)] = Field(None, description="List of vendor settlements associated with the split settlement.")
     __properties = ["settlement", "refunds", "vendors"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

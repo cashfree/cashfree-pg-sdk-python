@@ -21,6 +21,7 @@ import json
 
 from typing import Optional, Union
 from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from pydantic import field_validator
 
 class TransferDetailsTagsInner(BaseModel):
     """
@@ -30,10 +31,12 @@ class TransferDetailsTagsInner(BaseModel):
     size: Optional[Union[StrictFloat, StrictInt]] = None
     __properties = ["product", "size"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

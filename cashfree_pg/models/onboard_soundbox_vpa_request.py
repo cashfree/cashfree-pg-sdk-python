@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
+from pydantic import field_validator
 
 class OnboardSoundboxVpaRequest(BaseModel):
     """
@@ -33,10 +34,12 @@ class OnboardSoundboxVpaRequest(BaseModel):
     language: Optional[StrictStr] = Field(None, description="language of soundbox,currently English, Hindi, Tamil")
     __properties = ["vpa", "cf_terminal_id", "device_serial_no", "merchant_name", "language"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

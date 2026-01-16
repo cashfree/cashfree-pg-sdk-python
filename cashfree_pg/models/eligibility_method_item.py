@@ -22,6 +22,7 @@ import json
 from typing import Optional
 from pydantic import BaseModel, Field, StrictBool, StrictStr
 from cashfree_pg.models.eligibility_method_item_entity_details import EligibilityMethodItemEntityDetails
+from pydantic import field_validator
 
 class EligibilityMethodItem(BaseModel):
     """
@@ -33,10 +34,12 @@ class EligibilityMethodItem(BaseModel):
     entity_details: Optional[EligibilityMethodItemEntityDetails] = None
     __properties = ["eligibility", "entity_type", "entity_value", "entity_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

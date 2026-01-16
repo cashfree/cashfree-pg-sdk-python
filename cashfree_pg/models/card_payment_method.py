@@ -22,6 +22,7 @@ import json
 
 from pydantic import BaseModel, Field
 from cashfree_pg.models.card import Card
+from pydantic import field_validator
 
 class CardPaymentMethod(BaseModel):
     """
@@ -30,10 +31,12 @@ class CardPaymentMethod(BaseModel):
     card: Card = Field(...)
     __properties = ["card"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -22,6 +22,7 @@ import json
 from typing import List, Optional
 from pydantic import BaseModel, conlist, constr
 from cashfree_pg.models.emi_plans_array import EMIPlansArray
+from pydantic import field_validator
 
 class CardlessEMIEntity(BaseModel):
     """
@@ -31,10 +32,12 @@ class CardlessEMIEntity(BaseModel):
     emi_plans: Optional[conlist(EMIPlansArray)] = None
     __properties = ["payment_method", "emi_plans"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

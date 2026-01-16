@@ -21,6 +21,7 @@ import json
 
 from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+from pydantic import field_validator
 
 class SplitOrderReconSuccessResponseSettlement(BaseModel):
     """
@@ -42,10 +43,12 @@ class SplitOrderReconSuccessResponseSettlement(BaseModel):
     payment_time: Optional[StrictStr] = Field(None, description="Timestamp when payment was made.")
     __properties = ["entity", "cf_settlement_id", "cf_payment_id", "order_id", "order_currency", "transfer_id", "order_amount", "service_charge", "service_tax", "settlement_amount", "settlement_currency", "transfer_utr", "transfer_time", "payment_time"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -21,6 +21,7 @@ import json
 
 
 from pydantic import BaseModel, Field, constr, validator
+from pydantic import field_validator
 
 class OfferTnc(BaseModel):
     """
@@ -30,17 +31,19 @@ class OfferTnc(BaseModel):
     offer_tnc_value: constr(strict=True, max_length=100, min_length=3) = Field(..., description="TnC for the Offer.")
     __properties = ["offer_tnc_type", "offer_tnc_value"]
 
-    @validator('offer_tnc_type')
+    @field_validator('offer_tnc_type')
     def offer_tnc_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('text', 'link'):
             raise ValueError("must be one of enum values ('text', 'link')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

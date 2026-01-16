@@ -22,6 +22,7 @@ import json
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
 from cashfree_pg.models.static_split_request_scheme_inner import StaticSplitRequestSchemeInner
+from pydantic import field_validator
 
 class StaticSplitRequest(BaseModel):
     """
@@ -34,10 +35,12 @@ class StaticSplitRequest(BaseModel):
     scheme: conlist(StaticSplitRequestSchemeInner) = Field(..., description="Provide the split scheme details.")
     __properties = ["active", "terminal_id", "terminal_reference_id", "product_type", "scheme"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -22,6 +22,7 @@ import json
 from typing import List, Optional
 from pydantic import BaseModel, conlist
 from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from pydantic import field_validator
 
 class VendorDocumentsResponse(BaseModel):
     """
@@ -30,10 +31,12 @@ class VendorDocumentsResponse(BaseModel):
     documents: Optional[conlist(VendorEntityRelatedDocsInner)] = None
     __properties = ["documents"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
