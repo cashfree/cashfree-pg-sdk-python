@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import field_validator
 
 class OrderDeliveryStatus(BaseModel):
     """
@@ -30,17 +31,19 @@ class OrderDeliveryStatus(BaseModel):
     reason: Optional[StrictStr] = Field(None, description="Reason of provided order delivery status. This is optional field.")
     __properties = ["status", "reason"]
 
-    @validator('status')
+    @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('AWAITING_PICKUP', 'CANCELLED', 'SELF_FULFILLED', 'PICKED_UP', 'SHIPPED', 'IN_TRANSIT', 'DELAY_COURIER_COMPANY_ISSUES', 'DELAY_INCORRECT_ADDRESS', 'DELAY_SELLER_ISSUES', 'REACHED_DESTINATION_HUB', 'OUT_FOR_DELIVERY', 'DELIVERED', 'POTENTIAL_RTO_DELIVERY_ATTEMPTED', 'RTO', 'LOST', 'DAMAGED', 'UNTRACKABLE_404', 'MANUAL_INTERVENTION_BROKEN_URL', 'ASSOCIATED_WITH_RETURN_PICKUP', 'UNSERVICEABLE'):
             raise ValueError("must be one of enum values ('AWAITING_PICKUP', 'CANCELLED', 'SELF_FULFILLED', 'PICKED_UP', 'SHIPPED', 'IN_TRANSIT', 'DELAY_COURIER_COMPANY_ISSUES', 'DELAY_INCORRECT_ADDRESS', 'DELAY_SELLER_ISSUES', 'REACHED_DESTINATION_HUB', 'OUT_FOR_DELIVERY', 'DELIVERED', 'POTENTIAL_RTO_DELIVERY_ATTEMPTED', 'RTO', 'LOST', 'DAMAGED', 'UNTRACKABLE_404', 'MANUAL_INTERVENTION_BROKEN_URL', 'ASSOCIATED_WITH_RETURN_PICKUP', 'UNSERVICEABLE')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

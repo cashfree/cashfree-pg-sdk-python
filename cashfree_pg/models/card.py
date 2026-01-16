@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+from pydantic import field_validator
 
 class Card(BaseModel):
     """
@@ -43,14 +44,14 @@ class Card(BaseModel):
     emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure selected by the user")
     __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "instrument_id", "cryptogram", "token_requestor_id", "token_reference_id", "token_type", "card_display", "card_alias", "card_bank_name", "emi_tenure"]
 
-    @validator('channel')
+    @field_validator('channel')
     def channel_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('link', 'post'):
             raise ValueError("must be one of enum values ('link', 'post')")
         return value
 
-    @validator('token_type')
+    @field_validator('token_type')
     def token_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -60,7 +61,7 @@ class Card(BaseModel):
             raise ValueError("must be one of enum values ('ISSUER_TOKEN', 'NETWORK_GC_TOKEN', 'ISSUER_GC_TOKEN')")
         return value
 
-    @validator('card_bank_name')
+    @field_validator('card_bank_name')
     def card_bank_name_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -70,10 +71,12 @@ class Card(BaseModel):
             raise ValueError("must be one of enum values ('Kotak', 'ICICI', 'RBL', 'BOB', 'Standard Chartered')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

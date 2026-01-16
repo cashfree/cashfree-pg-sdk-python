@@ -24,6 +24,7 @@ from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, Stric
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.upi_details import UpiDetails
+from pydantic import field_validator
 
 class UpdateVendorRequest(BaseModel):
     """
@@ -41,10 +42,12 @@ class UpdateVendorRequest(BaseModel):
     kyc_details: conlist(KycDetails) = Field(..., description="Specify the kyc details that should be updated.")
     __properties = ["status", "name", "email", "phone", "verify_account", "dashboard_access", "schedule_option", "bank", "upi", "kyc_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

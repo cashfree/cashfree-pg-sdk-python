@@ -25,6 +25,7 @@ from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
 from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from pydantic import field_validator
 
 class UpdateVendorResponse(BaseModel):
     """
@@ -49,10 +50,12 @@ class UpdateVendorResponse(BaseModel):
     related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
     __properties = ["email", "status", "bank", "upi", "added_on", "updated_on", "vendor_type", "account_type", "business_type", "phone", "name", "vendor_id", "schedule_option", "kyc_details", "dashboard_access", "bank_details", "related_docs"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

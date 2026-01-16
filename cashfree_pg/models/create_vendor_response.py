@@ -24,6 +24,7 @@ from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, c
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
+from pydantic import field_validator
 
 class CreateVendorResponse(BaseModel):
     """
@@ -42,10 +43,12 @@ class CreateVendorResponse(BaseModel):
     bank_details: Optional[StrictStr] = None
     __properties = ["email", "status", "bank", "upi", "phone", "name", "vendor_id", "schedule_option", "kyc_details", "dashboard_access", "bank_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

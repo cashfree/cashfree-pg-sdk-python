@@ -23,6 +23,7 @@ from typing import List, Optional
 from pydantic import BaseModel, Field, StrictStr, conlist
 from cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner import EligibilityMethodItemEntityDetailsAvailableHandlesInner
 from cashfree_pg.models.subscription_bank_details import SubscriptionBankDetails
+from pydantic import field_validator
 
 class EligibilityMethodItemEntityDetails(BaseModel):
     """
@@ -35,10 +36,12 @@ class EligibilityMethodItemEntityDetails(BaseModel):
     allowed_card_types: Optional[conlist(StrictStr)] = Field(None, description="List of allowed card types. (e.g. DEBIT_CARD, CREDIT_CARD)")
     __properties = ["account_types", "frequent_bank_details", "all_bank_details", "available_handles", "allowed_card_types"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

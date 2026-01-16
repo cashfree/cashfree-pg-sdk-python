@@ -22,6 +22,7 @@ import json
 from typing import List, Optional
 from pydantic import BaseModel, Field, conlist
 from cashfree_pg.models.offer_type import OfferType
+from pydantic import field_validator
 
 class OfferFilters(BaseModel):
     """
@@ -30,10 +31,12 @@ class OfferFilters(BaseModel):
     offer_type: Optional[conlist(OfferType)] = Field(None, description="Array of offer_type to be filtered.")
     __properties = ["offer_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -21,6 +21,7 @@ import json
 
 from typing import Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+from pydantic import field_validator
 
 class CustomerDetailsResponse(BaseModel):
     """
@@ -36,10 +37,12 @@ class CustomerDetailsResponse(BaseModel):
     customer_uid: Optional[StrictStr] = Field(None, description="Customer identifier at Cashfree. You will get this when you create/get customer")
     __properties = ["customer_id", "customer_email", "customer_phone", "customer_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_uid"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

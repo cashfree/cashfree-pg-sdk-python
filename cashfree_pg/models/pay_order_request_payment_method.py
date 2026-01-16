@@ -60,8 +60,10 @@ class PayOrderRequestPaymentMethod(BaseModel):
         actual_instance: Any
     one_of_schemas: List[str] = Field(PAYORDERREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
 
-    class Config:
-        validate_assignment = True
+    # Updated to Pydantic v2
+    model_config = {
+        "validate_assignment": True
+    }
 
     def __init__(self, *args, **kwargs):
         if args:

@@ -22,6 +22,7 @@ import json
 from typing import List, Optional, Union
 from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, constr, validator
 from cashfree_pg.models.vendor_split import VendorSplit
+from pydantic import field_validator
 
 class OrderCreateRefundRequest(BaseModel):
     """
@@ -34,7 +35,7 @@ class OrderCreateRefundRequest(BaseModel):
     refund_splits: Optional[conlist(VendorSplit)] = None
     __properties = ["refund_amount", "refund_id", "refund_note", "refund_speed", "refund_splits"]
 
-    @validator('refund_speed')
+    @field_validator('refund_speed')
     def refund_speed_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -44,10 +45,12 @@ class OrderCreateRefundRequest(BaseModel):
             raise ValueError("must be one of enum values ('STANDARD', 'INSTANT')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
