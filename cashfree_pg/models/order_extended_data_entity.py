@@ -26,6 +26,7 @@ from cashfree_pg.models.charges_entity import ChargesEntity
 from cashfree_pg.models.extended_cart_details import ExtendedCartDetails
 from cashfree_pg.models.extended_customer_details import ExtendedCustomerDetails
 from cashfree_pg.models.offer_extended_details import OfferExtendedDetails
+from pydantic import field_validator
 
 class OrderExtendedDataEntity(BaseModel):
     """
@@ -44,10 +45,12 @@ class OrderExtendedDataEntity(BaseModel):
     offer: Optional[OfferExtendedDetails] = None
     __properties = ["cf_order_id", "order_id", "order_amount", "order_currency", "created_at", "charges", "customer_details", "shipping_address", "billing_address", "cart", "offer"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

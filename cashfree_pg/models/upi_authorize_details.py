@@ -21,6 +21,7 @@ import json
 
 from typing import Optional
 from pydantic import BaseModel, Field, StrictStr
+from pydantic import field_validator
 
 class UPIAuthorizeDetails(BaseModel):
     """
@@ -31,10 +32,12 @@ class UPIAuthorizeDetails(BaseModel):
     end_time: Optional[StrictStr] = Field(None, description="This is the time when the UPI mandate will be over. If the mandate has not been executed by this time, the funds will be returned back to the customer after this time.")
     __properties = ["approve_by", "start_time", "end_time"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

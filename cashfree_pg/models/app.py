@@ -21,6 +21,7 @@ import json
 
 
 from pydantic import BaseModel, Field, StrictStr, validator
+from pydantic import field_validator
 
 class App(BaseModel):
     """
@@ -31,17 +32,19 @@ class App(BaseModel):
     phone: StrictStr = Field(..., description="Customer phone number associated with a wallet for payment.")
     __properties = ["channel", "provider", "phone"]
 
-    @validator('provider')
+    @field_validator('provider')
     def provider_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('gpay', 'phonepe', 'ola', 'paytm', 'amazon', 'airtel', 'freecharge', 'mobikwik', 'jio'):
             raise ValueError("must be one of enum values ('gpay', 'phonepe', 'ola', 'paytm', 'amazon', 'airtel', 'freecharge', 'mobikwik', 'jio')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
