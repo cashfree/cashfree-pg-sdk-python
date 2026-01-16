@@ -31,10 +31,12 @@ class PaymentMethodAppInPaymentsEntityApp(BaseModel):
     phone: Optional[StrictStr] = None
     __properties = ["channel", "provider", "phone"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

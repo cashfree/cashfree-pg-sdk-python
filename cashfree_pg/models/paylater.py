@@ -31,7 +31,7 @@ class Paylater(BaseModel):
     phone: Optional[StrictStr] = Field(None, description="Customers phone number for this payment instrument. If the customer is not eligible you will receive a 400 error with type as 'invalid_request_error' and code as 'invalid_request_error'")
     __properties = ["channel", "provider", "phone"]
 
-    @validator('provider')
+    @field_validator('provider')
     def provider_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -41,10 +41,12 @@ class Paylater(BaseModel):
             raise ValueError("must be one of enum values ('kotak', 'flexipay', 'zestmoney', 'lazypay', 'olapostpaid', 'simpl', 'freechargepaylater')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -36,10 +36,12 @@ class SubscriptionCustomerDetails(BaseModel):
     customer_bank_account_type: Optional[StrictStr] = Field(None, description="Bank account type of the customer.")
     __properties = ["customer_name", "customer_email", "customer_phone", "customer_bank_account_holder_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_bank_account_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -37,17 +37,19 @@ class CardEMI(BaseModel):
     emi_tenure: StrictInt = Field(..., description="EMI tenure selected by the user")
     __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "card_alias", "card_bank_name", "emi_tenure"]
 
-    @validator('card_bank_name')
+    @field_validator('card_bank_name')
     def card_bank_name_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex'):
             raise ValueError("must be one of enum values ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

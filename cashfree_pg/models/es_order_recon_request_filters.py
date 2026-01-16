@@ -31,10 +31,12 @@ class ESOrderReconRequestFilters(BaseModel):
     order_ids: Optional[conlist(StrictStr)] = Field(None, description="Please provide list of order ids for which you want to get the recon data.")
     __properties = ["start_date", "end_date", "order_ids"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

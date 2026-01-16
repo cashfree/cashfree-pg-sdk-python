@@ -44,10 +44,12 @@ class CreateOrderRequest(BaseModel):
     order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
     __properties = ["order_id", "order_amount", "order_currency", "cart_details", "customer_details", "terminal", "order_meta", "order_expiry_time", "order_note", "order_tags", "order_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

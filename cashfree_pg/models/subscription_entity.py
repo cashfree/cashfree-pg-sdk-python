@@ -46,10 +46,12 @@ class SubscriptionEntity(BaseModel):
     subscription_tags: Optional[Dict[str, Any]] = Field(None, description="Tags for the subscription.")
     __properties = ["authorisation_details", "cf_subscription_id", "customer_details", "plan_details", "subscription_expiry_time", "subscription_first_charge_time", "subscription_id", "subscription_meta", "subscription_note", "subscription_session_id", "subscription_payment_splits", "subscription_status", "subscription_tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

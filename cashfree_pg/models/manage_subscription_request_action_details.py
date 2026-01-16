@@ -30,10 +30,12 @@ class ManageSubscriptionRequestActionDetails(BaseModel):
     plan_id: Optional[StrictStr] = Field(None, description="Plan ID to update. Required for CHANGE_PLAN action.")
     __properties = ["next_scheduled_time", "plan_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

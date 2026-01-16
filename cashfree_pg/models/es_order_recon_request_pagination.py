@@ -30,10 +30,12 @@ class ESOrderReconRequestPagination(BaseModel):
     limit: Optional[StrictInt] = Field(None, description="Set the minimum/maximum limit for number of filtered data. Min value - 10, Max value - 100.")
     __properties = ["cursor", "limit"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

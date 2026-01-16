@@ -30,17 +30,19 @@ class EntitySimulationRequest(BaseModel):
     payment_error_code: Optional[StrictStr] = Field(None, description="Payment Error Code")
     __properties = ["payment_status", "payment_error_code"]
 
-    @validator('payment_status')
+    @field_validator('payment_status')
     def payment_status_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('SUCCESS', 'FAILED', 'PENDING', 'USER_DROPPED'):
             raise ValueError("must be one of enum values ('SUCCESS', 'FAILED', 'PENDING', 'USER_DROPPED')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

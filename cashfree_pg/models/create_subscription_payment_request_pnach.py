@@ -36,10 +36,12 @@ class CreateSubscriptionPaymentRequestPnach(BaseModel):
     mandate_start_date: Optional[StrictStr] = Field(None, description="Mandate start date")
     __properties = ["channel", "account_holder_name", "account_number", "account_bank_code", "account_type", "account_ifsc", "mandate_creation_date", "mandate_start_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

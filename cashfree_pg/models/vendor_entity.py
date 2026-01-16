@@ -46,10 +46,12 @@ class VendorEntity(BaseModel):
     related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
     __properties = ["email", "status", "phone", "name", "vendor_id", "added_on", "updated_on", "bank", "upi", "schedule_option", "vendor_type", "account_type", "business_type", "remarks", "related_docs"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

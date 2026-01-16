@@ -47,7 +47,7 @@ class DisputesEntity(BaseModel):
     customer_details: Optional[CustomerDetailsInDisputesEntity] = None
     __properties = ["dispute_id", "dispute_type", "reason_code", "reason_description", "dispute_amount", "created_at", "respond_by", "updated_at", "resolved_at", "dispute_status", "cf_dispute_remarks", "preferred_evidence", "dispute_evidence", "order_details", "customer_details"]
 
-    @validator('dispute_type')
+    @field_validator('dispute_type')
     def dispute_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -57,7 +57,7 @@ class DisputesEntity(BaseModel):
             raise ValueError("must be one of enum values ('DISPUTE', 'CHARGEBACK', 'RETRIEVAL', 'PRE_ARBITRATION', 'ARBITRATION')")
         return value
 
-    @validator('dispute_status')
+    @field_validator('dispute_status')
     def dispute_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -67,10 +67,12 @@ class DisputesEntity(BaseModel):
             raise ValueError("must be one of enum values ('DISPUTE_CREATED', 'DISPUTE_DOCS_RECEIVED', 'DISPUTE_UNDER_REVIEW', 'DISPUTE_MERCHANT_WON', 'DISPUTE_MERCHANT_LOST', 'DISPUTE_MERCHANT_ACCEPTED', 'DISPUTE_INSUFFICIENT_EVIDENCE', 'CHARGEBACK_CREATED', 'CHARGEBACK_DOCS_RECEIVED', 'CHARGEBACK_UNDER_REVIEW', 'CHARGEBACK_MERCHANT_WON', 'CHARGEBACK_MERCHANT_LOST', 'CHARGEBACK_MERCHANT_ACCEPTED', 'CHARGEBACK_INSUFFICIENT_EVIDENCE', 'RETRIEVAL_CREATED', 'RETRIEVAL_DOCS_RECEIVED', 'RETRIEVAL_UNDER_REVIEW', 'RETRIEVAL_MERCHANT_WON', 'RETRIEVAL_MERCHANT_LOST', 'RETRIEVAL_MERCHANT_ACCEPTED', 'RETRIEVAL_INSUFFICIENT_EVIDENCE', 'PRE_ARBITRATION_CREATED', 'PRE_ARBITRATION_DOCS_RECEIVED', 'PRE_ARBITRATION_UNDER_REVIEW', 'PRE_ARBITRATION_MERCHANT_WON', 'PRE_ARBITRATION_MERCHANT_LOST', 'PRE_ARBITRATION_MERCHANT_ACCEPTED', 'PRE_ARBITRATION_INSUFFICIENT_EVIDENCE', 'ARBITRATION_CREATED', 'ARBITRATION_DOCS_RECEIVED', 'ARBITRATION_UNDER_REVIEW', 'ARBITRATION_MERCHANT_WON', 'ARBITRATION_MERCHANT_LOST', 'ARBITRATION_MERCHANT_ACCEPTED', 'ARBITRATION_INSUFFICIENT_EVIDENCE')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

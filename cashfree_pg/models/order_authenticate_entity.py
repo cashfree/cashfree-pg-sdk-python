@@ -32,7 +32,7 @@ class OrderAuthenticateEntity(BaseModel):
     payment_message: Optional[StrictStr] = Field(None, description="Human readable message which describes the status in more detail")
     __properties = ["cf_payment_id", "action", "authenticate_status", "payment_message"]
 
-    @validator('action')
+    @field_validator('action')
     def action_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -42,7 +42,7 @@ class OrderAuthenticateEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUBMIT_OTP', 'RESEND_OTP')")
         return value
 
-    @validator('authenticate_status')
+    @field_validator('authenticate_status')
     def authenticate_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -52,10 +52,12 @@ class OrderAuthenticateEntity(BaseModel):
             raise ValueError("must be one of enum values ('FAILED', 'SUCCESS')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

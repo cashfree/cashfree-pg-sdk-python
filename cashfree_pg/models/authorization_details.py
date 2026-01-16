@@ -35,10 +35,12 @@ class AuthorizationDetails(BaseModel):
     payment_method: Optional[StrictStr] = Field(None, description="Payment method used for the authorization.")
     __properties = ["authorization_amount", "authorization_amount_refund", "authorization_reference", "authorization_time", "authorization_status", "payment_id", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
