@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_payment_request import CreateSubscriptionPaymentRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_payment_request import CreateSubscriptionPaymentRequest
 
 class TestCreateSubscriptionPaymentRequest(unittest.TestCase):
     """CreateSubscriptionPaymentRequest unit test stubs"""
@@ -29,26 +26,26 @@ class TestCreateSubscriptionPaymentRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionPaymentRequest:
         """Test CreateSubscriptionPaymentRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionPaymentRequest`
         """
-        model = cashfree_pg.models.create_subscription_payment_request.CreateSubscriptionPaymentRequest()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionPaymentRequest()
+        if include_optional:
             return CreateSubscriptionPaymentRequest(
-                subscription_id = '', 
-                subscription_session_id = '', 
-                payment_id = '', 
-                payment_amount = 1.337, 
-                payment_schedule_date = '', 
-                payment_remarks = '', 
-                payment_type = '', 
+                subscription_id = '',
+                subscription_session_id = '',
+                payment_id = '',
+                payment_amount = 1.337,
+                payment_schedule_date = '',
+                payment_remarks = '',
+                payment_type = '',
                 payment_method = cashfree_pg.models.create_subscription_payment_request_payment_method.CreateSubscriptionPaymentRequest_payment_method()
             )
-        else :
+        else:
             return CreateSubscriptionPaymentRequest(
                 subscription_id = '',
                 payment_id = '',

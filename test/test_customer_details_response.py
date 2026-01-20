@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.customer_details_response import CustomerDetailsResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.customer_details_response import CustomerDetailsResponse
 
 class TestCustomerDetailsResponse(unittest.TestCase):
     """CustomerDetailsResponse unit test stubs"""
@@ -29,26 +26,26 @@ class TestCustomerDetailsResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CustomerDetailsResponse:
         """Test CustomerDetailsResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CustomerDetailsResponse`
         """
-        model = cashfree_pg.models.customer_details_response.CustomerDetailsResponse()  # noqa: E501
-        if include_optional :
+        model = CustomerDetailsResponse()
+        if include_optional:
             return CustomerDetailsResponse(
-                customer_id = '012', 
-                customer_email = '012', 
-                customer_phone = '0123456789', 
-                customer_name = '012', 
-                customer_bank_account_number = '012', 
-                customer_bank_ifsc = '', 
-                customer_bank_code = 1.337, 
+                customer_id = '012',
+                customer_email = '012',
+                customer_phone = '0123456789',
+                customer_name = '012',
+                customer_bank_account_number = '012',
+                customer_bank_ifsc = '',
+                customer_bank_code = 1.337,
                 customer_uid = ''
             )
-        else :
+        else:
             return CustomerDetailsResponse(
         )
         """

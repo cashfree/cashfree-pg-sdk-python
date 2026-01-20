@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_request_plan_details import CreateSubscriptionRequestPlanDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_request_plan_details import CreateSubscriptionRequestPlanDetails
 
 class TestCreateSubscriptionRequestPlanDetails(unittest.TestCase):
     """CreateSubscriptionRequestPlanDetails unit test stubs"""
@@ -29,28 +26,28 @@ class TestCreateSubscriptionRequestPlanDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionRequestPlanDetails:
         """Test CreateSubscriptionRequestPlanDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionRequestPlanDetails`
         """
-        model = cashfree_pg.models.create_subscription_request_plan_details.CreateSubscriptionRequestPlanDetails()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionRequestPlanDetails()
+        if include_optional:
             return CreateSubscriptionRequestPlanDetails(
-                plan_id = '', 
-                plan_name = '', 
-                plan_type = '', 
-                plan_currency = '', 
-                plan_amount = 1.337, 
-                plan_max_amount = 1.337, 
-                plan_max_cycles = 56, 
-                plan_intervals = 56, 
-                plan_interval_type = '', 
+                plan_id = '',
+                plan_name = '',
+                plan_type = '',
+                plan_currency = '',
+                plan_amount = 1.337,
+                plan_max_amount = 1.337,
+                plan_max_cycles = 56,
+                plan_intervals = 56,
+                plan_interval_type = '',
                 plan_note = ''
             )
-        else :
+        else:
             return CreateSubscriptionRequestPlanDetails(
         )
         """

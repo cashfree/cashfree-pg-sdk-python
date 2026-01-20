@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_validations_payment_method import OfferValidationsPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_validations_payment_method import OfferValidationsPaymentMethod
 
 class TestOfferValidationsPaymentMethod(unittest.TestCase):
     """OfferValidationsPaymentMethod unit test stubs"""
@@ -29,17 +26,17 @@ class TestOfferValidationsPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferValidationsPaymentMethod:
         """Test OfferValidationsPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferValidationsPaymentMethod`
         """
-        model = cashfree_pg.models.offer_validations_payment_method.OfferValidationsPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = OfferValidationsPaymentMethod()
+        if include_optional:
             return OfferValidationsPaymentMethod(
-                all = cashfree_pg.models.all_offers.All Offers(), 
+                all = cashfree_pg.models.all_offers.All Offers(),
                 card = cashfree_pg.models.card_offer.Card Offer(
                     type = [
                         'dc'
@@ -47,14 +44,14 @@ class TestOfferValidationsPaymentMethod(unittest.TestCase):
                     bank_name = 'hdfc bank', 
                     scheme_name = [
                         'visa'
-                        ], ), 
+                        ], ),
                 netbanking = cashfree_pg.models.offer_nb_netbanking.OfferNB_netbanking(
-                    bank_name = 'all', ), 
+                    bank_name = 'all', ),
                 app = cashfree_pg.models.wallet_offer.Wallet Offer(
-                    provider = 'paytm', ), 
-                upi = cashfree_pg.models.upi_offer.UPI Offer(), 
+                    provider = 'paytm', ),
+                upi = cashfree_pg.models.upi_offer.UPI Offer(),
                 paylater = cashfree_pg.models.paylater_offer.Paylater Offer(
-                    provider = 'simpl', ), 
+                    provider = 'simpl', ),
                 emi = cashfree_pg.models.emi_offer.EMI Offer(
                     type = 'cardless_emi', 
                     issuer = 'hdfc bank', 
@@ -62,7 +59,7 @@ class TestOfferValidationsPaymentMethod(unittest.TestCase):
                         3
                         ], )
             )
-        else :
+        else:
             return OfferValidationsPaymentMethod(
                 all = cashfree_pg.models.all_offers.All Offers(),
                 card = cashfree_pg.models.card_offer.Card Offer(

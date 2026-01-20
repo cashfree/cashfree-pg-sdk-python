@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_vendor_response import CreateVendorResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_vendor_response import CreateVendorResponse
 
 class TestCreateVendorResponse(unittest.TestCase):
     """CreateVendorResponse unit test stubs"""
@@ -29,35 +26,35 @@ class TestCreateVendorResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateVendorResponse:
         """Test CreateVendorResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateVendorResponse`
         """
-        model = cashfree_pg.models.create_vendor_response.CreateVendorResponse()  # noqa: E501
-        if include_optional :
+        model = CreateVendorResponse()
+        if include_optional:
             return CreateVendorResponse(
-                email = '', 
-                status = '', 
+                email = '',
+                status = '',
                 bank = [
                     {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
-                upi = '', 
-                phone = 1.337, 
-                name = '', 
-                vendor_id = '', 
+                    ],
+                upi = '',
+                phone = 1.337,
+                name = '',
+                vendor_id = '',
                 schedule_option = [
                     {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}
-                    ], 
+                    ],
                 kyc_details = [
                     {"account_type":"BUSINESS","business_type":"NBFC","uidai":753624181019,"gst":"11AAAAA1111A1Z0","cin":"L00000Aa0000AaA000000","pan":"BIAPA2934N","passport_number":"L6892603"}
-                    ], 
-                dashboard_access = True, 
+                    ],
+                dashboard_access = True,
                 bank_details = ''
             )
-        else :
+        else:
             return CreateVendorResponse(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.cardless_emi_entity import CardlessEMIEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.cardless_emi_entity import CardlessEMIEntity
 
 class TestCardlessEMIEntity(unittest.TestCase):
     """CardlessEMIEntity unit test stubs"""
@@ -29,17 +26,17 @@ class TestCardlessEMIEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CardlessEMIEntity:
         """Test CardlessEMIEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CardlessEMIEntity`
         """
-        model = cashfree_pg.models.cardless_emi_entity.CardlessEMIEntity()  # noqa: E501
-        if include_optional :
+        model = CardlessEMIEntity()
+        if include_optional:
             return CardlessEMIEntity(
-                payment_method = 'idfc', 
+                payment_method = 'idfc',
                 emi_plans = [
                     cashfree_pg.models.emi_plans_array.EMIPlansArray(
                         tenure = 3, 
@@ -50,7 +47,7 @@ class TestCardlessEMIEntity(unittest.TestCase):
                         total_amount = 10404, )
                     ]
             )
-        else :
+        else:
             return CardlessEMIEntity(
         )
         """

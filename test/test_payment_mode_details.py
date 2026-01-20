@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_mode_details import PaymentModeDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_mode_details import PaymentModeDetails
 
 class TestPaymentModeDetails(unittest.TestCase):
     """PaymentModeDetails unit test stubs"""
@@ -29,22 +26,22 @@ class TestPaymentModeDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentModeDetails:
         """Test PaymentModeDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentModeDetails`
         """
-        model = cashfree_pg.models.payment_mode_details.PaymentModeDetails()  # noqa: E501
-        if include_optional :
+        model = PaymentModeDetails()
+        if include_optional:
             return PaymentModeDetails(
-                nick = 'motak_kahindra_bank', 
-                display = 'Motak Mahindra Bank', 
-                eligibility = False, 
+                nick = 'motak_kahindra_bank',
+                display = 'Motak Mahindra Bank',
+                eligibility = False,
                 code = 3001
             )
-        else :
+        else:
             return PaymentModeDetails(
         )
         """

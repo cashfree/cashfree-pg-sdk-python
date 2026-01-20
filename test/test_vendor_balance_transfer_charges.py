@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.vendor_balance_transfer_charges import VendorBalanceTransferCharges  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.vendor_balance_transfer_charges import VendorBalanceTransferCharges
 
 class TestVendorBalanceTransferCharges(unittest.TestCase):
     """VendorBalanceTransferCharges unit test stubs"""
@@ -29,23 +26,23 @@ class TestVendorBalanceTransferCharges(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> VendorBalanceTransferCharges:
         """Test VendorBalanceTransferCharges
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `VendorBalanceTransferCharges`
         """
-        model = cashfree_pg.models.vendor_balance_transfer_charges.VendorBalanceTransferCharges()  # noqa: E501
-        if include_optional :
+        model = VendorBalanceTransferCharges()
+        if include_optional:
             return VendorBalanceTransferCharges(
-                service_charges = 1.337, 
-                service_tax = 1.337, 
-                amount = 1.337, 
-                billed_to = '', 
+                service_charges = 1.337,
+                service_tax = 1.337,
+                amount = 1.337,
+                billed_to = '',
                 is_postpaid = True
             )
-        else :
+        else:
             return VendorBalanceTransferCharges(
         )
         """

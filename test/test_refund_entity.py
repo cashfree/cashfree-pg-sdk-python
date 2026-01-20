@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.refund_entity import RefundEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.refund_entity import RefundEntity
 
 class TestRefundEntity(unittest.TestCase):
     """RefundEntity unit test stubs"""
@@ -29,39 +26,39 @@ class TestRefundEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> RefundEntity:
         """Test RefundEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `RefundEntity`
         """
-        model = cashfree_pg.models.refund_entity.RefundEntity()  # noqa: E501
-        if include_optional :
+        model = RefundEntity()
+        if include_optional:
             return RefundEntity(
-                cf_payment_id = '', 
-                cf_refund_id = '', 
-                order_id = '', 
-                refund_id = '', 
-                entity = 'refund', 
-                refund_amount = 1.337, 
-                refund_currency = '', 
-                refund_note = '', 
-                refund_status = 'SUCCESS', 
-                refund_arn = '', 
-                refund_charge = 1.337, 
-                status_description = '', 
-                metadata = None, 
+                cf_payment_id = '',
+                cf_refund_id = '',
+                order_id = '',
+                refund_id = '',
+                entity = 'refund',
+                refund_amount = 1.337,
+                refund_currency = '',
+                refund_note = '',
+                refund_status = 'SUCCESS',
+                refund_arn = '',
+                refund_charge = 1.337,
+                status_description = '',
+                metadata = None,
                 refund_splits = [
                     {"vendor_id":"Vendor01","amount":100.12,"description":"order amount should be more than equal to 100.12"}
-                    ], 
-                refund_type = 'PAYMENT_AUTO_REFUND', 
-                refund_mode = '', 
-                created_at = '', 
-                processed_at = '', 
+                    ],
+                refund_type = 'PAYMENT_AUTO_REFUND',
+                refund_mode = '',
+                created_at = '',
+                processed_at = '',
                 refund_speed = {"requested":"STANDARD","accepted":"STANDARD","processed":"STANDARD","message":"Error message, if any"}
             )
-        else :
+        else:
             return RefundEntity(
         )
         """

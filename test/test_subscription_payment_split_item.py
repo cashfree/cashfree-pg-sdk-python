@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_payment_split_item import SubscriptionPaymentSplitItem  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_payment_split_item import SubscriptionPaymentSplitItem
 
 class TestSubscriptionPaymentSplitItem(unittest.TestCase):
     """SubscriptionPaymentSplitItem unit test stubs"""
@@ -29,20 +26,20 @@ class TestSubscriptionPaymentSplitItem(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionPaymentSplitItem:
         """Test SubscriptionPaymentSplitItem
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionPaymentSplitItem`
         """
-        model = cashfree_pg.models.subscription_payment_split_item.SubscriptionPaymentSplitItem()  # noqa: E501
-        if include_optional :
+        model = SubscriptionPaymentSplitItem()
+        if include_optional:
             return SubscriptionPaymentSplitItem(
-                vendor_id = '', 
+                vendor_id = '',
                 percentage = 1.337
             )
-        else :
+        else:
             return SubscriptionPaymentSplitItem(
         )
         """

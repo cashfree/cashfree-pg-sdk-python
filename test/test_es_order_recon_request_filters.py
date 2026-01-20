@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_request_filters import ESOrderReconRequestFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_request_filters import ESOrderReconRequestFilters
 
 class TestESOrderReconRequestFilters(unittest.TestCase):
     """ESOrderReconRequestFilters unit test stubs"""
@@ -29,23 +26,23 @@ class TestESOrderReconRequestFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconRequestFilters:
         """Test ESOrderReconRequestFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconRequestFilters`
         """
-        model = cashfree_pg.models.es_order_recon_request_filters.ESOrderReconRequestFilters()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconRequestFilters()
+        if include_optional:
             return ESOrderReconRequestFilters(
-                start_date = '', 
-                end_date = '', 
+                start_date = '',
+                end_date = '',
                 order_ids = [
                     ''
                     ]
             )
-        else :
+        else:
             return ESOrderReconRequestFilters(
         )
         """

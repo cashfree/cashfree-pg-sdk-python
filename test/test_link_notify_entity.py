@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.link_notify_entity import LinkNotifyEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.link_notify_entity import LinkNotifyEntity
 
 class TestLinkNotifyEntity(unittest.TestCase):
     """LinkNotifyEntity unit test stubs"""
@@ -29,20 +26,20 @@ class TestLinkNotifyEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> LinkNotifyEntity:
         """Test LinkNotifyEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `LinkNotifyEntity`
         """
-        model = cashfree_pg.models.link_notify_entity.LinkNotifyEntity()  # noqa: E501
-        if include_optional :
+        model = LinkNotifyEntity()
+        if include_optional:
             return LinkNotifyEntity(
-                send_sms = True, 
+                send_sms = True,
                 send_email = True
             )
-        else :
+        else:
             return LinkNotifyEntity(
         )
         """

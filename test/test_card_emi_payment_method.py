@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.card_emi_payment_method import CardEMIPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.card_emi_payment_method import CardEMIPaymentMethod
 
 class TestCardEMIPaymentMethod(unittest.TestCase):
     """CardEMIPaymentMethod unit test stubs"""
@@ -29,19 +26,19 @@ class TestCardEMIPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CardEMIPaymentMethod:
         """Test CardEMIPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CardEMIPaymentMethod`
         """
-        model = cashfree_pg.models.card_emi_payment_method.CardEMIPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = CardEMIPaymentMethod()
+        if include_optional:
             return CardEMIPaymentMethod(
                 emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3}
             )
-        else :
+        else:
             return CardEMIPaymentMethod(
                 emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3},
         )

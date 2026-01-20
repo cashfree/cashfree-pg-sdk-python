@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_tnc import OfferTnc  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_tnc import OfferTnc
 
 class TestOfferTnc(unittest.TestCase):
     """OfferTnc unit test stubs"""
@@ -29,20 +26,20 @@ class TestOfferTnc(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferTnc:
         """Test OfferTnc
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferTnc`
         """
-        model = cashfree_pg.models.offer_tnc.OfferTnc()  # noqa: E501
-        if include_optional :
+        model = OfferTnc()
+        if include_optional:
             return OfferTnc(
-                offer_tnc_type = 'text', 
+                offer_tnc_type = 'text',
                 offer_tnc_value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
             )
-        else :
+        else:
             return OfferTnc(
                 offer_tnc_type = 'text',
                 offer_tnc_value = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner import ESOrderReconResponseDataInnerOrderSplitsInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner import ESOrderReconResponseDataInnerOrderSplitsInner
 
 class TestESOrderReconResponseDataInnerOrderSplitsInner(unittest.TestCase):
     """ESOrderReconResponseDataInnerOrderSplitsInner unit test stubs"""
@@ -29,25 +26,25 @@ class TestESOrderReconResponseDataInnerOrderSplitsInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconResponseDataInnerOrderSplitsInner:
         """Test ESOrderReconResponseDataInnerOrderSplitsInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconResponseDataInnerOrderSplitsInner`
         """
-        model = cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner.ESOrderReconResponseDataInnerOrderSplitsInner()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconResponseDataInnerOrderSplitsInner()
+        if include_optional:
             return ESOrderReconResponseDataInnerOrderSplitsInner(
                 split = [
                     cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner.ESOrderReconResponse_data_inner_order_splits_inner_split_inner(
                         merchant_vendor_id = '', 
                         percentage = 1.337, 
                         tags = cashfree_pg.models.tags.tags(), )
-                    ], 
+                    ],
                 created_at = ''
             )
-        else :
+        else:
             return ESOrderReconResponseDataInnerOrderSplitsInner(
         )
         """

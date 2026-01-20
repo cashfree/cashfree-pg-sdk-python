@@ -15,52 +15,50 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.orders_api import OrdersApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.orders_api import OrdersApi
 
 
 class TestOrdersApi(unittest.TestCase):
     """OrdersApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.orders_api.OrdersApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = OrdersApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_create_order(self):
+    def test_p_g_create_order(self) -> None:
         """Test case for p_g_create_order
 
-        Create Order  # noqa: E501
+        Create Order
         """
         pass
 
-    def test_p_g_fetch_order(self):
+    def test_p_g_fetch_order(self) -> None:
         """Test case for p_g_fetch_order
 
-        Get Order  # noqa: E501
+        Get Order
         """
         pass
 
-    def test_p_g_fetch_order_extended_data(self):
+    def test_p_g_fetch_order_extended_data(self) -> None:
         """Test case for p_g_fetch_order_extended_data
 
-        Get Order Extended  # noqa: E501
+        Get Order Extended
         """
         pass
 
-    def test_p_g_terminate_order(self):
+    def test_p_g_terminate_order(self) -> None:
         """Test case for p_g_terminate_order
 
-        Terminate Order  # noqa: E501
+        Terminate Order
         """
         pass
 
-    def test_p_g_update_order_extended_data(self):
+    def test_p_g_update_order_extended_data(self) -> None:
         """Test case for p_g_update_order_extended_data
 
-        Update Order Extended  # noqa: E501
+        Update Order Extended
         """
         pass
 

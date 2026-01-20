@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_link_customer_details import PaymentLinkCustomerDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_link_customer_details import PaymentLinkCustomerDetails
 
 class TestPaymentLinkCustomerDetails(unittest.TestCase):
     """PaymentLinkCustomerDetails unit test stubs"""
@@ -29,25 +26,25 @@ class TestPaymentLinkCustomerDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentLinkCustomerDetails:
         """Test PaymentLinkCustomerDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentLinkCustomerDetails`
         """
-        model = cashfree_pg.models.payment_link_customer_details.PaymentLinkCustomerDetails()  # noqa: E501
-        if include_optional :
+        model = PaymentLinkCustomerDetails()
+        if include_optional:
             return PaymentLinkCustomerDetails(
-                customer_id = '012', 
-                customer_email = '012', 
-                customer_phone = '0123456789', 
-                customer_name = '012', 
-                customer_bank_account_number = '012', 
-                customer_bank_ifsc = '', 
+                customer_id = '012',
+                customer_email = '012',
+                customer_phone = '0123456789',
+                customer_name = '012',
+                customer_bank_account_number = '012',
+                customer_bank_ifsc = '',
                 customer_bank_code = 1.337
             )
-        else :
+        else:
             return PaymentLinkCustomerDetails(
                 customer_phone = '0123456789',
         )

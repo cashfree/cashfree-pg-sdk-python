@@ -15,45 +15,43 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.eligibility_api import EligibilityApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.eligibility_api import EligibilityApi
 
 
 class TestEligibilityApi(unittest.TestCase):
     """EligibilityApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.eligibility_api.EligibilityApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = EligibilityApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_eligibility_fetch_cardless_emi(self):
+    def test_p_g_eligibility_fetch_cardless_emi(self) -> None:
         """Test case for p_g_eligibility_fetch_cardless_emi
 
-        Get Eligible Cardless EMI Payment Methods for a customer on an order  # noqa: E501
+        Get Eligible Cardless EMI Payment Methods for a customer on an order
         """
         pass
 
-    def test_p_g_eligibility_fetch_offers(self):
+    def test_p_g_eligibility_fetch_offers(self) -> None:
         """Test case for p_g_eligibility_fetch_offers
 
-        Get Eligible Offers for an Order  # noqa: E501
+        Get Eligible Offers for an Order
         """
         pass
 
-    def test_p_g_eligibility_fetch_paylater(self):
+    def test_p_g_eligibility_fetch_paylater(self) -> None:
         """Test case for p_g_eligibility_fetch_paylater
 
-        Get Eligible Paylater for a customer on an order  # noqa: E501
+        Get Eligible Paylater for a customer on an order
         """
         pass
 
-    def test_p_g_eligibility_fetch_payment_methods(self):
+    def test_p_g_eligibility_fetch_payment_methods(self) -> None:
         """Test case for p_g_eligibility_fetch_payment_methods
 
-        Get eligible Payment Methods  # noqa: E501
+        Get eligible Payment Methods
         """
         pass
 

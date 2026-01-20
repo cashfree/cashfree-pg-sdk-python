@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.pay_order_entity import PayOrderEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.pay_order_entity import PayOrderEntity
 
 class TestPayOrderEntity(unittest.TestCase):
     """PayOrderEntity unit test stubs"""
@@ -29,24 +26,24 @@ class TestPayOrderEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PayOrderEntity:
         """Test PayOrderEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PayOrderEntity`
         """
-        model = cashfree_pg.models.pay_order_entity.PayOrderEntity()  # noqa: E501
-        if include_optional :
+        model = PayOrderEntity()
+        if include_optional:
             return PayOrderEntity(
-                payment_amount = 1.337, 
-                cf_payment_id = '', 
-                payment_method = 'netbanking', 
-                channel = 'link', 
-                action = 'link', 
+                payment_amount = 1.337,
+                cf_payment_id = '',
+                payment_method = 'netbanking',
+                channel = 'link',
+                action = 'link',
                 data = {"url":"https://examplebank.com/sendTo/897?q","payload":{"MD":89811231231,"PaReq":"89123l1j2l3j1ljkkl="},"content_type":"application/x-www-form-encoded","method":"post"}
             )
-        else :
+        else:
             return PayOrderEntity(
         )
         """

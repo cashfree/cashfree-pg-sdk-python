@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.upload_terminal_docs_entity import UploadTerminalDocsEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.upload_terminal_docs_entity import UploadTerminalDocsEntity
 
 class TestUploadTerminalDocsEntity(unittest.TestCase):
     """UploadTerminalDocsEntity unit test stubs"""
@@ -29,22 +26,22 @@ class TestUploadTerminalDocsEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UploadTerminalDocsEntity:
         """Test UploadTerminalDocsEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UploadTerminalDocsEntity`
         """
-        model = cashfree_pg.models.upload_terminal_docs_entity.UploadTerminalDocsEntity()  # noqa: E501
-        if include_optional :
+        model = UploadTerminalDocsEntity()
+        if include_optional:
             return UploadTerminalDocsEntity(
-                cf_terminal_id = 56, 
-                doc_type = '', 
-                doc_value = '', 
+                cf_terminal_id = 56,
+                doc_type = '',
+                doc_value = '',
                 status = ''
             )
-        else :
+        else:
             return UploadTerminalDocsEntity(
         )
         """

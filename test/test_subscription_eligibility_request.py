@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_eligibility_request import SubscriptionEligibilityRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_eligibility_request import SubscriptionEligibilityRequest
 
 class TestSubscriptionEligibilityRequest(unittest.TestCase):
     """SubscriptionEligibilityRequest unit test stubs"""
@@ -29,24 +26,24 @@ class TestSubscriptionEligibilityRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionEligibilityRequest:
         """Test SubscriptionEligibilityRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionEligibilityRequest`
         """
-        model = cashfree_pg.models.subscription_eligibility_request.SubscriptionEligibilityRequest()  # noqa: E501
-        if include_optional :
+        model = SubscriptionEligibilityRequest()
+        if include_optional:
             return SubscriptionEligibilityRequest(
                 queries = cashfree_pg.models.subscription_eligibility_request_queries.SubscriptionEligibilityRequest_queries(
-                    subscription_id = '', ), 
+                    subscription_id = '', ),
                 filters = cashfree_pg.models.subscription_eligibility_request_filters.SubscriptionEligibilityRequest_filters(
                     payment_methods = [
                         ''
                         ], )
             )
-        else :
+        else:
             return SubscriptionEligibilityRequest(
                 queries = cashfree_pg.models.subscription_eligibility_request_queries.SubscriptionEligibilityRequest_queries(
                     subscription_id = '', ),

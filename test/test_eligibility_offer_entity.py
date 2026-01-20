@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_offer_entity import EligibilityOfferEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_offer_entity import EligibilityOfferEntity
 
 class TestEligibilityOfferEntity(unittest.TestCase):
     """EligibilityOfferEntity unit test stubs"""
@@ -29,19 +26,19 @@ class TestEligibilityOfferEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityOfferEntity:
         """Test EligibilityOfferEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityOfferEntity`
         """
-        model = cashfree_pg.models.eligibility_offer_entity.EligibilityOfferEntity()  # noqa: E501
-        if include_optional :
+        model = EligibilityOfferEntity()
+        if include_optional:
             return EligibilityOfferEntity(
-                eligibility = True, 
-                entity_type = 'offers', 
-                entity_value = 'd2b430fb-1afe-455a-af31-66d00377b29a', 
+                eligibility = True,
+                entity_type = 'offers',
+                entity_value = 'd2b430fb-1afe-455a-af31-66d00377b29a',
                 entity_details = cashfree_pg.models.offer_entity.OfferEntity(
                     offer_id = 'd2b430fb-1afe-455a-af31-66d00377b29a', 
                     offer_status = 'active', 
@@ -50,7 +47,7 @@ class TestEligibilityOfferEntity(unittest.TestCase):
                     offer_details = {"$ref":"#/components/schemas/OfferDetails/example"}, 
                     offer_validations = {"$ref":"#/components/schemas/OfferValidations/example"}, )
             )
-        else :
+        else:
             return EligibilityOfferEntity(
         )
         """

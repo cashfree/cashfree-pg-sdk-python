@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity
 
 class TestLinkCustomerDetailsEntity(unittest.TestCase):
     """LinkCustomerDetailsEntity unit test stubs"""
@@ -29,24 +26,24 @@ class TestLinkCustomerDetailsEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> LinkCustomerDetailsEntity:
         """Test LinkCustomerDetailsEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `LinkCustomerDetailsEntity`
         """
-        model = cashfree_pg.models.link_customer_details_entity.LinkCustomerDetailsEntity()  # noqa: E501
-        if include_optional :
+        model = LinkCustomerDetailsEntity()
+        if include_optional:
             return LinkCustomerDetailsEntity(
-                customer_phone = '', 
-                customer_email = '', 
-                customer_name = '', 
-                customer_bank_account_number = '', 
-                customer_bank_ifsc = '', 
+                customer_phone = '',
+                customer_email = '',
+                customer_name = '',
+                customer_bank_account_number = '',
+                customer_bank_ifsc = '',
                 customer_bank_code = 3003
             )
-        else :
+        else:
             return LinkCustomerDetailsEntity(
                 customer_phone = '',
         )

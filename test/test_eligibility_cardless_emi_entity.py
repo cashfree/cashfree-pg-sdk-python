@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_cardless_emi_entity import EligibilityCardlessEMIEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_cardless_emi_entity import EligibilityCardlessEMIEntity
 
 class TestEligibilityCardlessEMIEntity(unittest.TestCase):
     """EligibilityCardlessEMIEntity unit test stubs"""
@@ -29,22 +26,22 @@ class TestEligibilityCardlessEMIEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityCardlessEMIEntity:
         """Test EligibilityCardlessEMIEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityCardlessEMIEntity`
         """
-        model = cashfree_pg.models.eligibility_cardless_emi_entity.EligibilityCardlessEMIEntity()  # noqa: E501
-        if include_optional :
+        model = EligibilityCardlessEMIEntity()
+        if include_optional:
             return EligibilityCardlessEMIEntity(
-                eligibility = True, 
-                entity_type = 'cardlessemi', 
-                entity_value = 'idfc', 
+                eligibility = True,
+                entity_type = 'cardlessemi',
+                entity_value = 'idfc',
                 entity_details = {"payment_method":"idfc","emi_plans":[{"tenure":1,"interest_rate":10,"currency":"INR","emi":400,"total_interest":10,"total_amount":40}]}
             )
-        else :
+        else:
             return EligibilityCardlessEMIEntity(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_customer_details import SubscriptionCustomerDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_customer_details import SubscriptionCustomerDetails
 
 class TestSubscriptionCustomerDetails(unittest.TestCase):
     """SubscriptionCustomerDetails unit test stubs"""
@@ -29,26 +26,26 @@ class TestSubscriptionCustomerDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionCustomerDetails:
         """Test SubscriptionCustomerDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionCustomerDetails`
         """
-        model = cashfree_pg.models.subscription_customer_details.SubscriptionCustomerDetails()  # noqa: E501
-        if include_optional :
+        model = SubscriptionCustomerDetails()
+        if include_optional:
             return SubscriptionCustomerDetails(
-                customer_name = '', 
-                customer_email = '', 
-                customer_phone = '', 
-                customer_bank_account_holder_name = '', 
-                customer_bank_account_number = '', 
-                customer_bank_ifsc = '', 
-                customer_bank_code = '', 
+                customer_name = '',
+                customer_email = '',
+                customer_phone = '',
+                customer_bank_account_holder_name = '',
+                customer_bank_account_number = '',
+                customer_bank_ifsc = '',
+                customer_bank_code = '',
                 customer_bank_account_type = ''
             )
-        else :
+        else:
             return SubscriptionCustomerDetails(
                 customer_email = '',
                 customer_phone = '',

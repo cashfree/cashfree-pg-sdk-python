@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.simulate_request import SimulateRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.simulate_request import SimulateRequest
 
 class TestSimulateRequest(unittest.TestCase):
     """SimulateRequest unit test stubs"""
@@ -29,21 +26,21 @@ class TestSimulateRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SimulateRequest:
         """Test SimulateRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SimulateRequest`
         """
-        model = cashfree_pg.models.simulate_request.SimulateRequest()  # noqa: E501
-        if include_optional :
+        model = SimulateRequest()
+        if include_optional:
             return SimulateRequest(
-                entity = 'PAYMENTS', 
-                entity_id = '', 
+                entity = 'PAYMENTS',
+                entity_id = '',
                 entity_simulation = {"payment_status":"FAILED","payment_error_code":"ISSUER_NOT_AVAILABLE"}
             )
-        else :
+        else:
             return SimulateRequest(
                 entity = 'PAYMENTS',
                 entity_id = '',

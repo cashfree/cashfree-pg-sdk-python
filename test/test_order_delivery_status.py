@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_delivery_status import OrderDeliveryStatus  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_delivery_status import OrderDeliveryStatus
 
 class TestOrderDeliveryStatus(unittest.TestCase):
     """OrderDeliveryStatus unit test stubs"""
@@ -29,20 +26,20 @@ class TestOrderDeliveryStatus(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderDeliveryStatus:
         """Test OrderDeliveryStatus
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderDeliveryStatus`
         """
-        model = cashfree_pg.models.order_delivery_status.OrderDeliveryStatus()  # noqa: E501
-        if include_optional :
+        model = OrderDeliveryStatus()
+        if include_optional:
             return OrderDeliveryStatus(
-                status = 'CANCELLED', 
+                status = 'CANCELLED',
                 reason = 'cancelled due to wrong address'
             )
-        else :
+        else:
             return OrderDeliveryStatus(
                 status = 'CANCELLED',
         )

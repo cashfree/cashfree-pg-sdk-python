@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_fetch_paylater_request import EligibilityFetchPaylaterRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_fetch_paylater_request import EligibilityFetchPaylaterRequest
 
 class TestEligibilityFetchPaylaterRequest(unittest.TestCase):
     """EligibilityFetchPaylaterRequest unit test stubs"""
@@ -29,19 +26,19 @@ class TestEligibilityFetchPaylaterRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityFetchPaylaterRequest:
         """Test EligibilityFetchPaylaterRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityFetchPaylaterRequest`
         """
-        model = cashfree_pg.models.eligibility_fetch_paylater_request.EligibilityFetchPaylaterRequest()  # noqa: E501
-        if include_optional :
+        model = EligibilityFetchPaylaterRequest()
+        if include_optional:
             return EligibilityFetchPaylaterRequest(
                 queries = {"order_id":"orderYB1X69LgzUQWiSxYDF","amount":20,"customer_details":{"customer_phone":"93838393833"}}
             )
-        else :
+        else:
             return EligibilityFetchPaylaterRequest(
                 queries = {"order_id":"orderYB1X69LgzUQWiSxYDF","amount":20,"customer_details":{"customer_phone":"93838393833"}},
         )

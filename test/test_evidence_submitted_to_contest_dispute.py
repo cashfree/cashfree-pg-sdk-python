@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.evidence_submitted_to_contest_dispute import EvidenceSubmittedToContestDispute  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.evidence_submitted_to_contest_dispute import EvidenceSubmittedToContestDispute
 
 class TestEvidenceSubmittedToContestDispute(unittest.TestCase):
     """EvidenceSubmittedToContestDispute unit test stubs"""
@@ -29,22 +26,22 @@ class TestEvidenceSubmittedToContestDispute(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EvidenceSubmittedToContestDispute:
         """Test EvidenceSubmittedToContestDispute
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EvidenceSubmittedToContestDispute`
         """
-        model = cashfree_pg.models.evidence_submitted_to_contest_dispute.EvidenceSubmittedToContestDispute()  # noqa: E501
-        if include_optional :
+        model = EvidenceSubmittedToContestDispute()
+        if include_optional:
             return EvidenceSubmittedToContestDispute(
-                document_id = 56, 
-                document_name = '', 
-                document_type = '', 
+                document_id = 56,
+                document_name = '',
+                document_type = '',
                 download_url = ''
             )
-        else :
+        else:
             return EvidenceSubmittedToContestDispute(
         )
         """

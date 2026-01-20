@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.vendor_balance import VendorBalance  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.vendor_balance import VendorBalance
 
 class TestVendorBalance(unittest.TestCase):
     """VendorBalance unit test stubs"""
@@ -29,22 +26,22 @@ class TestVendorBalance(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> VendorBalance:
         """Test VendorBalance
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `VendorBalance`
         """
-        model = cashfree_pg.models.vendor_balance.VendorBalance()  # noqa: E501
-        if include_optional :
+        model = VendorBalance()
+        if include_optional:
             return VendorBalance(
-                merchant_id = 1.337, 
-                vendor_id = '', 
-                merchant_unsettled = 1.337, 
+                merchant_id = 1.337,
+                vendor_id = '',
+                merchant_unsettled = 1.337,
                 vendor_unsettled = 1.337
             )
-        else :
+        else:
             return VendorBalance(
         )
         """

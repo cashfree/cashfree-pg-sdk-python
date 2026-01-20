@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.emi_offer import EMIOffer  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.emi_offer import EMIOffer
 
 class TestEMIOffer(unittest.TestCase):
     """EMIOffer unit test stubs"""
@@ -29,23 +26,23 @@ class TestEMIOffer(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EMIOffer:
         """Test EMIOffer
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EMIOffer`
         """
-        model = cashfree_pg.models.emi_offer.EMIOffer()  # noqa: E501
-        if include_optional :
+        model = EMIOffer()
+        if include_optional:
             return EMIOffer(
-                type = 'cardless_emi', 
-                issuer = 'hdfc bank', 
+                type = 'cardless_emi',
+                issuer = 'hdfc bank',
                 tenures = [
                     3
                     ]
             )
-        else :
+        else:
             return EMIOffer(
                 type = 'cardless_emi',
                 issuer = 'hdfc bank',

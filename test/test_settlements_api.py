@@ -15,31 +15,29 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.settlements_api import SettlementsApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.settlements_api import SettlementsApi
 
 
 class TestSettlementsApi(unittest.TestCase):
     """SettlementsApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.settlements_api.SettlementsApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = SettlementsApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_mark_for_settlement(self):
+    def test_mark_for_settlement(self) -> None:
         """Test case for mark_for_settlement
 
-        Mark Order For Settlement  # noqa: E501
+        Mark Order For Settlement
         """
         pass
 
-    def test_p_g_order_fetch_settlement(self):
+    def test_p_g_order_fetch_settlement(self) -> None:
         """Test case for p_g_order_fetch_settlement
 
-        Get Settlements by Order ID  # noqa: E501
+        Get Settlements by Order ID
         """
         pass
 

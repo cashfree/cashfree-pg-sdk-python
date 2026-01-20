@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_refund_request import CreateSubscriptionRefundRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_refund_request import CreateSubscriptionRefundRequest
 
 class TestCreateSubscriptionRefundRequest(unittest.TestCase):
     """CreateSubscriptionRefundRequest unit test stubs"""
@@ -29,25 +26,25 @@ class TestCreateSubscriptionRefundRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionRefundRequest:
         """Test CreateSubscriptionRefundRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionRefundRequest`
         """
-        model = cashfree_pg.models.create_subscription_refund_request.CreateSubscriptionRefundRequest()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionRefundRequest()
+        if include_optional:
             return CreateSubscriptionRefundRequest(
-                subscription_id = '', 
-                payment_id = '', 
-                cf_payment_id = '', 
-                refund_id = '', 
-                refund_amount = 1.337, 
-                refund_note = '', 
+                subscription_id = '',
+                payment_id = '',
+                cf_payment_id = '',
+                refund_id = '',
+                refund_amount = 1.337,
+                refund_note = '',
                 refund_speed = ''
             )
-        else :
+        else:
             return CreateSubscriptionRefundRequest(
                 subscription_id = '',
                 refund_id = '',

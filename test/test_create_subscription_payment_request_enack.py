@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack
 
 class TestCreateSubscriptionPaymentRequestEnack(unittest.TestCase):
     """CreateSubscriptionPaymentRequestEnack unit test stubs"""
@@ -29,25 +26,25 @@ class TestCreateSubscriptionPaymentRequestEnack(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionPaymentRequestEnack:
         """Test CreateSubscriptionPaymentRequestEnack
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionPaymentRequestEnack`
         """
-        model = cashfree_pg.models.create_subscription_payment_request_enack.CreateSubscriptionPaymentRequestEnack()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionPaymentRequestEnack()
+        if include_optional:
             return CreateSubscriptionPaymentRequestEnack(
-                channel = '', 
-                auth_mode = '', 
-                account_holder_name = '', 
-                account_number = '', 
-                account_bank_code = '', 
-                account_type = '', 
+                channel = '',
+                auth_mode = '',
+                account_holder_name = '',
+                account_number = '',
+                account_bank_code = '',
+                account_type = '',
                 account_ifsc = ''
             )
-        else :
+        else:
             return CreateSubscriptionPaymentRequestEnack(
         )
         """

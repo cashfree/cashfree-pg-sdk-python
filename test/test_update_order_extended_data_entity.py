@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.update_order_extended_data_entity import UpdateOrderExtendedDataEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.update_order_extended_data_entity import UpdateOrderExtendedDataEntity
 
 class TestUpdateOrderExtendedDataEntity(unittest.TestCase):
     """UpdateOrderExtendedDataEntity unit test stubs"""
@@ -29,18 +26,18 @@ class TestUpdateOrderExtendedDataEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UpdateOrderExtendedDataEntity:
         """Test UpdateOrderExtendedDataEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UpdateOrderExtendedDataEntity`
         """
-        model = cashfree_pg.models.update_order_extended_data_entity.UpdateOrderExtendedDataEntity()  # noqa: E501
-        if include_optional :
+        model = UpdateOrderExtendedDataEntity()
+        if include_optional:
             return UpdateOrderExtendedDataEntity(
-                cf_order_id = '', 
-                order_id = '', 
+                cf_order_id = '',
+                order_id = '',
                 shipment_details = [
                     cashfree_pg.models.shipment_details.ShipmentDetails(
                         tracking_company = 'DHL', 
@@ -50,12 +47,12 @@ class TestUpdateOrderExtendedDataEntity(unittest.TestCase):
                         tracking_numbers = [
                             'TRACK654321'
                             ], )
-                    ], 
+                    ],
                 order_delivery_status = cashfree_pg.models.order_delivery_status.OrderDeliveryStatus(
                     status = 'CANCELLED', 
                     reason = 'cancelled due to wrong address', )
             )
-        else :
+        else:
             return UpdateOrderExtendedDataEntity(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.instrument_webhook_data import InstrumentWebhookData  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.instrument_webhook_data import InstrumentWebhookData
 
 class TestInstrumentWebhookData(unittest.TestCase):
     """InstrumentWebhookData unit test stubs"""
@@ -29,22 +26,22 @@ class TestInstrumentWebhookData(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> InstrumentWebhookData:
         """Test InstrumentWebhookData
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `InstrumentWebhookData`
         """
-        model = cashfree_pg.models.instrument_webhook_data.InstrumentWebhookData()  # noqa: E501
-        if include_optional :
+        model = InstrumentWebhookData()
+        if include_optional:
             return InstrumentWebhookData(
                 data = cashfree_pg.models.instrument_webhook_data_entity.InstrumentWebhookDataEntity(
-                    instrument = null, ), 
-                event_time = '2021-10-07T19:42:44+05:30', 
+                    instrument = null, ),
+                event_time = '2021-10-07T19:42:44+05:30',
                 type = 'INSTRUMENT_ACTIVE_WEBHOOK'
             )
-        else :
+        else:
             return InstrumentWebhookData(
         )
         """

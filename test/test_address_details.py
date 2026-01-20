@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.address_details import AddressDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.address_details import AddressDetails
 
 class TestAddressDetails(unittest.TestCase):
     """AddressDetails unit test stubs"""
@@ -29,29 +26,29 @@ class TestAddressDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> AddressDetails:
         """Test AddressDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AddressDetails`
         """
-        model = cashfree_pg.models.address_details.AddressDetails()  # noqa: E501
-        if include_optional :
+        model = AddressDetails()
+        if include_optional:
             return AddressDetails(
-                name = '', 
-                address_line_one = '', 
-                address_line_two = '', 
-                country = '', 
-                country_code = '', 
-                state = '', 
-                state_code = '', 
-                city = '', 
-                pin_code = '', 
-                phone = '', 
+                name = '',
+                address_line_one = '',
+                address_line_two = '',
+                country = '',
+                country_code = '',
+                state = '',
+                state_code = '',
+                city = '',
+                pin_code = '',
+                phone = '',
                 email = ''
             )
-        else :
+        else:
             return AddressDetails(
         )
         """

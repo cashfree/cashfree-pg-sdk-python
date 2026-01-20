@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.upload_vendor_documents_response import UploadVendorDocumentsResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.upload_vendor_documents_response import UploadVendorDocumentsResponse
 
 class TestUploadVendorDocumentsResponse(unittest.TestCase):
     """UploadVendorDocumentsResponse unit test stubs"""
@@ -29,23 +26,23 @@ class TestUploadVendorDocumentsResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UploadVendorDocumentsResponse:
         """Test UploadVendorDocumentsResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UploadVendorDocumentsResponse`
         """
-        model = cashfree_pg.models.upload_vendor_documents_response.UploadVendorDocumentsResponse()  # noqa: E501
-        if include_optional :
+        model = UploadVendorDocumentsResponse()
+        if include_optional:
             return UploadVendorDocumentsResponse(
-                vendor_id = '', 
-                doc_type = '', 
-                doc_value = '', 
-                status = '', 
+                vendor_id = '',
+                doc_type = '',
+                doc_value = '',
+                status = '',
                 remarks = ''
             )
-        else :
+        else:
             return UploadVendorDocumentsResponse(
         )
         """

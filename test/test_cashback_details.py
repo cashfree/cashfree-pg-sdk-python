@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.cashback_details import CashbackDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.cashback_details import CashbackDetails
 
 class TestCashbackDetails(unittest.TestCase):
     """CashbackDetails unit test stubs"""
@@ -29,21 +26,21 @@ class TestCashbackDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CashbackDetails:
         """Test CashbackDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CashbackDetails`
         """
-        model = cashfree_pg.models.cashback_details.CashbackDetails()  # noqa: E501
-        if include_optional :
+        model = CashbackDetails()
+        if include_optional:
             return CashbackDetails(
-                cashback_type = 'flat', 
-                cashback_value = 1.337, 
+                cashback_type = 'flat',
+                cashback_value = 1.337,
                 max_cashback_amount = 1.337
             )
-        else :
+        else:
             return CashbackDetails(
                 cashback_type = 'flat',
                 cashback_value = 1.337,

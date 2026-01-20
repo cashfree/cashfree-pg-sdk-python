@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.split_order_recon_success_response import SplitOrderReconSuccessResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.split_order_recon_success_response import SplitOrderReconSuccessResponse
 
 class TestSplitOrderReconSuccessResponse(unittest.TestCase):
     """SplitOrderReconSuccessResponse unit test stubs"""
@@ -29,15 +26,15 @@ class TestSplitOrderReconSuccessResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SplitOrderReconSuccessResponse:
         """Test SplitOrderReconSuccessResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SplitOrderReconSuccessResponse`
         """
-        model = cashfree_pg.models.split_order_recon_success_response.SplitOrderReconSuccessResponse()  # noqa: E501
-        if include_optional :
+        model = SplitOrderReconSuccessResponse()
+        if include_optional:
             return SplitOrderReconSuccessResponse(
                 settlement = cashfree_pg.models.split_order_recon_success_response_settlement.SplitOrderReconSuccessResponse_settlement(
                     entity = '', 
@@ -53,10 +50,10 @@ class TestSplitOrderReconSuccessResponse(unittest.TestCase):
                     settlement_currency = '', 
                     transfer_utr = '', 
                     transfer_time = '', 
-                    payment_time = '', ), 
+                    payment_time = '', ),
                 refunds = [
                     None
-                    ], 
+                    ],
                 vendors = [
                     cashfree_pg.models.split_order_recon_success_response_vendors_inner.SplitOrderReconSuccessResponse_vendors_inner(
                         vendor_id = '', 
@@ -65,7 +62,7 @@ class TestSplitOrderReconSuccessResponse(unittest.TestCase):
                         settlement_eligibility_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
-        else :
+        else:
             return SplitOrderReconSuccessResponse(
         )
         """

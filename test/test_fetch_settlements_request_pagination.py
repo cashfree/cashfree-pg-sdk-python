@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.fetch_settlements_request_pagination import FetchSettlementsRequestPagination  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.fetch_settlements_request_pagination import FetchSettlementsRequestPagination
 
 class TestFetchSettlementsRequestPagination(unittest.TestCase):
     """FetchSettlementsRequestPagination unit test stubs"""
@@ -29,20 +26,20 @@ class TestFetchSettlementsRequestPagination(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> FetchSettlementsRequestPagination:
         """Test FetchSettlementsRequestPagination
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FetchSettlementsRequestPagination`
         """
-        model = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequestPagination()  # noqa: E501
-        if include_optional :
+        model = FetchSettlementsRequestPagination()
+        if include_optional:
             return FetchSettlementsRequestPagination(
-                limit = 56, 
+                limit = 56,
                 cursor = ''
             )
-        else :
+        else:
             return FetchSettlementsRequestPagination(
                 limit = 56,
         )

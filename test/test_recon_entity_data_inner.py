@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.recon_entity_data_inner import ReconEntityDataInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.recon_entity_data_inner import ReconEntityDataInner
 
 class TestReconEntityDataInner(unittest.TestCase):
     """ReconEntityDataInner unit test stubs"""
@@ -29,65 +26,65 @@ class TestReconEntityDataInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ReconEntityDataInner:
         """Test ReconEntityDataInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ReconEntityDataInner`
         """
-        model = cashfree_pg.models.recon_entity_data_inner.ReconEntityDataInner()  # noqa: E501
-        if include_optional :
+        model = ReconEntityDataInner()
+        if include_optional:
             return ReconEntityDataInner(
-                event_id = '', 
-                event_type = '', 
-                event_settlement_amount = 1.337, 
-                event_amount = 1.337, 
-                sale_type = '', 
-                event_status = '', 
-                entity = '', 
-                event_time = '', 
-                event_currency = '', 
-                order_id = '', 
-                order_amount = 1.337, 
-                customer_phone = '', 
-                customer_email = '', 
-                customer_name = '', 
-                payment_amount = 1.337, 
-                payment_utr = '', 
-                payment_time = '', 
-                payment_service_charge = 1.337, 
-                payment_service_tax = 1.337, 
-                cf_payment_id = '', 
-                cf_settlement_id = '', 
-                settlement_date = '', 
-                settlement_utr = '', 
-                split_service_charge = 1.337, 
-                split_service_tax = 1.337, 
-                vendor_commission = 1.337, 
-                closed_in_favor_of = '', 
-                dispute_resolved_on = '', 
-                dispute_category = '', 
-                dispute_note = '', 
-                refund_processed_at = '', 
-                refund_arn = '', 
-                refund_note = '', 
-                refund_id = '', 
-                adjustment_remarks = '', 
-                adjustment = 1.337, 
-                service_tax = 1.337, 
-                service_charge = 1.337, 
-                amount_settled = 1.337, 
-                payment_from = '', 
-                payment_till = '', 
-                reason = '', 
-                settlement_initiated_on = '', 
-                settlement_type = '', 
-                settlement_charge = 1.337, 
-                settlement_tax = 1.337, 
+                event_id = '',
+                event_type = '',
+                event_settlement_amount = 1.337,
+                event_amount = 1.337,
+                sale_type = '',
+                event_status = '',
+                entity = '',
+                event_time = '',
+                event_currency = '',
+                order_id = '',
+                order_amount = 1.337,
+                customer_phone = '',
+                customer_email = '',
+                customer_name = '',
+                payment_amount = 1.337,
+                payment_utr = '',
+                payment_time = '',
+                payment_service_charge = 1.337,
+                payment_service_tax = 1.337,
+                cf_payment_id = '',
+                cf_settlement_id = '',
+                settlement_date = '',
+                settlement_utr = '',
+                split_service_charge = 1.337,
+                split_service_tax = 1.337,
+                vendor_commission = 1.337,
+                closed_in_favor_of = '',
+                dispute_resolved_on = '',
+                dispute_category = '',
+                dispute_note = '',
+                refund_processed_at = '',
+                refund_arn = '',
+                refund_note = '',
+                refund_id = '',
+                adjustment_remarks = '',
+                adjustment = 1.337,
+                service_tax = 1.337,
+                service_charge = 1.337,
+                amount_settled = 1.337,
+                payment_from = '',
+                payment_till = '',
+                reason = '',
+                settlement_initiated_on = '',
+                settlement_type = '',
+                settlement_charge = 1.337,
+                settlement_tax = 1.337,
                 remarks = ''
             )
-        else :
+        else:
             return ReconEntityDataInner(
         )
         """

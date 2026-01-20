@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.upload_terminal_docs import UploadTerminalDocs  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.upload_terminal_docs import UploadTerminalDocs
 
 class TestUploadTerminalDocs(unittest.TestCase):
     """UploadTerminalDocs unit test stubs"""
@@ -29,21 +26,21 @@ class TestUploadTerminalDocs(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UploadTerminalDocs:
         """Test UploadTerminalDocs
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UploadTerminalDocs`
         """
-        model = cashfree_pg.models.upload_terminal_docs.UploadTerminalDocs()  # noqa: E501
-        if include_optional :
+        model = UploadTerminalDocs()
+        if include_optional:
             return UploadTerminalDocs(
-                doc_type = '', 
-                doc_value = '', 
+                doc_type = '',
+                doc_value = '',
                 file = ''
             )
-        else :
+        else:
             return UploadTerminalDocs(
                 doc_type = '',
                 doc_value = '',

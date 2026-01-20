@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.onboard_soundbox_vpa_request import OnboardSoundboxVpaRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.onboard_soundbox_vpa_request import OnboardSoundboxVpaRequest
 
 class TestOnboardSoundboxVpaRequest(unittest.TestCase):
     """OnboardSoundboxVpaRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestOnboardSoundboxVpaRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OnboardSoundboxVpaRequest:
         """Test OnboardSoundboxVpaRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OnboardSoundboxVpaRequest`
         """
-        model = cashfree_pg.models.onboard_soundbox_vpa_request.OnboardSoundboxVpaRequest()  # noqa: E501
-        if include_optional :
+        model = OnboardSoundboxVpaRequest()
+        if include_optional:
             return OnboardSoundboxVpaRequest(
-                vpa = '', 
-                cf_terminal_id = '', 
-                device_serial_no = '', 
-                merchant_name = '', 
+                vpa = '',
+                cf_terminal_id = '',
+                device_serial_no = '',
+                merchant_name = '',
                 language = ''
             )
-        else :
+        else:
             return OnboardSoundboxVpaRequest(
                 vpa = '',
                 cf_terminal_id = '',

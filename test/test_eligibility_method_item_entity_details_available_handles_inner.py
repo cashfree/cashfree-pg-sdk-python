@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner import EligibilityMethodItemEntityDetailsAvailableHandlesInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner import EligibilityMethodItemEntityDetailsAvailableHandlesInner
 
 class TestEligibilityMethodItemEntityDetailsAvailableHandlesInner(unittest.TestCase):
     """EligibilityMethodItemEntityDetailsAvailableHandlesInner unit test stubs"""
@@ -29,20 +26,20 @@ class TestEligibilityMethodItemEntityDetailsAvailableHandlesInner(unittest.TestC
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityMethodItemEntityDetailsAvailableHandlesInner:
         """Test EligibilityMethodItemEntityDetailsAvailableHandlesInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityMethodItemEntityDetailsAvailableHandlesInner`
         """
-        model = cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner.EligibilityMethodItemEntityDetailsAvailableHandlesInner()  # noqa: E501
-        if include_optional :
+        model = EligibilityMethodItemEntityDetailsAvailableHandlesInner()
+        if include_optional:
             return EligibilityMethodItemEntityDetailsAvailableHandlesInner(
-                handle = '', 
+                handle = '',
                 application = ''
             )
-        else :
+        else:
             return EligibilityMethodItemEntityDetailsAvailableHandlesInner(
         )
         """

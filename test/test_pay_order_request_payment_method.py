@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.pay_order_request_payment_method import PayOrderRequestPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.pay_order_request_payment_method import PayOrderRequestPaymentMethod
 
 class TestPayOrderRequestPaymentMethod(unittest.TestCase):
     """PayOrderRequestPaymentMethod unit test stubs"""
@@ -29,26 +26,26 @@ class TestPayOrderRequestPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PayOrderRequestPaymentMethod:
         """Test PayOrderRequestPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PayOrderRequestPaymentMethod`
         """
-        model = cashfree_pg.models.pay_order_request_payment_method.PayOrderRequestPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = PayOrderRequestPaymentMethod()
+        if include_optional:
             return PayOrderRequestPaymentMethod(
-                card = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"}, 
-                upi = {"channel":"collect","upi_id":"john@okxdfcbak","upi_expiry_minutes":10}, 
-                netbanking = {"channel":"link","netbanking_bank_code":3022}, 
-                app = {"channel":"link","provider":"gpay","phone":"8474090552"}, 
-                emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3}, 
-                cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3}, 
-                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"}, 
+                card = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"},
+                upi = {"channel":"collect","upi_id":"john@okxdfcbak","upi_expiry_minutes":10},
+                netbanking = {"channel":"link","netbanking_bank_code":3022},
+                app = {"channel":"link","provider":"gpay","phone":"8474090552"},
+                emi = {"channel":"link","card_bank_name":"hdfc","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900","emi_tenure":3},
+                cardless_emi = {"channel":"link","provider":"kotak","phone":"7768913241","emi_tenure":3},
+                paylater = {"channel":"link","provider":"kotak","phone":"7789112345"},
                 banktransfer = {"channel":"link"}
             )
-        else :
+        else:
             return PayOrderRequestPaymentMethod(
                 card = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"},
                 upi = {"channel":"collect","upi_id":"john@okxdfcbak","upi_expiry_minutes":10},

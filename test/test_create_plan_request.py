@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_plan_request import CreatePlanRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_plan_request import CreatePlanRequest
 
 class TestCreatePlanRequest(unittest.TestCase):
     """CreatePlanRequest unit test stubs"""
@@ -29,28 +26,28 @@ class TestCreatePlanRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreatePlanRequest:
         """Test CreatePlanRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreatePlanRequest`
         """
-        model = cashfree_pg.models.create_plan_request.CreatePlanRequest()  # noqa: E501
-        if include_optional :
+        model = CreatePlanRequest()
+        if include_optional:
             return CreatePlanRequest(
-                plan_id = '0', 
-                plan_name = '0', 
-                plan_type = '', 
-                plan_currency = '', 
-                plan_recurring_amount = 1.337, 
-                plan_max_amount = 1.337, 
-                plan_max_cycles = 56, 
-                plan_intervals = 56, 
-                plan_interval_type = '', 
+                plan_id = '0',
+                plan_name = '0',
+                plan_type = '',
+                plan_currency = '',
+                plan_recurring_amount = 1.337,
+                plan_max_amount = 1.337,
+                plan_max_cycles = 56,
+                plan_intervals = 56,
+                plan_interval_type = '',
                 plan_note = ''
             )
-        else :
+        else:
             return CreatePlanRequest(
                 plan_id = '0',
                 plan_name = '0',

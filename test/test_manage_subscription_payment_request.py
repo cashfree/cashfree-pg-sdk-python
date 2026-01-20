@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.manage_subscription_payment_request import ManageSubscriptionPaymentRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.manage_subscription_payment_request import ManageSubscriptionPaymentRequest
 
 class TestManageSubscriptionPaymentRequest(unittest.TestCase):
     """ManageSubscriptionPaymentRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestManageSubscriptionPaymentRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ManageSubscriptionPaymentRequest:
         """Test ManageSubscriptionPaymentRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ManageSubscriptionPaymentRequest`
         """
-        model = cashfree_pg.models.manage_subscription_payment_request.ManageSubscriptionPaymentRequest()  # noqa: E501
-        if include_optional :
+        model = ManageSubscriptionPaymentRequest()
+        if include_optional:
             return ManageSubscriptionPaymentRequest(
-                subscription_id = '', 
-                payment_id = '', 
-                action = '', 
+                subscription_id = '',
+                payment_id = '',
+                action = '',
                 action_details = cashfree_pg.models.manage_subscription_payment_request_action_details.ManageSubscriptionPaymentRequest_action_details(
                     next_scheduled_time = '', )
             )
-        else :
+        else:
             return ManageSubscriptionPaymentRequest(
                 subscription_id = '',
                 payment_id = '',

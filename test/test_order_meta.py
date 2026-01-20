@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_meta import OrderMeta  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_meta import OrderMeta
 
 class TestOrderMeta(unittest.TestCase):
     """OrderMeta unit test stubs"""
@@ -29,21 +26,21 @@ class TestOrderMeta(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderMeta:
         """Test OrderMeta
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderMeta`
         """
-        model = cashfree_pg.models.order_meta.OrderMeta()  # noqa: E501
-        if include_optional :
+        model = OrderMeta()
+        if include_optional:
             return OrderMeta(
-                return_url = 'https://www.cashfree.com/devstudio/thankyou', 
-                notify_url = 'https://example.com/cf_notify', 
+                return_url = 'https://www.cashfree.com/devstudio/thankyou',
+                notify_url = 'https://example.com/cf_notify',
                 payment_methods = cc,dc,upi
             )
-        else :
+        else:
             return OrderMeta(
         )
         """

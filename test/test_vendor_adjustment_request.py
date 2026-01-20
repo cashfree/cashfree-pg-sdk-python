@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.vendor_adjustment_request import VendorAdjustmentRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.vendor_adjustment_request import VendorAdjustmentRequest
 
 class TestVendorAdjustmentRequest(unittest.TestCase):
     """VendorAdjustmentRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestVendorAdjustmentRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> VendorAdjustmentRequest:
         """Test VendorAdjustmentRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `VendorAdjustmentRequest`
         """
-        model = cashfree_pg.models.vendor_adjustment_request.VendorAdjustmentRequest()  # noqa: E501
-        if include_optional :
+        model = VendorAdjustmentRequest()
+        if include_optional:
             return VendorAdjustmentRequest(
-                vendor_id = '', 
-                adjustment_id = 56, 
-                amount = 1.337, 
-                type = '', 
+                vendor_id = '',
+                adjustment_id = 56,
+                amount = 1.337,
+                type = '',
                 remarks = ''
             )
-        else :
+        else:
             return VendorAdjustmentRequest(
                 vendor_id = '',
                 adjustment_id = 56,

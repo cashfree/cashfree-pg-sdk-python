@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.api_error502 import ApiError502  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.api_error502 import ApiError502
 
 class TestApiError502(unittest.TestCase):
     """ApiError502 unit test stubs"""
@@ -29,21 +26,21 @@ class TestApiError502(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ApiError502:
         """Test ApiError502
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ApiError502`
         """
-        model = cashfree_pg.models.api_error502.ApiError502()  # noqa: E501
-        if include_optional :
+        model = ApiError502()
+        if include_optional:
             return ApiError502(
-                message = '', 
-                code = '', 
+                message = '',
+                code = '',
                 type = 'api_error'
             )
-        else :
+        else:
             return ApiError502(
         )
         """

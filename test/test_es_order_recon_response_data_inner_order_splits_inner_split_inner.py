@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner import ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner import ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
 
 class TestESOrderReconResponseDataInnerOrderSplitsInnerSplitInner(unittest.TestCase):
     """ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner unit test stubs"""
@@ -29,21 +26,21 @@ class TestESOrderReconResponseDataInnerOrderSplitsInnerSplitInner(unittest.TestC
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner:
         """Test ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner`
         """
-        model = cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner.ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner()
+        if include_optional:
             return ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner(
-                merchant_vendor_id = '', 
-                percentage = 1.337, 
+                merchant_vendor_id = '',
+                percentage = 1.337,
                 tags = cashfree_pg.models.tags.tags()
             )
-        else :
+        else:
             return ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner(
         )
         """

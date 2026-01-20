@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.fetch_recon_request_filters import FetchReconRequestFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.fetch_recon_request_filters import FetchReconRequestFilters
 
 class TestFetchReconRequestFilters(unittest.TestCase):
     """FetchReconRequestFilters unit test stubs"""
@@ -29,20 +26,20 @@ class TestFetchReconRequestFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> FetchReconRequestFilters:
         """Test FetchReconRequestFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FetchReconRequestFilters`
         """
-        model = cashfree_pg.models.fetch_recon_request_filters.FetchReconRequestFilters()  # noqa: E501
-        if include_optional :
+        model = FetchReconRequestFilters()
+        if include_optional:
             return FetchReconRequestFilters(
-                start_date = '', 
+                start_date = '',
                 end_date = ''
             )
-        else :
+        else:
             return FetchReconRequestFilters(
                 start_date = '',
                 end_date = '',

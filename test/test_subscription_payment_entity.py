@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_payment_entity import SubscriptionPaymentEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_payment_entity import SubscriptionPaymentEntity
 
 class TestSubscriptionPaymentEntity(unittest.TestCase):
     """SubscriptionPaymentEntity unit test stubs"""
@@ -29,34 +26,34 @@ class TestSubscriptionPaymentEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionPaymentEntity:
         """Test SubscriptionPaymentEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionPaymentEntity`
         """
-        model = cashfree_pg.models.subscription_payment_entity.SubscriptionPaymentEntity()  # noqa: E501
-        if include_optional :
+        model = SubscriptionPaymentEntity()
+        if include_optional:
             return SubscriptionPaymentEntity(
-                authorization_details = {"authorization_amount":1,"authorization_amount_refund":false,"authorization_reference":"","authorization_time":"2022-06-14T23:47:52+05:30","authorization_status":"INITIALIZED","payment_id":"97877","payment_method":"NPCI_SBC"}, 
-                cf_payment_id = '', 
-                cf_subscription_id = '', 
-                cf_txn_id = '', 
-                cf_order_id = '', 
+                authorization_details = {"authorization_amount":1,"authorization_amount_refund":false,"authorization_reference":"","authorization_time":"2022-06-14T23:47:52+05:30","authorization_status":"INITIALIZED","payment_id":"97877","payment_method":"NPCI_SBC"},
+                cf_payment_id = '',
+                cf_subscription_id = '',
+                cf_txn_id = '',
+                cf_order_id = '',
                 failure_details = cashfree_pg.models.subscription_payment_entity_failure_details.SubscriptionPaymentEntity_failure_details(
-                    failure_reason = '', ), 
-                payment_amount = 1.337, 
-                payment_id = '', 
-                payment_initiated_date = '', 
-                payment_remarks = '', 
-                payment_schedule_date = '', 
-                payment_status = '', 
-                payment_type = '', 
-                retry_attempts = 56, 
+                    failure_reason = '', ),
+                payment_amount = 1.337,
+                payment_id = '',
+                payment_initiated_date = '',
+                payment_remarks = '',
+                payment_schedule_date = '',
+                payment_status = '',
+                payment_type = '',
+                retry_attempts = 56,
                 subscription_id = ''
             )
-        else :
+        else:
             return SubscriptionPaymentEntity(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.adjust_vendor_balance_response import AdjustVendorBalanceResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.adjust_vendor_balance_response import AdjustVendorBalanceResponse
 
 class TestAdjustVendorBalanceResponse(unittest.TestCase):
     """AdjustVendorBalanceResponse unit test stubs"""
@@ -29,22 +26,22 @@ class TestAdjustVendorBalanceResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> AdjustVendorBalanceResponse:
         """Test AdjustVendorBalanceResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AdjustVendorBalanceResponse`
         """
-        model = cashfree_pg.models.adjust_vendor_balance_response.AdjustVendorBalanceResponse()  # noqa: E501
-        if include_optional :
+        model = AdjustVendorBalanceResponse()
+        if include_optional:
             return AdjustVendorBalanceResponse(
-                settlement_id = 1.337, 
-                transfer_details = {"vendor_id":"test03","transfer_from":"VENDOR","transfer_type":"ADJUSTMENT","transfer_amount":10,"remark":"Testing","tags":[{"product":"SHRT"},{"size":1}]}, 
-                balances = {"merchant_id":152707,"vendor_id":"test03","merchant_unsettled":2442,"vendor_unsettled":4757.42}, 
+                settlement_id = 1.337,
+                transfer_details = {"vendor_id":"test03","transfer_from":"VENDOR","transfer_type":"ADJUSTMENT","transfer_amount":10,"remark":"Testing","tags":[{"product":"SHRT"},{"size":1}]},
+                balances = {"merchant_id":152707,"vendor_id":"test03","merchant_unsettled":2442,"vendor_unsettled":4757.42},
                 charges = {"service_charges":2,"service_tax":0.36,"amount":10,"billed_to":"MERCHANT","is_postpaid":true}
             )
-        else :
+        else:
             return AdjustVendorBalanceResponse(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_webhook_gateway_details_entity import PaymentWebhookGatewayDetailsEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_webhook_gateway_details_entity import PaymentWebhookGatewayDetailsEntity
 
 class TestPaymentWebhookGatewayDetailsEntity(unittest.TestCase):
     """PaymentWebhookGatewayDetailsEntity unit test stubs"""
@@ -29,23 +26,23 @@ class TestPaymentWebhookGatewayDetailsEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentWebhookGatewayDetailsEntity:
         """Test PaymentWebhookGatewayDetailsEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentWebhookGatewayDetailsEntity`
         """
-        model = cashfree_pg.models.payment_webhook_gateway_details_entity.PaymentWebhookGatewayDetailsEntity()  # noqa: E501
-        if include_optional :
+        model = PaymentWebhookGatewayDetailsEntity()
+        if include_optional:
             return PaymentWebhookGatewayDetailsEntity(
-                gateway_name = '', 
-                gateway_order_id = '', 
-                gateway_payment_id = '', 
-                gateway_status_code = '', 
+                gateway_name = '',
+                gateway_order_id = '',
+                gateway_payment_id = '',
+                gateway_status_code = '',
                 gateway_settlement = ''
             )
-        else :
+        else:
             return PaymentWebhookGatewayDetailsEntity(
         )
         """

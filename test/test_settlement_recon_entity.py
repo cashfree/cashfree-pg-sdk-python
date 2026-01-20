@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.settlement_recon_entity import SettlementReconEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.settlement_recon_entity import SettlementReconEntity
 
 class TestSettlementReconEntity(unittest.TestCase):
     """SettlementReconEntity unit test stubs"""
@@ -29,18 +26,18 @@ class TestSettlementReconEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SettlementReconEntity:
         """Test SettlementReconEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SettlementReconEntity`
         """
-        model = cashfree_pg.models.settlement_recon_entity.SettlementReconEntity()  # noqa: E501
-        if include_optional :
+        model = SettlementReconEntity()
+        if include_optional:
             return SettlementReconEntity(
-                cursor = '', 
-                limit = 56, 
+                cursor = '',
+                limit = 56,
                 data = [
                     cashfree_pg.models.settlement_recon_entity_data_inner.SettlementReconEntity_data_inner(
                         event_id = '', 
@@ -80,7 +77,7 @@ class TestSettlementReconEntity(unittest.TestCase):
                         adjustment_remarks = '', )
                     ]
             )
-        else :
+        else:
             return SettlementReconEntity(
         )
         """

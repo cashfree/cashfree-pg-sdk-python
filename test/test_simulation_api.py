@@ -15,31 +15,29 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.simulation_api import SimulationApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.simulation_api import SimulationApi
 
 
 class TestSimulationApi(unittest.TestCase):
     """SimulationApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.simulation_api.SimulationApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = SimulationApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_fetch_simulation(self):
+    def test_p_g_fetch_simulation(self) -> None:
         """Test case for p_g_fetch_simulation
 
-        Fetch Simulation  # noqa: E501
+        Fetch Simulation
         """
         pass
 
-    def test_p_g_simulate_payment(self):
+    def test_p_g_simulate_payment(self) -> None:
         """Test case for p_g_simulate_payment
 
-        Simulate Payment  # noqa: E501
+        Simulate Payment
         """
         pass
 

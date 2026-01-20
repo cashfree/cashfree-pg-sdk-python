@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.terminal_details import TerminalDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.terminal_details import TerminalDetails
 
 class TestTerminalDetails(unittest.TestCase):
     """TerminalDetails unit test stubs"""
@@ -29,28 +26,28 @@ class TestTerminalDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> TerminalDetails:
         """Test TerminalDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TerminalDetails`
         """
-        model = cashfree_pg.models.terminal_details.TerminalDetails()  # noqa: E501
-        if include_optional :
+        model = TerminalDetails()
+        if include_optional:
             return TerminalDetails(
-                added_on = '', 
-                cf_terminal_id = '', 
-                last_updated_on = '', 
-                terminal_address = '', 
-                terminal_id = '012', 
-                terminal_name = '', 
-                terminal_note = '', 
-                terminal_phone_no = '', 
-                terminal_status = '', 
+                added_on = '',
+                cf_terminal_id = '',
+                last_updated_on = '',
+                terminal_address = '',
+                terminal_id = '012',
+                terminal_name = '',
+                terminal_note = '',
+                terminal_phone_no = '',
+                terminal_status = '',
                 terminal_type = '0123'
             )
-        else :
+        else:
             return TerminalDetails(
                 terminal_phone_no = '',
                 terminal_type = '0123',

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_meta import OfferMeta  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_meta import OfferMeta
 
 class TestOfferMeta(unittest.TestCase):
     """OfferMeta unit test stubs"""
@@ -29,23 +26,23 @@ class TestOfferMeta(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferMeta:
         """Test OfferMeta
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferMeta`
         """
-        model = cashfree_pg.models.offer_meta.OfferMeta()  # noqa: E501
-        if include_optional :
+        model = OfferMeta()
+        if include_optional:
             return OfferMeta(
-                offer_title = 'Test Offer', 
-                offer_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit', 
-                offer_code = 'CFTESTOFFER', 
-                offer_start_time = '2023-03-21T08:09:51Z', 
+                offer_title = 'Test Offer',
+                offer_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                offer_code = 'CFTESTOFFER',
+                offer_start_time = '2023-03-21T08:09:51Z',
                 offer_end_time = '2023-03-29T08:09:51Z'
             )
-        else :
+        else:
             return OfferMeta(
                 offer_title = 'Test Offer',
                 offer_description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',

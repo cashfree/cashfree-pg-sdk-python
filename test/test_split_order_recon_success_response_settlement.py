@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.split_order_recon_success_response_settlement import SplitOrderReconSuccessResponseSettlement  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.split_order_recon_success_response_settlement import SplitOrderReconSuccessResponseSettlement
 
 class TestSplitOrderReconSuccessResponseSettlement(unittest.TestCase):
     """SplitOrderReconSuccessResponseSettlement unit test stubs"""
@@ -29,32 +26,32 @@ class TestSplitOrderReconSuccessResponseSettlement(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SplitOrderReconSuccessResponseSettlement:
         """Test SplitOrderReconSuccessResponseSettlement
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SplitOrderReconSuccessResponseSettlement`
         """
-        model = cashfree_pg.models.split_order_recon_success_response_settlement.SplitOrderReconSuccessResponseSettlement()  # noqa: E501
-        if include_optional :
+        model = SplitOrderReconSuccessResponseSettlement()
+        if include_optional:
             return SplitOrderReconSuccessResponseSettlement(
-                entity = '', 
-                cf_settlement_id = 56, 
-                cf_payment_id = 56, 
-                order_id = '', 
-                order_currency = '', 
-                transfer_id = '', 
-                order_amount = 1.337, 
-                service_charge = 1.337, 
-                service_tax = 1.337, 
-                settlement_amount = 1.337, 
-                settlement_currency = '', 
-                transfer_utr = '', 
-                transfer_time = '', 
+                entity = '',
+                cf_settlement_id = 56,
+                cf_payment_id = 56,
+                order_id = '',
+                order_currency = '',
+                transfer_id = '',
+                order_amount = 1.337,
+                service_charge = 1.337,
+                service_tax = 1.337,
+                settlement_amount = 1.337,
+                settlement_currency = '',
+                transfer_utr = '',
+                transfer_time = '',
                 payment_time = ''
             )
-        else :
+        else:
             return SplitOrderReconSuccessResponseSettlement(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.update_terminal_request import UpdateTerminalRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.update_terminal_request import UpdateTerminalRequest
 
 class TestUpdateTerminalRequest(unittest.TestCase):
     """UpdateTerminalRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestUpdateTerminalRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UpdateTerminalRequest:
         """Test UpdateTerminalRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UpdateTerminalRequest`
         """
-        model = cashfree_pg.models.update_terminal_request.UpdateTerminalRequest()  # noqa: E501
-        if include_optional :
+        model = UpdateTerminalRequest()
+        if include_optional:
             return UpdateTerminalRequest(
-                terminal_email = '', 
-                terminal_phone_no = '0123456789', 
+                terminal_email = '',
+                terminal_phone_no = '0123456789',
                 terminal_meta = cashfree_pg.models.update_terminal_request_terminal_meta.UpdateTerminalRequest_terminal_meta(
-                    terminal_operator = '', ), 
+                    terminal_operator = '', ),
                 terminal_type = ''
             )
-        else :
+        else:
             return UpdateTerminalRequest(
                 terminal_type = '',
         )

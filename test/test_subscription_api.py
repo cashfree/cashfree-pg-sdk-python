@@ -15,108 +15,106 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.subscription_api import SubscriptionApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.subscription_api import SubscriptionApi
 
 
 class TestSubscriptionApi(unittest.TestCase):
     """SubscriptionApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.subscription_api.SubscriptionApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = SubscriptionApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_subs_create_payment(self):
+    def test_subs_create_payment(self) -> None:
         """Test case for subs_create_payment
 
-        Raise a charge or create an auth.  # noqa: E501
+        Raise a charge or create an auth.
         """
         pass
 
-    def test_subs_create_plan(self):
+    def test_subs_create_plan(self) -> None:
         """Test case for subs_create_plan
 
-        Create a plan.  # noqa: E501
+        Create a plan.
         """
         pass
 
-    def test_subs_create_refund(self):
+    def test_subs_create_refund(self) -> None:
         """Test case for subs_create_refund
 
-        Create a refund.  # noqa: E501
+        Create a refund.
         """
         pass
 
-    def test_subs_create_subscription(self):
+    def test_subs_create_subscription(self) -> None:
         """Test case for subs_create_subscription
 
-        Create Subscription  # noqa: E501
+        Create Subscription
         """
         pass
 
-    def test_subs_fetch_plan(self):
+    def test_subs_fetch_plan(self) -> None:
         """Test case for subs_fetch_plan
 
-        Fetch Plan  # noqa: E501
+        Fetch Plan
         """
         pass
 
-    def test_subs_fetch_subscription(self):
+    def test_subs_fetch_subscription(self) -> None:
         """Test case for subs_fetch_subscription
 
-        Fetch Subscription  # noqa: E501
+        Fetch Subscription
         """
         pass
 
-    def test_subs_fetch_subscription_payment(self):
+    def test_subs_fetch_subscription_payment(self) -> None:
         """Test case for subs_fetch_subscription_payment
 
-        Fetch details of a single payment.  # noqa: E501
+        Fetch details of a single payment.
         """
         pass
 
-    def test_subs_fetch_subscription_payments(self):
+    def test_subs_fetch_subscription_payments(self) -> None:
         """Test case for subs_fetch_subscription_payments
 
-        Fetch details of all payments of a subscription.  # noqa: E501
+        Fetch details of all payments of a subscription.
         """
         pass
 
-    def test_subs_fetch_subscription_refund(self):
+    def test_subs_fetch_subscription_refund(self) -> None:
         """Test case for subs_fetch_subscription_refund
 
-        Fetch details of a refund.  # noqa: E501
+        Fetch details of a refund.
         """
         pass
 
-    def test_subs_manage_subscription(self):
+    def test_subs_manage_subscription(self) -> None:
         """Test case for subs_manage_subscription
 
-        Manage a subscription.  # noqa: E501
+        Manage a subscription.
         """
         pass
 
-    def test_subs_manage_subscription_payment(self):
+    def test_subs_manage_subscription_payment(self) -> None:
         """Test case for subs_manage_subscription_payment
 
-        Manage a single payment.  # noqa: E501
+        Manage a single payment.
         """
         pass
 
-    def test_subscription_document_upload(self):
+    def test_subscription_document_upload(self) -> None:
         """Test case for subscription_document_upload
 
-        API to upload file for Physical Nach Authorization.  # noqa: E501
+        API to upload file for Physical Nach Authorization.
         """
         pass
 
-    def test_subscription_eligibility(self):
+    def test_subscription_eligibility(self) -> None:
         """Test case for subscription_eligibility
 
-        API to get all the payment method details available for subscription payments.  # noqa: E501
+        API to get all the payment method details available for subscription payments.
         """
         pass
 

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.idempotency_error import IdempotencyError  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.idempotency_error import IdempotencyError
 
 class TestIdempotencyError(unittest.TestCase):
     """IdempotencyError unit test stubs"""
@@ -29,21 +26,21 @@ class TestIdempotencyError(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> IdempotencyError:
         """Test IdempotencyError
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `IdempotencyError`
         """
-        model = cashfree_pg.models.idempotency_error.IdempotencyError()  # noqa: E501
-        if include_optional :
+        model = IdempotencyError()
+        if include_optional:
             return IdempotencyError(
-                message = '', 
-                code = '', 
+                message = '',
+                code = '',
                 type = 'idempotency_error'
             )
-        else :
+        else:
             return IdempotencyError(
         )
         """

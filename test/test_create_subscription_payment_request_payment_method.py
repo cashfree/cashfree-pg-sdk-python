@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_payment_request_payment_method import CreateSubscriptionPaymentRequestPaymentMethod
 
 class TestCreateSubscriptionPaymentRequestPaymentMethod(unittest.TestCase):
     """CreateSubscriptionPaymentRequestPaymentMethod unit test stubs"""
@@ -29,35 +26,35 @@ class TestCreateSubscriptionPaymentRequestPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionPaymentRequestPaymentMethod:
         """Test CreateSubscriptionPaymentRequestPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionPaymentRequestPaymentMethod`
         """
-        model = cashfree_pg.models.create_subscription_payment_request_payment_method.CreateSubscriptionPaymentRequestPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionPaymentRequestPaymentMethod()
+        if include_optional:
             return CreateSubscriptionPaymentRequestPaymentMethod(
-                upi_id = '', 
-                channel = '', 
-                auth_mode = '', 
-                account_holder_name = '', 
-                account_number = '', 
-                account_bank_code = '', 
-                account_type = '', 
-                account_ifsc = '', 
-                mandate_creation_date = '', 
-                mandate_start_date = '', 
-                card_number = '', 
-                card_holder_name = '', 
-                card_expiry_mm = '', 
-                card_expiry_yy = '', 
-                card_cvv = '', 
-                card_network = '', 
+                upi_id = '',
+                channel = '',
+                auth_mode = '',
+                account_holder_name = '',
+                account_number = '',
+                account_bank_code = '',
+                account_type = '',
+                account_ifsc = '',
+                mandate_creation_date = '',
+                mandate_start_date = '',
+                card_number = '',
+                card_holder_name = '',
+                card_expiry_mm = '',
+                card_expiry_yy = '',
+                card_cvv = '',
+                card_network = '',
                 card_type = ''
             )
-        else :
+        else:
             return CreateSubscriptionPaymentRequestPaymentMethod(
         )
         """

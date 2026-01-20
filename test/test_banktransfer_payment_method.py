@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.banktransfer_payment_method import BanktransferPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.banktransfer_payment_method import BanktransferPaymentMethod
 
 class TestBanktransferPaymentMethod(unittest.TestCase):
     """BanktransferPaymentMethod unit test stubs"""
@@ -29,19 +26,19 @@ class TestBanktransferPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> BanktransferPaymentMethod:
         """Test BanktransferPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `BanktransferPaymentMethod`
         """
-        model = cashfree_pg.models.banktransfer_payment_method.BanktransferPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = BanktransferPaymentMethod()
+        if include_optional:
             return BanktransferPaymentMethod(
                 banktransfer = {"channel":"link"}
             )
-        else :
+        else:
             return BanktransferPaymentMethod(
                 banktransfer = {"channel":"link"},
         )

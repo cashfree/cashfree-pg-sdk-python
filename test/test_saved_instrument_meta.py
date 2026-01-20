@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.saved_instrument_meta import SavedInstrumentMeta  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.saved_instrument_meta import SavedInstrumentMeta
 
 class TestSavedInstrumentMeta(unittest.TestCase):
     """SavedInstrumentMeta unit test stubs"""
@@ -29,23 +26,23 @@ class TestSavedInstrumentMeta(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SavedInstrumentMeta:
         """Test SavedInstrumentMeta
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SavedInstrumentMeta`
         """
-        model = cashfree_pg.models.saved_instrument_meta.SavedInstrumentMeta()  # noqa: E501
-        if include_optional :
+        model = SavedInstrumentMeta()
+        if include_optional:
             return SavedInstrumentMeta(
-                card_network = 'VISA', 
-                card_bank_name = 'HDFC Bank', 
-                card_country = 'IN', 
-                card_type = 'DEBIT_CARD', 
+                card_network = 'VISA',
+                card_bank_name = 'HDFC Bank',
+                card_country = 'IN',
+                card_type = 'DEBIT_CARD',
                 card_token_details = {"par":"somepar","expiry_month":"12","expiry_year":"23"}
             )
-        else :
+        else:
             return SavedInstrumentMeta(
         )
         """

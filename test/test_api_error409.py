@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.api_error409 import ApiError409  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.api_error409 import ApiError409
 
 class TestApiError409(unittest.TestCase):
     """ApiError409 unit test stubs"""
@@ -29,21 +26,21 @@ class TestApiError409(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ApiError409:
         """Test ApiError409
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ApiError409`
         """
-        model = cashfree_pg.models.api_error409.ApiError409()  # noqa: E501
-        if include_optional :
+        model = ApiError409()
+        if include_optional:
             return ApiError409(
-                message = '', 
-                code = '', 
+                message = '',
+                code = '',
                 type = 'invalid_request_error'
             )
-        else :
+        else:
             return ApiError409(
         )
         """

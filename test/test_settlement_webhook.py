@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.settlement_webhook import SettlementWebhook  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.settlement_webhook import SettlementWebhook
 
 class TestSettlementWebhook(unittest.TestCase):
     """SettlementWebhook unit test stubs"""
@@ -29,22 +26,22 @@ class TestSettlementWebhook(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SettlementWebhook:
         """Test SettlementWebhook
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SettlementWebhook`
         """
-        model = cashfree_pg.models.settlement_webhook.SettlementWebhook()  # noqa: E501
-        if include_optional :
+        model = SettlementWebhook()
+        if include_optional:
             return SettlementWebhook(
                 data = cashfree_pg.models.settlement_webhook_data_entity.SettlementWebhookDataEntity(
-                    settlement = null, ), 
-                event_time = '2021-10-07T19:42:44+05:30', 
+                    settlement = null, ),
+                event_time = '2021-10-07T19:42:44+05:30',
                 type = 'PAYMENT_SUCCESS_WEBHOOK'
             )
-        else :
+        else:
             return SettlementWebhook(
         )
         """

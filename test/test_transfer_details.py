@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.transfer_details import TransferDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.transfer_details import TransferDetails
 
 class TestTransferDetails(unittest.TestCase):
     """TransferDetails unit test stubs"""
@@ -29,28 +26,28 @@ class TestTransferDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> TransferDetails:
         """Test TransferDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TransferDetails`
         """
-        model = cashfree_pg.models.transfer_details.TransferDetails()  # noqa: E501
-        if include_optional :
+        model = TransferDetails()
+        if include_optional:
             return TransferDetails(
-                vendor_id = '', 
-                transfer_from = '', 
-                transfer_type = '', 
-                transfer_amount = 1.337, 
-                remark = '', 
+                vendor_id = '',
+                transfer_from = '',
+                transfer_type = '',
+                transfer_amount = 1.337,
+                remark = '',
                 tags = [
                     cashfree_pg.models.transfer_details_tags_inner.TransferDetails_tags_inner(
                         product = '', 
                         size = 1.337, )
                     ]
             )
-        else :
+        else:
             return TransferDetails(
         )
         """

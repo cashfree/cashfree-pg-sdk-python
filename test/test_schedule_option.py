@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.schedule_option import ScheduleOption  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.schedule_option import ScheduleOption
 
 class TestScheduleOption(unittest.TestCase):
     """ScheduleOption unit test stubs"""
@@ -29,21 +26,21 @@ class TestScheduleOption(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ScheduleOption:
         """Test ScheduleOption
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ScheduleOption`
         """
-        model = cashfree_pg.models.schedule_option.ScheduleOption()  # noqa: E501
-        if include_optional :
+        model = ScheduleOption()
+        if include_optional:
             return ScheduleOption(
-                settlement_schedule_message = '', 
-                schedule_id = 1.337, 
+                settlement_schedule_message = '',
+                schedule_id = 1.337,
                 merchant_default = True
             )
-        else :
+        else:
             return ScheduleOption(
         )
         """

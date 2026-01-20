@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_card import OfferCard  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_card import OfferCard
 
 class TestOfferCard(unittest.TestCase):
     """OfferCard unit test stubs"""
@@ -29,15 +26,15 @@ class TestOfferCard(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferCard:
         """Test OfferCard
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferCard`
         """
-        model = cashfree_pg.models.offer_card.OfferCard()  # noqa: E501
-        if include_optional :
+        model = OfferCard()
+        if include_optional:
             return OfferCard(
                 card = cashfree_pg.models.card_offer.Card Offer(
                     type = [
@@ -48,7 +45,7 @@ class TestOfferCard(unittest.TestCase):
                         'visa'
                         ], )
             )
-        else :
+        else:
             return OfferCard(
                 card = cashfree_pg.models.card_offer.Card Offer(
                     type = [

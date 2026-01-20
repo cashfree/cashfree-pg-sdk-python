@@ -15,31 +15,29 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.settlement_reconciliation_api import SettlementReconciliationApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.settlement_reconciliation_api import SettlementReconciliationApi
 
 
 class TestSettlementReconciliationApi(unittest.TestCase):
     """SettlementReconciliationApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.settlement_reconciliation_api.SettlementReconciliationApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = SettlementReconciliationApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_fetch_settlements(self):
+    def test_p_g_fetch_settlements(self) -> None:
         """Test case for p_g_fetch_settlements
 
-        Get All Settlements  # noqa: E501
+        Get All Settlements
         """
         pass
 
-    def test_p_g_settlement_fetch_recon(self):
+    def test_p_g_settlement_fetch_recon(self) -> None:
         """Test case for p_g_settlement_fetch_recon
 
-        Settlement Reconciliation  # noqa: E501
+        Settlement Reconciliation
         """
         pass
 

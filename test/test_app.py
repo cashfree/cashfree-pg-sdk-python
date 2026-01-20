@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.app import App  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.app import App
 
 class TestApp(unittest.TestCase):
     """App unit test stubs"""
@@ -29,21 +26,21 @@ class TestApp(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> App:
         """Test App
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `App`
         """
-        model = cashfree_pg.models.app.App()  # noqa: E501
-        if include_optional :
+        model = App()
+        if include_optional:
             return App(
-                channel = '', 
-                provider = 'gpay', 
+                channel = '',
+                provider = 'gpay',
                 phone = ''
             )
-        else :
+        else:
             return App(
                 channel = '',
                 provider = 'gpay',

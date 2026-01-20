@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_response_data_inner import ESOrderReconResponseDataInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_response_data_inner import ESOrderReconResponseDataInner
 
 class TestESOrderReconResponseDataInner(unittest.TestCase):
     """ESOrderReconResponseDataInner unit test stubs"""
@@ -29,40 +26,40 @@ class TestESOrderReconResponseDataInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconResponseDataInner:
         """Test ESOrderReconResponseDataInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconResponseDataInner`
         """
-        model = cashfree_pg.models.es_order_recon_response_data_inner.ESOrderReconResponseDataInner()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconResponseDataInner()
+        if include_optional:
             return ESOrderReconResponseDataInner(
-                amount = 1.337, 
-                settlement_eligibility_time = '', 
-                merchant_order_id = '', 
-                tx_time = '', 
-                settled = '', 
-                entity_id = '', 
-                merchant_settlement_utr = '', 
-                currency = '', 
-                sale_type = '', 
-                customer_name = '', 
-                customer_email = '', 
-                customer_phone = '', 
-                merchant_vendor_commission = '', 
-                split_service_charge = '', 
-                split_service_tax = '', 
-                pg_service_tax = '', 
-                pg_service_charge = '', 
-                pg_charge_postpaid = '', 
-                merchant_settlement_id = '', 
-                added_on = '', 
-                tags = '', 
-                entity_type = '', 
-                settlement_initiated_on = '', 
-                settlement_time = '', 
+                amount = 1.337,
+                settlement_eligibility_time = '',
+                merchant_order_id = '',
+                tx_time = '',
+                settled = '',
+                entity_id = '',
+                merchant_settlement_utr = '',
+                currency = '',
+                sale_type = '',
+                customer_name = '',
+                customer_email = '',
+                customer_phone = '',
+                merchant_vendor_commission = '',
+                split_service_charge = '',
+                split_service_tax = '',
+                pg_service_tax = '',
+                pg_service_charge = '',
+                pg_charge_postpaid = '',
+                merchant_settlement_id = '',
+                added_on = '',
+                tags = '',
+                entity_type = '',
+                settlement_initiated_on = '',
+                settlement_time = '',
                 order_splits = [
                     cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner.ESOrderReconResponse_data_inner_order_splits_inner(
                         split = [
@@ -72,10 +69,10 @@ class TestESOrderReconResponseDataInner(unittest.TestCase):
                                 tags = cashfree_pg.models.tags.tags(), )
                             ], 
                         created_at = '', )
-                    ], 
+                    ],
                 eligible_split_balance = ''
             )
-        else :
+        else:
             return ESOrderReconResponseDataInner(
         )
         """

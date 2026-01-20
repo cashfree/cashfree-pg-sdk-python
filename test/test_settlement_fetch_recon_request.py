@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.settlement_fetch_recon_request import SettlementFetchReconRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.settlement_fetch_recon_request import SettlementFetchReconRequest
 
 class TestSettlementFetchReconRequest(unittest.TestCase):
     """SettlementFetchReconRequest unit test stubs"""
@@ -29,19 +26,19 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SettlementFetchReconRequest:
         """Test SettlementFetchReconRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SettlementFetchReconRequest`
         """
-        model = cashfree_pg.models.settlement_fetch_recon_request.SettlementFetchReconRequest()  # noqa: E501
-        if include_optional :
+        model = SettlementFetchReconRequest()
+        if include_optional:
             return SettlementFetchReconRequest(
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 
-                    cursor = '', ), 
+                    cursor = '', ),
                 filters = cashfree_pg.models.fetch_settlements_request_filters.FetchSettlementsRequest_filters(
                     cf_settlement_ids = [
                         ''
@@ -52,7 +49,7 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
                     start_date = '', 
                     end_date = '', )
             )
-        else :
+        else:
             return SettlementFetchReconRequest(
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 

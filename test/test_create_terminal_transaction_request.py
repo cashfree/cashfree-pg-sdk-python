@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_terminal_transaction_request import CreateTerminalTransactionRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_terminal_transaction_request import CreateTerminalTransactionRequest
 
 class TestCreateTerminalTransactionRequest(unittest.TestCase):
     """CreateTerminalTransactionRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestCreateTerminalTransactionRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateTerminalTransactionRequest:
         """Test CreateTerminalTransactionRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateTerminalTransactionRequest`
         """
-        model = cashfree_pg.models.create_terminal_transaction_request.CreateTerminalTransactionRequest()  # noqa: E501
-        if include_optional :
+        model = CreateTerminalTransactionRequest()
+        if include_optional:
             return CreateTerminalTransactionRequest(
-                cf_order_id = '', 
-                cf_terminal_id = '', 
-                payment_method = '012', 
-                terminal_phone_no = '0123456789', 
+                cf_order_id = '',
+                cf_terminal_id = '',
+                payment_method = '012',
+                terminal_phone_no = '0123456789',
                 add_invoice = True
             )
-        else :
+        else:
             return CreateTerminalTransactionRequest(
                 cf_order_id = '',
                 payment_method = '012',

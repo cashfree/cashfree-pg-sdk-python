@@ -15,24 +15,22 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.pg_reconciliation_api import PGReconciliationApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.pg_reconciliation_api import PGReconciliationApi
 
 
 class TestPGReconciliationApi(unittest.TestCase):
     """PGReconciliationApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.pg_reconciliation_api.PGReconciliationApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = PGReconciliationApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_fetch_recon(self):
+    def test_p_g_fetch_recon(self) -> None:
         """Test case for p_g_fetch_recon
 
-        PG Reconciliation  # noqa: E501
+        PG Reconciliation
         """
         pass
 

@@ -15,115 +15,113 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.easy_split_api import EasySplitApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.easy_split_api import EasySplitApi
 
 
 class TestEasySplitApi(unittest.TestCase):
     """EasySplitApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.easy_split_api.EasySplitApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = EasySplitApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_order_split_after_payment(self):
+    def test_p_g_order_split_after_payment(self) -> None:
         """Test case for p_g_order_split_after_payment
 
-        Split After Payment  # noqa: E501
+        Split After Payment
         """
         pass
 
-    def test_p_g_order_static_split(self):
+    def test_p_g_order_static_split(self) -> None:
         """Test case for p_g_order_static_split
 
-        Create Static Split Configuration  # noqa: E501
+        Create Static Split Configuration
         """
         pass
 
-    def test_p_g_split_order_recon(self):
+    def test_p_g_split_order_recon(self) -> None:
         """Test case for p_g_split_order_recon
 
-        Get Split and Settlement Details by OrderID  # noqa: E501
+        Get Split and Settlement Details by OrderID
         """
         pass
 
-    def test_p_ges_create_adjustment(self):
+    def test_p_ges_create_adjustment(self) -> None:
         """Test case for p_ges_create_adjustment
 
-        Create Adjustment  # noqa: E501
+        Create Adjustment
         """
         pass
 
-    def test_p_ges_create_on_demand_transfer(self):
+    def test_p_ges_create_on_demand_transfer(self) -> None:
         """Test case for p_ges_create_on_demand_transfer
 
-        Create On Demand Transfer  # noqa: E501
+        Create On Demand Transfer
         """
         pass
 
-    def test_p_ges_create_vendors(self):
+    def test_p_ges_create_vendors(self) -> None:
         """Test case for p_ges_create_vendors
 
-        Create vendor  # noqa: E501
+        Create vendor
         """
         pass
 
-    def test_p_ges_download_vendors_docs(self):
+    def test_p_ges_download_vendors_docs(self) -> None:
         """Test case for p_ges_download_vendors_docs
 
-        Download Vendor Documents  # noqa: E501
+        Download Vendor Documents
         """
         pass
 
-    def test_p_ges_fetch_vendors(self):
+    def test_p_ges_fetch_vendors(self) -> None:
         """Test case for p_ges_fetch_vendors
 
-        Get Vendor All Details  # noqa: E501
+        Get Vendor All Details
         """
         pass
 
-    def test_p_ges_get_vendor_balance(self):
+    def test_p_ges_get_vendor_balance(self) -> None:
         """Test case for p_ges_get_vendor_balance
 
-        Get On Demand Balance  # noqa: E501
+        Get On Demand Balance
         """
         pass
 
-    def test_p_ges_get_vendor_balance_transfer_charges(self):
+    def test_p_ges_get_vendor_balance_transfer_charges(self) -> None:
         """Test case for p_ges_get_vendor_balance_transfer_charges
 
-        Get Vendor Balance Transfer Charges  # noqa: E501
+        Get Vendor Balance Transfer Charges
         """
         pass
 
-    def test_p_ges_get_vendors_docs(self):
+    def test_p_ges_get_vendors_docs(self) -> None:
         """Test case for p_ges_get_vendors_docs
 
-        Get Vendor All Documents Status  # noqa: E501
+        Get Vendor All Documents Status
         """
         pass
 
-    def test_p_ges_order_recon(self):
+    def test_p_ges_order_recon(self) -> None:
         """Test case for p_ges_order_recon
 
-        Get Split and Settlement Details by OrderID v2.0  # noqa: E501
+        Get Split and Settlement Details by OrderID v2.0
         """
         pass
 
-    def test_p_ges_update_vendors(self):
+    def test_p_ges_update_vendors(self) -> None:
         """Test case for p_ges_update_vendors
 
-        Update vendor Details  # noqa: E501
+        Update vendor Details
         """
         pass
 
-    def test_p_ges_upload_vendors_docs(self):
+    def test_p_ges_upload_vendors_docs(self) -> None:
         """Test case for p_ges_upload_vendors_docs
 
-        Upload Vendor Docs  # noqa: E501
+        Upload Vendor Docs
         """
         pass
 

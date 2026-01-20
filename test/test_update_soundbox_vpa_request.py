@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.update_soundbox_vpa_request import UpdateSoundboxVpaRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.update_soundbox_vpa_request import UpdateSoundboxVpaRequest
 
 class TestUpdateSoundboxVpaRequest(unittest.TestCase):
     """UpdateSoundboxVpaRequest unit test stubs"""
@@ -29,22 +26,22 @@ class TestUpdateSoundboxVpaRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UpdateSoundboxVpaRequest:
         """Test UpdateSoundboxVpaRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UpdateSoundboxVpaRequest`
         """
-        model = cashfree_pg.models.update_soundbox_vpa_request.UpdateSoundboxVpaRequest()  # noqa: E501
-        if include_optional :
+        model = UpdateSoundboxVpaRequest()
+        if include_optional:
             return UpdateSoundboxVpaRequest(
-                vpa = '', 
-                cf_terminal_id = '', 
-                merchant_name = '', 
+                vpa = '',
+                cf_terminal_id = '',
+                merchant_name = '',
                 language = ''
             )
-        else :
+        else:
             return UpdateSoundboxVpaRequest(
                 vpa = '',
                 cf_terminal_id = '',

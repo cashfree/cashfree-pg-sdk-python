@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_eligibility_response import SubscriptionEligibilityResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_eligibility_response import SubscriptionEligibilityResponse
 
 class TestSubscriptionEligibilityResponse(unittest.TestCase):
     """SubscriptionEligibilityResponse unit test stubs"""
@@ -29,15 +26,15 @@ class TestSubscriptionEligibilityResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionEligibilityResponse:
         """Test SubscriptionEligibilityResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionEligibilityResponse`
         """
-        model = cashfree_pg.models.subscription_eligibility_response.SubscriptionEligibilityResponse()  # noqa: E501
-        if include_optional :
+        model = SubscriptionEligibilityResponse()
+        if include_optional:
             return SubscriptionEligibilityResponse(
                 type = [
                     cashfree_pg.models.eligibility_method_item.EligibilityMethodItem(
@@ -71,7 +68,7 @@ class TestSubscriptionEligibilityResponse(unittest.TestCase):
                                 ], ), )
                     ]
             )
-        else :
+        else:
             return SubscriptionEligibilityResponse(
         )
         """

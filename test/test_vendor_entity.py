@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.vendor_entity import VendorEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.vendor_entity import VendorEntity
 
 class TestVendorEntity(unittest.TestCase):
     """VendorEntity unit test stubs"""
@@ -29,34 +26,34 @@ class TestVendorEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> VendorEntity:
         """Test VendorEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `VendorEntity`
         """
-        model = cashfree_pg.models.vendor_entity.VendorEntity()  # noqa: E501
-        if include_optional :
+        model = VendorEntity()
+        if include_optional:
             return VendorEntity(
-                email = '', 
-                status = '', 
-                phone = '', 
-                name = '', 
-                vendor_id = '', 
-                added_on = '', 
-                updated_on = '', 
+                email = '',
+                status = '',
+                phone = '',
+                name = '',
+                vendor_id = '',
+                added_on = '',
+                updated_on = '',
                 bank = [
                     {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
-                upi = '', 
+                    ],
+                upi = '',
                 schedule_option = [
                     {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}
-                    ], 
-                vendor_type = '', 
-                account_type = '', 
-                business_type = '', 
-                remarks = '', 
+                    ],
+                vendor_type = '',
+                account_type = '',
+                business_type = '',
+                remarks = '',
                 related_docs = [
                     cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
                         vendor_id = '', 
@@ -66,7 +63,7 @@ class TestVendorEntity(unittest.TestCase):
                         remarks = '', )
                     ]
             )
-        else :
+        else:
             return VendorEntity(
         )
         """

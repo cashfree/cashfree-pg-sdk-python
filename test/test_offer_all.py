@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_all import OfferAll  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_all import OfferAll
 
 class TestOfferAll(unittest.TestCase):
     """OfferAll unit test stubs"""
@@ -29,19 +26,19 @@ class TestOfferAll(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferAll:
         """Test OfferAll
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferAll`
         """
-        model = cashfree_pg.models.offer_all.OfferAll()  # noqa: E501
-        if include_optional :
+        model = OfferAll()
+        if include_optional:
             return OfferAll(
                 all = cashfree_pg.models.all_offers.All Offers()
             )
-        else :
+        else:
             return OfferAll(
                 all = cashfree_pg.models.all_offers.All Offers(),
         )

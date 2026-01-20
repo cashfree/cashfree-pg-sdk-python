@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_payment_methods_entity_entity_details import EligibilityPaymentMethodsEntityEntityDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_payment_methods_entity_entity_details import EligibilityPaymentMethodsEntityEntityDetails
 
 class TestEligibilityPaymentMethodsEntityEntityDetails(unittest.TestCase):
     """EligibilityPaymentMethodsEntityEntityDetails unit test stubs"""
@@ -29,15 +26,15 @@ class TestEligibilityPaymentMethodsEntityEntityDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityPaymentMethodsEntityEntityDetails:
         """Test EligibilityPaymentMethodsEntityEntityDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityPaymentMethodsEntityEntityDetails`
         """
-        model = cashfree_pg.models.eligibility_payment_methods_entity_entity_details.EligibilityPaymentMethodsEntityEntityDetails()  # noqa: E501
-        if include_optional :
+        model = EligibilityPaymentMethodsEntityEntityDetails()
+        if include_optional:
             return EligibilityPaymentMethodsEntityEntityDetails(
                 payment_method_details = [
                     cashfree_pg.models.payment_mode_details.PaymentModeDetails(
@@ -47,7 +44,7 @@ class TestEligibilityPaymentMethodsEntityEntityDetails(unittest.TestCase):
                         code = 3001, )
                     ]
             )
-        else :
+        else:
             return EligibilityPaymentMethodsEntityEntityDetails(
         )
         """

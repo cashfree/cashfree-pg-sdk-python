@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_extended_data_entity import OrderExtendedDataEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_extended_data_entity import OrderExtendedDataEntity
 
 class TestOrderExtendedDataEntity(unittest.TestCase):
     """OrderExtendedDataEntity unit test stubs"""
@@ -29,25 +26,25 @@ class TestOrderExtendedDataEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderExtendedDataEntity:
         """Test OrderExtendedDataEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderExtendedDataEntity`
         """
-        model = cashfree_pg.models.order_extended_data_entity.OrderExtendedDataEntity()  # noqa: E501
-        if include_optional :
+        model = OrderExtendedDataEntity()
+        if include_optional:
             return OrderExtendedDataEntity(
-                cf_order_id = '', 
-                order_id = '', 
-                order_amount = 1.337, 
-                order_currency = '', 
-                created_at = '2022-08-16T14:45:38+05:30', 
-                charges = {"shipping_charges":5,"cod_handling_charges":10}, 
-                customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"}, 
-                shipping_address = {"name":"Aditya Keshri","address_line_one":"MK Building","address_line_two":"Test Address","country":"India","country_code":"IN","state":"Karnataka","state_code":"KA","city":"Bangalore","pin_code":"560034","phone":"+91 1118911189","email":"test@cashfree.com"}, 
-                billing_address = {"name":"Aditya Keshri","address_line_one":"MK Building","address_line_two":"Test Address","country":"India","country_code":"IN","state":"Karnataka","state_code":"KA","city":"Bangalore","pin_code":"560034","phone":"+91 1118911189","email":"test@cashfree.com"}, 
+                cf_order_id = '',
+                order_id = '',
+                order_amount = 1.337,
+                order_currency = '',
+                created_at = '2022-08-16T14:45:38+05:30',
+                charges = {"shipping_charges":5,"cod_handling_charges":10},
+                customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"},
+                shipping_address = {"name":"Aditya Keshri","address_line_one":"MK Building","address_line_two":"Test Address","country":"India","country_code":"IN","state":"Karnataka","state_code":"KA","city":"Bangalore","pin_code":"560034","phone":"+91 1118911189","email":"test@cashfree.com"},
+                billing_address = {"name":"Aditya Keshri","address_line_one":"MK Building","address_line_two":"Test Address","country":"India","country_code":"IN","state":"Karnataka","state_code":"KA","city":"Bangalore","pin_code":"560034","phone":"+91 1118911189","email":"test@cashfree.com"},
                 cart = cashfree_pg.models.cart_details.CartDetails(
                     name = '', 
                     items = [
@@ -64,7 +61,7 @@ class TestOrderExtendedDataEntity(unittest.TestCase):
                             item_discounted_unit_price = 1.337, 
                             item_currency = '', 
                             item_quantity = 1.337, )
-                        ], ), 
+                        ], ),
                 offer = cashfree_pg.models.offer_details.OfferDetails(
                     offer_id = 'd2b430fb-1afe-455a-af31-66d00377b29a', 
                     offer_status = 'active', 
@@ -73,7 +70,7 @@ class TestOrderExtendedDataEntity(unittest.TestCase):
                     offer_details = {"$ref":"#/components/schemas/OfferDetails/example"}, 
                     offer_validations = {"$ref":"#/components/schemas/OfferValidations/example"}, )
             )
-        else :
+        else:
             return OrderExtendedDataEntity(
         )
         """

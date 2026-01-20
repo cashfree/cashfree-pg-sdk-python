@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_webhook_error_entity import PaymentWebhookErrorEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_webhook_error_entity import PaymentWebhookErrorEntity
 
 class TestPaymentWebhookErrorEntity(unittest.TestCase):
     """PaymentWebhookErrorEntity unit test stubs"""
@@ -29,24 +26,24 @@ class TestPaymentWebhookErrorEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentWebhookErrorEntity:
         """Test PaymentWebhookErrorEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentWebhookErrorEntity`
         """
-        model = cashfree_pg.models.payment_webhook_error_entity.PaymentWebhookErrorEntity()  # noqa: E501
-        if include_optional :
+        model = PaymentWebhookErrorEntity()
+        if include_optional:
             return PaymentWebhookErrorEntity(
-                error_code = '', 
-                error_description = '', 
-                error_reason = '', 
-                error_source = '', 
-                error_code_raw = '', 
+                error_code = '',
+                error_description = '',
+                error_reason = '',
+                error_source = '',
+                error_code_raw = '',
                 error_description_raw = ''
             )
-        else :
+        else:
             return PaymentWebhookErrorEntity(
         )
         """

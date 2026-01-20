@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity import PaymentMethodBankTransferInPaymentsEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity import PaymentMethodBankTransferInPaymentsEntity
 
 class TestPaymentMethodBankTransferInPaymentsEntity(unittest.TestCase):
     """PaymentMethodBankTransferInPaymentsEntity unit test stubs"""
@@ -29,15 +26,15 @@ class TestPaymentMethodBankTransferInPaymentsEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodBankTransferInPaymentsEntity:
         """Test PaymentMethodBankTransferInPaymentsEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodBankTransferInPaymentsEntity`
         """
-        model = cashfree_pg.models.payment_method_bank_transfer_in_payments_entity.PaymentMethodBankTransferInPaymentsEntity()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodBankTransferInPaymentsEntity()
+        if include_optional:
             return PaymentMethodBankTransferInPaymentsEntity(
                 banktransfer = cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer.PaymentMethodBankTransferInPaymentsEntity_banktransfer(
                     channel = '', 
@@ -45,7 +42,7 @@ class TestPaymentMethodBankTransferInPaymentsEntity(unittest.TestCase):
                     banktransfer_ifsc = '', 
                     banktransfer_account_number = '', )
             )
-        else :
+        else:
             return PaymentMethodBankTransferInPaymentsEntity(
         )
         """

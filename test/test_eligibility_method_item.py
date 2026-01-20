@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_method_item import EligibilityMethodItem  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_method_item import EligibilityMethodItem
 
 class TestEligibilityMethodItem(unittest.TestCase):
     """EligibilityMethodItem unit test stubs"""
@@ -29,19 +26,19 @@ class TestEligibilityMethodItem(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityMethodItem:
         """Test EligibilityMethodItem
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityMethodItem`
         """
-        model = cashfree_pg.models.eligibility_method_item.EligibilityMethodItem()  # noqa: E501
-        if include_optional :
+        model = EligibilityMethodItem()
+        if include_optional:
             return EligibilityMethodItem(
-                eligibility = True, 
-                entity_type = '', 
-                entity_value = '', 
+                eligibility = True,
+                entity_type = '',
+                entity_value = '',
                 entity_details = cashfree_pg.models.eligibility_method_item_entity_details.EligibilityMethodItem_entity_details(
                     account_types = [
                         ''
@@ -68,7 +65,7 @@ class TestEligibilityMethodItem(unittest.TestCase):
                         ''
                         ], )
             )
-        else :
+        else:
             return EligibilityMethodItem(
         )
         """

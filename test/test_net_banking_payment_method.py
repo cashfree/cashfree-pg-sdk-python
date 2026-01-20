@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.net_banking_payment_method import NetBankingPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.net_banking_payment_method import NetBankingPaymentMethod
 
 class TestNetBankingPaymentMethod(unittest.TestCase):
     """NetBankingPaymentMethod unit test stubs"""
@@ -29,19 +26,19 @@ class TestNetBankingPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> NetBankingPaymentMethod:
         """Test NetBankingPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `NetBankingPaymentMethod`
         """
-        model = cashfree_pg.models.net_banking_payment_method.NetBankingPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = NetBankingPaymentMethod()
+        if include_optional:
             return NetBankingPaymentMethod(
                 netbanking = {"channel":"link","netbanking_bank_code":3022}
             )
-        else :
+        else:
             return NetBankingPaymentMethod(
                 netbanking = {"channel":"link","netbanking_bank_code":3022},
         )
