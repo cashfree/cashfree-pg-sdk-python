@@ -12,20 +12,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+
+
 from cashfree_pg.models.create_subscription_payment_request_card import CreateSubscriptionPaymentRequestCard
 from cashfree_pg.models.create_subscription_payment_request_enack import CreateSubscriptionPaymentRequestEnack
 from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach
 from cashfree_pg.models.create_subscripton_payment_request_upi import CreateSubscriptonPaymentRequestUpi
-from typing import Union, Any, List, TYPE_CHECKING
+from typing import Union, Any, List, TYPE_CHECKING, Literal
 from pydantic import StrictStr, Field
 
 CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS = ["CreateSubscriptionPaymentRequestCard", "CreateSubscriptionPaymentRequestEnack", "CreateSubscriptionPaymentRequestPnach", "CreateSubscriptonPaymentRequestUpi"]
@@ -46,10 +45,12 @@ class CreateSubscriptionPaymentRequestPaymentMethod(BaseModel):
         actual_instance: Union[CreateSubscriptionPaymentRequestCard, CreateSubscriptionPaymentRequestEnack, CreateSubscriptionPaymentRequestPnach, CreateSubscriptonPaymentRequestUpi]
     else:
         actual_instance: Any
-    one_of_schemas: List[str] = Field(CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Literal[CREATESUBSCRIPTIONPAYMENTREQUESTPAYMENTMETHOD_ONE_OF_SCHEMAS]
 
-    class Config:
-        validate_assignment = True
+    # Updated to Pydantic v2
+    model_config = {
+        "validate_assignment": True
+    }
 
     def __init__(self, *args, **kwargs):
         if args:

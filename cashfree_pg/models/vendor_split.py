@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class VendorSplit(BaseModel):
     """
     Use to split order when cashfree's Easy Split is enabled for your account.
     """
-    vendor_id: StrictStr = Field(..., description="Vendor id created in Cashfree system")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount which will be associated with this vendor")
-    percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Percentage of order amount which shall get added to vendor account")
-    tags: Optional[Dict[str, Dict[str, Any]]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
+    vendor_id: StrictStr = Field(description="Vendor id created in Cashfree system")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount which will be associated with this vendor")
+    percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Percentage of order amount which shall get added to vendor account")
+    tags: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["vendor_id", "amount", "percentage", "tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

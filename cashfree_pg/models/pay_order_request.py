@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+
+
 from cashfree_pg.models.pay_order_request_payment_method import PayOrderRequestPaymentMethod
+from pydantic import field_validator
 
 class PayOrderRequest(BaseModel):
     """
     Complete object for the pay api that uses payment method objects
     """
-    payment_session_id: StrictStr = Field(...)
-    payment_method: PayOrderRequestPaymentMethod = Field(...)
+    payment_session_id: StrictStr
+    payment_method: PayOrderRequestPaymentMethod
     save_instrument: Optional[StrictBool] = None
-    offer_id: Optional[StrictStr] = Field(None, description="This is required if any offers needs to be applied to the order.")
+    offer_id: Optional[StrictStr] = Field(default=None, description="This is required if any offers needs to be applied to the order.")
     __properties = ["payment_session_id", "payment_method", "save_instrument", "offer_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

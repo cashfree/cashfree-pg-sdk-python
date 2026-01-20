@@ -12,40 +12,42 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, validator
+
+
 from cashfree_pg.models.upi_authorize_details import UPIAuthorizeDetails
+from pydantic import field_validator
 
 class Upi(BaseModel):
     """
     UPI collect payment method object
     """
-    channel: StrictStr = Field(..., description="Specify the channel through which the payment must be processed. Can be one of [\"link\", \"collect\", \"qrcode\"]")
-    upi_id: Optional[StrictStr] = Field(None, description="Customer UPI VPA to process payment.  ### Important This is a required parameter for channel = `collect` ")
-    upi_redirect_url: Optional[StrictBool] = Field(None, description="use this if you want cashfree to show a loader. Sample response below. It is only supported for collect `action:collect` will be returned with `data.url` having the link for redirection ")
-    upi_expiry_minutes: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The UPI request will be valid for this expiry minutes. This parameter is only applicable for a UPI collect payment. The default value is 5 minutes. You should keep the minimum as 5 minutes, and maximum as 15 minutes")
-    authorize_only: Optional[StrictBool] = Field(None, description="For one time mandate on UPI. Set this as authorize_only = true. Please note that you can only use the \"collect\" channel if you are sending a one time mandate request")
+    channel: StrictStr = Field(description="Specify the channel through which the payment must be processed. Can be one of [\"link\", \"collect\", \"qrcode\"]")
+    upi_id: Optional[StrictStr] = Field(default=None, description="Customer UPI VPA to process payment.  ### Important This is a required parameter for channel = `collect` ")
+    upi_redirect_url: Optional[StrictBool] = Field(default=None, description="use this if you want cashfree to show a loader. Sample response below. It is only supported for collect `action:collect` will be returned with `data.url` having the link for redirection ")
+    upi_expiry_minutes: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The UPI request will be valid for this expiry minutes. This parameter is only applicable for a UPI collect payment. The default value is 5 minutes. You should keep the minimum as 5 minutes, and maximum as 15 minutes")
+    authorize_only: Optional[StrictBool] = Field(default=None, description="For one time mandate on UPI. Set this as authorize_only = true. Please note that you can only use the \"collect\" channel if you are sending a one time mandate request")
     authorization: Optional[UPIAuthorizeDetails] = None
     __properties = ["channel", "upi_id", "upi_redirect_url", "upi_expiry_minutes", "authorize_only", "authorization"]
 
-    @validator('channel')
+    @field_validator('channel')
     def channel_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('link', 'collect', 'qrcode'):
             raise ValueError("must be one of enum values ('link', 'collect', 'qrcode')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

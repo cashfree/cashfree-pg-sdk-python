@@ -12,33 +12,35 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class CreateSubscriptionPaymentRequestEnack(BaseModel):
     """
     payment method enach.
     """
-    channel: Optional[StrictStr] = Field(None, description="Channel. can be link")
-    auth_mode: Optional[StrictStr] = Field(None, description="Authentication mode. can be debit_card, aadhaar, or net_banking")
-    account_holder_name: Optional[StrictStr] = Field(None, description="Account holder name")
-    account_number: Optional[StrictStr] = Field(None, description="Account number")
-    account_bank_code: Optional[StrictStr] = Field(None, description="Account bank code (required without AccountIFSC)")
-    account_type: Optional[StrictStr] = Field(None, description="Account type")
-    account_ifsc: Optional[StrictStr] = Field(None, description="Account IFSC")
+    channel: Optional[StrictStr] = Field(default=None, description="Channel. can be link")
+    auth_mode: Optional[StrictStr] = Field(default=None, description="Authentication mode. can be debit_card, aadhaar, or net_banking")
+    account_holder_name: Optional[StrictStr] = Field(default=None, description="Account holder name")
+    account_number: Optional[StrictStr] = Field(default=None, description="Account number")
+    account_bank_code: Optional[StrictStr] = Field(default=None, description="Account bank code (required without AccountIFSC)")
+    account_type: Optional[StrictStr] = Field(default=None, description="Account type")
+    account_ifsc: Optional[StrictStr] = Field(default=None, description="Account IFSC")
     __properties = ["channel", "auth_mode", "account_holder_name", "account_number", "account_bank_code", "account_type", "account_ifsc"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

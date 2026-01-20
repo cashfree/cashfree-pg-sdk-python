@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from setuptools import setup, find_packages  # noqa: H301
 
 # To install the library, run the following
@@ -21,8 +20,8 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "cashfree_pg"
-VERSION = "4.5.1"
+NAME = "cashfree-pg"
+VERSION = "1.0.0"
 with open("README.md", "r", encoding="utf-8") as fh:
     readme = fh.read()
 PYTHON_REQUIRES = ">=3.7"
@@ -30,7 +29,7 @@ REQUIRES = [
     "urllib3 >= 1.25.3, < 2.1.0",
     "python-dateutil",
     "sentry-sdk >= 1.32.0, < 1.33.0",
-    "pydantic >= 1.10.24, < 2",
+    "pydantic >= 2.11.7",
     "aenum"
 ]
 
@@ -40,7 +39,7 @@ setup(
     description="Cashfree Payment Gateway APIs",
     author="Cashfree Payments",
     author_email="developers@cashfree.com",
-    url="https://cashfree.com",
+    url="",
     keywords=["Payment Gateway", "Cashfree", "SDK", "Payments", "Cashfree Payment Gateway APIs"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),

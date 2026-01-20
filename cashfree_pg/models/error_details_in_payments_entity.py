@@ -12,15 +12,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, StrictStr
+
+
+from pydantic import field_validator
 
 class ErrorDetailsInPaymentsEntity(BaseModel):
     """
@@ -35,10 +35,12 @@ class ErrorDetailsInPaymentsEntity(BaseModel):
     error_subcode_raw: Optional[StrictStr] = None
     __properties = ["error_code", "error_description", "error_reason", "error_source", "error_code_raw", "error_description_raw", "error_subcode_raw"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

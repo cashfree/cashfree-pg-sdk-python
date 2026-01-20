@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, constr
+
+
+from pydantic import field_validator
 
 class CreateCustomerRequest(BaseModel):
     """
     Request body to create a customer at cashfree
     """
-    customer_phone: constr(strict=True, max_length=10, min_length=10) = Field(..., description="Customer Phone Number")
-    customer_email: Optional[StrictStr] = Field(None, description="Customer Email")
-    customer_name: Optional[StrictStr] = Field(None, description="Customer Name")
+    customer_phone: Annotated[str, Field(min_length=10, strict=True, max_length=10)] = Field(description="Customer Phone Number")
+    customer_email: Optional[StrictStr] = Field(default=None, description="Customer Email")
+    customer_name: Optional[StrictStr] = Field(default=None, description="Customer Name")
     __properties = ["customer_phone", "customer_email", "customer_name"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

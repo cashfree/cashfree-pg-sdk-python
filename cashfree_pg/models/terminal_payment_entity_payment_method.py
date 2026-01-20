@@ -12,15 +12,14 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+
+
 from cashfree_pg.models.payment_method_app_in_payments_entity import PaymentMethodAppInPaymentsEntity
 from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity import PaymentMethodBankTransferInPaymentsEntity
 from cashfree_pg.models.payment_method_card_emiin_payments_entity import PaymentMethodCardEMIInPaymentsEntity
@@ -29,7 +28,7 @@ from cashfree_pg.models.payment_method_cardless_emiin_payments_entity import Pay
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity import PaymentMethodNetBankingInPaymentsEntity
 from cashfree_pg.models.payment_method_paylater_in_payments_entity import PaymentMethodPaylaterInPaymentsEntity
 from cashfree_pg.models.payment_method_upiin_payments_entity import PaymentMethodUPIInPaymentsEntity
-from typing import Union, Any, List, TYPE_CHECKING
+from typing import Union, Any, List, TYPE_CHECKING, Literal
 from pydantic import StrictStr, Field
 
 TERMINALPAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS = ["PaymentMethodAppInPaymentsEntity", "PaymentMethodBankTransferInPaymentsEntity", "PaymentMethodCardEMIInPaymentsEntity", "PaymentMethodCardInPaymentsEntity", "PaymentMethodCardlessEMIInPaymentsEntity", "PaymentMethodNetBankingInPaymentsEntity", "PaymentMethodPaylaterInPaymentsEntity", "PaymentMethodUPIInPaymentsEntity"]
@@ -58,10 +57,12 @@ class TerminalPaymentEntityPaymentMethod(BaseModel):
         actual_instance: Union[PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity]
     else:
         actual_instance: Any
-    one_of_schemas: List[str] = Field(TERMINALPAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Literal[TERMINALPAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS]
 
-    class Config:
-        validate_assignment = True
+    # Updated to Pydantic v2
+    model_config = {
+        "validate_assignment": True
+    }
 
     def __init__(self, *args, **kwargs):
         if args:

@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,19 +19,22 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+
+from pydantic import field_validator
 
 class SubscriptionEligibilityRequestQueries(BaseModel):
     """
     Necessary parameters to fetch eligible payment methods.
     """
-    subscription_id: StrictStr = Field(..., description="A unique ID passed by merchant for identifying the subscription")
+    subscription_id: StrictStr = Field(description="A unique ID passed by merchant for identifying the subscription")
     __properties = ["subscription_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,27 +12,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr, validator
+
+
+from pydantic import field_validator
 
 class OrderAuthenticateEntity(BaseModel):
     """
     This is the response shared when merchant inovkes the OTP submit or resend API
     """
-    cf_payment_id: Optional[StrictStr] = Field(None, description="The payment id for which this request was sent")
-    action: Optional[StrictStr] = Field(None, description="The action that was invoked for this request.")
-    authenticate_status: Optional[StrictStr] = Field(None, description="Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status.")
-    payment_message: Optional[StrictStr] = Field(None, description="Human readable message which describes the status in more detail")
+    cf_payment_id: Optional[StrictStr] = Field(default=None, description="The payment id for which this request was sent")
+    action: Optional[StrictStr] = Field(default=None, description="The action that was invoked for this request.")
+    authenticate_status: Optional[StrictStr] = Field(default=None, description="Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status.")
+    payment_message: Optional[StrictStr] = Field(default=None, description="Human readable message which describes the status in more detail")
     __properties = ["cf_payment_id", "action", "authenticate_status", "payment_message"]
 
-    @validator('action')
+    @field_validator('action')
     def action_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -42,7 +42,7 @@ class OrderAuthenticateEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUBMIT_OTP', 'RESEND_OTP')")
         return value
 
-    @validator('authenticate_status')
+    @field_validator('authenticate_status')
     def authenticate_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -52,10 +52,12 @@ class OrderAuthenticateEntity(BaseModel):
             raise ValueError("must be one of enum values ('FAILED', 'SUCCESS')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, confloat, conint
+
+
 from cashfree_pg.models.offer_validations_payment_method import OfferValidationsPaymentMethod
+from pydantic import field_validator
 
 class OfferValidations(BaseModel):
     """
     Offer validation object
     """
-    min_amount: Optional[Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)]] = Field(None, description="Minimum Amount for Offer to be Applicable")
-    max_allowed: Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)] = Field(..., description="Maximum Amount for Offer to be Applicable")
-    payment_method: OfferValidationsPaymentMethod = Field(...)
+    min_amount: Optional[Union[Annotated[float, Field(strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]]] = Field(default=None, description="Minimum Amount for Offer to be Applicable")
+    max_allowed: Union[Annotated[float, Field(strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]] = Field(description="Maximum Amount for Offer to be Applicable")
+    payment_method: OfferValidationsPaymentMethod
     __properties = ["min_amount", "max_allowed", "payment_method"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

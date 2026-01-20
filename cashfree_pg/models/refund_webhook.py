@@ -12,16 +12,16 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, StrictStr
+
+
 from cashfree_pg.models.refund_webhook_data_entity import RefundWebhookDataEntity
+from pydantic import field_validator
 
 class RefundWebhook(BaseModel):
     """
@@ -32,10 +32,12 @@ class RefundWebhook(BaseModel):
     type: Optional[StrictStr] = None
     __properties = ["data", "event_time", "type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

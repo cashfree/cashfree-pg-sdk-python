@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class AdjustVendorBalanceRequest(BaseModel):
     """
     Adjust Vendor Balance Request
     """
-    transfer_from: StrictStr = Field(..., description="Mention to whom you want to transfer the on demand balance. Possible values - MERCHANT, VENDOR.")
-    transfer_type: StrictStr = Field(..., description="Mention the type of transfer. Possible values: ON_DEMAND.")
-    transfer_amount: Union[StrictFloat, StrictInt] = Field(..., description="Mention the on demand transfer amount.")
-    remark: Optional[StrictStr] = Field(None, description="Mention remarks if any for the on demand transfer.")
-    tags: Optional[Dict[str, Any]] = Field(None, description="Provide additional data fields using tags.")
+    transfer_from: StrictStr = Field(description="Mention to whom you want to transfer the on demand balance. Possible values - MERCHANT, VENDOR.")
+    transfer_type: StrictStr = Field(description="Mention the type of transfer. Possible values: ON_DEMAND.")
+    transfer_amount: Union[StrictFloat, StrictInt] = Field(description="Mention the on demand transfer amount.")
+    remark: Optional[StrictStr] = Field(default=None, description="Mention remarks if any for the on demand transfer.")
+    tags: Optional[Dict[str, Any]] = Field(default=None, description="Provide additional data fields using tags.")
     __properties = ["transfer_from", "transfer_type", "transfer_amount", "remark", "tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional
-from pydantic import BaseModel, conlist, constr
+
+
 from cashfree_pg.models.emi_plans_array import EMIPlansArray
+from pydantic import field_validator
 
 class CardlessEMIEntity(BaseModel):
     """
     cardless EMI object
     """
-    payment_method: Optional[constr(strict=True, max_length=50, min_length=3)] = None
-    emi_plans: Optional[conlist(EMIPlansArray)] = None
+    payment_method: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=50)]] = None
+    emi_plans: Optional[List[EMIPlansArray]] = None
     __properties = ["payment_method", "emi_plans"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

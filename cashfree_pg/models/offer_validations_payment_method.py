@@ -12,15 +12,14 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 from inspect import getfullargspec
 import json
 import pprint
 import re  # noqa: F401
 
-from typing import Any, List, Optional
-from pydantic import BaseModel, Field, StrictStr, ValidationError, validator
+
+
 from cashfree_pg.models.offer_all import OfferAll
 from cashfree_pg.models.offer_card import OfferCard
 from cashfree_pg.models.offer_emi import OfferEMI
@@ -28,7 +27,7 @@ from cashfree_pg.models.offer_nb import OfferNB
 from cashfree_pg.models.offer_paylater import OfferPaylater
 from cashfree_pg.models.offer_upi import OfferUPI
 from cashfree_pg.models.offer_wallet import OfferWallet
-from typing import Union, Any, List, TYPE_CHECKING
+from typing import Union, Any, List, TYPE_CHECKING, Literal
 from pydantic import StrictStr, Field
 
 OFFERVALIDATIONSPAYMENTMETHOD_ONE_OF_SCHEMAS = ["OfferAll", "OfferCard", "OfferEMI", "OfferNB", "OfferPaylater", "OfferUPI", "OfferWallet"]
@@ -55,10 +54,12 @@ class OfferValidationsPaymentMethod(BaseModel):
         actual_instance: Union[OfferAll, OfferCard, OfferEMI, OfferNB, OfferPaylater, OfferUPI, OfferWallet]
     else:
         actual_instance: Any
-    one_of_schemas: List[str] = Field(OFFERVALIDATIONSPAYMENTMETHOD_ONE_OF_SCHEMAS, const=True)
+    one_of_schemas: List[str] = Literal[OFFERVALIDATIONSPAYMENTMETHOD_ONE_OF_SCHEMAS]
 
-    class Config:
-        validate_assignment = True
+    # Updated to Pydantic v2
+    model_config = {
+        "validate_assignment": True
+    }
 
     def __init__(self, *args, **kwargs):
         if args:

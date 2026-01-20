@@ -12,28 +12,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class FetchReconRequestPagination(BaseModel):
     """
     To fetch the next set of settlements, pass the cursor received in the response to the next API call.   To receive the data for the first time, pass the cursor as null.   Limit would be number of settlements that you want to receive.
     """
-    limit: StrictInt = Field(..., description="Number of settlements you want to fetch in the next iteration. Maximum limit is 1000, default value is 10.")
-    cursor: Optional[StrictStr] = Field(None, description="Specifies from where the next set of settlement details should be fetched.")
+    limit: StrictInt = Field(description="Number of settlements you want to fetch in the next iteration. Maximum limit is 1000, default value is 10.")
+    cursor: Optional[StrictStr] = Field(default=None, description="Specifies from where the next set of settlement details should be fetched.")
     __properties = ["limit", "cursor"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

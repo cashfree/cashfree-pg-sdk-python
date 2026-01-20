@@ -12,36 +12,38 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+
+
+from pydantic import field_validator
 
 class CreatePlanRequest(BaseModel):
     """
     Request body to create a plan.
     """
-    plan_id: constr(strict=True, max_length=40, min_length=1) = Field(..., description="Unique ID to identify the plan. Only alpha-numerics, dot, hyphen and underscore allowed.")
-    plan_name: constr(strict=True, max_length=40, min_length=1) = Field(..., description="Name of the plan.")
-    plan_type: StrictStr = Field(..., description="Type of the plan. Possible values - PERIODIC, ON_DEMAND.")
-    plan_currency: Optional[StrictStr] = Field(None, description="Currency of the plan.")
-    plan_recurring_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Recurring amount for the plan. Required for PERIODIC plan_type.")
-    plan_max_amount: Union[StrictFloat, StrictInt] = Field(..., description="Maximum amount for the plan.")
-    plan_max_cycles: Optional[StrictInt] = Field(None, description="Maximum number of payment cycles for the plan.")
-    plan_intervals: Optional[StrictInt] = Field(None, description="Number of billing cycles between charges. For instance, if set to 2 and the interval type is 'week', the service will be billed every 2 weeks. Similarly, if set to 3 and the interval type is 'month', the service will be billed every 3 months. Required for PERIODIC plan_type.")
-    plan_interval_type: Optional[StrictStr] = Field(None, description="Interval type for the plan. Possible values - DAY, WEEK, MONTH, YEAR.")
-    plan_note: Optional[StrictStr] = Field(None, description="Note for the plan.")
+    plan_id: Annotated[str, Field(min_length=1, strict=True, max_length=40)] = Field(description="Unique ID to identify the plan. Only alpha-numerics, dot, hyphen and underscore allowed.")
+    plan_name: Annotated[str, Field(min_length=1, strict=True, max_length=40)] = Field(description="Name of the plan.")
+    plan_type: StrictStr = Field(description="Type of the plan. Possible values - PERIODIC, ON_DEMAND.")
+    plan_currency: Optional[StrictStr] = Field(default=None, description="Currency of the plan.")
+    plan_recurring_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Recurring amount for the plan. Required for PERIODIC plan_type.")
+    plan_max_amount: Union[StrictFloat, StrictInt] = Field(description="Maximum amount for the plan.")
+    plan_max_cycles: Optional[StrictInt] = Field(default=None, description="Maximum number of payment cycles for the plan.")
+    plan_intervals: Optional[StrictInt] = Field(default=None, description="Number of billing cycles between charges. For instance, if set to 2 and the interval type is 'week', the service will be billed every 2 weeks. Similarly, if set to 3 and the interval type is 'month', the service will be billed every 3 months. Required for PERIODIC plan_type.")
+    plan_interval_type: Optional[StrictStr] = Field(default=None, description="Interval type for the plan. Possible values - DAY, WEEK, MONTH, YEAR.")
+    plan_note: Optional[StrictStr] = Field(default=None, description="Note for the plan.")
     __properties = ["plan_id", "plan_name", "plan_type", "plan_currency", "plan_recurring_amount", "plan_max_amount", "plan_max_cycles", "plan_intervals", "plan_interval_type", "plan_note"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

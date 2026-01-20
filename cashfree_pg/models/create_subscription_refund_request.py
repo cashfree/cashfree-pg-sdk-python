@@ -12,33 +12,35 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class CreateSubscriptionRefundRequest(BaseModel):
     """
     Request body to create a subscription refund.
     """
-    subscription_id: StrictStr = Field(..., description="A unique ID passed by merchant for identifying the subscription.")
-    payment_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the transaction.")
-    cf_payment_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment reference number.")
-    refund_id: StrictStr = Field(..., description="A unique ID passed by merchant for identifying the refund.")
-    refund_amount: Union[StrictFloat, StrictInt] = Field(..., description="The amount to be refunded. Can be partial or full amount of the payment.")
-    refund_note: Optional[StrictStr] = Field(None, description="Refund note.")
-    refund_speed: Optional[StrictStr] = Field(None, description="Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds.")
+    subscription_id: StrictStr = Field(description="A unique ID passed by merchant for identifying the subscription.")
+    payment_id: Optional[StrictStr] = Field(default=None, description="A unique ID passed by merchant for identifying the transaction.")
+    cf_payment_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription payment reference number.")
+    refund_id: StrictStr = Field(description="A unique ID passed by merchant for identifying the refund.")
+    refund_amount: Union[StrictFloat, StrictInt] = Field(description="The amount to be refunded. Can be partial or full amount of the payment.")
+    refund_note: Optional[StrictStr] = Field(default=None, description="Refund note.")
+    refund_speed: Optional[StrictStr] = Field(default=None, description="Refund speed. Can be INSTANT or STANDARD. UPI supports only STANDARD refunds, Enach and Pnach supports only INSTANT refunds.")
     __properties = ["subscription_id", "payment_id", "cf_payment_id", "refund_id", "refund_amount", "refund_note", "refund_speed"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,37 +12,39 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class AddressDetails(BaseModel):
     """
     Address associated with the customer.
     """
-    name: Optional[StrictStr] = Field(None, description="Full Name of the customer associated with the address.")
-    address_line_one: Optional[StrictStr] = Field(None, description="First line of the address.")
-    address_line_two: Optional[StrictStr] = Field(None, description="Second line of the address.")
-    country: Optional[StrictStr] = Field(None, description="Country Name.")
-    country_code: Optional[StrictStr] = Field(None, description="Country Code.")
-    state: Optional[StrictStr] = Field(None, description="State Name.")
-    state_code: Optional[StrictStr] = Field(None, description="State Code.")
-    city: Optional[StrictStr] = Field(None, description="City Name.")
-    pin_code: Optional[StrictStr] = Field(None, description="Pin Code/Zip Code.")
-    phone: Optional[StrictStr] = Field(None, description="Customer Phone Number.")
-    email: Optional[StrictStr] = Field(None, description="Cutomer Email Address.")
+    name: Optional[StrictStr] = Field(default=None, description="Full Name of the customer associated with the address.")
+    address_line_one: Optional[StrictStr] = Field(default=None, description="First line of the address.")
+    address_line_two: Optional[StrictStr] = Field(default=None, description="Second line of the address.")
+    country: Optional[StrictStr] = Field(default=None, description="Country Name.")
+    country_code: Optional[StrictStr] = Field(default=None, description="Country Code.")
+    state: Optional[StrictStr] = Field(default=None, description="State Name.")
+    state_code: Optional[StrictStr] = Field(default=None, description="State Code.")
+    city: Optional[StrictStr] = Field(default=None, description="City Name.")
+    pin_code: Optional[StrictStr] = Field(default=None, description="Pin Code/Zip Code.")
+    phone: Optional[StrictStr] = Field(default=None, description="Customer Phone Number.")
+    email: Optional[StrictStr] = Field(default=None, description="Cutomer Email Address.")
     __properties = ["name", "address_line_one", "address_line_two", "country", "country_code", "state", "state_code", "city", "pin_code", "phone", "email"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

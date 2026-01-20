@@ -12,43 +12,45 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist, constr
+
+
 from cashfree_pg.models.link_customer_details_entity import LinkCustomerDetailsEntity
 from cashfree_pg.models.link_meta_response_entity import LinkMetaResponseEntity
 from cashfree_pg.models.link_notify_entity import LinkNotifyEntity
 from cashfree_pg.models.vendor_split import VendorSplit
+from pydantic import field_validator
 
 class CreateLinkRequest(BaseModel):
     """
     Request paramenters for link creation
     """
-    link_id: constr(strict=True, max_length=50) = Field(..., description="Unique Identifier (provided by merchant) for the Link. Alphanumeric and only - and _ allowed (50 character limit). Use this for other link-related APIs.")
-    link_amount: Union[StrictFloat, StrictInt] = Field(..., description="Amount to be collected using this link. Provide upto two decimals for paise.")
-    link_currency: constr(strict=True) = Field(..., description="Currency for the payment link. Default is INR. Contact care@cashfree.com to enable new currencies.")
-    link_purpose: constr(strict=True, max_length=500) = Field(..., description="A brief description for which payment must be collected. This is shown to the customer.")
-    customer_details: LinkCustomerDetailsEntity = Field(...)
-    link_partial_payments: Optional[StrictBool] = Field(None, description="If \"true\", customer can make partial payments for the link.")
-    link_minimum_partial_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Minimum amount in first installment that needs to be paid by the customer if partial payments are enabled. This should be less than the link_amount.")
-    link_expiry_time: Optional[StrictStr] = Field(None, description="Time after which the link expires. Customers will not be able to make the payment beyond the time specified here. You can provide them in a valid ISO 8601 time format. Default is 30 days.")
+    link_id: Annotated[str, Field(strict=True, max_length=50)] = Field(description="Unique Identifier (provided by merchant) for the Link. Alphanumeric and only - and _ allowed (50 character limit). Use this for other link-related APIs.")
+    link_amount: Union[StrictFloat, StrictInt] = Field(description="Amount to be collected using this link. Provide upto two decimals for paise.")
+    link_currency: Annotated[str, Field(strict=True)] = Field(description="Currency for the payment link. Default is INR. Contact care@cashfree.com to enable new currencies.")
+    link_purpose: Annotated[str, Field(strict=True, max_length=500)] = Field(description="A brief description for which payment must be collected. This is shown to the customer.")
+    customer_details: LinkCustomerDetailsEntity
+    link_partial_payments: Optional[StrictBool] = Field(default=None, description="If \"true\", customer can make partial payments for the link.")
+    link_minimum_partial_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Minimum amount in first installment that needs to be paid by the customer if partial payments are enabled. This should be less than the link_amount.")
+    link_expiry_time: Optional[StrictStr] = Field(default=None, description="Time after which the link expires. Customers will not be able to make the payment beyond the time specified here. You can provide them in a valid ISO 8601 time format. Default is 30 days.")
     link_notify: Optional[LinkNotifyEntity] = None
-    link_auto_reminders: Optional[StrictBool] = Field(None, description="If \"true\", reminders will be sent to customers for collecting payments.")
-    link_notes: Optional[Dict[str, StrictStr]] = Field(None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
+    link_auto_reminders: Optional[StrictBool] = Field(default=None, description="If \"true\", reminders will be sent to customers for collecting payments.")
+    link_notes: Optional[Dict[str, StrictStr]] = Field(default=None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
     link_meta: Optional[LinkMetaResponseEntity] = None
-    order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
+    order_splits: Optional[List[VendorSplit]] = Field(default=None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
     __properties = ["link_id", "link_amount", "link_currency", "link_purpose", "customer_details", "link_partial_payments", "link_minimum_partial_amount", "link_expiry_time", "link_notify", "link_auto_reminders", "link_notes", "link_meta", "order_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

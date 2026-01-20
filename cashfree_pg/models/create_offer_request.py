@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,26 +19,29 @@ import json
 
 
 
-from pydantic import BaseModel, Field
+
 from cashfree_pg.models.offer_details import OfferDetails
 from cashfree_pg.models.offer_meta import OfferMeta
 from cashfree_pg.models.offer_tnc import OfferTnc
 from cashfree_pg.models.offer_validations import OfferValidations
+from pydantic import field_validator
 
 class CreateOfferRequest(BaseModel):
     """
     create offer backend request object
     """
-    offer_meta: OfferMeta = Field(...)
-    offer_tnc: OfferTnc = Field(...)
-    offer_details: OfferDetails = Field(...)
-    offer_validations: OfferValidations = Field(...)
+    offer_meta: OfferMeta
+    offer_tnc: OfferTnc
+    offer_details: OfferDetails
+    offer_validations: OfferValidations
     __properties = ["offer_meta", "offer_tnc", "offer_details", "offer_validations"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,34 +12,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class CreateSubscriptionPaymentRequestCard(BaseModel):
     """
     payment method card.
     """
-    channel: Optional[StrictStr] = Field(None, description="Channel. can be link")
-    card_number: Optional[StrictStr] = Field(None, description="Card number")
-    card_holder_name: Optional[StrictStr] = Field(None, description="Card holder name")
-    card_expiry_mm: Optional[StrictStr] = Field(None, description="Card expiry month")
-    card_expiry_yy: Optional[StrictStr] = Field(None, description="Card expiry year")
-    card_cvv: Optional[StrictStr] = Field(None, description="Card CVV")
-    card_network: Optional[StrictStr] = Field(None, description="Card network")
-    card_type: Optional[StrictStr] = Field(None, description="Card type")
+    channel: Optional[StrictStr] = Field(default=None, description="Channel. can be link")
+    card_number: Optional[StrictStr] = Field(default=None, description="Card number")
+    card_holder_name: Optional[StrictStr] = Field(default=None, description="Card holder name")
+    card_expiry_mm: Optional[StrictStr] = Field(default=None, description="Card expiry month")
+    card_expiry_yy: Optional[StrictStr] = Field(default=None, description="Card expiry year")
+    card_cvv: Optional[StrictStr] = Field(default=None, description="Card CVV")
+    card_network: Optional[StrictStr] = Field(default=None, description="Card network")
+    card_type: Optional[StrictStr] = Field(default=None, description="Card type")
     __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "card_network", "card_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

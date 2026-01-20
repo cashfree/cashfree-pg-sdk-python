@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,27 +19,30 @@ import json
 
 
 
-from pydantic import BaseModel, Field, constr, validator
+
+from pydantic import field_validator
 
 class OfferTnc(BaseModel):
     """
     Offer terms and condition object
     """
-    offer_tnc_type: constr(strict=True, max_length=50, min_length=3) = Field(..., description="TnC Type for the Offer. It can be either `text` or `link`")
-    offer_tnc_value: constr(strict=True, max_length=100, min_length=3) = Field(..., description="TnC for the Offer.")
+    offer_tnc_type: Annotated[str, Field(min_length=3, strict=True, max_length=50)] = Field(description="TnC Type for the Offer. It can be either `text` or `link`")
+    offer_tnc_value: Annotated[str, Field(min_length=3, strict=True, max_length=100)] = Field(description="TnC for the Offer.")
     __properties = ["offer_tnc_type", "offer_tnc_value"]
 
-    @validator('offer_tnc_type')
+    @field_validator('offer_tnc_type')
     def offer_tnc_type_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('text', 'link'):
             raise ValueError("must be one of enum values ('text', 'link')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

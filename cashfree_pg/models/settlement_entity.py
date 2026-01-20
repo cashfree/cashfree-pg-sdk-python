@@ -12,15 +12,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class SettlementEntity(BaseModel):
     """
@@ -42,10 +42,12 @@ class SettlementEntity(BaseModel):
     transfer_utr: Optional[StrictStr] = None
     __properties = ["cf_payment_id", "cf_settlement_id", "settlement_currency", "order_id", "entity", "order_amount", "payment_time", "service_charge", "service_tax", "settlement_amount", "settlement_id", "transfer_id", "transfer_time", "transfer_utr"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class VendorAdjustmentRequest(BaseModel):
     """
     Vendor Adjustment Request Body
     """
-    vendor_id: StrictStr = Field(..., description="The unique identifier of the vendor to whom the adjustment is applied")
-    adjustment_id: StrictInt = Field(..., description="The unique identifier for the adjustment transaction.")
-    amount: Union[StrictFloat, StrictInt] = Field(..., description="The adjustment amount to be applied.")
-    type: StrictStr = Field(..., description="The type of adjustment. Possible values: CREDIT, DEBIT.")
-    remarks: Optional[StrictStr] = Field(None, description="Remarks for the adjustment transaction, if any.")
+    vendor_id: StrictStr = Field(description="The unique identifier of the vendor to whom the adjustment is applied")
+    adjustment_id: StrictInt = Field(description="The unique identifier for the adjustment transaction.")
+    amount: Union[StrictFloat, StrictInt] = Field(description="The adjustment amount to be applied.")
+    type: StrictStr = Field(description="The type of adjustment. Possible values: CREDIT, DEBIT.")
+    remarks: Optional[StrictStr] = Field(default=None, description="Remarks for the adjustment transaction, if any.")
     __properties = ["vendor_id", "adjustment_id", "amount", "type", "remarks"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

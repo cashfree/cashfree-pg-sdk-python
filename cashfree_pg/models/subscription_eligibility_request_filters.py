@@ -12,27 +12,29 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+
+
+from pydantic import field_validator
 
 class SubscriptionEligibilityRequestFilters(BaseModel):
     """
     Filters to refine eligible payment method selection.
     """
-    payment_methods: Optional[conlist(StrictStr)] = Field(None, description="Possbile values in array - enach, pnach, upi, card.")
+    payment_methods: Optional[List[StrictStr]] = Field(default=None, description="Possbile values in array - enach, pnach, upi, card.")
     __properties = ["payment_methods"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

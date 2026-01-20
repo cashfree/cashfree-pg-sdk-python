@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+
+
+from pydantic import field_validator
 
 class CreateSubscriptionRequestAuthorizationDetails(BaseModel):
     """
     CreateSubscriptionRequestAuthorizationDetails
     """
-    authorization_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Authorization amount for the auth payment.")
-    authorization_amount_refund: Optional[StrictBool] = Field(None, description="Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription.")
-    payment_methods: Optional[conlist(StrictStr)] = Field(None, description="Payment methods for the subscription. enach, pnach, upi, card are possible values.")
+    authorization_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Authorization amount for the auth payment.")
+    authorization_amount_refund: Optional[StrictBool] = Field(default=None, description="Indicates whether the authorization amount should be refunded to the customer automatically. Merchants can use this field to specify if the authorized funds should be returned to the customer after authorization of the subscription.")
+    payment_methods: Optional[List[StrictStr]] = Field(default=None, description="Payment methods for the subscription. enach, pnach, upi, card are possible values.")
     __properties = ["authorization_amount", "authorization_amount_refund", "payment_methods"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
