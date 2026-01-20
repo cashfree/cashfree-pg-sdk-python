@@ -12,28 +12,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class ManageSubscriptionRequestActionDetails(BaseModel):
     """
     Details of the action to be performed.
     """
-    next_scheduled_time: Optional[StrictStr] = Field(None, description="Next scheduled time for the action. Required for ACTIVATE action.")
-    plan_id: Optional[StrictStr] = Field(None, description="Plan ID to update. Required for CHANGE_PLAN action.")
+    next_scheduled_time: Optional[StrictStr] = Field(default=None, description="Next scheduled time for the action. Required for ACTIVATE action.")
+    plan_id: Optional[StrictStr] = Field(default=None, description="Plan ID to update. Required for CHANGE_PLAN action.")
     __properties = ["next_scheduled_time", "plan_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

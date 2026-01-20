@@ -12,15 +12,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class AuthenticationError(BaseModel):
     """
@@ -28,13 +28,15 @@ class AuthenticationError(BaseModel):
     """
     message: Optional[StrictStr] = None
     code: Optional[StrictStr] = None
-    type: Optional[StrictStr] = Field(None, description="authentication_error")
+    type: Optional[StrictStr] = Field(default=None, description="authentication_error")
     __properties = ["message", "code", "type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

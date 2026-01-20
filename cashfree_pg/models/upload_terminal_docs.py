@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,21 +19,24 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+
+from pydantic import field_validator
 
 class UploadTerminalDocs(BaseModel):
     """
     Request body to upload terminal documents.
     """
-    doc_type: StrictStr = Field(..., description="Mention the document type you are uploading. Possible values - ADDRESSPROOF, PHOTOGRAPH.")
-    doc_value: StrictStr = Field(..., description="Enter the display name of the uploaded file.")
-    file: StrictStr = Field(..., description="Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.")
+    doc_type: StrictStr = Field(description="Mention the document type you are uploading. Possible values - ADDRESSPROOF, PHOTOGRAPH.")
+    doc_value: StrictStr = Field(description="Enter the display name of the uploaded file.")
+    file: StrictStr = Field(description="Select the document that should be uploaded or provide the path of that file. You cannot upload a file that is more than 2MB in size.")
     __properties = ["doc_type", "doc_value", "file"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

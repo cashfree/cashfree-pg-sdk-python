@@ -12,27 +12,27 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+
+
+from pydantic import field_validator
 
 class CardlessEMI(BaseModel):
     """
     Request body for cardless emi payment method
     """
-    channel: Optional[StrictStr] = Field(None, description="The channel for cardless EMI is always `link`")
-    provider: Optional[StrictStr] = Field(None, description="One of [`flexmoney`, `zestmoney`, `hdfc`, `icici`, `cashe`, `idfc`, `kotak`, `snapmint`, `bharatx`]")
-    phone: Optional[StrictStr] = Field(None, description="Customers phone number for this payment instrument. If the customer is not eligible you will receive a 400 error with type as 'invalid_request_error' and code as 'invalid_request_error'")
-    emi_tenure: Optional[StrictInt] = Field(None, description="EMI tenure for the selected provider. This is mandatory when provider is one of [`hdfc`, `icici`, `cashe`, `idfc`, `kotak`]")
+    channel: Optional[StrictStr] = Field(default=None, description="The channel for cardless EMI is always `link`")
+    provider: Optional[StrictStr] = Field(default=None, description="One of [`flexmoney`, `zestmoney`, `hdfc`, `icici`, `cashe`, `idfc`, `kotak`, `snapmint`, `bharatx`]")
+    phone: Optional[StrictStr] = Field(default=None, description="Customers phone number for this payment instrument. If the customer is not eligible you will receive a 400 error with type as 'invalid_request_error' and code as 'invalid_request_error'")
+    emi_tenure: Optional[StrictInt] = Field(default=None, description="EMI tenure for the selected provider. This is mandatory when provider is one of [`hdfc`, `icici`, `cashe`, `idfc`, `kotak`]")
     __properties = ["channel", "provider", "phone", "emi_tenure"]
 
-    @validator('provider')
+    @field_validator('provider')
     def provider_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -42,10 +42,12 @@ class CardlessEMI(BaseModel):
             raise ValueError("must be one of enum values ('flexmoney', 'zestmoney', 'hdfc', 'icici', 'cashe', 'idfc', 'kotak', 'snapmint', 'bharatx')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

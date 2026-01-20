@@ -12,44 +12,46 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+
+
 from cashfree_pg.models.authorization_details import AuthorizationDetails
 from cashfree_pg.models.plan_entity import PlanEntity
 from cashfree_pg.models.subscription_customer_details import SubscriptionCustomerDetails
 from cashfree_pg.models.subscription_entity_subscription_meta import SubscriptionEntitySubscriptionMeta
 from cashfree_pg.models.subscription_payment_split_item import SubscriptionPaymentSplitItem
+from pydantic import field_validator
 
 class SubscriptionEntity(BaseModel):
     """
     The response returned for Get, Create or Manage Subscription APIs.
     """
     authorisation_details: Optional[AuthorizationDetails] = None
-    cf_subscription_id: Optional[StrictStr] = Field(None, description="Cashfree subscription reference number")
+    cf_subscription_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription reference number")
     customer_details: Optional[SubscriptionCustomerDetails] = None
     plan_details: Optional[PlanEntity] = None
-    subscription_expiry_time: Optional[StrictStr] = Field(None, description="Time at which the subscription will expire.")
-    subscription_first_charge_time: Optional[StrictStr] = Field(None, description="Time at which the first charge will be made for the subscription. Applicable only for PERIODIC plans.")
-    subscription_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the subscription.")
+    subscription_expiry_time: Optional[StrictStr] = Field(default=None, description="Time at which the subscription will expire.")
+    subscription_first_charge_time: Optional[StrictStr] = Field(default=None, description="Time at which the first charge will be made for the subscription. Applicable only for PERIODIC plans.")
+    subscription_id: Optional[StrictStr] = Field(default=None, description="A unique ID passed by merchant for identifying the subscription.")
     subscription_meta: Optional[SubscriptionEntitySubscriptionMeta] = None
-    subscription_note: Optional[StrictStr] = Field(None, description="Note for the subscription.")
-    subscription_session_id: Optional[StrictStr] = Field(None, description="Subscription Session Id.")
-    subscription_payment_splits: Optional[conlist(SubscriptionPaymentSplitItem)] = Field(None, description="Payment splits for the subscription.")
-    subscription_status: Optional[StrictStr] = Field(None, description="Status of the subscription.")
-    subscription_tags: Optional[Dict[str, Any]] = Field(None, description="Tags for the subscription.")
+    subscription_note: Optional[StrictStr] = Field(default=None, description="Note for the subscription.")
+    subscription_session_id: Optional[StrictStr] = Field(default=None, description="Subscription Session Id.")
+    subscription_payment_splits: Optional[List[SubscriptionPaymentSplitItem]] = Field(default=None, description="Payment splits for the subscription.")
+    subscription_status: Optional[StrictStr] = Field(default=None, description="Status of the subscription.")
+    subscription_tags: Optional[Dict[str, Any]] = Field(default=None, description="Tags for the subscription.")
     __properties = ["authorisation_details", "cf_subscription_id", "customer_details", "plan_details", "subscription_expiry_time", "subscription_first_charge_time", "subscription_id", "subscription_meta", "subscription_note", "subscription_session_id", "subscription_payment_splits", "subscription_status", "subscription_tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

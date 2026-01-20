@@ -12,34 +12,36 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class SubscriptionCustomerDetails(BaseModel):
     """
     Subscription customer details.
     """
-    customer_name: Optional[StrictStr] = Field(None, description="Name of the customer.")
-    customer_email: StrictStr = Field(..., description="Email of the customer.")
-    customer_phone: StrictStr = Field(..., description="Phone number of the customer.")
-    customer_bank_account_holder_name: Optional[StrictStr] = Field(None, description="Bank holder name of the customer.")
-    customer_bank_account_number: Optional[StrictStr] = Field(None, description="Bank account number of the customer.")
-    customer_bank_ifsc: Optional[StrictStr] = Field(None, description="IFSC code of the customer.")
-    customer_bank_code: Optional[StrictStr] = Field(None, description="Bank code of the customer. Refer to https://www.npci.org.in/PDF/nach/live-members-e-mandates/Live-Banks-in-API-E-Mandate.pdf")
-    customer_bank_account_type: Optional[StrictStr] = Field(None, description="Bank account type of the customer.")
+    customer_name: Optional[StrictStr] = Field(default=None, description="Name of the customer.")
+    customer_email: StrictStr = Field(description="Email of the customer.")
+    customer_phone: StrictStr = Field(description="Phone number of the customer.")
+    customer_bank_account_holder_name: Optional[StrictStr] = Field(default=None, description="Bank holder name of the customer.")
+    customer_bank_account_number: Optional[StrictStr] = Field(default=None, description="Bank account number of the customer.")
+    customer_bank_ifsc: Optional[StrictStr] = Field(default=None, description="IFSC code of the customer.")
+    customer_bank_code: Optional[StrictStr] = Field(default=None, description="Bank code of the customer. Refer to https://www.npci.org.in/PDF/nach/live-members-e-mandates/Live-Banks-in-API-E-Mandate.pdf")
+    customer_bank_account_type: Optional[StrictStr] = Field(default=None, description="Bank account type of the customer.")
     __properties = ["customer_name", "customer_email", "customer_phone", "customer_bank_account_holder_name", "customer_bank_account_number", "customer_bank_ifsc", "customer_bank_code", "customer_bank_account_type"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

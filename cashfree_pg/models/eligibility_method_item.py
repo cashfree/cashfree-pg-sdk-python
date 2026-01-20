@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+
+
 from cashfree_pg.models.eligibility_method_item_entity_details import EligibilityMethodItemEntityDetails
+from pydantic import field_validator
 
 class EligibilityMethodItem(BaseModel):
     """
     Eligibile payment method object
     """
-    eligibility: Optional[StrictBool] = Field(None, description="Indicates whether the payment method is eligible.")
-    entity_type: Optional[StrictStr] = Field(None, description="Type of entity (e.g., \"payment_methods\").")
-    entity_value: Optional[StrictStr] = Field(None, description="Payment method (e.g., enach, pnach, upi, card).")
+    eligibility: Optional[StrictBool] = Field(default=None, description="Indicates whether the payment method is eligible.")
+    entity_type: Optional[StrictStr] = Field(default=None, description="Type of entity (e.g., \"payment_methods\").")
+    entity_value: Optional[StrictStr] = Field(default=None, description="Payment method (e.g., enach, pnach, upi, card).")
     entity_details: Optional[EligibilityMethodItemEntityDetails] = None
     __properties = ["eligibility", "entity_type", "entity_value", "entity_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

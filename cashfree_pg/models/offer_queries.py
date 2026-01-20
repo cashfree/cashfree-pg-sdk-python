@@ -12,28 +12,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, confloat, conint, constr
+
+
+from pydantic import field_validator
 
 class OfferQueries(BaseModel):
     """
     Offer Query Object
     """
-    order_id: Optional[constr(strict=True, max_length=50, min_length=3)] = Field(None, description="OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
-    amount: Optional[Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)]] = Field(None, description="Amount of the order. OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
+    order_id: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=50)]] = Field(default=None, description="OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
+    amount: Optional[Union[Annotated[float, Field(strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]]] = Field(default=None, description="Amount of the order. OrderId of the order. Either of `order_id` or `order_amount` is mandatory.")
     __properties = ["order_id", "amount"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Dict, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, constr
+
+
+from pydantic import field_validator
 
 class SplitAfterPaymentRequestSplitInner(BaseModel):
     """
     SplitAfterPaymentRequestSplitInner
     """
-    vendor_id: Optional[StrictStr] = Field(None, description="Specify the merchant vendor ID to split the payment.")
-    amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Specify the amount to be split to the vendor.")
-    percentage: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Specify the percentage of amount to be split.")
-    tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
+    vendor_id: Optional[StrictStr] = Field(default=None, description="Specify the merchant vendor ID to split the payment.")
+    amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Specify the amount to be split to the vendor.")
+    percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Specify the percentage of amount to be split.")
+    tags: Optional[Dict[str, Annotated[str, Field(min_length=1, strict=True, max_length=255)]]] = Field(default=None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
     __properties = ["vendor_id", "amount", "percentage", "tags"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist
+
+
 from cashfree_pg.models.cart_item import CartItem
+from pydantic import field_validator
 
 class CartDetails(BaseModel):
     """
     The cart details that are necessary like shipping address, billing address and more.
     """
     shipping_charge: Optional[Union[StrictFloat, StrictInt]] = None
-    cart_name: Optional[StrictStr] = Field(None, description="Name of the cart.")
-    cart_items: Optional[conlist(CartItem)] = None
+    cart_name: Optional[StrictStr] = Field(default=None, description="Name of the cart.")
+    cart_items: Optional[List[CartItem]] = None
     __properties = ["shipping_charge", "cart_name", "cart_items"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

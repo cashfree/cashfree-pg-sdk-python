@@ -12,43 +12,45 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
 from cashfree_pg.models.authorization_details import AuthorizationDetails
 from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
+from pydantic import field_validator
 
 class SubscriptionPaymentEntity(BaseModel):
     """
     The response returned in Get, Create or Manage Subscription Payment APIs.
     """
     authorization_details: Optional[AuthorizationDetails] = None
-    cf_payment_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment reference number")
-    cf_subscription_id: Optional[StrictStr] = Field(None, description="Cashfree subscription reference number")
-    cf_txn_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment transaction ID")
-    cf_order_id: Optional[StrictStr] = Field(None, description="Cashfree subscription payment order ID")
+    cf_payment_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription payment reference number")
+    cf_subscription_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription reference number")
+    cf_txn_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription payment transaction ID")
+    cf_order_id: Optional[StrictStr] = Field(default=None, description="Cashfree subscription payment order ID")
     failure_details: Optional[SubscriptionPaymentEntityFailureDetails] = None
-    payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="The charge amount of the payment.")
-    payment_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the transaction.")
-    payment_initiated_date: Optional[StrictStr] = Field(None, description="The date on which the payment was initiated.")
-    payment_remarks: Optional[StrictStr] = Field(None, description="Payment remarks.")
-    payment_schedule_date: Optional[StrictStr] = Field(None, description="The date on which the payment is scheduled to be processed.")
-    payment_status: Optional[StrictStr] = Field(None, description="Status of the payment.")
-    payment_type: Optional[StrictStr] = Field(None, description="Payment type. Can be AUTH or CHARGE.")
-    retry_attempts: Optional[StrictInt] = Field(None, description="Retry attempts.")
-    subscription_id: Optional[StrictStr] = Field(None, description="A unique ID passed by merchant for identifying the subscription.")
+    payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="The charge amount of the payment.")
+    payment_id: Optional[StrictStr] = Field(default=None, description="A unique ID passed by merchant for identifying the transaction.")
+    payment_initiated_date: Optional[StrictStr] = Field(default=None, description="The date on which the payment was initiated.")
+    payment_remarks: Optional[StrictStr] = Field(default=None, description="Payment remarks.")
+    payment_schedule_date: Optional[StrictStr] = Field(default=None, description="The date on which the payment is scheduled to be processed.")
+    payment_status: Optional[StrictStr] = Field(default=None, description="Status of the payment.")
+    payment_type: Optional[StrictStr] = Field(default=None, description="Payment type. Can be AUTH or CHARGE.")
+    retry_attempts: Optional[StrictInt] = Field(default=None, description="Retry attempts.")
+    subscription_id: Optional[StrictStr] = Field(default=None, description="A unique ID passed by merchant for identifying the subscription.")
     __properties = ["authorization_details", "cf_payment_id", "cf_subscription_id", "cf_txn_id", "cf_order_id", "failure_details", "payment_amount", "payment_id", "payment_initiated_date", "payment_remarks", "payment_schedule_date", "payment_status", "payment_type", "retry_attempts", "subscription_id"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

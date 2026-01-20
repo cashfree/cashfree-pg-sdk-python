@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class SavedInstrumentMeta(BaseModel):
     """
     Card instrument meta information
     """
-    card_network: Optional[StrictStr] = Field(None, description="card scheme/network of the saved card. Example visa, mastercard")
-    card_bank_name: Optional[StrictStr] = Field(None, description="Issuing bank name of saved card")
-    card_country: Optional[StrictStr] = Field(None, description="Issuing country of saved card")
-    card_type: Optional[StrictStr] = Field(None, description="Type of saved card")
+    card_network: Optional[StrictStr] = Field(default=None, description="card scheme/network of the saved card. Example visa, mastercard")
+    card_bank_name: Optional[StrictStr] = Field(default=None, description="Issuing bank name of saved card")
+    card_country: Optional[StrictStr] = Field(default=None, description="Issuing country of saved card")
+    card_type: Optional[StrictStr] = Field(default=None, description="Type of saved card")
     card_token_details: Optional[Dict[str, Any]] = None
     __properties = ["card_network", "card_bank_name", "card_country", "card_type", "card_token_details"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

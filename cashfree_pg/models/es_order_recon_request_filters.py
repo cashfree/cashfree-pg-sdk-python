@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional
-from pydantic import BaseModel, Field, StrictStr, conlist
+
+
+from pydantic import field_validator
 
 class ESOrderReconRequestFilters(BaseModel):
     """
     Provide the filter object details.
     """
-    start_date: Optional[StrictStr] = Field(None, description="Specify the start data from which you want to get the recon data.")
-    end_date: Optional[StrictStr] = Field(None, description="Specify the end data till which you want to get the recon data.")
-    order_ids: Optional[conlist(StrictStr)] = Field(None, description="Please provide list of order ids for which you want to get the recon data.")
+    start_date: Optional[StrictStr] = Field(default=None, description="Specify the start data from which you want to get the recon data.")
+    end_date: Optional[StrictStr] = Field(default=None, description="Specify the end data till which you want to get the recon data.")
+    order_ids: Optional[List[StrictStr]] = Field(default=None, description="Please provide list of order ids for which you want to get the recon data.")
     __properties = ["start_date", "end_date", "order_ids"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

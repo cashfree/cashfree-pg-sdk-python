@@ -12,14 +12,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 import json
 import pprint
 import re  # noqa: F401
 from aenum import Enum, no_arg
 
 
+from pydantic import Field
 
+# Updated imports for Pydantic v2 compatibility
 
 
 class OfferType(str, Enum):
@@ -39,5 +40,4 @@ class OfferType(str, Enum):
     def from_json(cls, json_str: str) -> OfferType:
         """Create an instance of OfferType from a JSON string"""
         return OfferType(json.loads(json_str))
-
 

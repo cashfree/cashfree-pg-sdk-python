@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class FetchTerminalQRCodesEntity(BaseModel):
     """
     Fetch Static QR Codes using terminal ID or phone number
     """
-    bank: Optional[StrictStr] = Field(None, description="Name of the bank that is linked to the Static QR.")
-    qr_code: Optional[StrictStr] = Field(None, alias="qrCode", description="Base-64 Encoded QR Code URL")
-    qr_code_url: Optional[StrictStr] = Field(None, alias="qrCodeUrl", description="URL of the qr Code.")
-    status: Optional[StrictStr] = Field(None, description="Status of the static QR.")
+    bank: Optional[StrictStr] = Field(default=None, description="Name of the bank that is linked to the Static QR.")
+    qr_code: Optional[StrictStr] = Field(default=None, description="Base-64 Encoded QR Code URL", alias="qrCode")
+    qr_code_url: Optional[StrictStr] = Field(default=None, description="URL of the qr Code.", alias="qrCodeUrl")
+    status: Optional[StrictStr] = Field(default=None, description="Status of the static QR.")
     __properties = ["bank", "qrCode", "qrCodeUrl", "status"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

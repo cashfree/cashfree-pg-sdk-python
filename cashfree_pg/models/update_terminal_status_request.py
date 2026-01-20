@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,19 +19,22 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+
+from pydantic import field_validator
 
 class UpdateTerminalStatusRequest(BaseModel):
     """
     Request body to update terminal status.
     """
-    terminal_status: StrictStr = Field(..., description="Status of the terminal to be updated. possible values - ACTIVE, INACTIVE.")
+    terminal_status: StrictStr = Field(description="Status of the terminal to be updated. possible values - ACTIVE, INACTIVE.")
     __properties = ["terminal_status"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

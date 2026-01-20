@@ -12,44 +12,44 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Any, Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, conlist, validator
+
+
 from cashfree_pg.models.refund_speed import RefundSpeed
 from cashfree_pg.models.vendor_split import VendorSplit
+from pydantic import field_validator
 
 class RefundEntity(BaseModel):
     """
     The refund entity
     """
-    cf_payment_id: Optional[StrictStr] = Field(None, description="Cashfree Payments ID of the payment for which refund is initiated")
-    cf_refund_id: Optional[StrictStr] = Field(None, description="Cashfree Payments ID for a refund")
-    order_id: Optional[StrictStr] = Field(None, description="Merchant’s order Id of the order for which refund is initiated")
-    refund_id: Optional[StrictStr] = Field(None, description="Merchant’s refund ID of the refund")
-    entity: Optional[StrictStr] = Field(None, description="Type of object")
-    refund_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Amount that is refunded")
-    refund_currency: Optional[StrictStr] = Field(None, description="Currency of the refund amount")
-    refund_note: Optional[StrictStr] = Field(None, description="Note added by merchant for the refund")
-    refund_status: Optional[StrictStr] = Field(None, description="This can be one of [\"SUCCESS\", \"PENDING\", \"CANCELLED\", \"ONHOLD\", \"FAILED\"]")
-    refund_arn: Optional[StrictStr] = Field(None, description="The bank reference number for refund")
-    refund_charge: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Charges in INR for processing refund")
-    status_description: Optional[StrictStr] = Field(None, description="Description of refund status")
-    metadata: Optional[Dict[str, Any]] = Field(None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
-    refund_splits: Optional[conlist(VendorSplit)] = None
-    refund_type: Optional[StrictStr] = Field(None, description="This can be one of [\"PAYMENT_AUTO_REFUND\", \"MERCHANT_INITIATED\", \"UNRECONCILED_AUTO_REFUND\"]")
-    refund_mode: Optional[StrictStr] = Field(None, description="Method or speed of processing refund")
-    created_at: Optional[StrictStr] = Field(None, description="Time of refund creation")
-    processed_at: Optional[StrictStr] = Field(None, description="Time when refund was processed successfully")
+    cf_payment_id: Optional[StrictStr] = Field(default=None, description="Cashfree Payments ID of the payment for which refund is initiated")
+    cf_refund_id: Optional[StrictStr] = Field(default=None, description="Cashfree Payments ID for a refund")
+    order_id: Optional[StrictStr] = Field(default=None, description="Merchant’s order Id of the order for which refund is initiated")
+    refund_id: Optional[StrictStr] = Field(default=None, description="Merchant’s refund ID of the refund")
+    entity: Optional[StrictStr] = Field(default=None, description="Type of object")
+    refund_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Amount that is refunded")
+    refund_currency: Optional[StrictStr] = Field(default=None, description="Currency of the refund amount")
+    refund_note: Optional[StrictStr] = Field(default=None, description="Note added by merchant for the refund")
+    refund_status: Optional[StrictStr] = Field(default=None, description="This can be one of [\"SUCCESS\", \"PENDING\", \"CANCELLED\", \"ONHOLD\", \"FAILED\"]")
+    refund_arn: Optional[StrictStr] = Field(default=None, description="The bank reference number for refund")
+    refund_charge: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Charges in INR for processing refund")
+    status_description: Optional[StrictStr] = Field(default=None, description="Description of refund status")
+    metadata: Optional[Dict[str, Any]] = Field(default=None, description="Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs")
+    refund_splits: Optional[List[VendorSplit]] = None
+    refund_type: Optional[StrictStr] = Field(default=None, description="This can be one of [\"PAYMENT_AUTO_REFUND\", \"MERCHANT_INITIATED\", \"UNRECONCILED_AUTO_REFUND\"]")
+    refund_mode: Optional[StrictStr] = Field(default=None, description="Method or speed of processing refund")
+    created_at: Optional[StrictStr] = Field(default=None, description="Time of refund creation")
+    processed_at: Optional[StrictStr] = Field(default=None, description="Time when refund was processed successfully")
     refund_speed: Optional[RefundSpeed] = None
     __properties = ["cf_payment_id", "cf_refund_id", "order_id", "refund_id", "entity", "refund_amount", "refund_currency", "refund_note", "refund_status", "refund_arn", "refund_charge", "status_description", "metadata", "refund_splits", "refund_type", "refund_mode", "created_at", "processed_at", "refund_speed"]
 
-    @validator('entity')
+    @field_validator('entity')
     def entity_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -59,7 +59,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('refund')")
         return value
 
-    @validator('refund_status')
+    @field_validator('refund_status')
     def refund_status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -69,7 +69,7 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('SUCCESS', 'PENDING', 'CANCELLED', 'ONHOLD')")
         return value
 
-    @validator('refund_type')
+    @field_validator('refund_type')
     def refund_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
@@ -79,10 +79,12 @@ class RefundEntity(BaseModel):
             raise ValueError("must be one of enum values ('PAYMENT_AUTO_REFUND', 'MERCHANT_INITIATED', 'UNRECONCILED_AUTO_REFUND')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

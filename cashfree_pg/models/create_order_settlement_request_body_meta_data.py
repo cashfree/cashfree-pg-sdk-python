@@ -12,28 +12,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
-from datetime import date
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+
+from pydantic import field_validator
 
 class CreateOrderSettlementRequestBodyMetaData(BaseModel):
     """
     CreateOrderSettlementRequestBodyMetaData
     """
-    cbriks_id: Optional[StrictStr] = Field(None, description="Meta data cbricks ID to be used for reporting purpose.")
-    settlement_date: Optional[date] = Field(None, description="Requested Settlement Date.")
+    cbriks_id: Optional[StrictStr] = Field(default=None, description="Meta data cbricks ID to be used for reporting purpose.")
+    settlement_date: Optional[date] = Field(default=None, description="Requested Settlement Date.")
     __properties = ["cbriks_id", "settlement_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

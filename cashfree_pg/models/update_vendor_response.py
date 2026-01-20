@@ -12,19 +12,19 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional, Union
-from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+
+
 from cashfree_pg.models.bank_details import BankDetails
 from cashfree_pg.models.kyc_details import KycDetails
 from cashfree_pg.models.schedule_option import ScheduleOption
 from cashfree_pg.models.vendor_entity_related_docs_inner import VendorEntityRelatedDocsInner
+from pydantic import field_validator
 
 class UpdateVendorResponse(BaseModel):
     """
@@ -32,7 +32,7 @@ class UpdateVendorResponse(BaseModel):
     """
     email: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
-    bank: Optional[conlist(BankDetails)] = None
+    bank: Optional[List[BankDetails]] = None
     upi: Optional[StrictStr] = None
     added_on: Optional[StrictStr] = None
     updated_on: Optional[StrictStr] = None
@@ -42,17 +42,19 @@ class UpdateVendorResponse(BaseModel):
     phone: Optional[Union[StrictFloat, StrictInt]] = None
     name: Optional[StrictStr] = None
     vendor_id: Optional[StrictStr] = None
-    schedule_option: Optional[conlist(ScheduleOption)] = None
-    kyc_details: Optional[conlist(KycDetails)] = None
+    schedule_option: Optional[List[ScheduleOption]] = None
+    kyc_details: Optional[List[KycDetails]] = None
     dashboard_access: Optional[StrictBool] = None
     bank_details: Optional[StrictStr] = None
-    related_docs: Optional[conlist(VendorEntityRelatedDocsInner)] = None
+    related_docs: Optional[List[VendorEntityRelatedDocsInner]] = None
     __properties = ["email", "status", "bank", "upi", "added_on", "updated_on", "vendor_type", "account_type", "business_type", "phone", "name", "vendor_id", "schedule_option", "kyc_details", "dashboard_access", "bank_details", "related_docs"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,28 +12,30 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictBool
+
+
+from pydantic import field_validator
 
 class LinkNotifyEntity(BaseModel):
     """
     Payment link Notify Object for SMS and Email
     """
-    send_sms: Optional[StrictBool] = Field(None, description="If \"true\", Cashfree will send sms on customer_phone")
-    send_email: Optional[StrictBool] = Field(None, description="If \"true\", Cashfree will send email on customer_email")
+    send_sms: Optional[StrictBool] = Field(default=None, description="If \"true\", Cashfree will send sms on customer_phone")
+    send_email: Optional[StrictBool] = Field(default=None, description="If \"true\", Cashfree will send email on customer_email")
     __properties = ["send_sms", "send_email"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

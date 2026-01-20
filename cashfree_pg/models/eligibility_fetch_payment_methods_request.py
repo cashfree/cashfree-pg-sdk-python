@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field
+
+
 from cashfree_pg.models.payment_methods_filters import PaymentMethodsFilters
 from cashfree_pg.models.payment_methods_queries import PaymentMethodsQueries
+from pydantic import field_validator
 
 class EligibilityFetchPaymentMethodsRequest(BaseModel):
     """
     eligibilty request to find eligible payment method
     """
-    queries: PaymentMethodsQueries = Field(...)
+    queries: PaymentMethodsQueries
     filters: Optional[PaymentMethodsFilters] = None
     __properties = ["queries", "filters"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional
-from pydantic import BaseModel, StrictStr, conlist
+
+
 from cashfree_pg.models.es_order_recon_response_data_inner_order_splits_inner_split_inner import ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner
+from pydantic import field_validator
 
 class ESOrderReconResponseDataInnerOrderSplitsInner(BaseModel):
     """
     ESOrderReconResponseDataInnerOrderSplitsInner
     """
-    split: Optional[conlist(ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner)] = None
+    split: Optional[List[ESOrderReconResponseDataInnerOrderSplitsInnerSplitInner]] = None
     created_at: Optional[StrictStr] = None
     __properties = ["split", "created_at"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

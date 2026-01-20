@@ -12,31 +12,33 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictStr
+
+
+from pydantic import field_validator
 
 class OnboardSoundboxVpaRequest(BaseModel):
     """
     Request body to onboard soundbox vpa
     """
-    vpa: StrictStr = Field(..., description="Terminal Vpa ,that need to onboard on soundbox")
-    cf_terminal_id: StrictStr = Field(..., description="cashfree terminal id.")
-    device_serial_no: StrictStr = Field(..., description="Device Serial No of soundbox")
-    merchant_name: Optional[StrictStr] = Field(None, description="Merchant Name that need to onboard on soundbox")
-    language: Optional[StrictStr] = Field(None, description="language of soundbox,currently English, Hindi, Tamil")
+    vpa: StrictStr = Field(description="Terminal Vpa ,that need to onboard on soundbox")
+    cf_terminal_id: StrictStr = Field(description="cashfree terminal id.")
+    device_serial_no: StrictStr = Field(description="Device Serial No of soundbox")
+    merchant_name: Optional[StrictStr] = Field(default=None, description="Merchant Name that need to onboard on soundbox")
+    language: Optional[StrictStr] = Field(default=None, description="language of soundbox,currently English, Hindi, Tamil")
     __properties = ["vpa", "cf_terminal_id", "device_serial_no", "merchant_name", "language"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

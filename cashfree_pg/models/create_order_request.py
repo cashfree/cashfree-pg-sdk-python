@@ -12,42 +12,44 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Dict, List, Optional, Union
-from pydantic import BaseModel, Field, StrictStr, confloat, conint, conlist, constr
+
+
 from cashfree_pg.models.cart_details import CartDetails
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.order_meta import OrderMeta
 from cashfree_pg.models.terminal_details import TerminalDetails
 from cashfree_pg.models.vendor_split import VendorSplit
+from pydantic import field_validator
 
 class CreateOrderRequest(BaseModel):
     """
     Request body to create an order at cashfree
     """
-    order_id: Optional[constr(strict=True, max_length=45, min_length=3)] = Field(None, description="Order identifier present in your system. Alphanumeric, '_' and '-' only")
-    order_amount: Union[confloat(ge=1, strict=True), conint(ge=1, strict=True)] = Field(..., description="Bill amount for the order. Provide upto two decimals. 10.15 means Rs 10 and 15 paisa")
-    order_currency: StrictStr = Field(..., description="Currency for the order. INR if left empty. Contact care@cashfree.com to enable new currencies.")
+    order_id: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=45)]] = Field(default=None, description="Order identifier present in your system. Alphanumeric, '_' and '-' only")
+    order_amount: Union[Annotated[float, Field(strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]] = Field(description="Bill amount for the order. Provide upto two decimals. 10.15 means Rs 10 and 15 paisa")
+    order_currency: StrictStr = Field(description="Currency for the order. INR if left empty. Contact care@cashfree.com to enable new currencies.")
     cart_details: Optional[CartDetails] = None
-    customer_details: CustomerDetails = Field(...)
+    customer_details: CustomerDetails
     terminal: Optional[TerminalDetails] = None
     order_meta: Optional[OrderMeta] = None
-    order_expiry_time: Optional[StrictStr] = Field(None, description="Time after which the order expires. Customers will not be able to make the payment beyond the time specified here. We store timestamps in IST, but you can provide them in a valid ISO 8601 time format. Example 2021-07-02T10:20:12+05:30 for IST, 2021-07-02T10:20:12Z for UTC")
-    order_note: Optional[constr(strict=True, max_length=200, min_length=3)] = Field(None, description="Order note for reference.")
-    order_tags: Optional[Dict[str, constr(strict=True, max_length=255, min_length=1)]] = Field(None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
-    order_splits: Optional[conlist(VendorSplit)] = Field(None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
+    order_expiry_time: Optional[StrictStr] = Field(default=None, description="Time after which the order expires. Customers will not be able to make the payment beyond the time specified here. We store timestamps in IST, but you can provide them in a valid ISO 8601 time format. Example 2021-07-02T10:20:12+05:30 for IST, 2021-07-02T10:20:12Z for UTC")
+    order_note: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=200)]] = Field(default=None, description="Order note for reference.")
+    order_tags: Optional[Dict[str, Annotated[str, Field(min_length=1, strict=True, max_length=255)]]] = Field(default=None, description="Custom Tags in thr form of {\"key\":\"value\"} which can be passed for an order. A maximum of 10 tags can be added")
+    order_splits: Optional[List[VendorSplit]] = Field(default=None, description="If you have Easy split enabled in your Cashfree account then you can use this option to split the order amount.")
     __properties = ["order_id", "order_amount", "order_currency", "cart_details", "customer_details", "terminal", "order_meta", "order_expiry_time", "order_note", "order_tags", "order_splits"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -4,6 +4,8 @@ from __future__ import annotations
 from typing import Any, Dict, Optional
 from pydantic import Field, StrictInt, StrictStr
 
+# Updated imports for Pydantic v2 compatibility
+
 class ApiResponse:
     """
     API response object

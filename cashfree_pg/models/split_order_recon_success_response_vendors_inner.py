@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from typing import Optional, Union
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
+
+
+
+from pydantic import field_validator
 
 class SplitOrderReconSuccessResponseVendorsInner(BaseModel):
     """
     SplitOrderReconSuccessResponseVendorsInner
     """
-    vendor_id: Optional[StrictStr] = Field(None, description="Unique identifier for the vendor.")
-    settlement_id: Optional[StrictInt] = Field(None, description="Settlement ID associated with the vendor.")
-    settlement_amount: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="Settlement amount allocated to the vendor.")
-    settlement_eligibility_date: Optional[datetime] = Field(None, description="Date and time when the vendor is eligible for the settlement.")
+    vendor_id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the vendor.")
+    settlement_id: Optional[StrictInt] = Field(default=None, description="Settlement ID associated with the vendor.")
+    settlement_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Settlement amount allocated to the vendor.")
+    settlement_eligibility_date: Optional[datetime] = Field(default=None, description="Date and time when the vendor is eligible for the settlement.")
     __properties = ["vendor_id", "settlement_id", "settlement_amount", "settlement_eligibility_date"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

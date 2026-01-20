@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List
-from pydantic import BaseModel, Field, StrictStr, conlist
+
+
+from pydantic import field_validator
 
 class ShipmentDetails(BaseModel):
     """
     Shipment details associated with shipping of order like tracking company, tracking number,tracking urls etc.
     """
-    tracking_company: StrictStr = Field(..., description="Tracking company name associated with order.")
-    tracking_urls: conlist(StrictStr) = Field(..., description="Tracking Urls associated with order.")
-    tracking_numbers: conlist(StrictStr) = Field(..., description="Tracking Numbers associated with order.")
+    tracking_company: StrictStr = Field(description="Tracking company name associated with order.")
+    tracking_urls: List[StrictStr] = Field(description="Tracking Urls associated with order.")
+    tracking_numbers: List[StrictStr] = Field(description="Tracking Numbers associated with order.")
     __properties = ["tracking_company", "tracking_urls", "tracking_numbers"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

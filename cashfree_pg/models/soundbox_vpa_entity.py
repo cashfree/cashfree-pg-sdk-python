@@ -12,15 +12,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, StrictStr
+
+
+from pydantic import field_validator
 
 class SoundboxVpaEntity(BaseModel):
     """
@@ -33,10 +33,12 @@ class SoundboxVpaEntity(BaseModel):
     language: Optional[StrictStr] = None
     __properties = ["vpa", "cf_terminal_id", "device_serial_no", "merchant_name", "language"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

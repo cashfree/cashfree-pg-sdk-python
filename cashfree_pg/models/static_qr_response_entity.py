@@ -12,30 +12,32 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr
+
+
+from pydantic import field_validator
 
 class StaticQrResponseEntity(BaseModel):
     """
     StaticQrResponseEntity
     """
-    cf_terminal_id: Optional[StrictInt] = Field(None, description="cashfree terminal id")
-    vpa: Optional[StrictStr] = Field(None, description="Virtual Address")
-    status: Optional[StrictStr] = Field(None, description="Status of vpa")
-    qr_code: Optional[StrictStr] = Field(None, alias="qrCode", description="qrcode")
+    cf_terminal_id: Optional[StrictInt] = Field(default=None, description="cashfree terminal id")
+    vpa: Optional[StrictStr] = Field(default=None, description="Virtual Address")
+    status: Optional[StrictStr] = Field(default=None, description="Status of vpa")
+    qr_code: Optional[StrictStr] = Field(default=None, description="qrcode", alias="qrCode")
     __properties = ["cf_terminal_id", "vpa", "status", "qrCode"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

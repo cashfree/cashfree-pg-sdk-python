@@ -12,7 +12,6 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
@@ -20,20 +19,23 @@ import json
 
 
 
-from pydantic import BaseModel, Field, StrictStr
+
+from pydantic import field_validator
 
 class DemapSoundboxVpaRequest(BaseModel):
     """
     Request body to demap soundbox vpa
     """
-    cf_terminal_id: StrictStr = Field(..., description="cashfree terminal id.")
-    device_serial_no: StrictStr = Field(..., description="Device Serial No of soundbox that need to demap.")
+    cf_terminal_id: StrictStr = Field(description="cashfree terminal id.")
+    device_serial_no: StrictStr = Field(description="Device Serial No of soundbox that need to demap.")
     __properties = ["cf_terminal_id", "device_serial_no"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

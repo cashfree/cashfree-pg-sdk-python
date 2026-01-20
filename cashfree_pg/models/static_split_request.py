@@ -12,32 +12,34 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List, Optional, Union
-from pydantic import BaseModel, Field, StrictBool, StrictFloat, StrictInt, StrictStr, conlist
+
+
 from cashfree_pg.models.static_split_request_scheme_inner import StaticSplitRequestSchemeInner
+from pydantic import field_validator
 
 class StaticSplitRequest(BaseModel):
     """
     Static Split Request
     """
-    active: StrictBool = Field(..., description="Specify if the split is to be active or not. Possible values: true/false")
-    terminal_id: Optional[StrictStr] = Field(None, description="For Subscription payments, the subscription reference ID is to be shared as the terminal ID. Incase for Payment Gateway terminal ID is non-mandatory. Mention as 0 if not applicable.")
-    terminal_reference_id: Optional[Union[StrictFloat, StrictInt]] = Field(None, description="You can share additional information using the reference ID.")
-    product_type: StrictStr = Field(..., description="Specify the product for which the split should be created. If you want split to be created for Payment Gateway pass value as \"PG\". If you want split to be created for Subscription, pass value as \"SBC\". Accepted values - \"STATIC_QR\", \"SBC\", \"PG\", \"EPOS\".")
-    scheme: conlist(StaticSplitRequestSchemeInner) = Field(..., description="Provide the split scheme details.")
+    active: StrictBool = Field(description="Specify if the split is to be active or not. Possible values: true/false")
+    terminal_id: Optional[StrictStr] = Field(default=None, description="For Subscription payments, the subscription reference ID is to be shared as the terminal ID. Incase for Payment Gateway terminal ID is non-mandatory. Mention as 0 if not applicable.")
+    terminal_reference_id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="You can share additional information using the reference ID.")
+    product_type: StrictStr = Field(description="Specify the product for which the split should be created. If you want split to be created for Payment Gateway pass value as \"PG\". If you want split to be created for Subscription, pass value as \"SBC\". Accepted values - \"STATIC_QR\", \"SBC\", \"PG\", \"EPOS\".")
+    scheme: List[StaticSplitRequestSchemeInner] = Field(description="Provide the split scheme details.")
     __properties = ["active", "terminal_id", "terminal_reference_id", "product_type", "scheme"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

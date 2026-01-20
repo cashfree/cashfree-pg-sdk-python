@@ -12,42 +12,44 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import Optional
-from pydantic import BaseModel, Field, StrictInt, StrictStr, validator
+
+
+from pydantic import field_validator
 
 class CardEMI(BaseModel):
     """
     Payment method for card emi
     """
-    channel: StrictStr = Field(..., description="The channel for card payments will always be \"link\"")
-    card_number: StrictStr = Field(..., description="Customer card number.")
-    card_holder_name: Optional[StrictStr] = Field(None, description="Customer name mentioned on the card.")
-    card_expiry_mm: StrictStr = Field(..., description="Card expiry month.")
-    card_expiry_yy: StrictStr = Field(..., description="Card expiry year.")
-    card_cvv: StrictStr = Field(..., description="CVV mentioned on the card.")
-    card_alias: Optional[StrictStr] = Field(None, description="Card alias as returned by Cashfree Vault API")
-    card_bank_name: StrictStr = Field(..., description="Card bank name, required for EMI payments. This is the bank user has selected for EMI. One of [\"hdfc, \"kotak\", \"icici\", \"rbl\", \"bob\", \"standard chartered\", \"axis\", \"au\", \"yes\", \"sbi\", \"fed\", \"hsbc\", \"citi\", \"amex\"]")
-    emi_tenure: StrictInt = Field(..., description="EMI tenure selected by the user")
+    channel: StrictStr = Field(description="The channel for card payments will always be \"link\"")
+    card_number: StrictStr = Field(description="Customer card number.")
+    card_holder_name: Optional[StrictStr] = Field(default=None, description="Customer name mentioned on the card.")
+    card_expiry_mm: StrictStr = Field(description="Card expiry month.")
+    card_expiry_yy: StrictStr = Field(description="Card expiry year.")
+    card_cvv: StrictStr = Field(description="CVV mentioned on the card.")
+    card_alias: Optional[StrictStr] = Field(default=None, description="Card alias as returned by Cashfree Vault API")
+    card_bank_name: StrictStr = Field(description="Card bank name, required for EMI payments. This is the bank user has selected for EMI. One of [\"hdfc, \"kotak\", \"icici\", \"rbl\", \"bob\", \"standard chartered\", \"axis\", \"au\", \"yes\", \"sbi\", \"fed\", \"hsbc\", \"citi\", \"amex\"]")
+    emi_tenure: StrictInt = Field(description="EMI tenure selected by the user")
     __properties = ["channel", "card_number", "card_holder_name", "card_expiry_mm", "card_expiry_yy", "card_cvv", "card_alias", "card_bank_name", "emi_tenure"]
 
-    @validator('card_bank_name')
+    @field_validator('card_bank_name')
     def card_bank_name_validate_enum(cls, value):
         """Validates the enum"""
         if value not in ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex'):
             raise ValueError("must be one of enum values ('hdfc', 'kotak', 'icici', 'rbl', 'bob', 'standard chartered', 'axis', 'au', 'yes', 'sbi', 'fed', 'hsbc', 'citi', 'amex')")
         return value
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

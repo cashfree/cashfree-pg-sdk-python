@@ -12,29 +12,31 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
 from __future__ import annotations
 import pprint
 import re  # noqa: F401
 import json
 
 
-from typing import List
-from pydantic import BaseModel, Field, StrictInt, conlist, constr
+
+
+from pydantic import field_validator
 
 class EMIOffer(BaseModel):
     """
     EMIOffer
     """
-    type: constr(strict=True, max_length=100, min_length=3) = Field(..., description="Type of emi offer. Possible values are `credit_card_emi`, `debit_card_emi`, `cardless_emi`")
-    issuer: constr(strict=True, max_length=100, min_length=3) = Field(..., description="Bank Name")
-    tenures: conlist(StrictInt) = Field(...)
+    type: Annotated[str, Field(min_length=3, strict=True, max_length=100)] = Field(description="Type of emi offer. Possible values are `credit_card_emi`, `debit_card_emi`, `cardless_emi`")
+    issuer: Annotated[str, Field(min_length=3, strict=True, max_length=100)] = Field(description="Bank Name")
+    tenures: List[StrictInt]
     __properties = ["type", "issuer", "tenures"]
 
-    class Config:
-        """Pydantic configuration"""
-        allow_population_by_field_name = True
-        validate_assignment = True
+    # Updated to Pydantic v2
+    """Pydantic configuration"""
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
