@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_order_settlement_request_body_meta_data import CreateOrderSettlementRequestBodyMetaData  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_order_settlement_request_body_meta_data import CreateOrderSettlementRequestBodyMetaData
 
 class TestCreateOrderSettlementRequestBodyMetaData(unittest.TestCase):
     """CreateOrderSettlementRequestBodyMetaData unit test stubs"""
@@ -29,20 +26,20 @@ class TestCreateOrderSettlementRequestBodyMetaData(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateOrderSettlementRequestBodyMetaData:
         """Test CreateOrderSettlementRequestBodyMetaData
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateOrderSettlementRequestBodyMetaData`
         """
-        model = cashfree_pg.models.create_order_settlement_request_body_meta_data.CreateOrderSettlementRequestBodyMetaData()  # noqa: E501
-        if include_optional :
+        model = CreateOrderSettlementRequestBodyMetaData()
+        if include_optional:
             return CreateOrderSettlementRequestBodyMetaData(
-                cbriks_id = '', 
+                cbriks_id = '',
                 settlement_date = datetime.datetime.strptime('1975-12-30', '%Y-%m-%d').date()
             )
-        else :
+        else:
             return CreateOrderSettlementRequestBodyMetaData(
         )
         """

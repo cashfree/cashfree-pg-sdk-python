@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_methods_filters import PaymentMethodsFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_methods_filters import PaymentMethodsFilters
 
 class TestPaymentMethodsFilters(unittest.TestCase):
     """PaymentMethodsFilters unit test stubs"""
@@ -29,21 +26,21 @@ class TestPaymentMethodsFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodsFilters:
         """Test PaymentMethodsFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodsFilters`
         """
-        model = cashfree_pg.models.payment_methods_filters.PaymentMethodsFilters()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodsFilters()
+        if include_optional:
             return PaymentMethodsFilters(
                 payment_methods = [
                     ''
                     ]
             )
-        else :
+        else:
             return PaymentMethodsFilters(
         )
         """

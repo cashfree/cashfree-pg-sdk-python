@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_filters import OfferFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_filters import OfferFilters
 
 class TestOfferFilters(unittest.TestCase):
     """OfferFilters unit test stubs"""
@@ -29,21 +26,21 @@ class TestOfferFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferFilters:
         """Test OfferFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferFilters`
         """
-        model = cashfree_pg.models.offer_filters.OfferFilters()  # noqa: E501
-        if include_optional :
+        model = OfferFilters()
+        if include_optional:
             return OfferFilters(
                 offer_type = [
                     'DISCOUNT_AND_CASHBACK'
                     ]
             )
-        else :
+        else:
             return OfferFilters(
         )
         """

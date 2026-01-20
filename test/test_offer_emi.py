@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_emi import OfferEMI  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_emi import OfferEMI
 
 class TestOfferEMI(unittest.TestCase):
     """OfferEMI unit test stubs"""
@@ -29,15 +26,15 @@ class TestOfferEMI(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferEMI:
         """Test OfferEMI
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferEMI`
         """
-        model = cashfree_pg.models.offer_emi.OfferEMI()  # noqa: E501
-        if include_optional :
+        model = OfferEMI()
+        if include_optional:
             return OfferEMI(
                 emi = cashfree_pg.models.emi_offer.EMI Offer(
                     type = 'cardless_emi', 
@@ -46,7 +43,7 @@ class TestOfferEMI(unittest.TestCase):
                         3
                         ], )
             )
-        else :
+        else:
             return OfferEMI(
                 emi = cashfree_pg.models.emi_offer.EMI Offer(
                     type = 'cardless_emi', 

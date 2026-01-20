@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.update_vendor_response import UpdateVendorResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.update_vendor_response import UpdateVendorResponse
 
 class TestUpdateVendorResponse(unittest.TestCase):
     """UpdateVendorResponse unit test stubs"""
@@ -29,38 +26,38 @@ class TestUpdateVendorResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UpdateVendorResponse:
         """Test UpdateVendorResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UpdateVendorResponse`
         """
-        model = cashfree_pg.models.update_vendor_response.UpdateVendorResponse()  # noqa: E501
-        if include_optional :
+        model = UpdateVendorResponse()
+        if include_optional:
             return UpdateVendorResponse(
-                email = '', 
-                status = '', 
+                email = '',
+                status = '',
                 bank = [
                     {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
-                upi = '', 
-                added_on = '', 
-                updated_on = '', 
-                vendor_type = '', 
-                account_type = '', 
-                business_type = '', 
-                phone = 1.337, 
-                name = '', 
-                vendor_id = '', 
+                    ],
+                upi = '',
+                added_on = '',
+                updated_on = '',
+                vendor_type = '',
+                account_type = '',
+                business_type = '',
+                phone = 1.337,
+                name = '',
+                vendor_id = '',
                 schedule_option = [
                     {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}
-                    ], 
+                    ],
                 kyc_details = [
                     {"account_type":"BUSINESS","business_type":"NBFC","uidai":753624181019,"gst":"11AAAAA1111A1Z0","cin":"L00000Aa0000AaA000000","pan":"BIAPA2934N","passport_number":"L6892603"}
-                    ], 
-                dashboard_access = True, 
-                bank_details = '', 
+                    ],
+                dashboard_access = True,
+                bank_details = '',
                 related_docs = [
                     cashfree_pg.models.vendor_entity_related_docs_inner.VendorEntity_related_docs_inner(
                         vendor_id = '', 
@@ -70,7 +67,7 @@ class TestUpdateVendorResponse(unittest.TestCase):
                         remarks = '', )
                     ]
             )
-        else :
+        else:
             return UpdateVendorResponse(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.pay_order_request import PayOrderRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.pay_order_request import PayOrderRequest
 
 class TestPayOrderRequest(unittest.TestCase):
     """PayOrderRequest unit test stubs"""
@@ -29,22 +26,22 @@ class TestPayOrderRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PayOrderRequest:
         """Test PayOrderRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PayOrderRequest`
         """
-        model = cashfree_pg.models.pay_order_request.PayOrderRequest()  # noqa: E501
-        if include_optional :
+        model = PayOrderRequest()
+        if include_optional:
             return PayOrderRequest(
-                payment_session_id = 'session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn', 
-                payment_method = {"card":{"channel":"link","card_number":"4111111111111111","card_expiry_mm":"03","card_expiry_yy":"28","card_cvv":"123"}}, 
-                save_instrument = True, 
+                payment_session_id = 'session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn',
+                payment_method = {"card":{"channel":"link","card_number":"4111111111111111","card_expiry_mm":"03","card_expiry_yy":"28","card_cvv":"123"}},
+                save_instrument = True,
                 offer_id = 'faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b'
             )
-        else :
+        else:
             return PayOrderRequest(
                 payment_session_id = 'session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn',
                 payment_method = {"card":{"channel":"link","card_number":"4111111111111111","card_expiry_mm":"03","card_expiry_yy":"28","card_cvv":"123"}},

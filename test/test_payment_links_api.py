@@ -15,45 +15,43 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.payment_links_api import PaymentLinksApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.payment_links_api import PaymentLinksApi
 
 
 class TestPaymentLinksApi(unittest.TestCase):
     """PaymentLinksApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.payment_links_api.PaymentLinksApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = PaymentLinksApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_cancel_link(self):
+    def test_p_g_cancel_link(self) -> None:
         """Test case for p_g_cancel_link
 
-        Cancel Payment Link  # noqa: E501
+        Cancel Payment Link
         """
         pass
 
-    def test_p_g_create_link(self):
+    def test_p_g_create_link(self) -> None:
         """Test case for p_g_create_link
 
-        Create Payment Link  # noqa: E501
+        Create Payment Link
         """
         pass
 
-    def test_p_g_fetch_link(self):
+    def test_p_g_fetch_link(self) -> None:
         """Test case for p_g_fetch_link
 
-        Fetch Payment Link Details  # noqa: E501
+        Fetch Payment Link Details
         """
         pass
 
-    def test_p_g_link_fetch_orders(self):
+    def test_p_g_link_fetch_orders(self) -> None:
         """Test case for p_g_link_fetch_orders
 
-        Get Orders for a Payment Link  # noqa: E501
+        Get Orders for a Payment Link
         """
         pass
 

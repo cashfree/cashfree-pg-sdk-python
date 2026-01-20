@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.static_split_response import StaticSplitResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.static_split_response import StaticSplitResponse
 
 class TestStaticSplitResponse(unittest.TestCase):
     """StaticSplitResponse unit test stubs"""
@@ -29,28 +26,28 @@ class TestStaticSplitResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> StaticSplitResponse:
         """Test StaticSplitResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `StaticSplitResponse`
         """
-        model = cashfree_pg.models.static_split_response.StaticSplitResponse()  # noqa: E501
-        if include_optional :
+        model = StaticSplitResponse()
+        if include_optional:
             return StaticSplitResponse(
-                active = True, 
-                terminal_id = '', 
-                terminal_reference_id = 1.337, 
-                product_type = '', 
+                active = True,
+                terminal_id = '',
+                terminal_reference_id = 1.337,
+                product_type = '',
                 scheme = [
                     cashfree_pg.models.static_split_response_scheme_inner.StaticSplitResponse_scheme_inner(
                         merchant_vendor_id = '', 
                         percentage = '', )
-                    ], 
+                    ],
                 added_on = ''
             )
-        else :
+        else:
             return StaticSplitResponse(
         )
         """

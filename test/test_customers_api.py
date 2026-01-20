@@ -15,24 +15,22 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.customers_api import CustomersApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.customers_api import CustomersApi
 
 
 class TestCustomersApi(unittest.TestCase):
     """CustomersApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.customers_api.CustomersApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = CustomersApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_create_customer(self):
+    def test_p_g_create_customer(self) -> None:
         """Test case for p_g_create_customer
 
-        Create Customer at Cashfree  # noqa: E501
+        Create Customer at Cashfree
         """
         pass
 

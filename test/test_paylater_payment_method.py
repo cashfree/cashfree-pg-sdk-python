@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.paylater_payment_method import PaylaterPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.paylater_payment_method import PaylaterPaymentMethod
 
 class TestPaylaterPaymentMethod(unittest.TestCase):
     """PaylaterPaymentMethod unit test stubs"""
@@ -29,19 +26,19 @@ class TestPaylaterPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaylaterPaymentMethod:
         """Test PaylaterPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaylaterPaymentMethod`
         """
-        model = cashfree_pg.models.paylater_payment_method.PaylaterPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = PaylaterPaymentMethod()
+        if include_optional:
             return PaylaterPaymentMethod(
                 paylater = {"channel":"link","provider":"kotak","phone":"7789112345"}
             )
-        else :
+        else:
             return PaylaterPaymentMethod(
                 paylater = {"channel":"link","provider":"kotak","phone":"7789112345"},
         )

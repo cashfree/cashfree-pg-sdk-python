@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_authenticate_entity import OrderAuthenticateEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_authenticate_entity import OrderAuthenticateEntity
 
 class TestOrderAuthenticateEntity(unittest.TestCase):
     """OrderAuthenticateEntity unit test stubs"""
@@ -29,22 +26,22 @@ class TestOrderAuthenticateEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderAuthenticateEntity:
         """Test OrderAuthenticateEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderAuthenticateEntity`
         """
-        model = cashfree_pg.models.order_authenticate_entity.OrderAuthenticateEntity()  # noqa: E501
-        if include_optional :
+        model = OrderAuthenticateEntity()
+        if include_optional:
             return OrderAuthenticateEntity(
-                cf_payment_id = '', 
-                action = 'SUBMIT_OTP', 
-                authenticate_status = 'FAILED', 
+                cf_payment_id = '',
+                action = 'SUBMIT_OTP',
+                authenticate_status = 'FAILED',
                 payment_message = ''
             )
-        else :
+        else:
             return OrderAuthenticateEntity(
         )
         """

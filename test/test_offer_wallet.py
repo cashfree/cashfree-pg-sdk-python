@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_wallet import OfferWallet  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_wallet import OfferWallet
 
 class TestOfferWallet(unittest.TestCase):
     """OfferWallet unit test stubs"""
@@ -29,20 +26,20 @@ class TestOfferWallet(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferWallet:
         """Test OfferWallet
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferWallet`
         """
-        model = cashfree_pg.models.offer_wallet.OfferWallet()  # noqa: E501
-        if include_optional :
+        model = OfferWallet()
+        if include_optional:
             return OfferWallet(
                 app = cashfree_pg.models.wallet_offer.Wallet Offer(
                     provider = 'paytm', )
             )
-        else :
+        else:
             return OfferWallet(
                 app = cashfree_pg.models.wallet_offer.Wallet Offer(
                     provider = 'paytm', ),

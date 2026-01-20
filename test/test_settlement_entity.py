@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.settlement_entity import SettlementEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.settlement_entity import SettlementEntity
 
 class TestSettlementEntity(unittest.TestCase):
     """SettlementEntity unit test stubs"""
@@ -29,32 +26,32 @@ class TestSettlementEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SettlementEntity:
         """Test SettlementEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SettlementEntity`
         """
-        model = cashfree_pg.models.settlement_entity.SettlementEntity()  # noqa: E501
-        if include_optional :
+        model = SettlementEntity()
+        if include_optional:
             return SettlementEntity(
-                cf_payment_id = '', 
-                cf_settlement_id = '', 
-                settlement_currency = '', 
-                order_id = '', 
-                entity = '', 
-                order_amount = 1.337, 
-                payment_time = '', 
-                service_charge = 1.337, 
-                service_tax = 1.337, 
-                settlement_amount = 1.337, 
-                settlement_id = 56, 
-                transfer_id = 56, 
-                transfer_time = '', 
+                cf_payment_id = '',
+                cf_settlement_id = '',
+                settlement_currency = '',
+                order_id = '',
+                entity = '',
+                order_amount = 1.337,
+                payment_time = '',
+                service_charge = 1.337,
+                service_tax = 1.337,
+                settlement_amount = 1.337,
+                settlement_id = 56,
+                transfer_id = 56,
+                transfer_time = '',
                 transfer_utr = ''
             )
-        else :
+        else:
             return SettlementEntity(
         )
         """

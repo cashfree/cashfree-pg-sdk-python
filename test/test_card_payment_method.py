@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.card_payment_method import CardPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.card_payment_method import CardPaymentMethod
 
 class TestCardPaymentMethod(unittest.TestCase):
     """CardPaymentMethod unit test stubs"""
@@ -29,19 +26,19 @@ class TestCardPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CardPaymentMethod:
         """Test CardPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CardPaymentMethod`
         """
-        model = cashfree_pg.models.card_payment_method.CardPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = CardPaymentMethod()
+        if include_optional:
             return CardPaymentMethod(
                 card = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"}
             )
-        else :
+        else:
             return CardPaymentMethod(
                 card = {"channel":"link","card_number":"4111111111111111","card_holder_name":"Tushar Gupta","card_expiry_mm":"06","card_expiry_yy":"22","card_cvv":"900"},
         )

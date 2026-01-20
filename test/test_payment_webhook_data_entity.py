@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_webhook_data_entity import PaymentWebhookDataEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_webhook_data_entity import PaymentWebhookDataEntity
 
 class TestPaymentWebhookDataEntity(unittest.TestCase):
     """PaymentWebhookDataEntity unit test stubs"""
@@ -29,15 +26,15 @@ class TestPaymentWebhookDataEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentWebhookDataEntity:
         """Test PaymentWebhookDataEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentWebhookDataEntity`
         """
-        model = cashfree_pg.models.payment_webhook_data_entity.PaymentWebhookDataEntity()  # noqa: E501
-        if include_optional :
+        model = PaymentWebhookDataEntity()
+        if include_optional:
             return PaymentWebhookDataEntity(
                 order = cashfree_pg.models.payment_webhook_order_entity.PaymentWebhookOrderEntity(
                     order_id = '', 
@@ -45,26 +42,26 @@ class TestPaymentWebhookDataEntity(unittest.TestCase):
                     order_currency = '', 
                     order_tags = {
                         'key' : '0'
-                        }, ), 
-                payment = {"$ref":"#/components/examples/payments_entity_list_example/value/0"}, 
+                        }, ),
+                payment = {"$ref":"#/components/examples/payments_entity_list_example/value/0"},
                 customer_details = cashfree_pg.models.payment_webhook_customer_entity.PaymentWebhookCustomerEntity(
                     customer_name = 'Yogesh', 
                     customer_id = '12121212', 
                     customer_email = 'yogesh.miglani@gmail.com', 
-                    customer_phone = '9666699999', ), 
+                    customer_phone = '9666699999', ),
                 error_details = cashfree_pg.models.payment_webhook_error_entity.PaymentWebhookErrorEntity(
                     error_code = '', 
                     error_description = '', 
                     error_reason = '', 
                     error_source = '', 
                     error_code_raw = '', 
-                    error_description_raw = '', ), 
+                    error_description_raw = '', ),
                 payment_gateway_details = cashfree_pg.models.payment_webhook_gateway_details_entity.PaymentWebhookGatewayDetailsEntity(
                     gateway_name = '', 
                     gateway_order_id = '', 
                     gateway_payment_id = '', 
                     gateway_status_code = '', 
-                    gateway_settlement = '', ), 
+                    gateway_settlement = '', ),
                 payment_offers = [
                     cashfree_pg.models.offer_entity.OfferEntity(
                         offer_id = 'd2b430fb-1afe-455a-af31-66d00377b29a', 
@@ -75,7 +72,7 @@ class TestPaymentWebhookDataEntity(unittest.TestCase):
                         offer_validations = {"$ref":"#/components/schemas/OfferValidations/example"}, )
                     ]
             )
-        else :
+        else:
             return PaymentWebhookDataEntity(
         )
         """

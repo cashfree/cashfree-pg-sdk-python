@@ -15,101 +15,99 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.soft_pos_api import SoftPOSApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.soft_pos_api import SoftPOSApi
 
 
 class TestSoftPOSApi(unittest.TestCase):
     """SoftPOSApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.soft_pos_api.SoftPOSApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = SoftPOSApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_spos_create_terminal(self):
+    def test_spos_create_terminal(self) -> None:
         """Test case for spos_create_terminal
 
-        Create Terminal  # noqa: E501
+        Create Terminal
         """
         pass
 
-    def test_spos_create_terminal_transaction(self):
+    def test_spos_create_terminal_transaction(self) -> None:
         """Test case for spos_create_terminal_transaction
 
-        Create Terminal Transaction  # noqa: E501
+        Create Terminal Transaction
         """
         pass
 
-    def test_spos_demap_soundbox_vpa(self):
+    def test_spos_demap_soundbox_vpa(self) -> None:
         """Test case for spos_demap_soundbox_vpa
 
-        Demap Soundbox Vpa  # noqa: E501
+        Demap Soundbox Vpa
         """
         pass
 
-    def test_spos_fetch_terminal(self):
+    def test_spos_fetch_terminal(self) -> None:
         """Test case for spos_fetch_terminal
 
-        Get Terminal Status using Phone Number  # noqa: E501
+        Get Terminal Status using Phone Number
         """
         pass
 
-    def test_spos_fetch_terminal_qr_codes(self):
+    def test_spos_fetch_terminal_qr_codes(self) -> None:
         """Test case for spos_fetch_terminal_qr_codes
 
-        Fetch Terminal QR Codes  # noqa: E501
+        Fetch Terminal QR Codes
         """
         pass
 
-    def test_spos_fetch_terminal_soundbox_vpa(self):
+    def test_spos_fetch_terminal_soundbox_vpa(self) -> None:
         """Test case for spos_fetch_terminal_soundbox_vpa
 
-        Fetch Terminal Soundbox vpa  # noqa: E501
+        Fetch Terminal Soundbox vpa
         """
         pass
 
-    def test_spos_fetch_terminal_transaction(self):
+    def test_spos_fetch_terminal_transaction(self) -> None:
         """Test case for spos_fetch_terminal_transaction
 
-        Get Terminal Transaction  # noqa: E501
+        Get Terminal Transaction
         """
         pass
 
-    def test_spos_onboard_soundbox_vpa(self):
+    def test_spos_onboard_soundbox_vpa(self) -> None:
         """Test case for spos_onboard_soundbox_vpa
 
-        Onboard Soundbox Vpa  # noqa: E501
+        Onboard Soundbox Vpa
         """
         pass
 
-    def test_spos_update_soundbox_vpa(self):
+    def test_spos_update_soundbox_vpa(self) -> None:
         """Test case for spos_update_soundbox_vpa
 
-        Update Soundbox Vpa  # noqa: E501
+        Update Soundbox Vpa
         """
         pass
 
-    def test_spos_update_terminal(self):
+    def test_spos_update_terminal(self) -> None:
         """Test case for spos_update_terminal
 
-        Update Terminal  # noqa: E501
+        Update Terminal
         """
         pass
 
-    def test_spos_update_terminal_status(self):
+    def test_spos_update_terminal_status(self) -> None:
         """Test case for spos_update_terminal_status
 
-        Update Terminal Status  # noqa: E501
+        Update Terminal Status
         """
         pass
 
-    def test_spos_upload_terminal_docs(self):
+    def test_spos_upload_terminal_docs(self) -> None:
         """Test case for spos_upload_terminal_docs
 
-        Upload Terminal Docs  # noqa: E501
+        Upload Terminal Docs
         """
         pass
 

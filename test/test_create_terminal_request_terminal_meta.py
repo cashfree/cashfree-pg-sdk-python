@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_terminal_request_terminal_meta import CreateTerminalRequestTerminalMeta
 
 class TestCreateTerminalRequestTerminalMeta(unittest.TestCase):
     """CreateTerminalRequestTerminalMeta unit test stubs"""
@@ -29,19 +26,19 @@ class TestCreateTerminalRequestTerminalMeta(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateTerminalRequestTerminalMeta:
         """Test CreateTerminalRequestTerminalMeta
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateTerminalRequestTerminalMeta`
         """
-        model = cashfree_pg.models.create_terminal_request_terminal_meta.CreateTerminalRequestTerminalMeta()  # noqa: E501
-        if include_optional :
+        model = CreateTerminalRequestTerminalMeta()
+        if include_optional:
             return CreateTerminalRequestTerminalMeta(
                 terminal_operator = ''
             )
-        else :
+        else:
             return CreateTerminalRequestTerminalMeta(
         )
         """

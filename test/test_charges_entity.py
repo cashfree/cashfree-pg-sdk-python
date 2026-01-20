@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.charges_entity import ChargesEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.charges_entity import ChargesEntity
 
 class TestChargesEntity(unittest.TestCase):
     """ChargesEntity unit test stubs"""
@@ -29,20 +26,20 @@ class TestChargesEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ChargesEntity:
         """Test ChargesEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ChargesEntity`
         """
-        model = cashfree_pg.models.charges_entity.ChargesEntity()  # noqa: E501
-        if include_optional :
+        model = ChargesEntity()
+        if include_optional:
             return ChargesEntity(
-                shipping_charges = 1.337, 
+                shipping_charges = 1.337,
                 cod_handling_charges = 1.337
             )
-        else :
+        else:
             return ChargesEntity(
         )
         """

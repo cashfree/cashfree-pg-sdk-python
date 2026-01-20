@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.fetch_settlements_request_filters import FetchSettlementsRequestFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.fetch_settlements_request_filters import FetchSettlementsRequestFilters
 
 class TestFetchSettlementsRequestFilters(unittest.TestCase):
     """FetchSettlementsRequestFilters unit test stubs"""
@@ -29,26 +26,26 @@ class TestFetchSettlementsRequestFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> FetchSettlementsRequestFilters:
         """Test FetchSettlementsRequestFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FetchSettlementsRequestFilters`
         """
-        model = cashfree_pg.models.fetch_settlements_request_filters.FetchSettlementsRequestFilters()  # noqa: E501
-        if include_optional :
+        model = FetchSettlementsRequestFilters()
+        if include_optional:
             return FetchSettlementsRequestFilters(
                 cf_settlement_ids = [
                     ''
-                    ], 
+                    ],
                 settlement_utrs = [
                     ''
-                    ], 
-                start_date = '', 
+                    ],
+                start_date = '',
                 end_date = ''
             )
-        else :
+        else:
             return FetchSettlementsRequestFilters(
         )
         """

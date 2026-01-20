@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_request import ESOrderReconRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_request import ESOrderReconRequest
 
 class TestESOrderReconRequest(unittest.TestCase):
     """ESOrderReconRequest unit test stubs"""
@@ -29,27 +26,27 @@ class TestESOrderReconRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconRequest:
         """Test ESOrderReconRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconRequest`
         """
-        model = cashfree_pg.models.es_order_recon_request.ESOrderReconRequest()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconRequest()
+        if include_optional:
             return ESOrderReconRequest(
                 filters = cashfree_pg.models.es_order_recon_request_filters.ESOrderReconRequest_filters(
                     start_date = '', 
                     end_date = '', 
                     order_ids = [
                         ''
-                        ], ), 
+                        ], ),
                 pagination = cashfree_pg.models.es_order_recon_request_pagination.ESOrderReconRequest_pagination(
                     cursor = '', 
                     limit = 56, )
             )
-        else :
+        else:
             return ESOrderReconRequest(
                 filters = cashfree_pg.models.es_order_recon_request_filters.ESOrderReconRequest_filters(
                     start_date = '', 

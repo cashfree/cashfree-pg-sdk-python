@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_fetch_payment_methods_request import EligibilityFetchPaymentMethodsRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_fetch_payment_methods_request import EligibilityFetchPaymentMethodsRequest
 
 class TestEligibilityFetchPaymentMethodsRequest(unittest.TestCase):
     """EligibilityFetchPaymentMethodsRequest unit test stubs"""
@@ -29,20 +26,20 @@ class TestEligibilityFetchPaymentMethodsRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityFetchPaymentMethodsRequest:
         """Test EligibilityFetchPaymentMethodsRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityFetchPaymentMethodsRequest`
         """
-        model = cashfree_pg.models.eligibility_fetch_payment_methods_request.EligibilityFetchPaymentMethodsRequest()  # noqa: E501
-        if include_optional :
+        model = EligibilityFetchPaymentMethodsRequest()
+        if include_optional:
             return EligibilityFetchPaymentMethodsRequest(
-                queries = {"amount":100}, 
+                queries = {"amount":100},
                 filters = {"payment_methods":null}
             )
-        else :
+        else:
             return EligibilityFetchPaymentMethodsRequest(
                 queries = {"amount":100},
         )

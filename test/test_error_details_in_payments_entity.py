@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.error_details_in_payments_entity import ErrorDetailsInPaymentsEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.error_details_in_payments_entity import ErrorDetailsInPaymentsEntity
 
 class TestErrorDetailsInPaymentsEntity(unittest.TestCase):
     """ErrorDetailsInPaymentsEntity unit test stubs"""
@@ -29,25 +26,25 @@ class TestErrorDetailsInPaymentsEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ErrorDetailsInPaymentsEntity:
         """Test ErrorDetailsInPaymentsEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ErrorDetailsInPaymentsEntity`
         """
-        model = cashfree_pg.models.error_details_in_payments_entity.ErrorDetailsInPaymentsEntity()  # noqa: E501
-        if include_optional :
+        model = ErrorDetailsInPaymentsEntity()
+        if include_optional:
             return ErrorDetailsInPaymentsEntity(
-                error_code = '', 
-                error_description = '', 
-                error_reason = '', 
-                error_source = '', 
-                error_code_raw = '', 
-                error_description_raw = '', 
+                error_code = '',
+                error_description = '',
+                error_reason = '',
+                error_source = '',
+                error_code_raw = '',
+                error_description_raw = '',
                 error_subcode_raw = ''
             )
-        else :
+        else:
             return ErrorDetailsInPaymentsEntity(
         )
         """

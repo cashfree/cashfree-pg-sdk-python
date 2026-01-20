@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_response import ESOrderReconResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_response import ESOrderReconResponse
 
 class TestESOrderReconResponse(unittest.TestCase):
     """ESOrderReconResponse unit test stubs"""
@@ -29,17 +26,17 @@ class TestESOrderReconResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconResponse:
         """Test ESOrderReconResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconResponse`
         """
-        model = cashfree_pg.models.es_order_recon_response.ESOrderReconResponse()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconResponse()
+        if include_optional:
             return ESOrderReconResponse(
-                cursor = '', 
+                cursor = '',
                 data = [
                     cashfree_pg.models.es_order_recon_response_data_inner.ESOrderReconResponse_data_inner(
                         amount = 1.337, 
@@ -77,10 +74,10 @@ class TestESOrderReconResponse(unittest.TestCase):
                                 created_at = '', )
                             ], 
                         eligible_split_balance = '', )
-                    ], 
+                    ],
                 limit = 56
             )
-        else :
+        else:
             return ESOrderReconResponse(
         )
         """

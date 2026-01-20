@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.es_order_recon_request_pagination import ESOrderReconRequestPagination  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.es_order_recon_request_pagination import ESOrderReconRequestPagination
 
 class TestESOrderReconRequestPagination(unittest.TestCase):
     """ESOrderReconRequestPagination unit test stubs"""
@@ -29,20 +26,20 @@ class TestESOrderReconRequestPagination(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ESOrderReconRequestPagination:
         """Test ESOrderReconRequestPagination
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ESOrderReconRequestPagination`
         """
-        model = cashfree_pg.models.es_order_recon_request_pagination.ESOrderReconRequestPagination()  # noqa: E501
-        if include_optional :
+        model = ESOrderReconRequestPagination()
+        if include_optional:
             return ESOrderReconRequestPagination(
-                cursor = '', 
+                cursor = '',
                 limit = 56
             )
-        else :
+        else:
             return ESOrderReconRequestPagination(
         )
         """

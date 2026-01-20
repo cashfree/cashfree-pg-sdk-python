@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_fetch_offers_request import EligibilityFetchOffersRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_fetch_offers_request import EligibilityFetchOffersRequest
 
 class TestEligibilityFetchOffersRequest(unittest.TestCase):
     """EligibilityFetchOffersRequest unit test stubs"""
@@ -29,20 +26,20 @@ class TestEligibilityFetchOffersRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityFetchOffersRequest:
         """Test EligibilityFetchOffersRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityFetchOffersRequest`
         """
-        model = cashfree_pg.models.eligibility_fetch_offers_request.EligibilityFetchOffersRequest()  # noqa: E501
-        if include_optional :
+        model = EligibilityFetchOffersRequest()
+        if include_optional:
             return EligibilityFetchOffersRequest(
-                queries = {"order_id":"order_413462PK1RI1IwYB1X69LgzUQWiSxYDF","amount":100}, 
+                queries = {"order_id":"order_413462PK1RI1IwYB1X69LgzUQWiSxYDF","amount":100},
                 filters = {"offer_type":["DISCOUNT_AND_CASHBACK","DISCOUNT"]}
             )
-        else :
+        else:
             return EligibilityFetchOffersRequest(
                 queries = {"order_id":"order_413462PK1RI1IwYB1X69LgzUQWiSxYDF","amount":100},
         )

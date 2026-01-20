@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.recon_entity import ReconEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.recon_entity import ReconEntity
 
 class TestReconEntity(unittest.TestCase):
     """ReconEntity unit test stubs"""
@@ -29,18 +26,18 @@ class TestReconEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ReconEntity:
         """Test ReconEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ReconEntity`
         """
-        model = cashfree_pg.models.recon_entity.ReconEntity()  # noqa: E501
-        if include_optional :
+        model = ReconEntity()
+        if include_optional:
             return ReconEntity(
-                cursor = '', 
-                limit = 56, 
+                cursor = '',
+                limit = 56,
                 data = [
                     cashfree_pg.models.recon_entity_data_inner.ReconEntity_data_inner(
                         event_id = '', 
@@ -92,7 +89,7 @@ class TestReconEntity(unittest.TestCase):
                         remarks = '', )
                     ]
             )
-        else :
+        else:
             return ReconEntity(
         )
         """

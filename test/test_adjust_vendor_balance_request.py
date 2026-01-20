@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.adjust_vendor_balance_request import AdjustVendorBalanceRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.adjust_vendor_balance_request import AdjustVendorBalanceRequest
 
 class TestAdjustVendorBalanceRequest(unittest.TestCase):
     """AdjustVendorBalanceRequest unit test stubs"""
@@ -29,23 +26,23 @@ class TestAdjustVendorBalanceRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> AdjustVendorBalanceRequest:
         """Test AdjustVendorBalanceRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AdjustVendorBalanceRequest`
         """
-        model = cashfree_pg.models.adjust_vendor_balance_request.AdjustVendorBalanceRequest()  # noqa: E501
-        if include_optional :
+        model = AdjustVendorBalanceRequest()
+        if include_optional:
             return AdjustVendorBalanceRequest(
-                transfer_from = '', 
-                transfer_type = '', 
-                transfer_amount = 1.337, 
-                remark = '', 
+                transfer_from = '',
+                transfer_type = '',
+                transfer_amount = 1.337,
+                remark = '',
                 tags = None
             )
-        else :
+        else:
             return AdjustVendorBalanceRequest(
                 transfer_from = '',
                 transfer_type = '',

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_request_authorization_details import CreateSubscriptionRequestAuthorizationDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_request_authorization_details import CreateSubscriptionRequestAuthorizationDetails
 
 class TestCreateSubscriptionRequestAuthorizationDetails(unittest.TestCase):
     """CreateSubscriptionRequestAuthorizationDetails unit test stubs"""
@@ -29,23 +26,23 @@ class TestCreateSubscriptionRequestAuthorizationDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionRequestAuthorizationDetails:
         """Test CreateSubscriptionRequestAuthorizationDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionRequestAuthorizationDetails`
         """
-        model = cashfree_pg.models.create_subscription_request_authorization_details.CreateSubscriptionRequestAuthorizationDetails()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionRequestAuthorizationDetails()
+        if include_optional:
             return CreateSubscriptionRequestAuthorizationDetails(
-                authorization_amount = 1.337, 
-                authorization_amount_refund = True, 
+                authorization_amount = 1.337,
+                authorization_amount_refund = True,
                 payment_methods = [
                     ''
                     ]
             )
-        else :
+        else:
             return CreateSubscriptionRequestAuthorizationDetails(
         )
         """

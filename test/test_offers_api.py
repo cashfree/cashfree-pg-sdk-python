@@ -15,31 +15,29 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.offers_api import OffersApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.offers_api import OffersApi
 
 
 class TestOffersApi(unittest.TestCase):
     """OffersApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.offers_api.OffersApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = OffersApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_create_offer(self):
+    def test_p_g_create_offer(self) -> None:
         """Test case for p_g_create_offer
 
-        Create Offer  # noqa: E501
+        Create Offer
         """
         pass
 
-    def test_p_g_fetch_offer(self):
+    def test_p_g_fetch_offer(self) -> None:
         """Test case for p_g_fetch_offer
 
-        Get Offer by ID  # noqa: E501
+        Get Offer by ID
         """
         pass
 

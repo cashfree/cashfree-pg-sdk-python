@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_paylater_entity import EligibilityPaylaterEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_paylater_entity import EligibilityPaylaterEntity
 
 class TestEligibilityPaylaterEntity(unittest.TestCase):
     """EligibilityPaylaterEntity unit test stubs"""
@@ -29,23 +26,23 @@ class TestEligibilityPaylaterEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityPaylaterEntity:
         """Test EligibilityPaylaterEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityPaylaterEntity`
         """
-        model = cashfree_pg.models.eligibility_paylater_entity.EligibilityPaylaterEntity()  # noqa: E501
-        if include_optional :
+        model = EligibilityPaylaterEntity()
+        if include_optional:
             return EligibilityPaylaterEntity(
-                eligibility = True, 
-                entity_type = 'paylater', 
-                entity_value = 'olapostpaid', 
+                eligibility = True,
+                entity_type = 'paylater',
+                entity_value = 'olapostpaid',
                 entity_details = cashfree_pg.models.paylater_entity.PaylaterEntity(
                     payment_method = 'olapostpaid', )
             )
-        else :
+        else:
             return EligibilityPaylaterEntity(
         )
         """

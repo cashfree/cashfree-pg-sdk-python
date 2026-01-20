@@ -15,31 +15,29 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.default_api import DefaultApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.default_api import DefaultApi
 
 
 class TestDefaultApi(unittest.TestCase):
     """DefaultApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.default_api.DefaultApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = DefaultApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_terminal_create_qr_codes(self):
+    def test_terminal_create_qr_codes(self) -> None:
         """Test case for terminal_create_qr_codes
 
-        Create Pre-Activated Vpas for partner  # noqa: E501
+        Create Pre-Activated Vpas for partner
         """
         pass
 
-    def test_terminal_get_qr_codes(self):
+    def test_terminal_get_qr_codes(self) -> None:
         """Test case for terminal_get_qr_codes
 
-        Get Pre-Activated Vpas for partner  # noqa: E501
+        Get Pre-Activated Vpas for partner
         """
         pass
 

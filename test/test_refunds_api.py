@@ -15,38 +15,36 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.refunds_api import RefundsApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.refunds_api import RefundsApi
 
 
 class TestRefundsApi(unittest.TestCase):
     """RefundsApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.refunds_api.RefundsApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = RefundsApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_order_create_refund(self):
+    def test_p_g_order_create_refund(self) -> None:
         """Test case for p_g_order_create_refund
 
-        Create Refund  # noqa: E501
+        Create Refund
         """
         pass
 
-    def test_p_g_order_fetch_refund(self):
+    def test_p_g_order_fetch_refund(self) -> None:
         """Test case for p_g_order_fetch_refund
 
-        Get Refund  # noqa: E501
+        Get Refund
         """
         pass
 
-    def test_p_g_order_fetch_refunds(self):
+    def test_p_g_order_fetch_refunds(self) -> None:
         """Test case for p_g_order_fetch_refunds
 
-        Get All Refunds for an Order  # noqa: E501
+        Get All Refunds for an Order
         """
         pass
 

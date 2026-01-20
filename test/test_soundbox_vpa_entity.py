@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.soundbox_vpa_entity import SoundboxVpaEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.soundbox_vpa_entity import SoundboxVpaEntity
 
 class TestSoundboxVpaEntity(unittest.TestCase):
     """SoundboxVpaEntity unit test stubs"""
@@ -29,23 +26,23 @@ class TestSoundboxVpaEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SoundboxVpaEntity:
         """Test SoundboxVpaEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SoundboxVpaEntity`
         """
-        model = cashfree_pg.models.soundbox_vpa_entity.SoundboxVpaEntity()  # noqa: E501
-        if include_optional :
+        model = SoundboxVpaEntity()
+        if include_optional:
             return SoundboxVpaEntity(
-                vpa = '', 
-                cf_terminal_id = '', 
-                device_serial_no = '', 
-                merchant_name = '', 
+                vpa = '',
+                cf_terminal_id = '',
+                device_serial_no = '',
+                merchant_name = '',
                 language = ''
             )
-        else :
+        else:
             return SoundboxVpaEntity(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.settlement_webhook_data_entity import SettlementWebhookDataEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.settlement_webhook_data_entity import SettlementWebhookDataEntity
 
 class TestSettlementWebhookDataEntity(unittest.TestCase):
     """SettlementWebhookDataEntity unit test stubs"""
@@ -29,19 +26,19 @@ class TestSettlementWebhookDataEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SettlementWebhookDataEntity:
         """Test SettlementWebhookDataEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SettlementWebhookDataEntity`
         """
-        model = cashfree_pg.models.settlement_webhook_data_entity.SettlementWebhookDataEntity()  # noqa: E501
-        if include_optional :
+        model = SettlementWebhookDataEntity()
+        if include_optional:
             return SettlementWebhookDataEntity(
                 settlement = {"cf_payment_id":"553338","order_id":"order-12-127","entity":"settlement","order_amount":100,"payment_time":"2021-07-13T13:13:59+05:30","service_charge":10,"service_tax":1.8,"settlement_amount":88.2,"cf_settlement_id":"6121238","transfer_id":238,"transfer_time":"2021-07-25T12:57:52+05:30","transfer_utr":"N87912312","order_currency":"INR","settlement_currency":"INR"}
             )
-        else :
+        else:
             return SettlementWebhookDataEntity(
         )
         """

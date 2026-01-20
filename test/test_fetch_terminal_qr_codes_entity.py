@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.fetch_terminal_qr_codes_entity import FetchTerminalQRCodesEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.fetch_terminal_qr_codes_entity import FetchTerminalQRCodesEntity
 
 class TestFetchTerminalQRCodesEntity(unittest.TestCase):
     """FetchTerminalQRCodesEntity unit test stubs"""
@@ -29,22 +26,22 @@ class TestFetchTerminalQRCodesEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> FetchTerminalQRCodesEntity:
         """Test FetchTerminalQRCodesEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FetchTerminalQRCodesEntity`
         """
-        model = cashfree_pg.models.fetch_terminal_qr_codes_entity.FetchTerminalQRCodesEntity()  # noqa: E501
-        if include_optional :
+        model = FetchTerminalQRCodesEntity()
+        if include_optional:
             return FetchTerminalQRCodesEntity(
-                bank = '', 
-                qr_code = '', 
-                qr_code_url = '', 
+                bank = '',
+                qr_code = '',
+                qr_code_url = '',
                 status = ''
             )
-        else :
+        else:
             return FetchTerminalQRCodesEntity(
         )
         """

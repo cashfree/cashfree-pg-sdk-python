@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.authentication_error import AuthenticationError  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.authentication_error import AuthenticationError
 
 class TestAuthenticationError(unittest.TestCase):
     """AuthenticationError unit test stubs"""
@@ -29,21 +26,21 @@ class TestAuthenticationError(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> AuthenticationError:
         """Test AuthenticationError
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AuthenticationError`
         """
-        model = cashfree_pg.models.authentication_error.AuthenticationError()  # noqa: E501
-        if include_optional :
+        model = AuthenticationError()
+        if include_optional:
             return AuthenticationError(
-                message = '', 
-                code = '', 
+                message = '',
+                code = '',
                 type = ''
             )
-        else :
+        else:
             return AuthenticationError(
         )
         """

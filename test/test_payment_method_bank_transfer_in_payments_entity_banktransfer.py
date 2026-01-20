@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer import PaymentMethodBankTransferInPaymentsEntityBanktransfer  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer import PaymentMethodBankTransferInPaymentsEntityBanktransfer
 
 class TestPaymentMethodBankTransferInPaymentsEntityBanktransfer(unittest.TestCase):
     """PaymentMethodBankTransferInPaymentsEntityBanktransfer unit test stubs"""
@@ -29,22 +26,22 @@ class TestPaymentMethodBankTransferInPaymentsEntityBanktransfer(unittest.TestCas
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodBankTransferInPaymentsEntityBanktransfer:
         """Test PaymentMethodBankTransferInPaymentsEntityBanktransfer
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodBankTransferInPaymentsEntityBanktransfer`
         """
-        model = cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer.PaymentMethodBankTransferInPaymentsEntityBanktransfer()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodBankTransferInPaymentsEntityBanktransfer()
+        if include_optional:
             return PaymentMethodBankTransferInPaymentsEntityBanktransfer(
-                channel = '', 
-                banktransfer_bank_name = '', 
-                banktransfer_ifsc = '', 
+                channel = '',
+                banktransfer_bank_name = '',
+                banktransfer_ifsc = '',
                 banktransfer_account_number = ''
             )
-        else :
+        else:
             return PaymentMethodBankTransferInPaymentsEntityBanktransfer(
         )
         """

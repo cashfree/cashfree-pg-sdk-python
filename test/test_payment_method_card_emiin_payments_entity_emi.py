@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi import PaymentMethodCardEMIInPaymentsEntityEmi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi import PaymentMethodCardEMIInPaymentsEntityEmi
 
 class TestPaymentMethodCardEMIInPaymentsEntityEmi(unittest.TestCase):
     """PaymentMethodCardEMIInPaymentsEntityEmi unit test stubs"""
@@ -29,30 +26,30 @@ class TestPaymentMethodCardEMIInPaymentsEntityEmi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodCardEMIInPaymentsEntityEmi:
         """Test PaymentMethodCardEMIInPaymentsEntityEmi
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodCardEMIInPaymentsEntityEmi`
         """
-        model = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi.PaymentMethodCardEMIInPaymentsEntityEmi()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodCardEMIInPaymentsEntityEmi()
+        if include_optional:
             return PaymentMethodCardEMIInPaymentsEntityEmi(
-                channel = '', 
-                card_number = '', 
-                card_network = '', 
-                card_type = '', 
-                card_country = '', 
-                card_bank_name = '', 
-                card_network_reference_id = '', 
-                emi_tenure = 1.337, 
+                channel = '',
+                card_number = '',
+                card_network = '',
+                card_type = '',
+                card_country = '',
+                card_bank_name = '',
+                card_network_reference_id = '',
+                emi_tenure = 1.337,
                 emi_details = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details.PaymentMethodCardEMIInPaymentsEntity_emi_emi_details(
                     emi_amount = 1.337, 
                     emi_tenure = 1.337, 
                     emi_interest = 1.337, )
             )
-        else :
+        else:
             return PaymentMethodCardEMIInPaymentsEntityEmi(
         )
         """

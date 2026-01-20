@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details import PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details import PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails
 
 class TestPaymentMethodCardEMIInPaymentsEntityEmiEmiDetails(unittest.TestCase):
     """PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails unit test stubs"""
@@ -29,21 +26,21 @@ class TestPaymentMethodCardEMIInPaymentsEntityEmiEmiDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails:
         """Test PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails`
         """
-        model = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details.PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails()
+        if include_optional:
             return PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails(
-                emi_amount = 1.337, 
-                emi_tenure = 1.337, 
+                emi_amount = 1.337,
+                emi_tenure = 1.337,
                 emi_interest = 1.337
             )
-        else :
+        else:
             return PaymentMethodCardEMIInPaymentsEntityEmiEmiDetails(
         )
         """

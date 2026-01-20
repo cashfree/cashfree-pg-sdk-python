@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_payment_entity_failure_details import SubscriptionPaymentEntityFailureDetails
 
 class TestSubscriptionPaymentEntityFailureDetails(unittest.TestCase):
     """SubscriptionPaymentEntityFailureDetails unit test stubs"""
@@ -29,19 +26,19 @@ class TestSubscriptionPaymentEntityFailureDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionPaymentEntityFailureDetails:
         """Test SubscriptionPaymentEntityFailureDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionPaymentEntityFailureDetails`
         """
-        model = cashfree_pg.models.subscription_payment_entity_failure_details.SubscriptionPaymentEntityFailureDetails()  # noqa: E501
-        if include_optional :
+        model = SubscriptionPaymentEntityFailureDetails()
+        if include_optional:
             return SubscriptionPaymentEntityFailureDetails(
                 failure_reason = ''
             )
-        else :
+        else:
             return SubscriptionPaymentEntityFailureDetails(
         )
         """

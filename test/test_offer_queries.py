@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_queries import OfferQueries  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_queries import OfferQueries
 
 class TestOfferQueries(unittest.TestCase):
     """OfferQueries unit test stubs"""
@@ -29,20 +26,20 @@ class TestOfferQueries(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferQueries:
         """Test OfferQueries
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferQueries`
         """
-        model = cashfree_pg.models.offer_queries.OfferQueries()  # noqa: E501
-        if include_optional :
+        model = OfferQueries()
+        if include_optional:
             return OfferQueries(
-                order_id = 'order_413462PK1RI1IwYB1X69LgzUQWiSxYDF', 
+                order_id = 'order_413462PK1RI1IwYB1X69LgzUQWiSxYDF',
                 amount = 100
             )
-        else :
+        else:
             return OfferQueries(
         )
         """

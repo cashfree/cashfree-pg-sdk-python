@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.card import Card  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.card import Card
 
 class TestCard(unittest.TestCase):
     """Card unit test stubs"""
@@ -29,33 +26,33 @@ class TestCard(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> Card:
         """Test Card
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `Card`
         """
-        model = cashfree_pg.models.card.Card()  # noqa: E501
-        if include_optional :
+        model = Card()
+        if include_optional:
             return Card(
-                channel = 'link', 
-                card_number = '', 
-                card_holder_name = '', 
-                card_expiry_mm = '', 
-                card_expiry_yy = '', 
-                card_cvv = '', 
-                instrument_id = '', 
-                cryptogram = '', 
-                token_requestor_id = '', 
-                token_reference_id = '', 
-                token_type = 'ISSUER_TOKEN', 
-                card_display = '', 
-                card_alias = '', 
-                card_bank_name = 'Kotak', 
+                channel = 'link',
+                card_number = '',
+                card_holder_name = '',
+                card_expiry_mm = '',
+                card_expiry_yy = '',
+                card_cvv = '',
+                instrument_id = '',
+                cryptogram = '',
+                token_requestor_id = '',
+                token_reference_id = '',
+                token_type = 'ISSUER_TOKEN',
+                card_display = '',
+                card_alias = '',
+                card_bank_name = 'Kotak',
                 emi_tenure = 56
             )
-        else :
+        else:
             return Card(
                 channel = 'link',
         )

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_entity import OrderEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_entity import OrderEntity
 
 class TestOrderEntity(unittest.TestCase):
     """OrderEntity unit test stubs"""
@@ -29,39 +26,39 @@ class TestOrderEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderEntity:
         """Test OrderEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderEntity`
         """
-        model = cashfree_pg.models.order_entity.OrderEntity()  # noqa: E501
-        if include_optional :
+        model = OrderEntity()
+        if include_optional:
             return OrderEntity(
-                cf_order_id = '', 
-                order_id = '', 
-                entity = '', 
-                order_currency = '', 
-                order_amount = 1.337, 
-                order_status = '', 
-                payment_session_id = '', 
-                order_expiry_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                order_note = '', 
-                created_at = '2022-08-16T14:45:38+05:30', 
+                cf_order_id = '',
+                order_id = '',
+                entity = '',
+                order_currency = '',
+                order_amount = 1.337,
+                order_status = '',
+                payment_session_id = '',
+                order_expiry_time = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                order_note = '',
+                created_at = '2022-08-16T14:45:38+05:30',
                 order_splits = [
                     {"vendor_id":"Vendor01","amount":100.12,"description":"order amount should be more than equal to 100.12"}
-                    ], 
-                customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_bank_account_number":"1518121112","customer_bank_ifsc":"XITI0000001","customer_bank_code":3333,"customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"}, 
+                    ],
+                customer_details = {"customer_id":"7112AAA812234","customer_email":"john@cashfree.com","customer_phone":"9908734801","customer_name":"John Doe","customer_bank_account_number":"1518121112","customer_bank_ifsc":"XITI0000001","customer_bank_code":3333,"customer_uid":"54deabb4-ba45-4a60-9e6a-9c016fe7ab10"},
                 order_meta = cashfree_pg.models.order_meta.OrderMeta(
                     return_url = 'https://www.cashfree.com/devstudio/thankyou', 
                     notify_url = 'https://example.com/cf_notify', 
-                    payment_methods = cc,dc,upi, ), 
-                order_tags = {"product":"Laptop","shipping_address":"123 Main St"}, 
+                    payment_methods = cc,dc,upi, ),
+                order_tags = {"product":"Laptop","shipping_address":"123 Main St"},
                 cart_details = cashfree_pg.models.cart_details_entity.CartDetailsEntity(
                     cart_id = '', )
             )
-        else :
+        else:
             return OrderEntity(
         )
         """

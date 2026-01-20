@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.customer_details_in_disputes_entity import CustomerDetailsInDisputesEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.customer_details_in_disputes_entity import CustomerDetailsInDisputesEntity
 
 class TestCustomerDetailsInDisputesEntity(unittest.TestCase):
     """CustomerDetailsInDisputesEntity unit test stubs"""
@@ -29,21 +26,21 @@ class TestCustomerDetailsInDisputesEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CustomerDetailsInDisputesEntity:
         """Test CustomerDetailsInDisputesEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CustomerDetailsInDisputesEntity`
         """
-        model = cashfree_pg.models.customer_details_in_disputes_entity.CustomerDetailsInDisputesEntity()  # noqa: E501
-        if include_optional :
+        model = CustomerDetailsInDisputesEntity()
+        if include_optional:
             return CustomerDetailsInDisputesEntity(
-                customer_name = '', 
-                customer_phone = '', 
+                customer_name = '',
+                customer_phone = '',
                 customer_email = ''
             )
-        else :
+        else:
             return CustomerDetailsInDisputesEntity(
         )
         """

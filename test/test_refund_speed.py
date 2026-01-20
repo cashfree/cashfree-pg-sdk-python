@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.refund_speed import RefundSpeed  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.refund_speed import RefundSpeed
 
 class TestRefundSpeed(unittest.TestCase):
     """RefundSpeed unit test stubs"""
@@ -29,22 +26,22 @@ class TestRefundSpeed(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> RefundSpeed:
         """Test RefundSpeed
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `RefundSpeed`
         """
-        model = cashfree_pg.models.refund_speed.RefundSpeed()  # noqa: E501
-        if include_optional :
+        model = RefundSpeed()
+        if include_optional:
             return RefundSpeed(
-                requested = '', 
-                accepted = '', 
-                processed = '', 
+                requested = '',
+                accepted = '',
+                processed = '',
                 message = ''
             )
-        else :
+        else:
             return RefundSpeed(
         )
         """

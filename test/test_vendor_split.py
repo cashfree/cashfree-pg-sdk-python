@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.vendor_split import VendorSplit  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.vendor_split import VendorSplit
 
 class TestVendorSplit(unittest.TestCase):
     """VendorSplit unit test stubs"""
@@ -29,24 +26,24 @@ class TestVendorSplit(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> VendorSplit:
         """Test VendorSplit
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `VendorSplit`
         """
-        model = cashfree_pg.models.vendor_split.VendorSplit()  # noqa: E501
-        if include_optional :
+        model = VendorSplit()
+        if include_optional:
             return VendorSplit(
-                vendor_id = '', 
-                amount = 1.337, 
-                percentage = 1.337, 
+                vendor_id = '',
+                amount = 1.337,
+                percentage = 1.337,
                 tags = {
                     'key' : None
                     }
             )
-        else :
+        else:
             return VendorSplit(
                 vendor_id = '',
         )

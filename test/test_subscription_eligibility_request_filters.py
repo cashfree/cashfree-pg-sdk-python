@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_eligibility_request_filters import SubscriptionEligibilityRequestFilters  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_eligibility_request_filters import SubscriptionEligibilityRequestFilters
 
 class TestSubscriptionEligibilityRequestFilters(unittest.TestCase):
     """SubscriptionEligibilityRequestFilters unit test stubs"""
@@ -29,21 +26,21 @@ class TestSubscriptionEligibilityRequestFilters(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionEligibilityRequestFilters:
         """Test SubscriptionEligibilityRequestFilters
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionEligibilityRequestFilters`
         """
-        model = cashfree_pg.models.subscription_eligibility_request_filters.SubscriptionEligibilityRequestFilters()  # noqa: E501
-        if include_optional :
+        model = SubscriptionEligibilityRequestFilters()
+        if include_optional:
             return SubscriptionEligibilityRequestFilters(
                 payment_methods = [
                     ''
                     ]
             )
-        else :
+        else:
             return SubscriptionEligibilityRequestFilters(
         )
         """

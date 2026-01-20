@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_validations import OfferValidations  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_validations import OfferValidations
 
 class TestOfferValidations(unittest.TestCase):
     """OfferValidations unit test stubs"""
@@ -29,21 +26,21 @@ class TestOfferValidations(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferValidations:
         """Test OfferValidations
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferValidations`
         """
-        model = cashfree_pg.models.offer_validations.OfferValidations()  # noqa: E501
-        if include_optional :
+        model = OfferValidations()
+        if include_optional:
             return OfferValidations(
-                min_amount = 1, 
-                max_allowed = 1, 
+                min_amount = 1,
+                max_allowed = 1,
                 payment_method = {"wallet":{"issuer":"paytm"}}
             )
-        else :
+        else:
             return OfferValidations(
                 max_allowed = 1,
                 payment_method = {"wallet":{"issuer":"paytm"}},

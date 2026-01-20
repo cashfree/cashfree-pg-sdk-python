@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.demap_soundbox_vpa_request import DemapSoundboxVpaRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.demap_soundbox_vpa_request import DemapSoundboxVpaRequest
 
 class TestDemapSoundboxVpaRequest(unittest.TestCase):
     """DemapSoundboxVpaRequest unit test stubs"""
@@ -29,20 +26,20 @@ class TestDemapSoundboxVpaRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> DemapSoundboxVpaRequest:
         """Test DemapSoundboxVpaRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `DemapSoundboxVpaRequest`
         """
-        model = cashfree_pg.models.demap_soundbox_vpa_request.DemapSoundboxVpaRequest()  # noqa: E501
-        if include_optional :
+        model = DemapSoundboxVpaRequest()
+        if include_optional:
             return DemapSoundboxVpaRequest(
-                cf_terminal_id = '', 
+                cf_terminal_id = '',
                 device_serial_no = ''
             )
-        else :
+        else:
             return DemapSoundboxVpaRequest(
                 cf_terminal_id = '',
                 device_serial_no = '',

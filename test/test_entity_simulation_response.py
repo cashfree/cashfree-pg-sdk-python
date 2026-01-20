@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.entity_simulation_response import EntitySimulationResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.entity_simulation_response import EntitySimulationResponse
 
 class TestEntitySimulationResponse(unittest.TestCase):
     """EntitySimulationResponse unit test stubs"""
@@ -29,20 +26,20 @@ class TestEntitySimulationResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EntitySimulationResponse:
         """Test EntitySimulationResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EntitySimulationResponse`
         """
-        model = cashfree_pg.models.entity_simulation_response.EntitySimulationResponse()  # noqa: E501
-        if include_optional :
+        model = EntitySimulationResponse()
+        if include_optional:
             return EntitySimulationResponse(
-                payment_status = '', 
+                payment_status = '',
                 payment_error_code = ''
             )
-        else :
+        else:
             return EntitySimulationResponse(
                 payment_status = '',
         )

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.terminal_payment_entity_payment_method import TerminalPaymentEntityPaymentMethod  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.terminal_payment_entity_payment_method import TerminalPaymentEntityPaymentMethod
 
 class TestTerminalPaymentEntityPaymentMethod(unittest.TestCase):
     """TerminalPaymentEntityPaymentMethod unit test stubs"""
@@ -29,15 +26,15 @@ class TestTerminalPaymentEntityPaymentMethod(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> TerminalPaymentEntityPaymentMethod:
         """Test TerminalPaymentEntityPaymentMethod
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TerminalPaymentEntityPaymentMethod`
         """
-        model = cashfree_pg.models.terminal_payment_entity_payment_method.TerminalPaymentEntityPaymentMethod()  # noqa: E501
-        if include_optional :
+        model = TerminalPaymentEntityPaymentMethod()
+        if include_optional:
             return TerminalPaymentEntityPaymentMethod(
                 card = cashfree_pg.models.payment_method_card_in_payments_entity_card.PaymentMethodCardInPaymentsEntity_card(
                     channel = '', 
@@ -46,28 +43,28 @@ class TestTerminalPaymentEntityPaymentMethod(unittest.TestCase):
                     card_type = '', 
                     card_country = '', 
                     card_bank_name = '', 
-                    card_network_reference_id = '', ), 
+                    card_network_reference_id = '', ),
                 netbanking = cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking.PaymentMethodNetBankingInPaymentsEntity_netbanking(
                     channel = '', 
                     netbanking_bank_code = 56, 
                     netbanking_bank_name = '', 
                     netbanking_ifsc = '', 
-                    netbanking_account_number = '', ), 
+                    netbanking_account_number = '', ),
                 upi = cashfree_pg.models.payment_method_upiin_payments_entity_upi.PaymentMethodUPIInPaymentsEntity_upi(
                     channel = '', 
-                    upi_id = '', ), 
+                    upi_id = '', ),
                 app = cashfree_pg.models.payment_method_app_in_payments_entity_app.PaymentMethodAppInPaymentsEntity_app(
                     channel = '', 
                     provider = '', 
-                    phone = '', ), 
+                    phone = '', ),
                 cardless_emi = cashfree_pg.models.payment_method_app_in_payments_entity_app.PaymentMethodAppInPaymentsEntity_app(
                     channel = '', 
                     provider = '', 
-                    phone = '', ), 
+                    phone = '', ),
                 paylater = cashfree_pg.models.payment_method_app_in_payments_entity_app.PaymentMethodAppInPaymentsEntity_app(
                     channel = '', 
                     provider = '', 
-                    phone = '', ), 
+                    phone = '', ),
                 emi = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi.PaymentMethodCardEMIInPaymentsEntity_emi(
                     channel = '', 
                     card_number = '', 
@@ -80,14 +77,14 @@ class TestTerminalPaymentEntityPaymentMethod(unittest.TestCase):
                     emi_details = cashfree_pg.models.payment_method_card_emiin_payments_entity_emi_emi_details.PaymentMethodCardEMIInPaymentsEntity_emi_emi_details(
                         emi_amount = 1.337, 
                         emi_tenure = 1.337, 
-                        emi_interest = 1.337, ), ), 
+                        emi_interest = 1.337, ), ),
                 banktransfer = cashfree_pg.models.payment_method_bank_transfer_in_payments_entity_banktransfer.PaymentMethodBankTransferInPaymentsEntity_banktransfer(
                     channel = '', 
                     banktransfer_bank_name = '', 
                     banktransfer_ifsc = '', 
                     banktransfer_account_number = '', )
             )
-        else :
+        else:
             return TerminalPaymentEntityPaymentMethod(
         )
         """

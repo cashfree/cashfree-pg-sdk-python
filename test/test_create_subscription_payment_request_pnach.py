@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_payment_request_pnach import CreateSubscriptionPaymentRequestPnach
 
 class TestCreateSubscriptionPaymentRequestPnach(unittest.TestCase):
     """CreateSubscriptionPaymentRequestPnach unit test stubs"""
@@ -29,26 +26,26 @@ class TestCreateSubscriptionPaymentRequestPnach(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionPaymentRequestPnach:
         """Test CreateSubscriptionPaymentRequestPnach
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionPaymentRequestPnach`
         """
-        model = cashfree_pg.models.create_subscription_payment_request_pnach.CreateSubscriptionPaymentRequestPnach()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionPaymentRequestPnach()
+        if include_optional:
             return CreateSubscriptionPaymentRequestPnach(
-                channel = '', 
-                account_holder_name = '', 
-                account_number = '', 
-                account_bank_code = '', 
-                account_type = '', 
-                account_ifsc = '', 
-                mandate_creation_date = '', 
+                channel = '',
+                account_holder_name = '',
+                account_number = '',
+                account_bank_code = '',
+                account_type = '',
+                account_ifsc = '',
+                mandate_creation_date = '',
                 mandate_start_date = ''
             )
-        else :
+        else:
             return CreateSubscriptionPaymentRequestPnach(
         )
         """

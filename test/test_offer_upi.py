@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_upi import OfferUPI  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_upi import OfferUPI
 
 class TestOfferUPI(unittest.TestCase):
     """OfferUPI unit test stubs"""
@@ -29,19 +26,19 @@ class TestOfferUPI(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferUPI:
         """Test OfferUPI
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferUPI`
         """
-        model = cashfree_pg.models.offer_upi.OfferUPI()  # noqa: E501
-        if include_optional :
+        model = OfferUPI()
+        if include_optional:
             return OfferUPI(
                 upi = cashfree_pg.models.upi_offer.UPI Offer()
             )
-        else :
+        else:
             return OfferUPI(
                 upi = cashfree_pg.models.upi_offer.UPI Offer(),
         )

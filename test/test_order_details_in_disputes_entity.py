@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_details_in_disputes_entity import OrderDetailsInDisputesEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_details_in_disputes_entity import OrderDetailsInDisputesEntity
 
 class TestOrderDetailsInDisputesEntity(unittest.TestCase):
     """OrderDetailsInDisputesEntity unit test stubs"""
@@ -29,24 +26,24 @@ class TestOrderDetailsInDisputesEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderDetailsInDisputesEntity:
         """Test OrderDetailsInDisputesEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderDetailsInDisputesEntity`
         """
-        model = cashfree_pg.models.order_details_in_disputes_entity.OrderDetailsInDisputesEntity()  # noqa: E501
-        if include_optional :
+        model = OrderDetailsInDisputesEntity()
+        if include_optional:
             return OrderDetailsInDisputesEntity(
-                order_id = '', 
-                order_currency = '', 
-                order_amount = 1.337, 
-                cf_payment_id = '', 
-                payment_currency = '', 
+                order_id = '',
+                order_currency = '',
+                order_amount = 1.337,
+                cf_payment_id = '',
+                payment_currency = '',
                 payment_amount = 1.337
             )
-        else :
+        else:
             return OrderDetailsInDisputesEntity(
         )
         """

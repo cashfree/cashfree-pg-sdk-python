@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.shipment_details import ShipmentDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.shipment_details import ShipmentDetails
 
 class TestShipmentDetails(unittest.TestCase):
     """ShipmentDetails unit test stubs"""
@@ -29,25 +26,25 @@ class TestShipmentDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ShipmentDetails:
         """Test ShipmentDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ShipmentDetails`
         """
-        model = cashfree_pg.models.shipment_details.ShipmentDetails()  # noqa: E501
-        if include_optional :
+        model = ShipmentDetails()
+        if include_optional:
             return ShipmentDetails(
-                tracking_company = 'DHL', 
+                tracking_company = 'DHL',
                 tracking_urls = [
                     'https://dhl.com/track/123456'
-                    ], 
+                    ],
                 tracking_numbers = [
                     'TRACK654321'
                     ]
             )
-        else :
+        else:
             return ShipmentDetails(
                 tracking_company = 'DHL',
                 tracking_urls = [

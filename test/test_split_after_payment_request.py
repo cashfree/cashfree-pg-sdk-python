@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.split_after_payment_request import SplitAfterPaymentRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.split_after_payment_request import SplitAfterPaymentRequest
 
 class TestSplitAfterPaymentRequest(unittest.TestCase):
     """SplitAfterPaymentRequest unit test stubs"""
@@ -29,15 +26,15 @@ class TestSplitAfterPaymentRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SplitAfterPaymentRequest:
         """Test SplitAfterPaymentRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SplitAfterPaymentRequest`
         """
-        model = cashfree_pg.models.split_after_payment_request.SplitAfterPaymentRequest()  # noqa: E501
-        if include_optional :
+        model = SplitAfterPaymentRequest()
+        if include_optional:
             return SplitAfterPaymentRequest(
                 split = [
                     cashfree_pg.models.split_after_payment_request_split_inner.SplitAfterPaymentRequest_split_inner(
@@ -47,10 +44,10 @@ class TestSplitAfterPaymentRequest(unittest.TestCase):
                         tags = {
                             'key' : '0'
                             }, )
-                    ], 
+                    ],
                 disable_split = True
             )
-        else :
+        else:
             return SplitAfterPaymentRequest(
                 split = [
                     cashfree_pg.models.split_after_payment_request_split_inner.SplitAfterPaymentRequest_split_inner(

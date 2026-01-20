@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.static_qr_response_entity import StaticQrResponseEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.static_qr_response_entity import StaticQrResponseEntity
 
 class TestStaticQrResponseEntity(unittest.TestCase):
     """StaticQrResponseEntity unit test stubs"""
@@ -29,22 +26,22 @@ class TestStaticQrResponseEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> StaticQrResponseEntity:
         """Test StaticQrResponseEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `StaticQrResponseEntity`
         """
-        model = cashfree_pg.models.static_qr_response_entity.StaticQrResponseEntity()  # noqa: E501
-        if include_optional :
+        model = StaticQrResponseEntity()
+        if include_optional:
             return StaticQrResponseEntity(
-                cf_terminal_id = 56, 
-                vpa = '', 
-                status = '', 
+                cf_terminal_id = 56,
+                vpa = '',
+                status = '',
                 qr_code = ''
             )
-        else :
+        else:
             return StaticQrResponseEntity(
         )
         """

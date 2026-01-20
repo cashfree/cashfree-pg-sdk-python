@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_nb_netbanking import OfferNBNetbanking  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_nb_netbanking import OfferNBNetbanking
 
 class TestOfferNBNetbanking(unittest.TestCase):
     """OfferNBNetbanking unit test stubs"""
@@ -29,19 +26,19 @@ class TestOfferNBNetbanking(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferNBNetbanking:
         """Test OfferNBNetbanking
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferNBNetbanking`
         """
-        model = cashfree_pg.models.offer_nb_netbanking.OfferNBNetbanking()  # noqa: E501
-        if include_optional :
+        model = OfferNBNetbanking()
+        if include_optional:
             return OfferNBNetbanking(
                 bank_name = 'all'
             )
-        else :
+        else:
             return OfferNBNetbanking(
         )
         """

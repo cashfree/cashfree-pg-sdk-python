@@ -15,45 +15,43 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.token_vault_api import TokenVaultApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.token_vault_api import TokenVaultApi
 
 
 class TestTokenVaultApi(unittest.TestCase):
     """TokenVaultApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.token_vault_api.TokenVaultApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = TokenVaultApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_customer_delete_instrument(self):
+    def test_p_g_customer_delete_instrument(self) -> None:
         """Test case for p_g_customer_delete_instrument
 
-        Delete Saved Card Instrument  # noqa: E501
+        Delete Saved Card Instrument
         """
         pass
 
-    def test_p_g_customer_fetch_instrument(self):
+    def test_p_g_customer_fetch_instrument(self) -> None:
         """Test case for p_g_customer_fetch_instrument
 
-        Fetch Specific Saved Card Instrument  # noqa: E501
+        Fetch Specific Saved Card Instrument
         """
         pass
 
-    def test_p_g_customer_fetch_instruments(self):
+    def test_p_g_customer_fetch_instruments(self) -> None:
         """Test case for p_g_customer_fetch_instruments
 
-        Fetch All Saved Card Instrument  # noqa: E501
+        Fetch All Saved Card Instrument
         """
         pass
 
-    def test_p_g_customer_instruments_fetch_cryptogram(self):
+    def test_p_g_customer_instruments_fetch_cryptogram(self) -> None:
         """Test case for p_g_customer_instruments_fetch_cryptogram
 
-        Fetch cryptogram for a saved card instrument  # noqa: E501
+        Fetch cryptogram for a saved card instrument
         """
         pass
 

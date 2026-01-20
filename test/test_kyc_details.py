@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.kyc_details import KycDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.kyc_details import KycDetails
 
 class TestKycDetails(unittest.TestCase):
     """KycDetails unit test stubs"""
@@ -29,27 +26,27 @@ class TestKycDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> KycDetails:
         """Test KycDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `KycDetails`
         """
-        model = cashfree_pg.models.kyc_details.KycDetails()  # noqa: E501
-        if include_optional :
+        model = KycDetails()
+        if include_optional:
             return KycDetails(
-                account_type = '', 
-                business_type = '', 
-                uidai = 1.337, 
-                gst = '', 
-                cin = '', 
-                pan = '', 
-                passport_number = '', 
-                driving_license = '', 
+                account_type = '',
+                business_type = '',
+                uidai = 1.337,
+                gst = '',
+                cin = '',
+                pan = '',
+                passport_number = '',
+                driving_license = '',
                 voter_id = ''
             )
-        else :
+        else:
             return KycDetails(
         )
         """

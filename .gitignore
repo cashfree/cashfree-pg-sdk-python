@@ -62,12 +62,5 @@ docs/_build/
 # PyBuilder
 target/
 
-#Ipython Notebook
+# Ipython Notebook
 .ipynb_checkpoints
-
-cashfree_pg/api
-.DS_Store
-__init__.py
-api_client.py
-api_response.py
-docs/

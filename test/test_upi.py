@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.upi import Upi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.upi import Upi
 
 class TestUpi(unittest.TestCase):
     """Upi unit test stubs"""
@@ -29,24 +26,24 @@ class TestUpi(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> Upi:
         """Test Upi
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `Upi`
         """
-        model = cashfree_pg.models.upi.Upi()  # noqa: E501
-        if include_optional :
+        model = Upi()
+        if include_optional:
             return Upi(
-                channel = 'link', 
-                upi_id = '', 
-                upi_redirect_url = True, 
-                upi_expiry_minutes = 1.337, 
-                authorize_only = True, 
+                channel = 'link',
+                upi_id = '',
+                upi_redirect_url = True,
+                upi_expiry_minutes = 1.337,
+                authorize_only = True,
                 authorization = {"authorization":{"approve_by":"2022-07-02T10:20:12+05:30","start_time":"2022-09-21T12:34:34Z","end_time":"2022-10-22T12:34:34Z"}}
             )
-        else :
+        else:
             return Upi(
                 channel = 'link',
         )

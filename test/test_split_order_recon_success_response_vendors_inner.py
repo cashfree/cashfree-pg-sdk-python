@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.split_order_recon_success_response_vendors_inner import SplitOrderReconSuccessResponseVendorsInner  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.split_order_recon_success_response_vendors_inner import SplitOrderReconSuccessResponseVendorsInner
 
 class TestSplitOrderReconSuccessResponseVendorsInner(unittest.TestCase):
     """SplitOrderReconSuccessResponseVendorsInner unit test stubs"""
@@ -29,22 +26,22 @@ class TestSplitOrderReconSuccessResponseVendorsInner(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SplitOrderReconSuccessResponseVendorsInner:
         """Test SplitOrderReconSuccessResponseVendorsInner
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SplitOrderReconSuccessResponseVendorsInner`
         """
-        model = cashfree_pg.models.split_order_recon_success_response_vendors_inner.SplitOrderReconSuccessResponseVendorsInner()  # noqa: E501
-        if include_optional :
+        model = SplitOrderReconSuccessResponseVendorsInner()
+        if include_optional:
             return SplitOrderReconSuccessResponseVendorsInner(
-                vendor_id = '', 
-                settlement_id = 56, 
-                settlement_amount = 1.337, 
+                vendor_id = '',
+                settlement_id = 56,
+                settlement_amount = 1.337,
                 settlement_eligibility_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
-        else :
+        else:
             return SplitOrderReconSuccessResponseVendorsInner(
         )
         """

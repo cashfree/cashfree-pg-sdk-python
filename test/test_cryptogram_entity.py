@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.cryptogram_entity import CryptogramEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.cryptogram_entity import CryptogramEntity
 
 class TestCryptogramEntity(unittest.TestCase):
     """CryptogramEntity unit test stubs"""
@@ -29,25 +26,25 @@ class TestCryptogramEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CryptogramEntity:
         """Test CryptogramEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CryptogramEntity`
         """
-        model = cashfree_pg.models.cryptogram_entity.CryptogramEntity()  # noqa: E501
-        if include_optional :
+        model = CryptogramEntity()
+        if include_optional:
             return CryptogramEntity(
-                instrument_id = '', 
-                token_requestor_id = '', 
-                card_number = '', 
-                card_expiry_mm = '', 
-                card_expiry_yy = '', 
-                cryptogram = '', 
+                instrument_id = '',
+                token_requestor_id = '',
+                card_number = '',
+                card_expiry_mm = '',
+                card_expiry_yy = '',
+                cryptogram = '',
                 card_display = ''
             )
-        else :
+        else:
             return CryptogramEntity(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.upload_pnach_image_response import UploadPnachImageResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.upload_pnach_image_response import UploadPnachImageResponse
 
 class TestUploadPnachImageResponse(unittest.TestCase):
     """UploadPnachImageResponse unit test stubs"""
@@ -29,22 +26,22 @@ class TestUploadPnachImageResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UploadPnachImageResponse:
         """Test UploadPnachImageResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UploadPnachImageResponse`
         """
-        model = cashfree_pg.models.upload_pnach_image_response.UploadPnachImageResponse()  # noqa: E501
-        if include_optional :
+        model = UploadPnachImageResponse()
+        if include_optional:
             return UploadPnachImageResponse(
-                payment_id = '', 
-                authorization_status = '', 
-                action = '', 
+                payment_id = '',
+                authorization_status = '',
+                action = '',
                 payment_message = ''
             )
-        else :
+        else:
             return UploadPnachImageResponse(
         )
         """

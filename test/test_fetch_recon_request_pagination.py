@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.fetch_recon_request_pagination import FetchReconRequestPagination  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.fetch_recon_request_pagination import FetchReconRequestPagination
 
 class TestFetchReconRequestPagination(unittest.TestCase):
     """FetchReconRequestPagination unit test stubs"""
@@ -29,20 +26,20 @@ class TestFetchReconRequestPagination(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> FetchReconRequestPagination:
         """Test FetchReconRequestPagination
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `FetchReconRequestPagination`
         """
-        model = cashfree_pg.models.fetch_recon_request_pagination.FetchReconRequestPagination()  # noqa: E501
-        if include_optional :
+        model = FetchReconRequestPagination()
+        if include_optional:
             return FetchReconRequestPagination(
-                limit = 56, 
+                limit = 56,
                 cursor = ''
             )
-        else :
+        else:
             return FetchReconRequestPagination(
                 limit = 56,
         )

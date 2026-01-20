@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.order_create_refund_request import OrderCreateRefundRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.order_create_refund_request import OrderCreateRefundRequest
 
 class TestOrderCreateRefundRequest(unittest.TestCase):
     """OrderCreateRefundRequest unit test stubs"""
@@ -29,25 +26,25 @@ class TestOrderCreateRefundRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OrderCreateRefundRequest:
         """Test OrderCreateRefundRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OrderCreateRefundRequest`
         """
-        model = cashfree_pg.models.order_create_refund_request.OrderCreateRefundRequest()  # noqa: E501
-        if include_optional :
+        model = OrderCreateRefundRequest()
+        if include_optional:
             return OrderCreateRefundRequest(
-                refund_amount = 1.337, 
-                refund_id = '012', 
-                refund_note = '012', 
-                refund_speed = 'STANDARD', 
+                refund_amount = 1.337,
+                refund_id = '012',
+                refund_note = '012',
+                refund_speed = 'STANDARD',
                 refund_splits = [
                     {"vendor_id":"Vendor01","amount":100.12,"description":"order amount should be more than equal to 100.12"}
                     ]
             )
-        else :
+        else:
             return OrderCreateRefundRequest(
                 refund_amount = 1.337,
                 refund_id = '012',

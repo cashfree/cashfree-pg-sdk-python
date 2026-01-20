@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.extended_cart_details import ExtendedCartDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.extended_cart_details import ExtendedCartDetails
 
 class TestExtendedCartDetails(unittest.TestCase):
     """ExtendedCartDetails unit test stubs"""
@@ -29,17 +26,17 @@ class TestExtendedCartDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> ExtendedCartDetails:
         """Test ExtendedCartDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `ExtendedCartDetails`
         """
-        model = cashfree_pg.models.extended_cart_details.ExtendedCartDetails()  # noqa: E501
-        if include_optional :
+        model = ExtendedCartDetails()
+        if include_optional:
             return ExtendedCartDetails(
-                name = '', 
+                name = '',
                 items = [
                     cashfree_pg.models.cart_item.CartItem(
                         item_id = '', 
@@ -56,7 +53,7 @@ class TestExtendedCartDetails(unittest.TestCase):
                         item_quantity = 1.337, )
                     ]
             )
-        else :
+        else:
             return ExtendedCartDetails(
         )
         """

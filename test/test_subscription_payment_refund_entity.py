@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_payment_refund_entity import SubscriptionPaymentRefundEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_payment_refund_entity import SubscriptionPaymentRefundEntity
 
 class TestSubscriptionPaymentRefundEntity(unittest.TestCase):
     """SubscriptionPaymentRefundEntity unit test stubs"""
@@ -29,26 +26,26 @@ class TestSubscriptionPaymentRefundEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionPaymentRefundEntity:
         """Test SubscriptionPaymentRefundEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionPaymentRefundEntity`
         """
-        model = cashfree_pg.models.subscription_payment_refund_entity.SubscriptionPaymentRefundEntity()  # noqa: E501
-        if include_optional :
+        model = SubscriptionPaymentRefundEntity()
+        if include_optional:
             return SubscriptionPaymentRefundEntity(
-                payment_id = '', 
-                cf_payment_id = '', 
-                refund_id = '', 
-                cf_refund_id = '', 
-                refund_amount = 1.337, 
-                refund_note = '', 
-                refund_speed = '', 
+                payment_id = '',
+                cf_payment_id = '',
+                refund_id = '',
+                cf_refund_id = '',
+                refund_amount = 1.337,
+                refund_note = '',
+                refund_speed = '',
                 refund_status = ''
             )
-        else :
+        else:
             return SubscriptionPaymentRefundEntity(
         )
         """

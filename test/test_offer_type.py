@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_type import OfferType  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_type import OfferType
 
 class TestOfferType(unittest.TestCase):
     """OfferType unit test stubs"""

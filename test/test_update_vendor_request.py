@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.update_vendor_request import UpdateVendorRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.update_vendor_request import UpdateVendorRequest
 
 class TestUpdateVendorRequest(unittest.TestCase):
     """UpdateVendorRequest unit test stubs"""
@@ -29,34 +26,34 @@ class TestUpdateVendorRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> UpdateVendorRequest:
         """Test UpdateVendorRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `UpdateVendorRequest`
         """
-        model = cashfree_pg.models.update_vendor_request.UpdateVendorRequest()  # noqa: E501
-        if include_optional :
+        model = UpdateVendorRequest()
+        if include_optional:
             return UpdateVendorRequest(
-                status = '', 
-                name = '', 
-                email = '', 
-                phone = '', 
-                verify_account = True, 
-                dashboard_access = True, 
-                schedule_option = 1.337, 
+                status = '',
+                name = '',
+                email = '',
+                phone = '',
+                verify_account = True,
+                dashboard_access = True,
+                schedule_option = 1.337,
                 bank = [
                     {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
+                    ],
                 upi = [
                     {"vpa":"success@upi","account_holder":"JOHN DOE"}
-                    ], 
+                    ],
                 kyc_details = [
                     {"account_type":"BUSINESS","business_type":"NBFC","uidai":753624181019,"gst":"11AAAAA1111A1Z0","cin":"L00000Aa0000AaA000000","pan":"BIAPA2934N","passport_number":"L6892603"}
                     ]
             )
-        else :
+        else:
             return UpdateVendorRequest(
                 status = '',
                 name = '',

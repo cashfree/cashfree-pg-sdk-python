@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_customer_request import CreateCustomerRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_customer_request import CreateCustomerRequest
 
 class TestCreateCustomerRequest(unittest.TestCase):
     """CreateCustomerRequest unit test stubs"""
@@ -29,21 +26,21 @@ class TestCreateCustomerRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateCustomerRequest:
         """Test CreateCustomerRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateCustomerRequest`
         """
-        model = cashfree_pg.models.create_customer_request.CreateCustomerRequest()  # noqa: E501
-        if include_optional :
+        model = CreateCustomerRequest()
+        if include_optional:
             return CreateCustomerRequest(
-                customer_phone = '9999999999', 
-                customer_email = 'example@test.com', 
+                customer_phone = '9999999999',
+                customer_email = 'example@test.com',
                 customer_name = 'YourCustomer'
             )
-        else :
+        else:
             return CreateCustomerRequest(
                 customer_phone = '9999999999',
         )

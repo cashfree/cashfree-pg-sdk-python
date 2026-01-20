@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.authorization_details import AuthorizationDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.authorization_details import AuthorizationDetails
 
 class TestAuthorizationDetails(unittest.TestCase):
     """AuthorizationDetails unit test stubs"""
@@ -29,25 +26,25 @@ class TestAuthorizationDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> AuthorizationDetails:
         """Test AuthorizationDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `AuthorizationDetails`
         """
-        model = cashfree_pg.models.authorization_details.AuthorizationDetails()  # noqa: E501
-        if include_optional :
+        model = AuthorizationDetails()
+        if include_optional:
             return AuthorizationDetails(
-                authorization_amount = 1.337, 
-                authorization_amount_refund = True, 
-                authorization_reference = '', 
-                authorization_time = '', 
-                authorization_status = '', 
-                payment_id = '', 
+                authorization_amount = 1.337,
+                authorization_amount_refund = True,
+                authorization_reference = '',
+                authorization_time = '',
+                authorization_status = '',
+                payment_id = '',
                 payment_method = ''
             )
-        else :
+        else:
             return AuthorizationDetails(
         )
         """

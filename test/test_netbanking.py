@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.netbanking import Netbanking  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.netbanking import Netbanking
 
 class TestNetbanking(unittest.TestCase):
     """Netbanking unit test stubs"""
@@ -29,21 +26,21 @@ class TestNetbanking(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> Netbanking:
         """Test Netbanking
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `Netbanking`
         """
-        model = cashfree_pg.models.netbanking.Netbanking()  # noqa: E501
-        if include_optional :
+        model = Netbanking()
+        if include_optional:
             return Netbanking(
-                channel = '', 
-                netbanking_bank_code = 56, 
+                channel = '',
+                netbanking_bank_code = 56,
                 netbanking_bank_name = 'AEIOT'
             )
-        else :
+        else:
             return Netbanking(
                 channel = '',
         )

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.plan_entity import PlanEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.plan_entity import PlanEntity
 
 class TestPlanEntity(unittest.TestCase):
     """PlanEntity unit test stubs"""
@@ -29,29 +26,29 @@ class TestPlanEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PlanEntity:
         """Test PlanEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PlanEntity`
         """
-        model = cashfree_pg.models.plan_entity.PlanEntity()  # noqa: E501
-        if include_optional :
+        model = PlanEntity()
+        if include_optional:
             return PlanEntity(
-                plan_currency = '', 
-                plan_id = '', 
-                plan_interval_type = '', 
-                plan_intervals = 56, 
-                plan_max_amount = 1.337, 
-                plan_max_cycles = 56, 
-                plan_name = '', 
-                plan_note = '', 
-                plan_recurring_amount = 1.337, 
-                plan_status = '', 
+                plan_currency = '',
+                plan_id = '',
+                plan_interval_type = '',
+                plan_intervals = 56,
+                plan_max_amount = 1.337,
+                plan_max_cycles = 56,
+                plan_name = '',
+                plan_note = '',
+                plan_recurring_amount = 1.337,
+                plan_status = '',
                 plan_type = ''
             )
-        else :
+        else:
             return PlanEntity(
         )
         """

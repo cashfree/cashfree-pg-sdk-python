@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_link_request import CreateLinkRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_link_request import CreateLinkRequest
 
 class TestCreateLinkRequest(unittest.TestCase):
     """CreateLinkRequest unit test stubs"""
@@ -29,31 +26,31 @@ class TestCreateLinkRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateLinkRequest:
         """Test CreateLinkRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateLinkRequest`
         """
-        model = cashfree_pg.models.create_link_request.CreateLinkRequest()  # noqa: E501
-        if include_optional :
+        model = CreateLinkRequest()
+        if include_optional:
             return CreateLinkRequest(
-                link_id = '', 
-                link_amount = 1.337, 
-                link_currency = '', 
-                link_purpose = '', 
-                customer_details = {"customer_name":"John Doe","customer_phone":"9999999999","customer_email":"john@cashfree.com","customer_bank_account_number":11111111111,"customer_bank_ifsc":"SBIN0001882","customer_bank_code":7001}, 
-                link_partial_payments = True, 
-                link_minimum_partial_amount = 1.337, 
-                link_expiry_time = '', 
-                link_notify = {"send_sms":false,"send_email":true}, 
-                link_auto_reminders = True, 
-                link_notes = {"key_1":"value_1","key_2":"value_2"}, 
-                link_meta = {"notify_url":"https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net","upi_intent":false,"return_url":"https://www.cashfree.com/devstudio/thankyou"}, 
+                link_id = '',
+                link_amount = 1.337,
+                link_currency = '',
+                link_purpose = '',
+                customer_details = {"customer_name":"John Doe","customer_phone":"9999999999","customer_email":"john@cashfree.com","customer_bank_account_number":11111111111,"customer_bank_ifsc":"SBIN0001882","customer_bank_code":7001},
+                link_partial_payments = True,
+                link_minimum_partial_amount = 1.337,
+                link_expiry_time = '',
+                link_notify = {"send_sms":false,"send_email":true},
+                link_auto_reminders = True,
+                link_notes = {"key_1":"value_1","key_2":"value_2"},
+                link_meta = {"notify_url":"https://ee08e626ecd88c61c85f5c69c0418cb5.m.pipedream.net","upi_intent":false,"return_url":"https://www.cashfree.com/devstudio/thankyou"},
                 order_splits = [{"amount":10,"vendor":"john"}]
             )
-        else :
+        else:
             return CreateLinkRequest(
                 link_id = '',
                 link_amount = 1.337,

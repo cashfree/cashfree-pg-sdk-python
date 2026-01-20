@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_method_card_in_payments_entity_card import PaymentMethodCardInPaymentsEntityCard  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_method_card_in_payments_entity_card import PaymentMethodCardInPaymentsEntityCard
 
 class TestPaymentMethodCardInPaymentsEntityCard(unittest.TestCase):
     """PaymentMethodCardInPaymentsEntityCard unit test stubs"""
@@ -29,25 +26,25 @@ class TestPaymentMethodCardInPaymentsEntityCard(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentMethodCardInPaymentsEntityCard:
         """Test PaymentMethodCardInPaymentsEntityCard
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentMethodCardInPaymentsEntityCard`
         """
-        model = cashfree_pg.models.payment_method_card_in_payments_entity_card.PaymentMethodCardInPaymentsEntityCard()  # noqa: E501
-        if include_optional :
+        model = PaymentMethodCardInPaymentsEntityCard()
+        if include_optional:
             return PaymentMethodCardInPaymentsEntityCard(
-                channel = '', 
-                card_number = '', 
-                card_network = '', 
-                card_type = '', 
-                card_country = '', 
-                card_bank_name = '', 
+                channel = '',
+                card_number = '',
+                card_network = '',
+                card_type = '',
+                card_country = '',
+                card_bank_name = '',
                 card_network_reference_id = ''
             )
-        else :
+        else:
             return PaymentMethodCardInPaymentsEntityCard(
         )
         """

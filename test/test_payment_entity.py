@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_entity import PaymentEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_entity import PaymentEntity
 
 class TestPaymentEntity(unittest.TestCase):
     """PaymentEntity unit test stubs"""
@@ -29,35 +26,35 @@ class TestPaymentEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentEntity:
         """Test PaymentEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentEntity`
         """
-        model = cashfree_pg.models.payment_entity.PaymentEntity()  # noqa: E501
-        if include_optional :
+        model = PaymentEntity()
+        if include_optional:
             return PaymentEntity(
-                cf_payment_id = '', 
-                order_id = '', 
-                entity = '', 
-                error_details = {"error_code":"TRANSACTION_DECLINED","error_description":"issuer bank or payment service provider declined the transaction","error_reason":"auth_declined","error_source":"customer","error_code_raw":"ZM","error_description_raw":"INVALID / INCORRECT MPIN","error_subcode_raw":""}, 
-                is_captured = True, 
-                order_amount = 1.337, 
-                payment_group = '', 
-                payment_currency = '', 
-                payment_amount = 1.337, 
-                payment_time = '', 
-                payment_completion_time = '', 
-                payment_status = 'SUCCESS', 
-                payment_message = '', 
-                bank_reference = '', 
-                auth_id = '', 
-                authorization = {"action":"CAPTURE","status":"PENDING","captured_amount":100,"start_time":"2022-02-09T18:04:34+05:30","end_time":"2022-02-19T18:04:34+05:30","approve_by":"2022-02-09T18:04:34+05:30","action_reference":"6595231908096894505959","action_time":"2022-08-03T16:09:51"}, 
+                cf_payment_id = '',
+                order_id = '',
+                entity = '',
+                error_details = {"error_code":"TRANSACTION_DECLINED","error_description":"issuer bank or payment service provider declined the transaction","error_reason":"auth_declined","error_source":"customer","error_code_raw":"ZM","error_description_raw":"INVALID / INCORRECT MPIN","error_subcode_raw":""},
+                is_captured = True,
+                order_amount = 1.337,
+                payment_group = '',
+                payment_currency = '',
+                payment_amount = 1.337,
+                payment_time = '',
+                payment_completion_time = '',
+                payment_status = 'SUCCESS',
+                payment_message = '',
+                bank_reference = '',
+                auth_id = '',
+                authorization = {"action":"CAPTURE","status":"PENDING","captured_amount":100,"start_time":"2022-02-09T18:04:34+05:30","end_time":"2022-02-19T18:04:34+05:30","approve_by":"2022-02-09T18:04:34+05:30","action_reference":"6595231908096894505959","action_time":"2022-08-03T16:09:51"},
                 payment_method = None
             )
-        else :
+        else:
             return PaymentEntity(
         )
         """

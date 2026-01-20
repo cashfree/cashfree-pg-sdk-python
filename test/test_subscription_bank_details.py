@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.subscription_bank_details import SubscriptionBankDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.subscription_bank_details import SubscriptionBankDetails
 
 class TestSubscriptionBankDetails(unittest.TestCase):
     """SubscriptionBankDetails unit test stubs"""
@@ -29,23 +26,23 @@ class TestSubscriptionBankDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> SubscriptionBankDetails:
         """Test SubscriptionBankDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `SubscriptionBankDetails`
         """
-        model = cashfree_pg.models.subscription_bank_details.SubscriptionBankDetails()  # noqa: E501
-        if include_optional :
+        model = SubscriptionBankDetails()
+        if include_optional:
             return SubscriptionBankDetails(
-                bank_id = '', 
-                bank_name = '', 
+                bank_id = '',
+                bank_name = '',
                 account_auth_modes = [
                     ''
                     ]
             )
-        else :
+        else:
             return SubscriptionBankDetails(
         )
         """

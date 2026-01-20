@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.offer_details import OfferDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.offer_details import OfferDetails
 
 class TestOfferDetails(unittest.TestCase):
     """OfferDetails unit test stubs"""
@@ -29,21 +26,21 @@ class TestOfferDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> OfferDetails:
         """Test OfferDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `OfferDetails`
         """
-        model = cashfree_pg.models.offer_details.OfferDetails()  # noqa: E501
-        if include_optional :
+        model = OfferDetails()
+        if include_optional:
             return OfferDetails(
-                offer_type = 'DISCOUNT_AND_CASHBACK', 
-                discount_details = {"discount_type":"flat","discount_value":"10","max_discount_amount":"10"}, 
+                offer_type = 'DISCOUNT_AND_CASHBACK',
+                discount_details = {"discount_type":"flat","discount_value":"10","max_discount_amount":"10"},
                 cashback_details = {"cashback_type":"percentage","cashback_value":"20","max_cashback_amount":"150"}
             )
-        else :
+        else:
             return OfferDetails(
                 offer_type = 'DISCOUNT_AND_CASHBACK',
         )

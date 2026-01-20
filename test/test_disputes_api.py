@@ -15,52 +15,50 @@
 
 import unittest
 
-import cashfree_pg
-from cashfree_pg.api.disputes_api import DisputesApi  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.api.disputes_api import DisputesApi
 
 
 class TestDisputesApi(unittest.TestCase):
     """DisputesApi unit test stubs"""
 
-    def setUp(self):
-        self.api = cashfree_pg.api.disputes_api.DisputesApi()  # noqa: E501
+    def setUp(self) -> None:
+        self.api = DisputesApi()
 
-    def tearDown(self):
+    def tearDown(self) -> None:
         pass
 
-    def test_p_g_accept_dispute_by_id(self):
+    def test_p_g_accept_dispute_by_id(self) -> None:
         """Test case for p_g_accept_dispute_by_id
 
-        Accept Dispute by Dispute ID  # noqa: E501
+        Accept Dispute by Dispute ID
         """
         pass
 
-    def test_p_g_fetch_dispute_by_id(self):
+    def test_p_g_fetch_dispute_by_id(self) -> None:
         """Test case for p_g_fetch_dispute_by_id
 
-        Get Disputes by Dispute ID  # noqa: E501
+        Get Disputes by Dispute ID
         """
         pass
 
-    def test_p_g_fetch_order_disputes(self):
+    def test_p_g_fetch_order_disputes(self) -> None:
         """Test case for p_g_fetch_order_disputes
 
-        Get Disputes by Order Id  # noqa: E501
+        Get Disputes by Order Id
         """
         pass
 
-    def test_p_g_fetch_payment_disputes(self):
+    def test_p_g_fetch_payment_disputes(self) -> None:
         """Test case for p_g_fetch_payment_disputes
 
-        Get Disputes by Payment ID  # noqa: E501
+        Get Disputes by Payment ID
         """
         pass
 
-    def test_p_g_upload_disputes_documents(self):
+    def test_p_g_upload_disputes_documents(self) -> None:
         """Test case for p_g_upload_disputes_documents
 
-        Submit Evidence to contest the Dispute by Dispute ID  # noqa: E501
+        Submit Evidence to contest the Dispute by Dispute ID
         """
         pass
 

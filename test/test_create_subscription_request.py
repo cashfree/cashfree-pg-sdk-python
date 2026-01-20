@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_request import CreateSubscriptionRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_request import CreateSubscriptionRequest
 
 class TestCreateSubscriptionRequest(unittest.TestCase):
     """CreateSubscriptionRequest unit test stubs"""
@@ -29,18 +26,18 @@ class TestCreateSubscriptionRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionRequest:
         """Test CreateSubscriptionRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionRequest`
         """
-        model = cashfree_pg.models.create_subscription_request.CreateSubscriptionRequest()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionRequest()
+        if include_optional:
             return CreateSubscriptionRequest(
-                subscription_id = '0', 
-                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_account_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""}, 
+                subscription_id = '0',
+                customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_account_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""},
                 plan_details = cashfree_pg.models.create_subscription_request_plan_details.CreateSubscriptionRequest_plan_details(
                     plan_id = '', 
                     plan_name = '', 
@@ -51,27 +48,27 @@ class TestCreateSubscriptionRequest(unittest.TestCase):
                     plan_max_cycles = 56, 
                     plan_intervals = 56, 
                     plan_interval_type = '', 
-                    plan_note = '', ), 
+                    plan_note = '', ),
                 authorization_details = cashfree_pg.models.create_subscription_request_authorization_details.CreateSubscriptionRequest_authorization_details(
                     authorization_amount = 1.337, 
                     authorization_amount_refund = True, 
                     payment_methods = [
                         ''
-                        ], ), 
+                        ], ),
                 subscription_meta = cashfree_pg.models.create_subscription_request_subscription_meta.CreateSubscriptionRequest_subscription_meta(
                     return_url = '', 
                     notification_channel = [
                         ''
-                        ], ), 
-                subscription_expiry_time = '', 
-                subscription_first_charge_time = '', 
-                subscription_note = '', 
-                subscription_tags = None, 
+                        ], ),
+                subscription_expiry_time = '',
+                subscription_first_charge_time = '',
+                subscription_note = '',
+                subscription_tags = None,
                 subscription_payment_splits = [
                     {"vendor_id":"123","percentage":12.05}
                     ]
             )
-        else :
+        else:
             return CreateSubscriptionRequest(
                 subscription_id = '0',
                 customer_details = {"customer_name":"Test Cust","customer_email":"test@gmail.com","customer_phone":"9900755700","customer_bank_account_holder_name":"","customer_bank_account_number":"","customer_bank_ifsc":"","customer_bank_code":"","customer_bank_account_type":""},

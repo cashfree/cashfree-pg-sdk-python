@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.bad_request_error import BadRequestError  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.bad_request_error import BadRequestError
 
 class TestBadRequestError(unittest.TestCase):
     """BadRequestError unit test stubs"""
@@ -29,21 +26,21 @@ class TestBadRequestError(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> BadRequestError:
         """Test BadRequestError
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `BadRequestError`
         """
-        model = cashfree_pg.models.bad_request_error.BadRequestError()  # noqa: E501
-        if include_optional :
+        model = BadRequestError()
+        if include_optional:
             return BadRequestError(
-                message = '', 
-                code = '', 
+                message = '',
+                code = '',
                 type = 'invalid_request_error'
             )
-        else :
+        else:
             return BadRequestError(
         )
         """

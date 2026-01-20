@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_terminal_request import CreateTerminalRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_terminal_request import CreateTerminalRequest
 
 class TestCreateTerminalRequest(unittest.TestCase):
     """CreateTerminalRequest unit test stubs"""
@@ -29,27 +26,27 @@ class TestCreateTerminalRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateTerminalRequest:
         """Test CreateTerminalRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateTerminalRequest`
         """
-        model = cashfree_pg.models.create_terminal_request.CreateTerminalRequest()  # noqa: E501
-        if include_optional :
+        model = CreateTerminalRequest()
+        if include_optional:
             return CreateTerminalRequest(
-                terminal_id = '012', 
-                terminal_phone_no = '0123456789', 
-                terminal_name = '012', 
-                terminal_address = '0', 
-                terminal_email = '0', 
-                terminal_note = '0', 
-                terminal_type = '0', 
+                terminal_id = '012',
+                terminal_phone_no = '0123456789',
+                terminal_name = '012',
+                terminal_address = '0',
+                terminal_email = '0',
+                terminal_note = '0',
+                terminal_type = '0',
                 terminal_meta = cashfree_pg.models.create_terminal_request_terminal_meta.CreateTerminalRequest_terminal_meta(
                     terminal_operator = '', )
             )
-        else :
+        else:
             return CreateTerminalRequest(
                 terminal_id = '012',
                 terminal_phone_no = '0123456789',

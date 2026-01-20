@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.payment_webhook import PaymentWebhook  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.payment_webhook import PaymentWebhook
 
 class TestPaymentWebhook(unittest.TestCase):
     """PaymentWebhook unit test stubs"""
@@ -29,15 +26,15 @@ class TestPaymentWebhook(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> PaymentWebhook:
         """Test PaymentWebhook
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `PaymentWebhook`
         """
-        model = cashfree_pg.models.payment_webhook.PaymentWebhook()  # noqa: E501
-        if include_optional :
+        model = PaymentWebhook()
+        if include_optional:
             return PaymentWebhook(
                 data = cashfree_pg.models.payment_webhook_data_entity.PaymentWebhookDataEntity(
                     order = cashfree_pg.models.payment_webhook_order_entity.PaymentWebhookOrderEntity(
@@ -74,11 +71,11 @@ class TestPaymentWebhook(unittest.TestCase):
                             offer_tnc = {"$ref":"#/components/schemas/OfferTnc/example"}, 
                             offer_details = {"$ref":"#/components/schemas/OfferDetails/example"}, 
                             offer_validations = {"$ref":"#/components/schemas/OfferValidations/example"}, )
-                        ], ), 
-                event_time = '2021-10-07T19:42:44+05:30', 
+                        ], ),
+                event_time = '2021-10-07T19:42:44+05:30',
                 type = 'PAYMENT_SUCCESS_WEBHOOK'
             )
-        else :
+        else:
             return PaymentWebhook(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.terminate_order_request import TerminateOrderRequest  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.terminate_order_request import TerminateOrderRequest
 
 class TestTerminateOrderRequest(unittest.TestCase):
     """TerminateOrderRequest unit test stubs"""
@@ -29,19 +26,19 @@ class TestTerminateOrderRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> TerminateOrderRequest:
         """Test TerminateOrderRequest
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TerminateOrderRequest`
         """
-        model = cashfree_pg.models.terminate_order_request.TerminateOrderRequest()  # noqa: E501
-        if include_optional :
+        model = TerminateOrderRequest()
+        if include_optional:
             return TerminateOrderRequest(
                 order_status = ''
             )
-        else :
+        else:
             return TerminateOrderRequest(
                 order_status = '',
         )

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.create_subscription_payment_response import CreateSubscriptionPaymentResponse  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.create_subscription_payment_response import CreateSubscriptionPaymentResponse
 
 class TestCreateSubscriptionPaymentResponse(unittest.TestCase):
     """CreateSubscriptionPaymentResponse unit test stubs"""
@@ -29,29 +26,29 @@ class TestCreateSubscriptionPaymentResponse(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> CreateSubscriptionPaymentResponse:
         """Test CreateSubscriptionPaymentResponse
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `CreateSubscriptionPaymentResponse`
         """
-        model = cashfree_pg.models.create_subscription_payment_response.CreateSubscriptionPaymentResponse()  # noqa: E501
-        if include_optional :
+        model = CreateSubscriptionPaymentResponse()
+        if include_optional:
             return CreateSubscriptionPaymentResponse(
-                cf_payment_id = '', 
+                cf_payment_id = '',
                 failure_details = cashfree_pg.models.subscription_payment_entity_failure_details.SubscriptionPaymentEntity_failure_details(
-                    failure_reason = '', ), 
-                payment_amount = 1.337, 
-                payment_id = '', 
-                payment_initiated_date = '', 
-                payment_status = '', 
-                payment_type = 'CHARGE', 
-                subscription_id = '', 
-                data = None, 
+                    failure_reason = '', ),
+                payment_amount = 1.337,
+                payment_id = '',
+                payment_initiated_date = '',
+                payment_status = '',
+                payment_type = 'CHARGE',
+                subscription_id = '',
+                data = None,
                 payment_method = ''
             )
-        else :
+        else:
             return CreateSubscriptionPaymentResponse(
         )
         """

@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.terminal_transaction_entity import TerminalTransactionEntity  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.terminal_transaction_entity import TerminalTransactionEntity
 
 class TestTerminalTransactionEntity(unittest.TestCase):
     """TerminalTransactionEntity unit test stubs"""
@@ -29,24 +26,24 @@ class TestTerminalTransactionEntity(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> TerminalTransactionEntity:
         """Test TerminalTransactionEntity
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `TerminalTransactionEntity`
         """
-        model = cashfree_pg.models.terminal_transaction_entity.TerminalTransactionEntity()  # noqa: E501
-        if include_optional :
+        model = TerminalTransactionEntity()
+        if include_optional:
             return TerminalTransactionEntity(
-                cf_payment_id = '', 
-                payment_amount = 56, 
-                payment_method = '', 
-                payment_url = '', 
-                qrcode = '', 
+                cf_payment_id = '',
+                payment_amount = 56,
+                payment_method = '',
+                payment_url = '',
+                qrcode = '',
                 timeout = ''
             )
-        else :
+        else:
             return TerminalTransactionEntity(
         )
         """

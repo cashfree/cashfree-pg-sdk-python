@@ -14,11 +14,8 @@
 
 
 import unittest
-import datetime
 
-import cashfree_pg
-from cashfree_pg.models.eligibility_method_item_entity_details import EligibilityMethodItemEntityDetails  # noqa: E501
-from cashfree_pg.rest import ApiException
+from cashfree_pg.models.eligibility_method_item_entity_details import EligibilityMethodItemEntityDetails
 
 class TestEligibilityMethodItemEntityDetails(unittest.TestCase):
     """EligibilityMethodItemEntityDetails unit test stubs"""
@@ -29,19 +26,19 @@ class TestEligibilityMethodItemEntityDetails(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional):
+    def make_instance(self, include_optional) -> EligibilityMethodItemEntityDetails:
         """Test EligibilityMethodItemEntityDetails
-            include_option is a boolean, when False only required
+            include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
         # uncomment below to create an instance of `EligibilityMethodItemEntityDetails`
         """
-        model = cashfree_pg.models.eligibility_method_item_entity_details.EligibilityMethodItemEntityDetails()  # noqa: E501
-        if include_optional :
+        model = EligibilityMethodItemEntityDetails()
+        if include_optional:
             return EligibilityMethodItemEntityDetails(
                 account_types = [
                     ''
-                    ], 
+                    ],
                 frequent_bank_details = [
                     cashfree_pg.models.subscription_bank_details.SubscriptionBankDetails(
                         bank_id = '', 
@@ -49,7 +46,7 @@ class TestEligibilityMethodItemEntityDetails(unittest.TestCase):
                         account_auth_modes = [
                             ''
                             ], )
-                    ], 
+                    ],
                 all_bank_details = [
                     cashfree_pg.models.subscription_bank_details.SubscriptionBankDetails(
                         bank_id = '', 
@@ -57,17 +54,17 @@ class TestEligibilityMethodItemEntityDetails(unittest.TestCase):
                         account_auth_modes = [
                             ''
                             ], )
-                    ], 
+                    ],
                 available_handles = [
                     cashfree_pg.models.eligibility_method_item_entity_details_available_handles_inner.EligibilityMethodItem_entity_details_available_handles_inner(
                         handle = '', 
                         application = '', )
-                    ], 
+                    ],
                 allowed_card_types = [
                     ''
                     ]
             )
-        else :
+        else:
             return EligibilityMethodItemEntityDetails(
         )
         """
