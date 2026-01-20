@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cashfree_pg"
-version = "4.5.1"
+version = "1.0.0"
 description = "Cashfree Payment Gateway APIs"
 authors = ["API Support <developers@cashfree.com>"]
 license = "Apache 2.0"
@@ -14,7 +14,7 @@ python = "^3.7"
 
 urllib3 = ">= 1.25.3"
 python-dateutil = ">=2.8.2"
-pydantic = "^1.10.5, <2"
+pydantic = "2.11.7"
 aenum = ">=3.1.11"
 
 [tool.poetry.dev-dependencies]
