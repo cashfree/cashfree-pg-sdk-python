@@ -1,8 +1,10 @@
 """API response object."""
 
 from __future__ import annotations
-from typing import Any, Dict, Optional
-from pydantic import Field, StrictInt, StrictStr
+from typing import Any, Dict, Optional, List, Tuple, Union
+from pydantic import validate_arguments, ValidationError, Field, StrictStr, StrictBytes, StrictInt, StrictFloat, StrictBool, field_validator, BaseModel
+
+# Updated imports for Pydantic v2 compatibility
 
 class ApiResponse:
     """
