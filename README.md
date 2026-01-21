@@ -27,10 +27,14 @@ from cashfree_pg.api_client import Cashfree
 from cashfree_pg.models.customer_details import CustomerDetails
 from cashfree_pg.models.order_meta import OrderMeta
 
-Cashfree.XClientId = "<x-client-id>"
-Cashfree.XClientSecret = "<x-client-secret>"
-Cashfree.XEnvironment = Cashfree.SANDBOX
-x_api_version = "2023-08-01"
+cashfree_instance = Cashfree(
+    XEnvironment=Cashfree.SANDBOX,
+    XClientId="<x-client-id>",
+    XClientSecret="<x-client-secret>",
+    XPartnerKey="<x-partner-key>",
+    XClientSignature="<x-client-signature>",
+    XPartnerMerchantId="<x-partner-merchant-id>"
+)
 ```
 
 Generate your API keys (x-client-id , x-client-secret) from [Cashfree Merchant Dashboard](https://merchant.cashfree.com/merchants/login)
@@ -42,7 +46,7 @@ customerDetails = CustomerDetails(customer_id="walterwNrcMi", customer_phone="99
 orderMeta = OrderMeta(return_url="https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}")
 createOrderRequest = CreateOrderRequest(order_amount=1, order_currency="INR", customer_details=customerDetails, order_meta=orderMeta)
 try:
-    api_response = Cashfree().PGCreateOrder(x_api_version, createOrderRequest, None, None)
+    api_response = cashfree_instance.PGCreateOrder(x_api_version, createOrderRequest, None, None)
     print(api_response.data)
 except Exception as e:
     print(e)
@@ -51,7 +55,7 @@ except Exception as e:
 Get Order
 ```python
 try:
-    api_response = Cashfree().PGFetchOrder(x_api_version, "order_3242X4jQ5f0S9KYxZO9mtDL1Kx2Y7u", None)
+    api_response = cashfree_instance.PGFetchOrder(x_api_version, "order_3242X4jQ5f0S9KYxZO9mtDL1Kx2Y7u", None)
     print(api_response.data)
 except Exception as e:
     print(e)
