@@ -40,9 +40,7 @@ class TestUpdateVendorResponse(unittest.TestCase):
             return UpdateVendorResponse(
                 email = '', 
                 status = '', 
-                bank = [
-                    {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
+                bank = {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}, 
                 upi = '', 
                 added_on = '', 
                 updated_on = '', 
@@ -52,12 +50,8 @@ class TestUpdateVendorResponse(unittest.TestCase):
                 phone = 1.337, 
                 name = '', 
                 vendor_id = '', 
-                schedule_option = [
-                    {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}
-                    ], 
-                kyc_details = [
-                    {"account_type":"BUSINESS","business_type":"NBFC","uidai":753624181019,"gst":"11AAAAA1111A1Z0","cin":"L00000Aa0000AaA000000","pan":"BIAPA2934N","passport_number":"L6892603"}
-                    ], 
+                schedule_option = {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}, 
+                kyc_details = {"account_type":"BUSINESS","business_type":"NBFC","uidai":753624181019,"gst":"11AAAAA1111A1Z0","cin":"L00000Aa0000AaA000000","pan":"BIAPA2934N","passport_number":"L6892603"}, 
                 dashboard_access = True, 
                 bank_details = '', 
                 related_docs = [

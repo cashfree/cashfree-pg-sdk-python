@@ -26,13 +26,25 @@ from typing_extensions import Annotated
 
 class FetchSettlementsRequestFilters(BaseModel):
     """
-    Specify either the Settlement ID, Settlement UTR, or start date and end date to fetch the settlement details.
+    Specify either the Settlement ID, Settlement UTR, settlement status, or start date and end date to fetch the settlement details.
     """
     cf_settlement_ids: Optional[List[StrictStr]] = Field(default=None, description="List of settlement IDs for which you want the settlement reconciliation details.")
     settlement_utrs: Optional[List[StrictStr]] = Field(default=None, description="List of settlement UTRs for which you want the settlement reconciliation details.")
+    settlement_status: Optional[List[StrictStr]] = Field(default=None, description="List of settlement statuses to filter by. Possible values are SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK, FAILED.")
     start_date: Optional[StrictStr] = Field(default=None, description="Specify the start date from when you want the settlement reconciliation details.")
     end_date: Optional[StrictStr] = Field(default=None, description="Specify the end date till when you want the settlement reconciliation details.")
-    __properties = ["cf_settlement_ids", "settlement_utrs", "start_date", "end_date"]
+    __properties = ["cf_settlement_ids", "settlement_utrs", "settlement_status", "start_date", "end_date"]
+
+    @field_validator('settlement_status')
+    def settlement_status_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        for i in value:
+            if i not in ('SUCCESS', 'PENDING', 'PENDING_WITH_CASHFREE', 'PENDING_WITH_BANK', 'FAILED'):
+                raise ValueError("each list item must be one of ('SUCCESS', 'PENDING', 'PENDING_WITH_CASHFREE', 'PENDING_WITH_BANK', 'FAILED')")
+        return value
 
     # Updated to Pydantic v2
     """Pydantic configuration"""
@@ -58,7 +70,7 @@ class FetchSettlementsRequestFilters(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> FetchSettlementsRequestFilters:
         """Create an instance of FetchSettlementsRequestFilters from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_settlement_ids, settlement_utrs, start_date, end_date" in temp_dict.keys():
+        if "cf_settlement_ids, settlement_utrs, settlement_status, start_date, end_date" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -82,6 +94,7 @@ class FetchSettlementsRequestFilters(BaseModel):
         _obj = FetchSettlementsRequestFilters.parse_obj({
             "cf_settlement_ids": obj.get("cf_settlement_ids"),
             "settlement_utrs": obj.get("settlement_utrs"),
+            "settlement_status": obj.get("settlement_status"),
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date")
         })

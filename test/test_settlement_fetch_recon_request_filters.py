@@ -44,6 +44,10 @@ class TestSettlementFetchReconRequestFilters(unittest.TestCase):
                 settlement_utrs = [
                     ''
                     ], 
+                start_date_initiated_on = '', 
+                end_date_initiated_on = '', 
+                start_date_processed_on = '', 
+                end_date_processed_on = '', 
                 start_date = '', 
                 end_date = ''
             )

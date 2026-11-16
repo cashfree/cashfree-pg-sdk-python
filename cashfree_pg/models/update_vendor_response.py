@@ -34,7 +34,7 @@ class UpdateVendorResponse(BaseModel):
     """
     email: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
-    bank: Optional[List[BankDetails]] = None
+    bank: Optional[BankDetails] = None
     upi: Optional[StrictStr] = None
     added_on: Optional[StrictStr] = None
     updated_on: Optional[StrictStr] = None
@@ -44,8 +44,8 @@ class UpdateVendorResponse(BaseModel):
     phone: Optional[Union[StrictFloat, StrictInt]] = None
     name: Optional[StrictStr] = None
     vendor_id: Optional[StrictStr] = None
-    schedule_option: Optional[List[ScheduleOption]] = None
-    kyc_details: Optional[List[KycDetails]] = None
+    schedule_option: Optional[ScheduleOption] = None
+    kyc_details: Optional[KycDetails] = None
     dashboard_access: Optional[StrictBool] = None
     bank_details: Optional[StrictStr] = None
     related_docs: Optional[List[VendorEntityRelatedDocsInner]] = None
@@ -85,27 +85,15 @@ class UpdateVendorResponse(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in bank (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of bank
         if self.bank:
-            for _item in self.bank:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['bank'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in schedule_option (list)
-        _items = []
+            _dict['bank'] = self.bank.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of schedule_option
         if self.schedule_option:
-            for _item in self.schedule_option:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['schedule_option'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in kyc_details (list)
-        _items = []
+            _dict['schedule_option'] = self.schedule_option.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of kyc_details
         if self.kyc_details:
-            for _item in self.kyc_details:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['kyc_details'] = _items
+            _dict['kyc_details'] = self.kyc_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in related_docs (list)
         _items = []
         if self.related_docs:
@@ -113,6 +101,21 @@ class UpdateVendorResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['related_docs'] = _items
+        # set to None if bank (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bank is None and "bank" in self.__fields_set__:
+            _dict['bank'] = None
+
+        # set to None if schedule_option (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule_option is None and "schedule_option" in self.__fields_set__:
+            _dict['schedule_option'] = None
+
+        # set to None if kyc_details (nullable) is None
+        # and __fields_set__ contains the field
+        if self.kyc_details is None and "kyc_details" in self.__fields_set__:
+            _dict['kyc_details'] = None
+
         return _dict
 
     @classmethod
@@ -127,7 +130,7 @@ class UpdateVendorResponse(BaseModel):
         _obj = UpdateVendorResponse.parse_obj({
             "email": obj.get("email"),
             "status": obj.get("status"),
-            "bank": [BankDetails.from_dict(_item) for _item in obj.get("bank")] if obj.get("bank") is not None else None,
+            "bank": BankDetails.from_dict(obj.get("bank")) if obj.get("bank") is not None else None,
             "upi": obj.get("upi"),
             "added_on": obj.get("added_on"),
             "updated_on": obj.get("updated_on"),
@@ -137,8 +140,8 @@ class UpdateVendorResponse(BaseModel):
             "phone": obj.get("phone"),
             "name": obj.get("name"),
             "vendor_id": obj.get("vendor_id"),
-            "schedule_option": [ScheduleOption.from_dict(_item) for _item in obj.get("schedule_option")] if obj.get("schedule_option") is not None else None,
-            "kyc_details": [KycDetails.from_dict(_item) for _item in obj.get("kyc_details")] if obj.get("kyc_details") is not None else None,
+            "schedule_option": ScheduleOption.from_dict(obj.get("schedule_option")) if obj.get("schedule_option") is not None else None,
+            "kyc_details": KycDetails.from_dict(obj.get("kyc_details")) if obj.get("kyc_details") is not None else None,
             "dashboard_access": obj.get("dashboard_access"),
             "bank_details": obj.get("bank_details"),
             "related_docs": [VendorEntityRelatedDocsInner.from_dict(_item) for _item in obj.get("related_docs")] if obj.get("related_docs") is not None else None

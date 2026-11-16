@@ -42,7 +42,7 @@ class TestSettlementReconEntity(unittest.TestCase):
                 limit = 56, 
                 data = [
                     cashfree_pg.models.settlement_recon_entity_data_inner.SettlementReconEntity_data_inner(
-                        event_details = cashfree_pg.models.recon_entity_data_inner_event_details.ReconEntity_data_inner_event_details(
+                        event_details = cashfree_pg.models.settlement_recon_entity_data_inner_event_details.SettlementReconEntity_data_inner_event_details(
                             event_id = '', 
                             event_type = '', 
                             event_settlement_amount = 1.337, 
@@ -54,13 +54,13 @@ class TestSettlementReconEntity(unittest.TestCase):
                             event_currency = '', 
                             event_service_charge = 1.337, 
                             event_service_tax = 1.337, 
-                            event_remarks = 1.337, ), 
-                        order_details = cashfree_pg.models.recon_entity_data_inner_order_details.ReconEntity_data_inner_order_details(
+                            event_remarks = '', ), 
+                        order_details = cashfree_pg.models.settlement_recon_entity_data_inner_order_details.SettlementReconEntity_data_inner_order_details(
                             order_id = '', 
                             order_amount = 1.337, 
                             order_currency = '', 
                             order_tags = cashfree_pg.models.order_tags.order_tags(), ), 
-                        customer_details = cashfree_pg.models.recon_entity_data_inner_customer_details.ReconEntity_data_inner_customer_details(
+                        customer_details = cashfree_pg.models.settlement_recon_entity_data_inner_customer_details.SettlementReconEntity_data_inner_customer_details(
                             customer_phone = '', 
                             customer_email = '', 
                             customer_name = '', 
@@ -73,18 +73,18 @@ class TestSettlementReconEntity(unittest.TestCase):
                             payment_currency = '', 
                             bank_reference = '', 
                             payment_time = '', 
-                            payment_mode = '', 
+                            payment_group = '', 
                             payment_service_charge = 1.337, 
                             payment_service_tax = 1.337, 
                             cf_payment_id = '', 
                             status = '', 
-                            forex_conversion_handling_charge = '', 
-                            forex_conversion_handling_tax = '', 
+                            forex_conversion_handling_charge = 1.337, 
+                            forex_conversion_handling_tax = 1.337, 
                             charges_currency = '', ), 
-                        settlement_details = cashfree_pg.models.recon_entity_data_inner_settlement_details.ReconEntity_data_inner_settlement_details(
+                        settlement_details = cashfree_pg.models.settlement_recon_entity_data_inner_settlement_details.SettlementReconEntity_data_inner_settlement_details(
                             cf_settlement_id = '', 
                             settlement_date = '', 
-                            utr = '', 
+                            settlement_utr = '', 
                             split_service_charge = 1.337, 
                             split_service_tax = 1.337, 
                             vendor_commission = 1.337, 
@@ -98,16 +98,21 @@ class TestSettlementReconEntity(unittest.TestCase):
                             settlement_initiated_on = '', 
                             settlement_tax = 1.337, 
                             settlement_type = '', ), 
-                        dispute_details = cashfree_pg.models.recon_entity_data_inner_dispute_details.ReconEntity_data_inner_dispute_details(
-                            closed_in_favor_of = '', 
-                            dispute_resolved_on = '', 
-                            dispute_category = '', 
-                            dispute_note = '', ), 
-                        refund_details = cashfree_pg.models.recon_entity_data_inner_refund_details.ReconEntity_data_inner_refund_details(
-                            refund_processed_at = '', 
-                            refund_arn = '', 
-                            refund_note = '', 
-                            refund_id = '', ), )
+                        dispute_details = [
+                            cashfree_pg.models.settlement_recon_entity_data_inner_dispute_details_inner.SettlementReconEntity_data_inner_dispute_details_inner(
+                                closed_in_favor_of = '', 
+                                dispute_resolved_on = '', 
+                                dispute_category = '', 
+                                dispute_note = '', 
+                                resolved_on = '', )
+                            ], 
+                        refund_details = [
+                            cashfree_pg.models.recon_entity_data_inner_refund_details.ReconEntity_data_inner_refund_details(
+                                refund_processed_at = '', 
+                                refund_arn = '', 
+                                refund_note = '', 
+                                refund_id = '', )
+                            ], )
                     ]
             )
         else :

@@ -26,13 +26,14 @@ from cashfree_pg.models.payment_method_card_emiin_payments_entity import Payment
 from cashfree_pg.models.payment_method_card_in_payments_entity import PaymentMethodCardInPaymentsEntity
 from cashfree_pg.models.payment_method_cardless_emiin_payments_entity import PaymentMethodCardlessEMIInPaymentsEntity
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity import PaymentMethodNetBankingInPaymentsEntity
+from cashfree_pg.models.payment_method_others_in_payments_entity import PaymentMethodOthersInPaymentsEntity
 from cashfree_pg.models.payment_method_paylater_in_payments_entity import PaymentMethodPaylaterInPaymentsEntity
 from cashfree_pg.models.payment_method_upiin_payments_entity import PaymentMethodUPIInPaymentsEntity
 from typing import Union, Any, List, TYPE_CHECKING, Literal, Dict, Optional, Tuple
 from pydantic import validate_arguments, ValidationError, Field, StrictStr, StrictBytes, StrictInt, StrictFloat, StrictBool, field_validator, BaseModel, validator
 from typing_extensions import Annotated
 
-PAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS = ["PaymentMethodAppInPaymentsEntity", "PaymentMethodBankTransferInPaymentsEntity", "PaymentMethodCardEMIInPaymentsEntity", "PaymentMethodCardInPaymentsEntity", "PaymentMethodCardlessEMIInPaymentsEntity", "PaymentMethodNetBankingInPaymentsEntity", "PaymentMethodPaylaterInPaymentsEntity", "PaymentMethodUPIInPaymentsEntity"]
+PAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS = ["PaymentMethodAppInPaymentsEntity", "PaymentMethodBankTransferInPaymentsEntity", "PaymentMethodCardEMIInPaymentsEntity", "PaymentMethodCardInPaymentsEntity", "PaymentMethodCardlessEMIInPaymentsEntity", "PaymentMethodNetBankingInPaymentsEntity", "PaymentMethodOthersInPaymentsEntity", "PaymentMethodPaylaterInPaymentsEntity", "PaymentMethodUPIInPaymentsEntity"]
 
 class PaymentEntityPaymentMethod(BaseModel):
     """
@@ -54,8 +55,10 @@ class PaymentEntityPaymentMethod(BaseModel):
     oneof_schema_7_validator: Optional[PaymentMethodCardEMIInPaymentsEntity] = None
     # data type: PaymentMethodBankTransferInPaymentsEntity
     oneof_schema_8_validator: Optional[PaymentMethodBankTransferInPaymentsEntity] = None
+    # data type: PaymentMethodOthersInPaymentsEntity
+    oneof_schema_9_validator: Optional[PaymentMethodOthersInPaymentsEntity] = None
     if TYPE_CHECKING:
-        actual_instance: Union[PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity]
+        actual_instance: Union[PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodOthersInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity]
     else:
         actual_instance: Any
     one_of_schemas: List[str] = Literal[PAYMENTENTITYPAYMENTMETHOD_ONE_OF_SCHEMAS]
@@ -120,12 +123,17 @@ class PaymentEntityPaymentMethod(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentMethodBankTransferInPaymentsEntity`")
         else:
             match += 1
+        # validate data type: PaymentMethodOthersInPaymentsEntity
+        if not isinstance(v, PaymentMethodOthersInPaymentsEntity):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentMethodOthersInPaymentsEntity`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodOthersInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodOthersInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -204,13 +212,21 @@ class PaymentEntityPaymentMethod(BaseModel):
                 return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into PaymentMethodOthersInPaymentsEntity
+        try:
+            instance.actual_instance = PaymentMethodOthersInPaymentsEntity.from_json_for_one_of(json_str)
+            match += 1
+            if (instance.actual_instance is not None):
+                return instance
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodOthersInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PaymentEntityPaymentMethod with oneOf schemas: PaymentMethodAppInPaymentsEntity, PaymentMethodBankTransferInPaymentsEntity, PaymentMethodCardEMIInPaymentsEntity, PaymentMethodCardInPaymentsEntity, PaymentMethodCardlessEMIInPaymentsEntity, PaymentMethodNetBankingInPaymentsEntity, PaymentMethodOthersInPaymentsEntity, PaymentMethodPaylaterInPaymentsEntity, PaymentMethodUPIInPaymentsEntity. Details: " + ", ".join(error_messages))
         else:
             return instance
 

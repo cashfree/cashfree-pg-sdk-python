@@ -83,6 +83,8 @@ from cashfree_pg.models.banktransfer_payment_method import *
 from cashfree_pg.models.card import *
 from cashfree_pg.models.card_downtime import *
 from cashfree_pg.models.card_downtime_card import *
+from cashfree_pg.models.card_downtime_card_network_enum import *
+from cashfree_pg.models.card_downtime_card_type_enum import *
 from cashfree_pg.models.card_emi import *
 from cashfree_pg.models.card_emi_payment_method import *
 from cashfree_pg.models.card_offer import *
@@ -174,6 +176,8 @@ from cashfree_pg.models.fetch_settlements_request import *
 from cashfree_pg.models.fetch_settlements_request_filters import *
 from cashfree_pg.models.fetch_settlements_request_pagination import *
 from cashfree_pg.models.fetch_terminal_qr_codes_entity import *
+from cashfree_pg.models.get_all_settlements_response import *
+from cashfree_pg.models.get_all_settlements_response_data_inner import *
 from cashfree_pg.models.get_all_terminal_payment_entity import *
 from cashfree_pg.models.get_all_terminal_transaction_request import *
 from cashfree_pg.models.get_card_bin_request import *
@@ -199,6 +203,8 @@ from cashfree_pg.models.manage_subscription_payment_request import *
 from cashfree_pg.models.manage_subscription_payment_request_action_details import *
 from cashfree_pg.models.manage_subscription_request import *
 from cashfree_pg.models.manage_subscription_request_action_details import *
+from cashfree_pg.models.mark_order_settlement_response import *
+from cashfree_pg.models.mark_order_settlement_response_meta_data import *
 from cashfree_pg.models.net_banking_downtime import *
 from cashfree_pg.models.net_banking_downtime_net_banking import *
 from cashfree_pg.models.net_banking_payment_method import *
@@ -241,6 +247,11 @@ from cashfree_pg.models.order_meta_payment_methods_filters import *
 from cashfree_pg.models.order_meta_payment_methods_filters_methods import *
 from cashfree_pg.models.order_pay_data import *
 from cashfree_pg.models.order_payment_method_filters import *
+from cashfree_pg.models.order_settlement_entity import *
+from cashfree_pg.models.order_settlement_entity_customer_details import *
+from cashfree_pg.models.order_settlement_entity_order_details import *
+from cashfree_pg.models.order_settlement_entity_payment_details import *
+from cashfree_pg.models.order_settlement_entity_settlement_details import *
 from cashfree_pg.models.order_update_refund_request import *
 from cashfree_pg.models.par_request import *
 from cashfree_pg.models.pg_create_par200_response import *
@@ -271,6 +282,7 @@ from cashfree_pg.models.payment_method_card_in_payments_entity_card import *
 from cashfree_pg.models.payment_method_cardless_emiin_payments_entity import *
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity import *
 from cashfree_pg.models.payment_method_net_banking_in_payments_entity_netbanking import *
+from cashfree_pg.models.payment_method_others_in_payments_entity import *
 from cashfree_pg.models.payment_method_paylater_in_payments_entity import *
 from cashfree_pg.models.payment_method_upiin_payments_entity import *
 from cashfree_pg.models.payment_method_upiin_payments_entity_upi import *
@@ -311,7 +323,12 @@ from cashfree_pg.models.settlement_fetch_recon_request import *
 from cashfree_pg.models.settlement_fetch_recon_request_filters import *
 from cashfree_pg.models.settlement_recon_entity import *
 from cashfree_pg.models.settlement_recon_entity_data_inner import *
+from cashfree_pg.models.settlement_recon_entity_data_inner_customer_details import *
+from cashfree_pg.models.settlement_recon_entity_data_inner_dispute_details_inner import *
+from cashfree_pg.models.settlement_recon_entity_data_inner_event_details import *
+from cashfree_pg.models.settlement_recon_entity_data_inner_order_details import *
 from cashfree_pg.models.settlement_recon_entity_data_inner_payment_details import *
+from cashfree_pg.models.settlement_recon_entity_data_inner_settlement_details import *
 from cashfree_pg.models.settlement_simulation_response import *
 from cashfree_pg.models.settlement_webhook import *
 from cashfree_pg.models.settlement_webhook_data_entity import *
@@ -565,7 +582,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -725,7 +742,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -874,7 +891,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1023,7 +1040,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1172,7 +1189,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1330,7 +1347,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1542,7 +1559,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1690,7 +1707,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1842,7 +1859,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -1995,7 +2012,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2141,7 +2158,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2297,7 +2314,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2447,7 +2464,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2606,7 +2623,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2748,7 +2765,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -2891,7 +2908,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3040,7 +3057,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3183,7 +3200,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3323,7 +3340,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3481,7 +3498,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3643,7 +3660,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3800,7 +3817,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -3957,7 +3974,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4113,7 +4130,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4282,7 +4299,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4443,7 +4460,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4586,7 +4603,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4745,7 +4762,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -4892,7 +4909,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5051,7 +5068,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5200,7 +5217,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5352,7 +5369,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5514,7 +5531,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5677,7 +5694,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5837,7 +5854,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -5983,7 +6000,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6142,7 +6159,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6298,7 +6315,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6451,7 +6468,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6614,7 +6631,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6780,7 +6797,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -6930,7 +6947,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7089,7 +7106,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7246,7 +7263,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7407,7 +7424,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7564,7 +7581,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7730,7 +7747,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -7880,7 +7897,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8038,7 +8055,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8095,7 +8112,7 @@ class Cashfree:
     def PGFetchSettlements(self, fetch_settlements_request : Annotated[FetchSettlementsRequest, Field(description="Request Body to get the settlements.")] = None, content_type : Annotated[Optional[StrictStr], Field(description="application/json.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree.")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. ")] = None, accept : Annotated[Optional[StrictStr], Field(description="application/json.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get All Settlements  # noqa: E501
 
-        Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.  # noqa: E501
+        Use this API to get all settlement details by specifying the settlement ID, settlement UTR, settlement status or date range. Returns settlements of all statuses including SUCCESS, PENDING, PENDING_WITH_CASHFREE, PENDING_WITH_BANK and FAILED.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8136,7 +8153,7 @@ class Cashfree:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(SettlementEntity, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(GetAllSettlementsResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         x_api_version = self.XApiVersion
@@ -8202,7 +8219,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8227,7 +8244,7 @@ class Cashfree:
         _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
 
         _response_types_map = {
-            '200': "SettlementEntity",
+            '200': "GetAllSettlementsResponse",
             '400': "BadRequestError",
             '401': "AuthenticationError",
             '404': "ApiError404",
@@ -8364,7 +8381,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8420,7 +8437,7 @@ class Cashfree:
     def MarkForSettlement(self, x_request_id : Annotated[Optional[StrictStr], Field(description="Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree.")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. ")] = None, create_order_settlement_request_body : Annotated[Optional[CreateOrderSettlementRequestBody], Field(description="Create Order Settlement Request Body.")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Mark Order For Settlement  # noqa: E501
 
-        Use this API to pass the CBRICS ID to Cashfree and mark an order for settlement.  # noqa: E501
+        Use this API to pass the CBRIKS ID to Cashfree and mark an order for settlement.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8457,7 +8474,7 @@ class Cashfree:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(object, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(MarkOrderSettlementResponse, status_code(int), headers(HTTPHeaderDict))
         """
 
         x_api_version = self.XApiVersion
@@ -8521,7 +8538,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8546,7 +8563,7 @@ class Cashfree:
         _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
 
         _response_types_map = {
-            '202': "object",
+            '200': "MarkOrderSettlementResponse",
             '400': "BadRequestError",
             '401': "AuthenticationError",
             '404': "BadRequestError",
@@ -8573,7 +8590,7 @@ class Cashfree:
     def PGOrderFetchSettlement(self, order_id : Annotated[StrictStr, Field(description="The ID which uniquely identifies your order.")] = None, x_request_id : Annotated[Optional[StrictStr], Field(description="Request ID for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to Cashfree.")] = None, x_idempotency_key : Annotated[Optional[StrictStr], Field(description="An idempotency key is a unique identifier you include with your API call. If the request fails or times out, you can safely retry it using the same key to avoid duplicate actions. ")] = None, **kwargs) -> ApiResponse:  # noqa: E501
         """Get Settlements by Order ID  # noqa: E501
 
-        Use this API to view all the settlements of a particular order.  # noqa: E501
+        Use this API to view the latest linked settlement details for a particular order, including pending and failed settlements.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 
@@ -8610,7 +8627,7 @@ class Cashfree:
         :return: Returns the result object.
                  If the method is called asynchronously,
                  returns the request thread.
-        :rtype: tuple(SettlementEntity, status_code(int), headers(HTTPHeaderDict))
+        :rtype: tuple(OrderSettlementEntity, status_code(int), headers(HTTPHeaderDict))
         """
 
         x_api_version = self.XApiVersion
@@ -8677,7 +8694,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8692,7 +8709,7 @@ class Cashfree:
         _auth_settings = ['XPartnerAPIKey', 'XClientSecret', 'XPartnerMerchantID', 'XClientID', 'XClientSignatureHeader']  # noqa: E501
 
         _response_types_map = {
-            '200': "SettlementEntity",
+            '200': "OrderSettlementEntity",
             '400': "BadRequestError",
             '401': "AuthenticationError",
             '404': "ApiError404",
@@ -8828,7 +8845,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -8975,7 +8992,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9119,7 +9136,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9273,7 +9290,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9428,7 +9445,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9583,7 +9600,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9744,7 +9761,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -9899,7 +9916,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10057,7 +10074,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10204,7 +10221,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10351,7 +10368,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10504,7 +10521,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10651,7 +10668,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10805,7 +10822,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -10955,7 +10972,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11122,7 +11139,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11288,7 +11305,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11449,7 +11466,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11614,7 +11631,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11770,7 +11787,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -11926,7 +11943,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12081,7 +12098,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12229,7 +12246,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12385,7 +12402,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12542,7 +12559,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12698,7 +12715,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -12854,7 +12871,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13013,7 +13030,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13168,7 +13185,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13323,7 +13340,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13478,7 +13495,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13624,7 +13641,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13781,7 +13798,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -13943,7 +13960,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -14105,7 +14122,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -14267,7 +14284,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -14429,7 +14446,7 @@ class Cashfree:
 
         if x_idempotency_key:
             _header_params["x-idempotency-key"] = x_idempotency_key
-        _header_params["x-sdk-platform"] = "pythonsdk-6.0.1"
+        _header_params["x-sdk-platform"] = "pythonsdk-6.0.7"
 
         # process the form parameters
         _form_params = []
@@ -14528,7 +14545,7 @@ class ApiClient(object):
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/6.0.1/python'
+        self.user_agent = 'OpenAPI-Generator/6.0.7/python'
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):

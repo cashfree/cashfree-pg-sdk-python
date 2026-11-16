@@ -48,6 +48,9 @@ class TestFetchSettlementsRequest(unittest.TestCase):
                     settlement_utrs = [
                         ''
                         ], 
+                    settlement_status = [
+                        'SUCCESS'
+                        ], 
                     start_date = '', 
                     end_date = '', )
             )
@@ -56,6 +59,18 @@ class TestFetchSettlementsRequest(unittest.TestCase):
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 
                     cursor = '', ),
+                filters = cashfree_pg.models.fetch_settlements_request_filters.FetchSettlementsRequest_filters(
+                    cf_settlement_ids = [
+                        ''
+                        ], 
+                    settlement_utrs = [
+                        ''
+                        ], 
+                    settlement_status = [
+                        'SUCCESS'
+                        ], 
+                    start_date = '', 
+                    end_date = '', ),
         )
         """
 

@@ -45,13 +45,9 @@ class TestVendorEntity(unittest.TestCase):
                 vendor_id = '', 
                 added_on = '', 
                 updated_on = '', 
-                bank = [
-                    {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}
-                    ], 
+                bank = {"account_number":11219276360,"account_holder":"JOHNDOE","ifsc":"YESB0000262"}, 
                 upi = '', 
-                schedule_option = [
-                    {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}
-                    ], 
+                schedule_option = {"settlement_schedule_message":"T+1 settlement at 11:00 AM","schedule_id":1,"merchant_default":true}, 
                 vendor_type = '', 
                 account_type = '', 
                 business_type = '', 

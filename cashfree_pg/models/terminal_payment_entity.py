@@ -39,7 +39,7 @@ class TerminalPaymentEntity(BaseModel):
     error_details: Optional[ErrorDetailsInPaymentsEntity] = None
     is_captured: Optional[StrictBool] = None
     order_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Order amount can be different from payment amount if you collect service fee from the customer.")
-    payment_group: Optional[StrictStr] = Field(default=None, description="Type of payment group. One of ['prepaid_card', 'upi_ppi_offline', 'cash', 'upi_credit_card', 'paypal', 'net_banking', 'cardless_emi', 'credit_card', 'bank_transfer', 'pay_later', 'debit_card_emi', 'debit_card', 'wallet', 'upi_ppi', 'upi', 'credit_card_emi'].")
+    payment_group: Optional[StrictStr] = Field(default=None, description="Type of payment group. One of ['prepaid_card', 'upi_ppi_offline', 'cash', 'upi_credit_card', 'paypal', 'net_banking', 'cardless_emi', 'credit_card', 'bank_transfer', 'pay_later', 'debit_card_emi', 'debit_card', 'wallet', 'upi_ppi', 'upi', 'credit_card_emi', 'upi_credit_line'].")
     payment_currency: Optional[StrictStr] = None
     payment_amount: Optional[Union[StrictFloat, StrictInt]] = None
     payment_time: Optional[StrictStr] = Field(default=None, description="This is the time when the payment was initiated.")

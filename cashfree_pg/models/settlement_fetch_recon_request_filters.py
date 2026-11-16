@@ -26,13 +26,17 @@ from typing_extensions import Annotated
 
 class SettlementFetchReconRequestFilters(BaseModel):
     """
-    Specify either the Settlement ID, Settlement UTR, or start date and end date to fetch the settlement details.
+    Specify either the Settlement ID, Settlement UTR, or date range filters to fetch the settlement details.
     """
     cf_settlement_ids: Optional[List[StrictInt]] = Field(default=None, description="List of settlement IDs for which you want the settlement reconciliation details.")
     settlement_utrs: Optional[List[StrictStr]] = Field(default=None, description="List of settlement UTRs for which you want the settlement reconciliation details.")
-    start_date: Optional[StrictStr] = Field(default=None, description="Specify the start date from when you want the settlement reconciliation details.")
-    end_date: Optional[StrictStr] = Field(default=None, description="Specify the end date till when you want the settlement reconciliation details.")
-    __properties = ["cf_settlement_ids", "settlement_utrs", "start_date", "end_date"]
+    start_date_initiated_on: Optional[StrictStr] = Field(default=None, description="Filter events by settlement initiation start date. Use ISO8601 format.")
+    end_date_initiated_on: Optional[StrictStr] = Field(default=None, description="Filter events by settlement initiation end date. Use ISO8601 format.")
+    start_date_processed_on: Optional[StrictStr] = Field(default=None, description="Filter events by settlement processed start date. Use ISO8601 format.")
+    end_date_processed_on: Optional[StrictStr] = Field(default=None, description="Filter events by settlement processed end date. Use ISO8601 format.")
+    start_date: Optional[StrictStr] = Field(default=None, description="Deprecated: Use start_date_initiated_on or start_date_processed_on instead. Specify the start date from when you want the settlement reconciliation details.")
+    end_date: Optional[StrictStr] = Field(default=None, description="Deprecated: Use end_date_initiated_on or end_date_processed_on instead. Specify the end date till when you want the settlement reconciliation details.")
+    __properties = ["cf_settlement_ids", "settlement_utrs", "start_date_initiated_on", "end_date_initiated_on", "start_date_processed_on", "end_date_processed_on", "start_date", "end_date"]
 
     # Updated to Pydantic v2
     """Pydantic configuration"""
@@ -58,7 +62,7 @@ class SettlementFetchReconRequestFilters(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SettlementFetchReconRequestFilters:
         """Create an instance of SettlementFetchReconRequestFilters from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "cf_settlement_ids, settlement_utrs, start_date, end_date" in temp_dict.keys():
+        if "cf_settlement_ids, settlement_utrs, start_date_initiated_on, end_date_initiated_on, start_date_processed_on, end_date_processed_on, start_date, end_date" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -82,6 +86,10 @@ class SettlementFetchReconRequestFilters(BaseModel):
         _obj = SettlementFetchReconRequestFilters.parse_obj({
             "cf_settlement_ids": obj.get("cf_settlement_ids"),
             "settlement_utrs": obj.get("settlement_utrs"),
+            "start_date_initiated_on": obj.get("start_date_initiated_on"),
+            "end_date_initiated_on": obj.get("end_date_initiated_on"),
+            "start_date_processed_on": obj.get("start_date_processed_on"),
+            "end_date_processed_on": obj.get("end_date_processed_on"),
             "start_date": obj.get("start_date"),
             "end_date": obj.get("end_date")
         })

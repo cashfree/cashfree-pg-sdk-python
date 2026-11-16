@@ -42,13 +42,13 @@ class TestSettlementReconEntityDataInnerPaymentDetails(unittest.TestCase):
                 payment_currency = '', 
                 bank_reference = '', 
                 payment_time = '', 
-                payment_mode = '', 
+                payment_group = '', 
                 payment_service_charge = 1.337, 
                 payment_service_tax = 1.337, 
                 cf_payment_id = '', 
                 status = '', 
-                forex_conversion_handling_charge = '', 
-                forex_conversion_handling_tax = '', 
+                forex_conversion_handling_charge = 1.337, 
+                forex_conversion_handling_tax = 1.337, 
                 charges_currency = ''
             )
         else :

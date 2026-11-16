@@ -57,6 +57,8 @@ cashfree_pg/models/banktransfer_payment_method.py
 cashfree_pg/models/card.py
 cashfree_pg/models/card_downtime.py
 cashfree_pg/models/card_downtime_card.py
+cashfree_pg/models/card_downtime_card_network_enum.py
+cashfree_pg/models/card_downtime_card_type_enum.py
 cashfree_pg/models/card_emi.py
 cashfree_pg/models/card_emi_payment_method.py
 cashfree_pg/models/card_offer.py
@@ -148,6 +150,8 @@ cashfree_pg/models/fetch_settlements_request.py
 cashfree_pg/models/fetch_settlements_request_filters.py
 cashfree_pg/models/fetch_settlements_request_pagination.py
 cashfree_pg/models/fetch_terminal_qr_codes_entity.py
+cashfree_pg/models/get_all_settlements_response.py
+cashfree_pg/models/get_all_settlements_response_data_inner.py
 cashfree_pg/models/get_all_terminal_payment_entity.py
 cashfree_pg/models/get_all_terminal_transaction_request.py
 cashfree_pg/models/get_card_bin_request.py
@@ -173,6 +177,8 @@ cashfree_pg/models/manage_subscription_payment_request.py
 cashfree_pg/models/manage_subscription_payment_request_action_details.py
 cashfree_pg/models/manage_subscription_request.py
 cashfree_pg/models/manage_subscription_request_action_details.py
+cashfree_pg/models/mark_order_settlement_response.py
+cashfree_pg/models/mark_order_settlement_response_meta_data.py
 cashfree_pg/models/net_banking_downtime.py
 cashfree_pg/models/net_banking_downtime_net_banking.py
 cashfree_pg/models/net_banking_payment_method.py
@@ -215,6 +221,11 @@ cashfree_pg/models/order_meta_payment_methods_filters.py
 cashfree_pg/models/order_meta_payment_methods_filters_methods.py
 cashfree_pg/models/order_pay_data.py
 cashfree_pg/models/order_payment_method_filters.py
+cashfree_pg/models/order_settlement_entity.py
+cashfree_pg/models/order_settlement_entity_customer_details.py
+cashfree_pg/models/order_settlement_entity_order_details.py
+cashfree_pg/models/order_settlement_entity_payment_details.py
+cashfree_pg/models/order_settlement_entity_settlement_details.py
 cashfree_pg/models/order_update_refund_request.py
 cashfree_pg/models/par_request.py
 cashfree_pg/models/pay_order_authorize_only_request.py
@@ -244,6 +255,7 @@ cashfree_pg/models/payment_method_card_in_payments_entity_card.py
 cashfree_pg/models/payment_method_cardless_emiin_payments_entity.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity.py
 cashfree_pg/models/payment_method_net_banking_in_payments_entity_netbanking.py
+cashfree_pg/models/payment_method_others_in_payments_entity.py
 cashfree_pg/models/payment_method_paylater_in_payments_entity.py
 cashfree_pg/models/payment_method_upiin_payments_entity.py
 cashfree_pg/models/payment_method_upiin_payments_entity_upi.py
@@ -285,7 +297,12 @@ cashfree_pg/models/settlement_fetch_recon_request.py
 cashfree_pg/models/settlement_fetch_recon_request_filters.py
 cashfree_pg/models/settlement_recon_entity.py
 cashfree_pg/models/settlement_recon_entity_data_inner.py
+cashfree_pg/models/settlement_recon_entity_data_inner_customer_details.py
+cashfree_pg/models/settlement_recon_entity_data_inner_dispute_details_inner.py
+cashfree_pg/models/settlement_recon_entity_data_inner_event_details.py
+cashfree_pg/models/settlement_recon_entity_data_inner_order_details.py
 cashfree_pg/models/settlement_recon_entity_data_inner_payment_details.py
+cashfree_pg/models/settlement_recon_entity_data_inner_settlement_details.py
 cashfree_pg/models/settlement_simulation_response.py
 cashfree_pg/models/settlement_webhook.py
 cashfree_pg/models/settlement_webhook_data_entity.py
@@ -395,6 +412,8 @@ docs/BanktransferPaymentMethod.md
 docs/Card.md
 docs/CardDowntime.md
 docs/CardDowntimeCard.md
+docs/CardDowntimeCardNetworkEnum.md
+docs/CardDowntimeCardTypeEnum.md
 docs/CardEMI.md
 docs/CardEMIPaymentMethod.md
 docs/CardOffer.md
@@ -491,6 +510,8 @@ docs/FetchSettlementsRequest.md
 docs/FetchSettlementsRequestFilters.md
 docs/FetchSettlementsRequestPagination.md
 docs/FetchTerminalQRCodesEntity.md
+docs/GetAllSettlementsResponse.md
+docs/GetAllSettlementsResponseDataInner.md
 docs/GetAllTerminalPaymentEntity.md
 docs/GetAllTerminalTransactionRequest.md
 docs/GetCardBinRequest.md
@@ -517,6 +538,8 @@ docs/ManageSubscriptionPaymentRequest.md
 docs/ManageSubscriptionPaymentRequestActionDetails.md
 docs/ManageSubscriptionRequest.md
 docs/ManageSubscriptionRequestActionDetails.md
+docs/MarkOrderSettlementResponse.md
+docs/MarkOrderSettlementResponseMetaData.md
 docs/NetBankingDowntime.md
 docs/NetBankingDowntimeNetBanking.md
 docs/NetBankingPaymentMethod.md
@@ -560,6 +583,11 @@ docs/OrderMetaPaymentMethodsFilters.md
 docs/OrderMetaPaymentMethodsFiltersMethods.md
 docs/OrderPayData.md
 docs/OrderPaymentMethodFilters.md
+docs/OrderSettlementEntity.md
+docs/OrderSettlementEntityCustomerDetails.md
+docs/OrderSettlementEntityOrderDetails.md
+docs/OrderSettlementEntityPaymentDetails.md
+docs/OrderSettlementEntitySettlementDetails.md
 docs/OrderUpdateRefundRequest.md
 docs/OrdersApi.md
 docs/PARRequest.md
@@ -593,6 +621,7 @@ docs/PaymentMethodCardInPaymentsEntityCard.md
 docs/PaymentMethodCardlessEMIInPaymentsEntity.md
 docs/PaymentMethodNetBankingInPaymentsEntity.md
 docs/PaymentMethodNetBankingInPaymentsEntityNetbanking.md
+docs/PaymentMethodOthersInPaymentsEntity.md
 docs/PaymentMethodPaylaterInPaymentsEntity.md
 docs/PaymentMethodUPIInPaymentsEntity.md
 docs/PaymentMethodUPIInPaymentsEntityUpi.md
@@ -636,7 +665,12 @@ docs/SettlementFetchReconRequest.md
 docs/SettlementFetchReconRequestFilters.md
 docs/SettlementReconEntity.md
 docs/SettlementReconEntityDataInner.md
+docs/SettlementReconEntityDataInnerCustomerDetails.md
+docs/SettlementReconEntityDataInnerDisputeDetailsInner.md
+docs/SettlementReconEntityDataInnerEventDetails.md
+docs/SettlementReconEntityDataInnerOrderDetails.md
 docs/SettlementReconEntityDataInnerPaymentDetails.md
+docs/SettlementReconEntityDataInnerSettlementDetails.md
 docs/SettlementReconciliationApi.md
 docs/SettlementSimulationResponse.md
 docs/SettlementWebhook.md
@@ -758,6 +792,8 @@ test/test_banktransfer_payment_method.py
 test/test_card.py
 test/test_card_downtime.py
 test/test_card_downtime_card.py
+test/test_card_downtime_card_network_enum.py
+test/test_card_downtime_card_type_enum.py
 test/test_card_emi.py
 test/test_card_emi_payment_method.py
 test/test_card_offer.py
@@ -854,6 +890,8 @@ test/test_fetch_settlements_request.py
 test/test_fetch_settlements_request_filters.py
 test/test_fetch_settlements_request_pagination.py
 test/test_fetch_terminal_qr_codes_entity.py
+test/test_get_all_settlements_response.py
+test/test_get_all_settlements_response_data_inner.py
 test/test_get_all_terminal_payment_entity.py
 test/test_get_all_terminal_transaction_request.py
 test/test_get_card_bin_request.py
@@ -880,6 +918,8 @@ test/test_manage_subscription_payment_request.py
 test/test_manage_subscription_payment_request_action_details.py
 test/test_manage_subscription_request.py
 test/test_manage_subscription_request_action_details.py
+test/test_mark_order_settlement_response.py
+test/test_mark_order_settlement_response_meta_data.py
 test/test_net_banking_downtime.py
 test/test_net_banking_downtime_net_banking.py
 test/test_net_banking_payment_method.py
@@ -923,6 +963,11 @@ test/test_order_meta_payment_methods_filters.py
 test/test_order_meta_payment_methods_filters_methods.py
 test/test_order_pay_data.py
 test/test_order_payment_method_filters.py
+test/test_order_settlement_entity.py
+test/test_order_settlement_entity_customer_details.py
+test/test_order_settlement_entity_order_details.py
+test/test_order_settlement_entity_payment_details.py
+test/test_order_settlement_entity_settlement_details.py
 test/test_order_update_refund_request.py
 test/test_orders_api.py
 test/test_par_request.py
@@ -954,6 +999,7 @@ test/test_payment_method_card_in_payments_entity_card.py
 test/test_payment_method_cardless_emiin_payments_entity.py
 test/test_payment_method_net_banking_in_payments_entity.py
 test/test_payment_method_net_banking_in_payments_entity_netbanking.py
+test/test_payment_method_others_in_payments_entity.py
 test/test_payment_method_paylater_in_payments_entity.py
 test/test_payment_method_upiin_payments_entity.py
 test/test_payment_method_upiin_payments_entity_upi.py
@@ -999,7 +1045,12 @@ test/test_settlement_fetch_recon_request.py
 test/test_settlement_fetch_recon_request_filters.py
 test/test_settlement_recon_entity.py
 test/test_settlement_recon_entity_data_inner.py
+test/test_settlement_recon_entity_data_inner_customer_details.py
+test/test_settlement_recon_entity_data_inner_dispute_details_inner.py
+test/test_settlement_recon_entity_data_inner_event_details.py
+test/test_settlement_recon_entity_data_inner_order_details.py
 test/test_settlement_recon_entity_data_inner_payment_details.py
+test/test_settlement_recon_entity_data_inner_settlement_details.py
 test/test_settlement_reconciliation_api.py
 test/test_settlement_simulation_response.py
 test/test_settlement_webhook.py

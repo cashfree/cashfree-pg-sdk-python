@@ -38,9 +38,9 @@ class VendorEntity(BaseModel):
     vendor_id: Optional[StrictStr] = None
     added_on: Optional[StrictStr] = None
     updated_on: Optional[StrictStr] = None
-    bank: Optional[List[BankDetails]] = None
+    bank: Optional[BankDetails] = None
     upi: Optional[StrictStr] = None
-    schedule_option: Optional[List[ScheduleOption]] = None
+    schedule_option: Optional[ScheduleOption] = None
     vendor_type: Optional[StrictStr] = None
     account_type: Optional[StrictStr] = None
     business_type: Optional[StrictStr] = None
@@ -82,20 +82,12 @@ class VendorEntity(BaseModel):
                           exclude={
                           },
                           exclude_none=True)
-        # override the default output from pydantic by calling `to_dict()` of each item in bank (list)
-        _items = []
+        # override the default output from pydantic by calling `to_dict()` of bank
         if self.bank:
-            for _item in self.bank:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['bank'] = _items
-        # override the default output from pydantic by calling `to_dict()` of each item in schedule_option (list)
-        _items = []
+            _dict['bank'] = self.bank.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of schedule_option
         if self.schedule_option:
-            for _item in self.schedule_option:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict['schedule_option'] = _items
+            _dict['schedule_option'] = self.schedule_option.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in related_docs (list)
         _items = []
         if self.related_docs:
@@ -103,6 +95,16 @@ class VendorEntity(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['related_docs'] = _items
+        # set to None if bank (nullable) is None
+        # and __fields_set__ contains the field
+        if self.bank is None and "bank" in self.__fields_set__:
+            _dict['bank'] = None
+
+        # set to None if schedule_option (nullable) is None
+        # and __fields_set__ contains the field
+        if self.schedule_option is None and "schedule_option" in self.__fields_set__:
+            _dict['schedule_option'] = None
+
         return _dict
 
     @classmethod
@@ -122,9 +124,9 @@ class VendorEntity(BaseModel):
             "vendor_id": obj.get("vendor_id"),
             "added_on": obj.get("added_on"),
             "updated_on": obj.get("updated_on"),
-            "bank": [BankDetails.from_dict(_item) for _item in obj.get("bank")] if obj.get("bank") is not None else None,
+            "bank": BankDetails.from_dict(obj.get("bank")) if obj.get("bank") is not None else None,
             "upi": obj.get("upi"),
-            "schedule_option": [ScheduleOption.from_dict(_item) for _item in obj.get("schedule_option")] if obj.get("schedule_option") is not None else None,
+            "schedule_option": ScheduleOption.from_dict(obj.get("schedule_option")) if obj.get("schedule_option") is not None else None,
             "vendor_type": obj.get("vendor_type"),
             "account_type": obj.get("account_type"),
             "business_type": obj.get("business_type"),

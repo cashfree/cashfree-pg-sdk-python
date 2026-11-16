@@ -48,6 +48,10 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
                     settlement_utrs = [
                         ''
                         ], 
+                    start_date_initiated_on = '', 
+                    end_date_initiated_on = '', 
+                    start_date_processed_on = '', 
+                    end_date_processed_on = '', 
                     start_date = '', 
                     end_date = '', )
             )
@@ -56,6 +60,19 @@ class TestSettlementFetchReconRequest(unittest.TestCase):
                 pagination = cashfree_pg.models.fetch_settlements_request_pagination.FetchSettlementsRequest_pagination(
                     limit = 56, 
                     cursor = '', ),
+                filters = cashfree_pg.models.settlement_fetch_recon_request_filters.SettlementFetchReconRequest_filters(
+                    cf_settlement_ids = [
+                        56
+                        ], 
+                    settlement_utrs = [
+                        ''
+                        ], 
+                    start_date_initiated_on = '', 
+                    end_date_initiated_on = '', 
+                    start_date_processed_on = '', 
+                    end_date_processed_on = '', 
+                    start_date = '', 
+                    end_date = '', ),
         )
         """
 
