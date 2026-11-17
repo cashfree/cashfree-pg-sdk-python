@@ -20,13 +20,13 @@ import json
 from datetime import date, datetime
 
 
-from cashfree_pg.models.recon_entity_data_inner_customer_details import ReconEntityDataInnerCustomerDetails
-from cashfree_pg.models.recon_entity_data_inner_dispute_details import ReconEntityDataInnerDisputeDetails
-from cashfree_pg.models.recon_entity_data_inner_event_details import ReconEntityDataInnerEventDetails
-from cashfree_pg.models.recon_entity_data_inner_order_details import ReconEntityDataInnerOrderDetails
 from cashfree_pg.models.recon_entity_data_inner_refund_details import ReconEntityDataInnerRefundDetails
-from cashfree_pg.models.recon_entity_data_inner_settlement_details import ReconEntityDataInnerSettlementDetails
+from cashfree_pg.models.settlement_recon_entity_data_inner_customer_details import SettlementReconEntityDataInnerCustomerDetails
+from cashfree_pg.models.settlement_recon_entity_data_inner_dispute_details_inner import SettlementReconEntityDataInnerDisputeDetailsInner
+from cashfree_pg.models.settlement_recon_entity_data_inner_event_details import SettlementReconEntityDataInnerEventDetails
+from cashfree_pg.models.settlement_recon_entity_data_inner_order_details import SettlementReconEntityDataInnerOrderDetails
 from cashfree_pg.models.settlement_recon_entity_data_inner_payment_details import SettlementReconEntityDataInnerPaymentDetails
+from cashfree_pg.models.settlement_recon_entity_data_inner_settlement_details import SettlementReconEntityDataInnerSettlementDetails
 from pydantic import validate_arguments, ValidationError, Field, StrictStr, StrictBytes, StrictInt, StrictFloat, StrictBool, field_validator, BaseModel
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
@@ -35,13 +35,13 @@ class SettlementReconEntityDataInner(BaseModel):
     """
     SettlementReconEntityDataInner
     """
-    event_details: Optional[ReconEntityDataInnerEventDetails] = None
-    order_details: Optional[ReconEntityDataInnerOrderDetails] = None
-    customer_details: Optional[ReconEntityDataInnerCustomerDetails] = None
+    event_details: Optional[SettlementReconEntityDataInnerEventDetails] = None
+    order_details: Optional[SettlementReconEntityDataInnerOrderDetails] = None
+    customer_details: Optional[SettlementReconEntityDataInnerCustomerDetails] = None
     payment_details: Optional[SettlementReconEntityDataInnerPaymentDetails] = None
-    settlement_details: Optional[ReconEntityDataInnerSettlementDetails] = None
-    dispute_details: Optional[ReconEntityDataInnerDisputeDetails] = None
-    refund_details: Optional[ReconEntityDataInnerRefundDetails] = None
+    settlement_details: Optional[SettlementReconEntityDataInnerSettlementDetails] = None
+    dispute_details: Optional[List[SettlementReconEntityDataInnerDisputeDetailsInner]] = Field(default=None, description="List of disputes linked to this event.")
+    refund_details: Optional[List[ReconEntityDataInnerRefundDetails]] = Field(default=None, description="List of refunds linked to this event.")
     __properties = ["event_details", "order_details", "customer_details", "payment_details", "settlement_details", "dispute_details", "refund_details"]
 
     # Updated to Pydantic v2
@@ -93,12 +93,20 @@ class SettlementReconEntityDataInner(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of settlement_details
         if self.settlement_details:
             _dict['settlement_details'] = self.settlement_details.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of dispute_details
+        # override the default output from pydantic by calling `to_dict()` of each item in dispute_details (list)
+        _items = []
         if self.dispute_details:
-            _dict['dispute_details'] = self.dispute_details.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of refund_details
+            for _item in self.dispute_details:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['dispute_details'] = _items
+        # override the default output from pydantic by calling `to_dict()` of each item in refund_details (list)
+        _items = []
         if self.refund_details:
-            _dict['refund_details'] = self.refund_details.to_dict()
+            for _item in self.refund_details:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict['refund_details'] = _items
         return _dict
 
     @classmethod
@@ -111,13 +119,13 @@ class SettlementReconEntityDataInner(BaseModel):
             return SettlementReconEntityDataInner.parse_obj(obj)
 
         _obj = SettlementReconEntityDataInner.parse_obj({
-            "event_details": ReconEntityDataInnerEventDetails.from_dict(obj.get("event_details")) if obj.get("event_details") is not None else None,
-            "order_details": ReconEntityDataInnerOrderDetails.from_dict(obj.get("order_details")) if obj.get("order_details") is not None else None,
-            "customer_details": ReconEntityDataInnerCustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
+            "event_details": SettlementReconEntityDataInnerEventDetails.from_dict(obj.get("event_details")) if obj.get("event_details") is not None else None,
+            "order_details": SettlementReconEntityDataInnerOrderDetails.from_dict(obj.get("order_details")) if obj.get("order_details") is not None else None,
+            "customer_details": SettlementReconEntityDataInnerCustomerDetails.from_dict(obj.get("customer_details")) if obj.get("customer_details") is not None else None,
             "payment_details": SettlementReconEntityDataInnerPaymentDetails.from_dict(obj.get("payment_details")) if obj.get("payment_details") is not None else None,
-            "settlement_details": ReconEntityDataInnerSettlementDetails.from_dict(obj.get("settlement_details")) if obj.get("settlement_details") is not None else None,
-            "dispute_details": ReconEntityDataInnerDisputeDetails.from_dict(obj.get("dispute_details")) if obj.get("dispute_details") is not None else None,
-            "refund_details": ReconEntityDataInnerRefundDetails.from_dict(obj.get("refund_details")) if obj.get("refund_details") is not None else None
+            "settlement_details": SettlementReconEntityDataInnerSettlementDetails.from_dict(obj.get("settlement_details")) if obj.get("settlement_details") is not None else None,
+            "dispute_details": [SettlementReconEntityDataInnerDisputeDetailsInner.from_dict(_item) for _item in obj.get("dispute_details")] if obj.get("dispute_details") is not None else None,
+            "refund_details": [ReconEntityDataInnerRefundDetails.from_dict(_item) for _item in obj.get("refund_details")] if obj.get("refund_details") is not None else None
         })
         return _obj
 

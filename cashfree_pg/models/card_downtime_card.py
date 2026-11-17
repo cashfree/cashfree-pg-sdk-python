@@ -20,6 +20,8 @@ import json
 from datetime import date, datetime
 
 
+from cashfree_pg.models.card_downtime_card_network_enum import CardDowntimeCardNetworkEnum
+from cashfree_pg.models.card_downtime_card_type_enum import CardDowntimeCardTypeEnum
 from pydantic import validate_arguments, ValidationError, Field, StrictStr, StrictBytes, StrictInt, StrictFloat, StrictBool, field_validator, BaseModel
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
@@ -29,31 +31,9 @@ class CardDowntimeCard(BaseModel):
     CardDowntimeCard
     """
     card_issuer: Optional[List[StrictStr]] = None
-    card_type: Optional[List[StrictStr]] = None
-    card_network: Optional[List[StrictStr]] = None
+    card_type: Optional[List[CardDowntimeCardTypeEnum]] = None
+    card_network: Optional[List[CardDowntimeCardNetworkEnum]] = None
     __properties = ["card_issuer", "card_type", "card_network"]
-
-    @field_validator('card_type')
-    def card_type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        for i in value:
-            if i not in ():
-                raise ValueError("each list item must be one of ()")
-        return value
-
-    @field_validator('card_network')
-    def card_network_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        for i in value:
-            if i not in ():
-                raise ValueError("each list item must be one of ()")
-        return value
 
     # Updated to Pydantic v2
     """Pydantic configuration"""

@@ -29,18 +29,18 @@ class SettlementReconEntityDataInnerPaymentDetails(BaseModel):
     SettlementReconEntityDataInnerPaymentDetails
     """
     payment_amount: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Payment amount captured.")
-    payment_currency: Optional[StrictStr] = Field(default=None, description="Payment Curreny type - INR.")
+    payment_currency: Optional[StrictStr] = Field(default=None, description="Payment Currency type - INR.")
     bank_reference: Optional[StrictStr] = Field(default=None, description="Unique transaction reference number of the payment.")
     payment_time: Optional[StrictStr] = Field(default=None, description="Date and time when the payment was initiated.")
-    payment_mode: Optional[StrictStr] = Field(default=None, description="Mode of the payment.")
+    payment_group: Optional[StrictStr] = Field(default=None, description="Payment group/mode of the payment. Example - UPI, CREDIT_CARD.")
     payment_service_charge: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Service charge applicable for the payment.")
     payment_service_tax: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Service tax applicable on the payment.")
     cf_payment_id: Optional[StrictStr] = Field(default=None, description="Cashfree Payments unique ID to identify a payment.")
     status: Optional[StrictStr] = Field(default=None, description="Status of the Payment.")
-    forex_conversion_handling_charge: Optional[StrictStr] = Field(default=None, description="Forex Conversion Service Charge.")
-    forex_conversion_handling_tax: Optional[StrictStr] = Field(default=None, description="Forex Conversion Service Tax.")
-    charges_currency: Optional[StrictStr] = Field(default=None, description="Forex Charges Curreny type - INR.")
-    __properties = ["payment_amount", "payment_currency", "bank_reference", "payment_time", "payment_mode", "payment_service_charge", "payment_service_tax", "cf_payment_id", "status", "forex_conversion_handling_charge", "forex_conversion_handling_tax", "charges_currency"]
+    forex_conversion_handling_charge: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Forex Conversion Service Charge.")
+    forex_conversion_handling_tax: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Forex Conversion Service Tax.")
+    charges_currency: Optional[StrictStr] = Field(default=None, description="Forex Charges Currency type - INR.")
+    __properties = ["payment_amount", "payment_currency", "bank_reference", "payment_time", "payment_group", "payment_service_charge", "payment_service_tax", "cf_payment_id", "status", "forex_conversion_handling_charge", "forex_conversion_handling_tax", "charges_currency"]
 
     # Updated to Pydantic v2
     """Pydantic configuration"""
@@ -66,7 +66,7 @@ class SettlementReconEntityDataInnerPaymentDetails(BaseModel):
     def from_json_for_one_of(cls, json_str: str) -> SettlementReconEntityDataInnerPaymentDetails:
         """Create an instance of SettlementReconEntityDataInnerPaymentDetails from a JSON string"""
         temp_dict = json.loads(json_str)
-        if "payment_amount, payment_currency, bank_reference, payment_time, payment_mode, payment_service_charge, payment_service_tax, cf_payment_id, status, forex_conversion_handling_charge, forex_conversion_handling_tax, charges_currency" in temp_dict.keys():
+        if "payment_amount, payment_currency, bank_reference, payment_time, payment_group, payment_service_charge, payment_service_tax, cf_payment_id, status, forex_conversion_handling_charge, forex_conversion_handling_tax, charges_currency" in temp_dict.keys():
             return cls.from_dict(json.loads(json_str))
         return None
 
@@ -92,7 +92,7 @@ class SettlementReconEntityDataInnerPaymentDetails(BaseModel):
             "payment_currency": obj.get("payment_currency"),
             "bank_reference": obj.get("bank_reference"),
             "payment_time": obj.get("payment_time"),
-            "payment_mode": obj.get("payment_mode"),
+            "payment_group": obj.get("payment_group"),
             "payment_service_charge": obj.get("payment_service_charge"),
             "payment_service_tax": obj.get("payment_service_tax"),
             "cf_payment_id": obj.get("cf_payment_id"),

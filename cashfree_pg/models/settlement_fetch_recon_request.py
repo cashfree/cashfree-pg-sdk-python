@@ -31,7 +31,7 @@ class SettlementFetchReconRequest(BaseModel):
     Recon Request Object.
     """
     pagination: FetchSettlementsRequestPagination
-    filters: Optional[SettlementFetchReconRequestFilters] = None
+    filters: SettlementFetchReconRequestFilters
     __properties = ["pagination", "filters"]
 
     # Updated to Pydantic v2

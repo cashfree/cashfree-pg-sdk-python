@@ -88,7 +88,8 @@ class TestPaymentEntityPaymentMethod(unittest.TestCase):
                     channel = '', 
                     banktransfer_bank_name = '', 
                     banktransfer_ifsc = '', 
-                    banktransfer_account_number = '', )
+                    banktransfer_account_number = '', ), 
+                others = cashfree_pg.models.others.others()
             )
         else :
             return PaymentEntityPaymentMethod(

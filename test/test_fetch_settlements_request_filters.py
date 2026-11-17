@@ -44,6 +44,9 @@ class TestFetchSettlementsRequestFilters(unittest.TestCase):
                 settlement_utrs = [
                     ''
                     ], 
+                settlement_status = [
+                    'SUCCESS'
+                    ], 
                 start_date = '', 
                 end_date = ''
             )
